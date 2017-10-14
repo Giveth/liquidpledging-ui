@@ -29,7 +29,7 @@ class LiquidPledgingController extends ProviderHelper {
 
     setupWeb3()
     {
-        this.setup(["*"]).then(()=>{
+        this.setup(["*", httpProvider]).then(()=>{
 
             }).catch((e)=>{console.error(e)})
         }
