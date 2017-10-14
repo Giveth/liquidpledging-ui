@@ -1,21 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import WrapperTest from './WrapperTest.js'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Liquid Pledging</h1>
-        </header>
-        <p className="App-intro">
-         Ready to go!
-        </p>
-      </div>
-    );
-  }
+
+    constructor()
+    {
+        super() 
+    }
+
+
+    render() {
+        return (
+            <div>
+                
+                <WrapperTest/>
+
+            </div>
+        )
+    }
 }
 
-export default App;
+export default App
+
+
+/*
+<header className="App-header">
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <h1 className="App-title">Liquid Pledging</h1>
+                </header>
+                */
