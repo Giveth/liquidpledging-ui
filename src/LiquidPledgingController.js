@@ -1,5 +1,12 @@
 import ProviderHelper from "./Web3ProviderHelper"
 
+const liquidpledging = require('liquidpledging');
+
+const LiquidPledging = liquidpledging.LiquidPledging;
+const LiquidPledgingState = liquidpledging.LiquidPledgingState;
+
+LiquidPledgingState
+
 const EventEmitter = require('events')
 const httpProvider = 'http://localhost:8545'
 
@@ -13,18 +20,16 @@ class LiquidPledgingController extends ProviderHelper {
         this.startInterval()
         this.STATE_CHANGED = "stateChanged"
         this.setupWeb3()
-    }
-
-    startInterval()
-    {
-        this.interval=setInterval(() => {
-            for (let i=0; i<10; i += 1) {
-                this.data[i] = Math.floor(Math.random() * 10);
-            }
-
-            this.emit(this.STATE_CHANGED)
-
-        }, 1000)
+        const liquidPledging = new LiquidPledging(web3, '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24');
+        this.liquidPledgingState = new LiquidPledgingState(liquidPledging);
+        web3.eth.filter("latest", (error, result) => {
+/*            liquidPledgingState.getState().then(st => {
+                this.data.st = st;
+                this.emit(this.STATE_CHANGED);
+            }) */
+            this.data.st = result;
+            this.emit(this.STATE_CHANGED);
+        });
     }
 
     setupWeb3(){
