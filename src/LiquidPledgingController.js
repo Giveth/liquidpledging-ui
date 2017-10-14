@@ -15,31 +15,36 @@ class LiquidPledgingController extends ProviderHelper {
     constructor()
     {
         super()
-        this.data = []
         this.interval = {}
-        this.startInterval()
         this.STATE_CHANGED = "stateChanged"
         this.setupWeb3()
-        const liquidPledging = new LiquidPledging(web3, '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24');
-        this.liquidPledgingState = new LiquidPledgingState(liquidPledging);
-        web3.eth.filter("latest", (error, result) => {
-/*            liquidPledgingState.getState().then(st => {
-                this.data.st = st;
-                this.emit(this.STATE_CHANGED);
-            }) */
-            this.data.st = result;
-            this.emit(this.STATE_CHANGED);
-        });
+        this.state={} 
     }
 
     setupWeb3(){
-        this.setup(["*", httpProvider]).then(()=>{
+        this.setup([httpProvider]).then(()=>{
 
-            }).catch((e)=>{console.error(e)})
-        }
+            this.setupLiquidPledging()
 
-    getData(){
-        return this.data
+        }).catch((e)=>{console.error(e)})
+    }
+
+    setupLiquidPledging()
+    {
+        const liquidPledging = new LiquidPledging(this.web3, '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24');
+        this.liquidPledgingState = new LiquidPledgingState(liquidPledging);
+
+        setInterval(()=>
+        {
+            this.liquidPledgingState.getState().then(state => {
+            this.state = state;
+            this.emit(this.STATE_CHANGED);
+
+        }, 5000)});
+    }
+
+    getState(){
+        return this.state
     }
 }
 
