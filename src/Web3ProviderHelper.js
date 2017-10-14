@@ -44,6 +44,7 @@ class Web3ProviderHelper extends EventEmitter
         this.accountListeners = []
         this.networkListeners = []
         this.checkInterval = undefined
+        this.web3 = {}
     }
 
     //Should be called after window load event
@@ -160,11 +161,10 @@ class Web3ProviderHelper extends EventEmitter
             this.provider = providerRef
         }
 
-        //window.web3 = new Web3()
-        Web3.setProvider(this.provider)
-        window.web3 = Web3
+        this.web3 = new Web3(this.provider)
+        window.web3 = this.web3
 
-        return window.web3.isConnected()
+        return this.web3.isConnected()
     }
 
     isReady=()=>
