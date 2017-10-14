@@ -3,8 +3,7 @@ import ProviderHelper from "./Web3ProviderHelper"
 const EventEmitter = require('events')
 const httpProvider = 'http://localhost:8545'
 
-
-class LiquidPledgingController extends EventEmitter {
+class LiquidPledgingController extends ProviderHelper {
 
     constructor()
     {
@@ -30,7 +29,7 @@ class LiquidPledgingController extends EventEmitter {
 
     setupWeb3()
     {
-        ProviderHelper.setup(["*"]).then(()=>{
+        this.setup(["*"]).then(()=>{
 
             }).catch((e)=>{console.error(e)})
         }

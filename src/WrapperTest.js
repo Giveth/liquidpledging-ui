@@ -7,13 +7,19 @@ class WrapperTest extends Component {
         super()
 
         Wrapper.on(Wrapper.STATE_CHANGED, this.onStateChanged)
+        Wrapper.on(Wrapper.ACCOUNT_CHANGED, this.onAccountChanged)
         this.state={data:[1,2,3]}
     }
 
     onStateChanged=()=>{
 
         let data = Wrapper.getData()
-        this.setState({data:data})
+        //this.setState({data:data})
+    }
+
+    onAccountChanged=()=>{
+        let newAccount = Wrapper.getCurrentAccount()
+        this.setState({data:newAccount})
     }
 
     render() {

@@ -1,4 +1,5 @@
-var Web3 = require('web3')
+const Web3 = require('web3')
+const EventEmitter = require('events')
 
 const Providers={
     INJECTED:"*",
@@ -26,10 +27,15 @@ const ReadOnlyProviders=[
     Providers.INFURA
 ]
 
-class Web3ProviderHelper
+class Web3ProviderHelper extends EventEmitter
 {
     constructor()
     {
+        super()
+
+        this.ACCOUNT_CHANGED = 'accountCanged'
+        this.NETWORK_CHANGED = 'networkChanged'
+
         this.currentAccount = undefined
         this.currentNetworkId = undefined
         this.injectedProvider = undefined
@@ -105,9 +111,17 @@ class Web3ProviderHelper
         if(this.currentAccount !== newAddress)
         {
             this.currentAccount = newAddress
-            for(var i = 0; i< this.accountListeners.length; i++)
+
+            this.emit(this.ACCOUNT_CHANGED, newAddress)
+            /*for(var i = 0; i< this.accountListeners.length; i++)
                 this.accountListeners[i](newAddress)
+                */
         }
+    }
+
+    getCurrentAccount=()=>
+    {
+        return this.currentAccount
     }
 
     //checks if we still on the same Ethereum network: Mainnet/Ropsten...
@@ -127,8 +141,10 @@ class Web3ProviderHelper
         if(this.currentNetworkId !== newNetworkId)
         {
             this.currentNetworkId = newNetworkId
-            for(var i = 0; i< this.networkListeners.length; i++)
-                this.networkListeners[i](newNetworkId)
+            /*for(var i = 0; i< this.networkListeners.length; i++)
+                this.networkListeners[i](newNetworkId)*/
+
+            this.emit(this.NETWORK_CHANGED)
         }
     }
 
@@ -278,5 +294,5 @@ class Web3ProviderHelper
     }
 }
 
-const instance = new Web3ProviderHelper()
-export default instance
+//const instance = new Web3ProviderHelper()
+export default Web3ProviderHelper
