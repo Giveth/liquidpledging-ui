@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "liquidpledging": "0.0.9",
+    "liquidpledging": "0.0.10",
     "material-ui": "^0.19.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-scripts": "1.0.14"
+    "react-scripts": "1.0.14",
+    "web3": "^0.13.0"
   },
   "scripts": {
     "start": "react-scripts start",
