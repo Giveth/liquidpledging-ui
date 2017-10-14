@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Wrapper from "./LiquidPledgingController.js"
+import LPController from "./LiquidPledgingController.js"
 
-class WrapperTest extends Component {
+class LPControllerTest extends Component {
 
     constructor(){
         super()
@@ -12,23 +12,23 @@ class WrapperTest extends Component {
             account:""
         }
 
-        Wrapper.on(Wrapper.STATE_CHANGED, this.onStateChanged)
-        Wrapper.on(Wrapper.ACCOUNT_CHANGED, this.onAccountChanged)
-        Wrapper.on(Wrapper.NETWORK_CHANGED, this.onNetworkChanged)
+        LPController.on(LPController.STATE_CHANGED, this.onStateChanged)
+        LPController.on(LPController.ACCOUNT_CHANGED, this.onAccountChanged)
+        LPController.on(LPController.NETWORK_CHANGED, this.onNetworkChanged)
     }
 
     onStateChanged=()=>{
-        let newData = Wrapper.getData().toString()
-        this.setState({data:newData})
+        let newState = LPController.getState().toString()
+        this.setState({data:newState.toString()})
     }
 
     onAccountChanged=()=>{
-        let newAccount = Wrapper.getCurrentAccount()
+        let newAccount = LPController.getCurrentAccount()
         this.setState({account:newAccount})
     }
 
     onNetworkChanged=()=>{
-        let newNetwork = Wrapper.getCurrentNetwork().name
+        let newNetwork = LPController.getCurrentNetwork().name
         console.log(newNetwork)
         this.setState({network:newNetwork})
     }
@@ -44,4 +44,4 @@ class WrapperTest extends Component {
     }
 }
 
-export default WrapperTest
+export default LPControllerTest
