@@ -18,7 +18,6 @@ class WrapperTest extends Component {
     }
 
     onStateChanged=()=>{
-        console.log(Wrapper.getData())
         let newData = Wrapper.getData().toString()
         this.setState({data:newData})
     }

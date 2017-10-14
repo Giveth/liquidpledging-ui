@@ -111,11 +111,7 @@ class Web3ProviderHelper extends EventEmitter
         if(this.currentAccount !== newAddress)
         {
             this.currentAccount = newAddress
-
             this.emit(this.ACCOUNT_CHANGED, newAddress)
-            /*for(var i = 0; i< this.accountListeners.length; i++)
-                this.accountListeners[i](newAddress)
-                */
         }
     }
 
@@ -141,9 +137,6 @@ class Web3ProviderHelper extends EventEmitter
         if(this.currentNetworkId !== newNetworkId)
         {
             this.currentNetworkId = newNetworkId
-            /*for(var i = 0; i< this.networkListeners.length; i++)
-                this.networkListeners[i](newNetworkId)*/
-
             this.emit(this.NETWORK_CHANGED)
         }
     }
