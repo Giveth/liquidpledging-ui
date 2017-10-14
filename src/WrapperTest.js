@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Wrapper from "./FakeWrapper.js"
+import Wrapper from "./LiquidPledgingController.js"
 
 class WrapperTest extends Component {
 
@@ -19,7 +19,7 @@ class WrapperTest extends Component {
     render() {
         return (
             <div >
-                <h1> {this.state.data.toString()} </h1>
+                <h1 style ={{wordWrap: 'break-word'}}> {this.state.data.toString()} </h1>
             </div>
         )
     }
