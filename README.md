@@ -15,20 +15,14 @@ Install npm dependencies
 
 ## Creating mock data
 
-At the current stage the functionalities are limited, so we need to pre-generate some pledges on our local node to be able to visualize something.
+We're using an slightly modified version of testrpc in order to use it with websockets.
 
-For this you will need to have [testrpc](https://github.com/ethereumjs/testrpc) installed.
+To start your local testrpc node run
 
-Run it using
-
-`testrpc --deterministic --gasLimit 6000000`
-
-The `--deterministic` is important because the current contract is hard-coded. This will ensure that testrpc deploys it to the same address.
-
-Because the contract is quite big, we need to increase the block gas limit size. That's why the `--gasLimit 6000000` option.
+`npm run testrpc`
 
 Now let's generate some mock data by runing a little script.
-This will deploy the liquidpledging contract into our local testrpc network. Then it creates some mock users and pledges.
+This will deploy the liquidpledging contract into the already running testrpc network and then it will create some mock users and pledges.
 
 `node scripts/basicScenario.js`
 
