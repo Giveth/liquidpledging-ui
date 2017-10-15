@@ -1,5 +1,5 @@
-const Web3 = require('web3')
-const EventEmitter = require('events')
+var Web3 = require('web3')
+var EventEmitter = require('events')
 
 const Providers={
     INJECTED:"*",
@@ -44,6 +44,7 @@ class Web3ProviderHelper extends EventEmitter
         this.accountListeners = []
         this.networkListeners = []
         this.checkInterval = undefined
+        this.web3 = {}
     }
 
     //Should be called after window load event
@@ -123,13 +124,15 @@ class Web3ProviderHelper extends EventEmitter
     //checks if we still on the same Ethereum network: Mainnet/Ropsten...
     checkNetwork=()=>
     {
-        window.web3.version.getNetwork((error, networkId) =>
+        //TODO: reimplmement with the new web3
+        /*this.web3.version.getNetwork((error, networkId) =>
         {
             if(error)
                 console.error(error)
 
             this.checkNetworkChange(networkId)
-        })
+        })*/
+
     }
 
     checkNetworkChange=(newNetworkId)=>
@@ -160,11 +163,17 @@ class Web3ProviderHelper extends EventEmitter
             this.provider = providerRef
         }
 
-        //window.web3 = new Web3()
-        Web3.setProvider(this.provider)
-        window.web3 = Web3
+        this.web3 = new Web3(this.provider)
+        window.web3 = this.web3
 
-        return window.web3.isConnected()
+        this.web3.eth.net.isListening().then((id)=>{
+            console.log(id)
+        })
+
+        //https://github.com/ethereum/web3.js/issues/440
+        //return this.web3.isConnected()
+        //TODO check network with new web3
+        return true
     }
 
     isReady=()=>
