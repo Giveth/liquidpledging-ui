@@ -1,43 +1,42 @@
 import React, { Component } from 'react'
-import LPController from "./LiquidPledgingController.js"
+import LPState from "./LiquidPledgingState.js"
 
-class LPControllerTest extends Component {
+class LPStateTest extends Component {
 
     constructor(){
         super()
 
         this.state={
-            data:[],
+            data:['{}'],
             network:"",
             account:""
         }
 
-        LPController.on(LPController.STATE_CHANGED, this.onStateChanged)
-        LPController.on(LPController.ACCOUNT_CHANGED, this.onAccountChanged)
-        LPController.on(LPController.NETWORK_CHANGED, this.onNetworkChanged)
+        LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
+        LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
+        LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
     }
 
     onStateChanged=()=>{
-        let newState = LPController.getState()
+        let newState = LPState.getState()
         let str = JSON.stringify(newState,null,2)
-        console.log(str)
         this.setState({data:str})
     }
 
     onAccountChanged=()=>{
-        let newAccount = LPController.getCurrentAccount()
+        let newAccount = LPState.getCurrentAccount()
         this.setState({account:newAccount})
     }
 
     onNetworkChanged=()=>{
-        let newNetwork = LPController.getCurrentNetwork().name
+        let newNetwork = LPState.getCurrentNetwork().name
         this.setState({network:newNetwork})
     }
 
     render() {
         return (
             <div >
-                <p key = {"data"} style ={{wordWrap: 'break-word'}}> <pre>{this.state.data} </pre></p>
+                <pre key = {"data"} style ={{wordWrap: 'break-word'}}> {this.state.data} </pre>
                 <h1 key = {"account"} style ={{wordWrap: 'break-word'}}> {this.state.account} </h1>
                 <h1 key = {"network"} style ={{wordWrap: 'break-word'}}> {this.state.network} </h1>
             </div>
@@ -45,4 +44,4 @@ class LPControllerTest extends Component {
     }
 }
 
-export default LPControllerTest
+export default LPStateTest
