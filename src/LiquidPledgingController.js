@@ -33,27 +33,36 @@ class LiquidPledgingController extends ProviderHelper {
         this.liquidPledgingState = new LiquidPledgingState(liquidPledging);
 
         
-        this.web3.eth.subscribe('newBlockHeaders',(err,block)=>
+        /*this.web3.eth.subscribe('newBlockHeaders',(err,block)=>
         {
             if (err) {
                 console.error("ERROR", err);
             } else {
-                //console.log("block: " + block.number );
+                //console.log("block: " + block.number )
                 this.retriveStateData()
             }
-        });
-        
+        })
+        */
+
+        setInterval(()=>{
+            console.log("S")
+            this.retriveStateData()
+        }, 3000);
     }
 
     retriveStateData()
     {
         this.liquidPledgingState.getState()
             .then((data) => {
-                this.state = data
-                this.emit(this.STATE_CHANGED)
-               // console.log("state changed", this.state)
+                this.setState(data)
             })
             .catch((error)=>{console.error(error)})
+    }
+
+    setState(data)
+    {
+        this.state = data
+        this.emit(this.STATE_CHANGED)
     }
 
     getState(){
