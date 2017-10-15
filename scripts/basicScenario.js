@@ -62,4 +62,5 @@ console.log("")
 
 run().then(() =>  {
     console.log("Finalized!");
+    process.exit(0);
 })
