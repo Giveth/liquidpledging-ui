@@ -29,26 +29,34 @@ async function run() {
 
     await liquidPledging.addGiver('Giver1', 'URLGiver1', 600, 0, { from: giver1 });
 
-// Donate
 
-    await liquidPledging.donate(1, 1, { from: giver1, value: utils.toWei(1) });
+
+// Donate
+// Admin #1 donates 2 ether to himself
+// A pledge is created as a result (#1)
+
+    await liquidPledging.donate(1, 1, { from: giver1, value: utils.toWei(2) });
 
 
 // Create a delegate
 
-    await liquidPledging.addDelegate('Delegate1', 'URLDelegate1', 0, 0, { from: delegate1 });
+    let commitTime = 0
+    let plugin = 0
+    await liquidPledging.addDelegate('Delegate1', 'URLDelegate1', commitTime, plugin, { from: delegate1 });
+
 
 // Delegate
-
+// Admin #1 delegates 0.5 ether to pledge #1
+// Pledge #2 is created as a result
     await liquidPledging.transfer(1, 1, utils.toWei(0.5), 2, { from: giver1 });
 
-// Create a project
 
+// Create a project
     await liquidPledging.addProject('Project1', 'URLProject1', adminProject1, 0, 86400, 0, { from: adminProject1 });
 
 
 // Propose a project
-
+// Admin #2 delegates to pledge#2 0.2 eth
     await liquidPledging.transfer(2, 2, utils.toWei(0.2), 3, { from: delegate1 });
 
     const st = await liquidPledgingState.getState();
