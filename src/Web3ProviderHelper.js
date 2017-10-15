@@ -260,18 +260,21 @@ class Web3ProviderHelper extends EventEmitter
             providerInfo.type= ProviderTypes.INJECTED
         }
 
-        else if(this.provider.host.indexOf("infura")!==-1) 
+        else if (this.provider.host)
         {
-            providerInfo.id= Providers.INFURA
-            providerInfo.type= ProviderTypes.HTTP
-            providerInfo.canWrite = false          
-        } 
-            
-        else if(this.provider.host.indexOf("localhost")!==-1)  
-        { 
-            providerInfo.id= Providers.LOCALHOST
-            providerInfo.type= ProviderTypes.HTTP
-            providerInfo.canWrite = false
+            if(this.provider.host.indexOf("infura")!==-1) 
+            {
+                providerInfo.id= Providers.INFURA
+                providerInfo.type= ProviderTypes.HTTP
+                providerInfo.canWrite = false          
+            } 
+                
+            else if(this.provider.host.indexOf("localhost")!==-1)  
+            { 
+                providerInfo.id= Providers.LOCALHOST
+                providerInfo.type= ProviderTypes.HTTP
+                providerInfo.canWrite = false
+            }
         }
 
         else
