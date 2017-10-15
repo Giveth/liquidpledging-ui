@@ -18,7 +18,7 @@ class LPControllerTest extends Component {
     }
 
     onStateChanged=()=>{
-        let newState = LPController.getState().toString()
+        let newState = LPController.getState()
         let str = JSON.stringify(newState,null,2)
         console.log(str)
         this.setState({data:str})
@@ -37,7 +37,7 @@ class LPControllerTest extends Component {
     render() {
         return (
             <div >
-                <h1 key = {"data"} style ={{wordWrap: 'break-word'}}> {this.state.data} </h1>
+                <p key = {"data"} style ={{wordWrap: 'break-word'}}> <pre>{this.state.data} </pre></p>
                 <h1 key = {"account"} style ={{wordWrap: 'break-word'}}> {this.state.account} </h1>
                 <h1 key = {"network"} style ={{wordWrap: 'break-word'}}> {this.state.network} </h1>
             </div>
