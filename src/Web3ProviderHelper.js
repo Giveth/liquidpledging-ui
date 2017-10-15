@@ -299,5 +299,4 @@ class Web3ProviderHelper extends EventEmitter
     }
 }
 
-//const instance = new Web3ProviderHelper()
 export default Web3ProviderHelper
