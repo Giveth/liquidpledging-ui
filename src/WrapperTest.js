@@ -18,8 +18,9 @@ class LPStateTest extends Component {
     }
 
     onStateChanged=()=>{
-        let newState = LPState.getState()
-        let str = JSON.stringify(newState,null,2)
+        let filter = {addr:'0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0'}
+        let newState = LPState.getAdmins(filter)
+        let str = JSON.stringify(newState,null, 2)
         this.setState({data:str})
     }
 
@@ -36,9 +37,9 @@ class LPStateTest extends Component {
     render() {
         return (
             <div >
+                <h3 key = {"account"} style ={{wordWrap: 'break-word'}}> {this.state.account} </h3>
                 <pre key = {"data"} style ={{wordWrap: 'break-word'}}> {this.state.data} </pre>
-                <h1 key = {"account"} style ={{wordWrap: 'break-word'}}> {this.state.account} </h1>
-                <h1 key = {"network"} style ={{wordWrap: 'break-word'}}> {this.state.network} </h1>
+            
             </div>
         )
     }
