@@ -45,7 +45,6 @@ class LiquidPledgingController extends ProviderHelper {
         */
 
         setInterval(()=>{
-            console.log("S")
             this.retriveStateData()
         }, 3000);
     }

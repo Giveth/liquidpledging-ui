@@ -29,7 +29,6 @@ async function run() {
 
     await liquidPledging.addGiver('Giver1', 'URLGiver1', 600, 0, { from: giver1 });
 
-
 // Donate
 
     await liquidPledging.donate(1, 1, { from: giver1, value: utils.toWei(1) });
