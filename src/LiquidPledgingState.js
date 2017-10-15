@@ -9,6 +9,14 @@ class LiquidPledgingState extends LiquidPledgingController {
         super()
     }
 
+    getAdmin(id)
+    {
+        if(!this.state.admins || id >= this.state.admins.length )
+            return {}
+        return this.state.admins[id]
+
+    }
+
     getAdmins(filter)
     {
         let filtered = []
@@ -22,6 +30,14 @@ class LiquidPledgingState extends LiquidPledgingController {
         
 
         return filtered
+    }
+
+    getPledge(id)
+    {
+        if(!this.state.pledges || id >= this.state.pledges.length )
+            return {}
+        return this.state.pledges[id]
+
     }
 
     getPledges(filter)
@@ -55,6 +71,10 @@ class LiquidPledgingState extends LiquidPledgingController {
             return false
 
         })
+    }
+
+    getDelegationChain()
+    {
 
     }
 }
