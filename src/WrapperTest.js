@@ -19,7 +19,9 @@ class LPControllerTest extends Component {
 
     onStateChanged=()=>{
         let newState = LPController.getState().toString()
-        this.setState({data:newState.toString()})
+        let str = JSON.stringify(newState,null,2)
+        console.log(str)
+        this.setState({data:str})
     }
 
     onAccountChanged=()=>{
@@ -29,7 +31,6 @@ class LPControllerTest extends Component {
 
     onNetworkChanged=()=>{
         let newNetwork = LPController.getCurrentNetwork().name
-        console.log(newNetwork)
         this.setState({network:newNetwork})
     }
 
