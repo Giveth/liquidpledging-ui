@@ -6,16 +6,17 @@ class DelegationList extends Component {
     constructor(props){
         super()
 
-        this.state={
-        }
+        this.state={}
     }
    
     render() {
-        const list = this.props.delegations.map((delegation) => { return <Delegation/>} )
 
-        console.log(list)
+        let list = []
+        if(this.props.delegations)
+            list = this.props.delegations.map((d,index) => {
+                return <Delegation key={index} delegation={d} />})
+
         console.log(this.props.delegations)
-
         return (
             <div >
                 {list}

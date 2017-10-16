@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class Delegation extends Component {
 
-    constructor(){
+    constructor(props){
         super()
 
         this.state={}
@@ -12,8 +12,8 @@ class Delegation extends Component {
     render() {
         return (
             <div>
-                <h3 key = {"delegate"} > {'Hackuna mattata'} </h3>
-                <pre key = {"data"} > {'bla bla'} </pre>
+                <h3 key = {"delegate"} > {this.props.delegation.currentDelegate.name} </h3>
+                <pre key = {"address"} > {this.props.delegation.currentDelegate.addr} </pre>
             
             </div>
         )

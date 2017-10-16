@@ -9,7 +9,8 @@ class LPStateTest extends Component {
         this.state={
             data:['{}'],
             network:"",
-            account:""
+            account:"",
+            delegations:[]
         }
 
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
@@ -23,7 +24,10 @@ class LPStateTest extends Component {
         let delegationFilter = {adminId:3, level:1}
         let newState = LPState.getPledges(propertiesFilter, delegationFilter)
         let str = JSON.stringify(newState,null, 2)
-        this.setState({data:str})
+        this.setState({
+            data:str,
+            delegations:LPState.getAvailableDelegations()
+        })
     }
 
     onAccountChanged=()=>{
@@ -39,7 +43,7 @@ class LPStateTest extends Component {
     render() {
         return (
             <div >
-                <DelegationsList delegations={[1,23,4,5]}/>
+                <DelegationsList delegations={this.state.delegations}/>
                 <h3 key = {"account"} style ={{wordWrap: 'break-word'}}> {this.state.account} </h3>
                 <pre key = {"data"} style ={{wordWrap: 'break-word'}}> {this.state.data} </pre>
             
