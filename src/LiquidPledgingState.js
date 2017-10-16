@@ -85,7 +85,6 @@ class LiquidPledgingState extends LiquidPledgingController {
 
             if(parseInt(pledge.delegates[level].id) === adminId)
                 return true
-        
 
             return false
         })
@@ -106,14 +105,22 @@ class LiquidPledgingState extends LiquidPledgingController {
         return chain
     }
 
-    getDelegation()
+    getDelegation(pledge, currentDelegate)
     {
         let delegation = {
-            pledge:{},
-            children:[],
-            parent:0
+            pledge:pledge,
+            currentDelegate:currentDelegate
         }
+        return delegation
     }
+
+    getAvailablePledges()
+    {
+        let filter={addr:this.getCurrentAccount()}
+        return this.getPledges(filter)
+    }
+
+
 
 
     /*getChildrenPledgeChain(pledgeId, pledgeTree = [])
