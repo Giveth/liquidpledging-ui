@@ -18,8 +18,10 @@ class LPStateTest extends Component {
     }
 
     onStateChanged=()=>{
-        let filter = {delegates:null}
-        let newState = LPState.getPledges(filter)
+        console.log('STATE_CHANGED')
+        let propertiesFilter = {}
+        let delegationFilter = {adminId:3, level:1}
+        let newState = LPState.getPledges(propertiesFilter, delegationFilter)
         let str = JSON.stringify(newState,null, 2)
         this.setState({data:str})
     }
