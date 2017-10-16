@@ -9,12 +9,11 @@ class LiquidPledgingState extends LiquidPledgingController {
         super()
     }
 
-    getAdmin(id)
+    getAdmin(adminId)
     {
-        if(!this.state.admins || id >= this.state.admins.length )
+        if(!this.state.admins || adminId >= this.state.admins.length )
             return {}
-        return this.state.admins[id]
-
+        return this.state.admins[adminId]
     }
 
     getAdmins(filter)
@@ -28,16 +27,14 @@ class LiquidPledgingState extends LiquidPledgingController {
         for (const property of Object.keys(filter)) 
             filtered = this.filterByProperty(filtered, property, filter[property])
         
-
         return filtered
     }
 
-    getPledge(id)
+    getPledge(pledgeId)
     {
-        if(!this.state.pledges || id >= this.state.pledges.length )
+        if(!this.state.pledges || pledgeId >= this.state.pledges.length )
             return {}
-        return this.state.pledges[id]
-
+        return this.state.pledges[pledgeId]
     }
 
     getPledges(filter)
@@ -52,7 +49,6 @@ class LiquidPledgingState extends LiquidPledgingController {
             filtered = this.filterByProperty(filtered, property, filter[property])
 
         return filtered
-        
     }
 
     filterByProperty(array, property, value)
@@ -69,14 +65,47 @@ class LiquidPledgingState extends LiquidPledgingController {
                 return true
                 
             return false
-
         })
     }
 
-    getDelegationChain()
+    getParentPledgeChain(pledgeId, chain = [])
     {
+        let pledge = this.getPledge(pledgeId)
 
+        if(!pledge)
+            return chain
+
+        chain.push(pledge)
+
+        if(pledge.oldPledge)
+            chain = this.getDelegationChain(pledge.oldPledge, chain)
+
+        return chain
     }
+
+
+    getChildrenPledgeChain(pledgeId, pledgeTree = [])
+    {
+        let pledge = this.getPledge(pledgeId)
+
+        if(!pledge)
+            return chain
+
+        chain.push(pledge)
+
+        if(pledge.oldPledge)
+            chain = this.getDelegationChain(pledge.oldPledge, chain)
+
+        return chain
+    }
+
+    getChildrenPledges(pledgeId)
+    {
+        return this.getPledges({oldPledge:pledgeId})
+    }
+
+    
+
 }
 
 export default new LiquidPledgingState ()
