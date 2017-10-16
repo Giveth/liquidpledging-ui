@@ -22,7 +22,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         if(!this.state.admins)
             return filtered
 
-        filtered  = this.state.admins
+        filtered  = this.state.admins.shft()
 
         for (const property of Object.keys(propertiesFilter)) 
             filtered = this.filterByProperty(filtered, property, propertiesFilter[property])
@@ -45,13 +45,13 @@ class LiquidPledgingState extends LiquidPledgingController {
 
         filtered  = this.state.pledges
 
+        filtered.shift()
+
         for (const property of Object.keys(propertiesFilter))
             filtered = this.filterByProperty(filtered, property, propertiesFilter[property])
 
         if(delegationFilter && delegationFilter.adminId)
             filtered = this.filterByDelegationLevel(filtered, delegationFilter.adminId, delegationFilter.level)
-
-        console.log(3,filtered)
 
         return filtered
     }
@@ -105,19 +105,47 @@ class LiquidPledgingState extends LiquidPledgingController {
         return chain
     }
 
-    getDelegation(pledge, currentDelegate)
+    getDelegation(pledge, currentDelegate, children)
     {
         let delegation = {
             pledge:pledge,
-            currentDelegate:currentDelegate
+            currentDelegate:currentDelegate,
+            children:children
         }
         return delegation
     }
 
+    getAdminForLevel(pledge, level)
+    {
+        if(pledge.delegates.length > level)
+            return pledge.delegates[pledge.delegates.length - 1 - level]
+        return -1
+    }
+
+    getDelegations(pledges)
+    {
+        let delegations = []
+        for( let pledge of pledges)
+        {
+            let admin = this.getAdmin(pledge)
+            delegations.push(this.getDelegation(pledge, this.getAdminForLevel(pledge, 0)))
+        }
+        return delegations
+    }
+
     getAvailablePledges()
     {
-        let filter={addr:this.getCurrentAccount()}
+        let filter={}
         return this.getPledges(filter)
+    }
+
+    getAvailableDelegations()
+    {
+        let pledges = this.getAvailablePledges()
+        
+        let delegations = this.getDelegations(pledges)
+        console.log(delegations)
+        return delegations
     }
 
 
