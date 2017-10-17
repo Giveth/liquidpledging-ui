@@ -13,17 +13,7 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     getAdmins(propertiesFilter={})
     {
-        if(!this.state.admins)
-            return []
-
-        let filtered = []
-
-        filtered  = this.state.admins
-
-        if(filtered.length<=1)
-            return []
-
-        filtered.shift()
+        let filtered  = this.state.admins
 
         for (const property of Object.keys(propertiesFilter)) 
             filtered = this.filterByProperty(filtered, property, propertiesFilter[property])
@@ -40,15 +30,7 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     getPledges(propertiesFilter={}, delegationFilter)
     {
-        let filtered = []
-        if(!this.state.pledges)
-            return filtered
-
-        if(filtered<=1)
-            return []
-
-        filtered  = this.state.pledges
-        filtered.shift()
+        let filtered  = this.state.pledges
 
         for (const property of Object.keys(propertiesFilter))
             filtered = this.filterByProperty(filtered, property, propertiesFilter[property])
@@ -147,7 +129,6 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     getAvailableDelegations()
     {
-        console.log("Fet")
         let pledges = this.getAvailablePledges()
         let delegations = this.getDelegations(pledges)
         return delegations
