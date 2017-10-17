@@ -93,7 +93,7 @@ class Web3ProviderHelper extends EventEmitter
     //see if the user changes the account, or unlocks it
     checkAccount=()=>
     {
-        window.web3.eth.getAccounts((error, accounts)=>
+        this.web3.eth.getAccounts((error, accounts)=>
         {
             if(error)
                 console.error(error)
@@ -295,7 +295,7 @@ class Web3ProviderHelper extends EventEmitter
 
     isConnected=()=>
     {
-        return window.web3.isConnected()
+        return this.web3.isConnected()
     }
 }
 
