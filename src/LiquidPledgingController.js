@@ -3,7 +3,7 @@ import ProviderHelper from "./Web3ProviderHelper"
 const liquidpledging = require('liquidpledging');
 const LiquidPledging = liquidpledging.LiquidPledging;
 const LiquidPledgingState = liquidpledging.LiquidPledgingState;
-const EventEmitter = require('events')
+//const EventEmitter = require('events')
 
 const testRPCProvider = 'ws://localhost:8546'
 const liquidPledgingContractAddress = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24'
@@ -65,6 +65,15 @@ class LiquidPledgingController extends ProviderHelper {
     setState(data)
     {
         this.state = data
+
+        if(this.state.pledges)
+            this.state.pledges=this.setIdsAndRemoveNull(this.state.pledges)
+
+        if(this.state.admins)
+            this.state.admins=this.setIdsAndRemoveNull(this.state.admins)
+
+        console.log(this.state)
+
         this.emit(this.STATE_CHANGED)
     }
 
@@ -77,6 +86,18 @@ class LiquidPledgingController extends ProviderHelper {
     {
         this.state = fakeState
         this.emit(this.STATE_CHANGED)
+    }
+
+    setIdsAndRemoveNull(array)
+    {
+       return array.map((item,index)=>{
+            if(item)
+            {
+                item.id=index
+
+                return item
+            }
+        })
     }
 }
 
