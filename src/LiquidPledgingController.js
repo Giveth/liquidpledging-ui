@@ -68,11 +68,13 @@ class LiquidPledgingController extends ProviderHelper {
 
         if(this.state.pledges)
             this.state.pledges=this.setIdsAndRemoveNull(this.state.pledges)
+        else
+            this.state.pledges=[]
 
         if(this.state.admins)
             this.state.admins=this.setIdsAndRemoveNull(this.state.admins)
-
-        console.log(this.state)
+        else
+            this.this.state.pledges=[]
 
         this.emit(this.STATE_CHANGED)
     }
