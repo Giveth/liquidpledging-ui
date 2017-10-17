@@ -120,9 +120,20 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     getAvailablePledges()
     {
+        //Let's get all the admins controled by user address
         let admins = this.getAdmins({addr:this.currentAccount})
+        console.log('admins', admins)
+        //for each admin we get all the pledges where he is in control
 
-        console.log("AvailbleAdmins", admins)
+        let allPledges = []
+        for(let admin of admins)
+        {
+            let propertiesFilter = {}
+            let delegationFilter = {adminId:admin.id, level:0}
+            let pledges = this.getPledges(propertiesFilter, delegationFilter)
+            console.log(admin.id, pledges)
+            allPledges.concat(pledges)
+        }
         let filter={addr:this.currentAccount}
         return this.getPledges(filter)
     }
@@ -130,6 +141,7 @@ class LiquidPledgingState extends LiquidPledgingController {
     getAvailableDelegations()
     {
         let pledges = this.getAvailablePledges()
+        console.log(pledges)
         let delegations = this.getDelegations(pledges)
         return delegations
     }
