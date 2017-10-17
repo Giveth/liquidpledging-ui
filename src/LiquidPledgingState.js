@@ -4,11 +4,6 @@ const adminTypes = {GIVER:'Giver', DELEGATE:'delegate', PROJECT:'project'}
 
 class LiquidPledgingState extends LiquidPledgingController {
 
-    constructor()
-    {
-        super()
-    }
-
     getAdmin(adminId)
     {
         if(!this.state.admins || adminId >= this.state.admins.length )
@@ -18,11 +13,17 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     getAdmins(propertiesFilter={})
     {
-        let filtered = []
         if(!this.state.admins)
-            return filtered
+            return []
 
-        filtered  = this.state.admins.shft()
+        let filtered = []
+
+        filtered  = this.state.admins
+
+        if(filtered.length<=1)
+            return []
+
+        filtered.shift()
 
         for (const property of Object.keys(propertiesFilter)) 
             filtered = this.filterByProperty(filtered, property, propertiesFilter[property])
@@ -43,8 +44,10 @@ class LiquidPledgingState extends LiquidPledgingController {
         if(!this.state.pledges)
             return filtered
 
-        filtered  = this.state.pledges
+        if(filtered<=1)
+            return []
 
+        filtered  = this.state.pledges
         filtered.shift()
 
         for (const property of Object.keys(propertiesFilter))
@@ -83,7 +86,7 @@ class LiquidPledgingState extends LiquidPledgingController {
             if(!pledge.delegates[level])
                 return false
 
-            if(parseInt(pledge.delegates[level].id) === adminId)
+            if(parseInt(pledge.delegates[level].id, 10) === adminId)
                 return true
 
             return false
@@ -135,38 +138,27 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     getAvailablePledges()
     {
-        let filter={}
+        let admins = this.getAdmins({addr:this.currentAccount})
+
+        console.log("AvailbleAdmins", admins)
+        let filter={addr:this.currentAccount}
         return this.getPledges(filter)
     }
 
     getAvailableDelegations()
     {
+        console.log("Fet")
         let pledges = this.getAvailablePledges()
-        
         let delegations = this.getDelegations(pledges)
-        console.log(delegations)
         return delegations
     }
 
-
-
-
-    /*getChildrenPledgeChain(pledgeId, pledgeTree = [])
+    getIdsFrom(admins)
     {
-        let pledge = this.getPledge(pledgeId)
-
-        if(!pledge)
-            return chain
-
-        chain.push(pledge)
-
-        if(pledge.oldPledge)
-            chain = this.getDelegationChain(pledge.oldPledge, chain)
-
-        return chain
-    }*/
-
-
+        let ids = []
+        for(let admin of admins)
+            ids.push(admin)
+    }
 
 }
 
