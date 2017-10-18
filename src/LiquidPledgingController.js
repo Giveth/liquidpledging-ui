@@ -55,7 +55,7 @@ class LiquidPledgingController extends ProviderHelper {
     {
         this.liquidPledgingState.getState()
             .then((data) => {
-                this.setFakeState()
+                this.setState(data)
             })
             .catch((error)=>{console.error(error)})
     }
@@ -68,7 +68,9 @@ class LiquidPledgingController extends ProviderHelper {
         {
             this.state.pledges=this.setIds(this.state.pledges)
             this.state.pledges.shift() //first item is always null
-            this.state.pledges=this.setStringsToNumbers(this.state.pledges)
+            this.state.pledges=this.setRightTypes(this.state.pledges)
+
+            console.log(this.state.pledges)
             this.delegations = this.createDelegations(this.state.pledges)
         }
         else
@@ -99,7 +101,7 @@ class LiquidPledgingController extends ProviderHelper {
             }
         })
     }
-    setStringsToNumbers(pledges)
+    setRightTypes(pledges)
     {
         return pledges.map((pledge, index)=>{
 
@@ -110,8 +112,7 @@ class LiquidPledgingController extends ProviderHelper {
             pledge.owner=parseInt(pledge.owner,10)
 
             pledge.delegates = pledge.delegates.map((delegate,index)=>{
-                 delegate.id=parseInt(delegate.id,10)
-                 return delegate
+                 return delegate.id=parseInt(delegate.id,10)
             })
 
             return pledge
@@ -119,8 +120,16 @@ class LiquidPledgingController extends ProviderHelper {
         })
     }
 
+
     createDelegations(pledges)
-    {}
+    {
+        let delegations = {}
+
+        for (let i = pledges.length - 1; i >= 0; --i) {
+            let pledge = pledges[i]
+            let id = pledges
+        }
+    }
 }
 
 
