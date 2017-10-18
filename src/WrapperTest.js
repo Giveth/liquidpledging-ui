@@ -19,7 +19,7 @@ class LPStateTest extends Component {
     }
 
     onStateChanged=()=>{
-        console.log('STATE_CHANGED')
+        /*console.log('STATE_CHANGED')
         let propertiesFilter = {}
         let delegationFilter = {adminId:3, level:1}
         let newState = LPState.getPledges(propertiesFilter, delegationFilter)
@@ -27,7 +27,9 @@ class LPStateTest extends Component {
         this.setState({
             data:str,
             delegations:LPState.getAvailableDelegations()
-        })
+        })*/
+
+       console.log(LPState.getOpenPledges(9))
     }
 
     onAccountChanged=()=>{
