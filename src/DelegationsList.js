@@ -16,7 +16,7 @@ class DelegationList extends Component {
             list = this.props.delegations.map((d,index) => {
                 return <Delegation key={index} delegation={d} />})
 
-        console.log(this.props.delegations)
+        //console.log(this.props.delegations)
         return (
             <div >
                 {list}
