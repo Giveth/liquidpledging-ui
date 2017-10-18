@@ -28,8 +28,9 @@ class LPStateTest extends Component {
             data:str,
             delegations:LPState.getAvailableDelegations()
         })*/
-
-       console.log(LPState.getOpenPledges(9))
+        let delegation = LPState.getDelegation("1")
+        
+         console.log(LPState.getDelegationTree(delegation))
     }
 
     onAccountChanged=()=>{

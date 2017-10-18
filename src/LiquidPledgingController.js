@@ -182,7 +182,7 @@ class LiquidPledgingController extends ProviderHelper {
             delegations[current.id] = current
         }
 
-        console.log(delegations)
+        return delegations
     }
 
     //returns an string made of all delegations. including the owner at the begining and the project at the end (if it exists)

@@ -1,7 +1,5 @@
 import LiquidPledgingController from "./LiquidPledgingController"
 const Filter = require('./Filter.js');
-
-
 const adminTypes = {GIVER:'Giver', DELEGATE:'delegate', PROJECT:'project'}
 
 class LiquidPledgingState extends LiquidPledgingController {
@@ -43,30 +41,9 @@ class LiquidPledgingState extends LiquidPledgingController {
         return filtered
     }
 
-
-    /*getParentPledgeChain(pledgeId, chain = [])
+    getDelegation(delegationId)
     {
-        let pledge = this.getPledge(pledgeId)
-
-        if(!pledge)
-            return chain
-
-        chain.push(pledge)
-
-        if(pledge.oldPledge)
-            chain = this.getDelegationChain(pledge.oldPledge, chain)
-
-        return chain
-    }*/
-
-    getDelegation(pledge, currentDelegate, children)
-    {
-        let delegation = {
-            pledge:pledge,
-            currentDelegate:currentDelegate,
-            children:children
-        }
-        return delegation
+        return this.delegations[delegationId]
     }
 
     getAdminForLevel(pledge, level)
@@ -76,15 +53,20 @@ class LiquidPledgingState extends LiquidPledgingController {
         return -1
     }
 
-    getDelegations(pledges)
+    getDelegationTree(delegation)
     {
-        let delegations = []
-        for( let pledge of pledges)
+        let children = []
+        for( let delegationId of delegation.delegations)
         {
-            let admin = this.getAdmin(pledge)
-            delegations.push(this.getDelegation(pledge, this.getAdminForLevel(pledge, 0)))
+            let child = this.getDelegation(delegationId)
+            children.push(this.getDelegationTree(child))
         }
-        return delegations
+        
+        let tree = {
+            delegation:delegation,
+            children:children
+        }
+        return tree
     }
 
     getAvailablePledges()
