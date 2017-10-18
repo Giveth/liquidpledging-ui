@@ -7,6 +7,7 @@ const LiquidPledgingState = liquidpledging.LiquidPledgingState;
 
 const testRPCProvider = 'ws://localhost:8546'
 const liquidPledgingContractAddress = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24'
+const NO_PARENT = "0"
 
 class LiquidPledgingController extends ProviderHelper {
 
@@ -107,7 +108,7 @@ class LiquidPledgingController extends ProviderHelper {
             pledge.commitTime=parseInt(pledge.commitTime,10)
             pledge.intendedProject=parseInt(pledge.intendedProject,10)
             pledge.oldPledge=parseInt(pledge.oldPledge,10)
-            //pledge.amount=parseInt(pledge.amount,10) //it may give problems with bigNumber
+            pledge.amount=parseInt(pledge.amount,10) //it may give problems with bigNumber
             pledge.owner=parseInt(pledge.owner,10)
 
             pledge.delegates = pledge.delegates.map((delegate,index)=>{
@@ -119,7 +120,6 @@ class LiquidPledgingController extends ProviderHelper {
         })
     }
 
-
     createDelegations(pledges)
     {
         let delegationsArray = []
@@ -128,17 +128,28 @@ class LiquidPledgingController extends ProviderHelper {
         for (let i = pledges.length - 1; i >= 0; --i) {
 
             let pledge = pledges[i]
-            let id = this.getDelegationId(pledge.owner, pledge.delegates)
+            
+            let id = this.getDelegationId(pledge.owner, pledge.delegates, pledge.intendedProject)
             let parentDelegates = pledge.delegates.slice()
             parentDelegates.splice(-1,1)
-            let parentId = this.getDelegationId(pledge.owner, parentDelegates)
+            let parentId = this.getDelegationId(pledge.owner, parentDelegates, 0)
             let adminId =  pledge.delegates[pledge.delegates.length-1]
 
+            if(pledge.intendedProject)
+                parentId = this.getDelegationId(pledge.owner, pledge.delegates, 0)
+
+            if(pledge.delegates.length===0)
+            {
+                parentId = this.getDelegationId(0, [], 0)
+                adminId = pledge.owner
+            }
+            
             let delegation={
                 id:id,
                 parentId:parentId,
                 delegations:[],
-                assignedAmount:0,
+                assignedAmount:pledge.amount,//pledge.amount = available amount. Down below we'll add the used one 
+                availableAmount:pledge.amount,
                 pledgeId:pledge.id,
                 intendedProject:pledge.intendedProject,
                 adminId:adminId
@@ -153,12 +164,17 @@ class LiquidPledgingController extends ProviderHelper {
         {
             let current = delegationsArray[i]
 
-            for(let j= 0; j < delegationsArray.length - i - 1; j++) //current minus self
+            for(let j= i + 1 ; j < delegationsArray.length; j++) //current plus self
             {
+                
+                if(current.parentId===NO_PARENT)
+                    break
+
                 if( current.parentId === delegationsArray[j].id)
                 {
+                    delegationsArray[j].assignedAmount += current.assignedAmount
                     delegationsArray[j].delegations.push(current.id)
-                    //TODO: add up amount
+
                     break //there is only one parent
                 }
             }
@@ -170,10 +186,12 @@ class LiquidPledgingController extends ProviderHelper {
     }
 
     //returns an string made of all delegations. including the owner at the begining and the project at the end (if it exists)
-    getDelegationId(owner, delegates)
+    getDelegationId(owner, delegates, intendedProject)
     {
         let delegatesChain = [owner]
         delegatesChain = delegatesChain.concat(delegates)
+        if(intendedProject)
+            delegatesChain = delegatesChain.concat([intendedProject])
         return delegatesChain.toString()
     }
 
