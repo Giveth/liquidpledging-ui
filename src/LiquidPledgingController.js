@@ -70,6 +70,7 @@ class LiquidPledgingController extends ProviderHelper {
         {
             this.state.pledges=this.setIds(this.state.pledges)
             this.state.pledges.shift() //first item is always null
+            this.state.pledges=this.setStringsToNumbers(this.state.pledges)
         }
         else
             this.state.pledges=[]
@@ -104,6 +105,25 @@ class LiquidPledgingController extends ProviderHelper {
                 item.id=index
                 return item
             }
+        })
+    }
+    setStringsToNumbers(pledges)
+    {
+        return pledges.map((pledge, index)=>{
+
+            pledge.commitTime=parseInt(pledge.commitTime,10)
+            pledge.intendedProject=parseInt(pledge.intendedProject,10)
+            pledge.oldPledge=parseInt(pledge.oldPledge,10)
+            //pledge.amount=parseInt(pledge.amount,10) //it may give problems with bigNumber
+            pledge.owner=parseInt(pledge.owner,10)
+
+            pledge.delegates = pledge.delegates.map((delegate,index)=>{
+                 delegate.id=parseInt(delegate.id,10)
+                 return delegate
+            })
+
+            return pledge
+            
         })
     }
 }

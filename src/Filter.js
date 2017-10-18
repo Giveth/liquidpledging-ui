@@ -1,7 +1,7 @@
 
 module.exports = {
 
-    byProperty(array, property, value)
+    property(array, property, value)
     {
         return array.filter((element)=>{
 
@@ -18,16 +18,16 @@ module.exports = {
         })
     },
 
-    byDelegationLevel(array, adminId, level, reverseLevel = false)
+    delegationLevel(pledges, adminId, level, reverseLevel = false)
     {
         if(reverseLevel)
         {
-            return array.filter((pledge)=>{
+            return pledges.filter((pledge)=>{
 
                 if(!pledge.delegates[pledge.delegates.length-1-level])
                     return false
 
-                if(parseInt(pledge.delegates[pledge.delegates.length-1-level].id, 10) === adminId)
+                if(pledge.delegates[pledge.delegates.length-1-level].id === adminId)
                     return true
 
                 return false
@@ -35,17 +35,26 @@ module.exports = {
         }
         else
         {
-            return array.filter((pledge)=>{
+            return pledges.filter((pledge)=>{
 
                 if(!pledge.delegates[level])
                     return false
 
-                if(parseInt(pledge.delegates[level].id, 10) === adminId)
+                if(pledge.delegates[level].id === adminId)
                     return true
 
                 return false
             })
         }  
-    }
+    },
+
+    hasIntendedProject(pledges, hasIntendedProject=true)
+    {
+        return pledges.filter((pledge)=>{
+           if(pledge.intendedProject === 0)
+                return !hasIntendedProject
+            return hasIntendedProject
+        })
+    },
 
 }
