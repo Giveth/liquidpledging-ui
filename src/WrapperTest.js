@@ -7,10 +7,9 @@ class LPStateTest extends Component {
         super()
 
         this.state={
-            data:['{}'],
             network:"",
             account:"",
-            delegations:[]
+            treeChildren:[]
         }
 
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
@@ -19,18 +18,12 @@ class LPStateTest extends Component {
     }
 
     onStateChanged=()=>{
-        /*console.log('STATE_CHANGED')
-        let propertiesFilter = {}
-        let delegationFilter = {adminId:3, level:1}
-        let newState = LPState.getPledges(propertiesFilter, delegationFilter)
-        let str = JSON.stringify(newState,null, 2)
-        this.setState({
-            data:str,
-            delegations:LPState.getAvailableDelegations()
-        })*/
+
         let delegation = LPState.getDelegation("1")
-        
-         console.log(LPState.getDelegationTree(delegation))
+        console.log()
+        this.setState({
+            tree:[LPState.getDelegationTree(delegation)]
+        })
     }
 
     onAccountChanged=()=>{
@@ -44,9 +37,10 @@ class LPStateTest extends Component {
     }
 
     render() {
+        console.log(this.state.treeChildren)
         return (
             <div >
-                <DelegationsList delegations={this.state.delegations}/>
+                <DelegationsList treeChildren={this.state.tree} indentLevel={0}/>
                 <h3 key = {"account"} style ={{wordWrap: 'break-word'}}> {this.state.account} </h3>
                 <pre key = {"data"} style ={{wordWrap: 'break-word'}}> {this.state.data} </pre>
             
