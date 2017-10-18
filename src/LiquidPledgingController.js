@@ -70,7 +70,6 @@ class LiquidPledgingController extends ProviderHelper {
             this.state.pledges.shift() //first item is always null
             this.state.pledges=this.setRightTypes(this.state.pledges)
 
-            console.log(this.state.pledges)
             this.delegations = this.createDelegations(this.state.pledges)
         }
         else
@@ -123,13 +122,61 @@ class LiquidPledgingController extends ProviderHelper {
 
     createDelegations(pledges)
     {
-        let delegations = {}
+        let delegationsArray = []
 
+        //lets create unique identifier for each pledge. And let's add al convinient data. 
         for (let i = pledges.length - 1; i >= 0; --i) {
+
             let pledge = pledges[i]
-            let id = pledges
+            let id = this.getDelegationId(pledge.owner, pledge.delegates)
+            let parentDelegates = pledge.delegates.slice()
+            parentDelegates.splice(-1,1)
+            let parentId = this.getDelegationId(pledge.owner, parentDelegates)
+            let adminId =  pledge.delegates[pledge.delegates.length-1]
+
+            let delegation={
+                id:id,
+                parentId:parentId,
+                delegations:[],
+                assignedAmount:0,
+                pledgeId:pledge.id,
+                intendedProject:pledge.intendedProject,
+                adminId:adminId
+            }
+            
+            delegationsArray.push(delegation)
         }
+
+        let delegations = {}
+        //we go over the just created delegations and assign them their child delegations
+        for(let i = 0; i < delegationsArray.length; i++)
+        {
+            let current = delegationsArray[i]
+
+            for(let j= 0; j < delegationsArray.length - i - 1; j++) //current minus self
+            {
+                if( current.parentId === delegationsArray[j].id)
+                {
+                    delegationsArray[j].delegations.push(current.id)
+                    //TODO: add up amount
+                    break //there is only one parent
+                }
+            }
+           
+            delegations[current.id] = current
+        }
+
+        console.log(delegations)
     }
+
+    //returns an string made of all delegations. including the owner at the begining and the project at the end (if it exists)
+    getDelegationId(owner, delegates)
+    {
+        let delegatesChain = [owner]
+        delegatesChain = delegatesChain.concat(delegates)
+        return delegatesChain.toString()
+    }
+
 }
 
 
