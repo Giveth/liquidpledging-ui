@@ -1,5 +1,5 @@
 import LiquidPledgingController from "./LiquidPledgingController"
-const Filters = require('./Filters.js');
+const Filter = require('./Filter.js');
 
 
 const adminTypes = {GIVER:'Giver', DELEGATE:'delegate', PROJECT:'project'}
@@ -18,7 +18,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         let filtered  = this.state.admins
 
         for (const property of Object.keys(propertiesFilter)) 
-            filtered = Filters.filterByProperty(filtered, property, propertiesFilter[property])
+            filtered = Filter.byProperty(filtered, property, propertiesFilter[property])
         
         return filtered
     }
@@ -32,15 +32,13 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     getPledges(propertiesFilter={}, delegationFilter)
     {
-
-        console.log(Filters)
         let filtered  = this.state.pledges
 
         for (const property of Object.keys(propertiesFilter))
-            filtered = Filters.filterByProperty(filtered, property, propertiesFilter[property])
+            filtered = Filter.byProperty(filtered, property, propertiesFilter[property])
 
         if(delegationFilter && delegationFilter.adminId)
-            filtered = Filters.filterByDelegationLevel(filtered, delegationFilter.adminId, delegationFilter.level, delegationFilter.reverseLevel)
+            filtered = Filter.byDelegationLevel(filtered, delegationFilter.adminId, delegationFilter.level, delegationFilter.reverseLevel)
 
         return filtered
     }
