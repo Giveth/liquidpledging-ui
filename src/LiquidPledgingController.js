@@ -67,12 +67,18 @@ class LiquidPledgingController extends ProviderHelper {
         this.state = data
 
         if(this.state.pledges)
-            this.state.pledges=this.setIdsAndRemoveNull(this.state.pledges)
+        {
+            this.state.pledges=this.setIds(this.state.pledges)
+            this.state.pledges.shift() //first item is always null
+        }
         else
             this.state.pledges=[]
 
         if(this.state.admins)
-            this.state.admins=this.setIdsAndRemoveNull(this.state.admins)
+        {
+            this.state.admins=this.setIds(this.state.admins)
+            this.state.pledges.shift()
+        }
         else
             this.this.state.pledges=[]
 
@@ -90,13 +96,12 @@ class LiquidPledgingController extends ProviderHelper {
         this.emit(this.STATE_CHANGED)
     }
 
-    setIdsAndRemoveNull(array)
+    setIds(array)
     {
        return array.map((item,index)=>{
             if(item)
             {
                 item.id=index
-
                 return item
             }
         })
