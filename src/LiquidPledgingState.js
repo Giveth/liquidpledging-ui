@@ -1,4 +1,5 @@
 import LiquidPledgingController from "./LiquidPledgingController"
+import Filters from "./Filters"
 
 const adminTypes = {GIVER:'Giver', DELEGATE:'delegate', PROJECT:'project'}
 
@@ -36,7 +37,7 @@ class LiquidPledgingState extends LiquidPledgingController {
             filtered = this.filterByProperty(filtered, property, propertiesFilter[property])
 
         if(delegationFilter && delegationFilter.adminId)
-            filtered = this.filterByDelegationLevel(filtered, delegationFilter.adminId, delegationFilter.level)
+            filtered = this.filterByDelegationLevel(filtered, delegationFilter.adminId, delegationFilter.level, delegationFilter.reverseLevel)
 
         return filtered
     }
@@ -58,24 +59,39 @@ class LiquidPledgingState extends LiquidPledgingController {
         })
     }
 
-    filterByDelegationLevel(array, adminId, level)
+    filterByDelegationLevel(array, adminId, level, reverseLevel = false)
     {
-        return array.filter((pledge)=>{
 
-            if(!pledge || !pledge.delegates)
+        if(reverseLevel)
+        {
+            return array.filter((pledge)=>{
+
+                if(!pledge.delegates[pledge.delegates.length-1-level])
+                    return false
+
+                if(parseInt(pledge.delegates[pledge.delegates.length-1-level].id, 10) === adminId)
+                    return true
+
                 return false
-        
-            if(!pledge.delegates[level])
+            })
+        }
+        else
+        {
+            return array.filter((pledge)=>{
+
+                if(!pledge.delegates[level])
+                    return false
+
+                if(parseInt(pledge.delegates[level].id, 10) === adminId)
+                    return true
+
                 return false
-
-            if(parseInt(pledge.delegates[level].id, 10) === adminId)
-                return true
-
-            return false
-        })
+            })
+        }
+            
     }
 
-    getParentPledgeChain(pledgeId, chain = [])
+    /*getParentPledgeChain(pledgeId, chain = [])
     {
         let pledge = this.getPledge(pledgeId)
 
@@ -88,7 +104,7 @@ class LiquidPledgingState extends LiquidPledgingController {
             chain = this.getDelegationChain(pledge.oldPledge, chain)
 
         return chain
-    }
+    }*/
 
     getDelegation(pledge, currentDelegate, children)
     {
@@ -120,18 +136,17 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     getAvailablePledges()
     {
-        //Let's get all the admins controled by user address
+        //Let's get all the admins controled by current account
         let admins = this.getAdmins({addr:this.currentAccount})
-        console.log('admins', admins)
-        //for each admin we get all the pledges where he is in control
+        //for each admin we get all the pledges where he is involved
 
         let allPledges = []
         for(let admin of admins)
         {
             let propertiesFilter = {}
             let delegationFilter = {adminId:admin.id, level:0}
+            //let delegationFilter = {adminId:admin.id}
             let pledges = this.getPledges(propertiesFilter, delegationFilter)
-            console.log(admin.id, pledges)
             allPledges.concat(pledges)
         }
         let filter={addr:this.currentAccount}
@@ -141,17 +156,20 @@ class LiquidPledgingState extends LiquidPledgingController {
     getAvailableDelegations()
     {
         let pledges = this.getAvailablePledges()
-        console.log(pledges)
         let delegations = this.getDelegations(pledges)
         return delegations
     }
 
-    getIdsFrom(admins)
+/////////////////////////////////////////
+
+    getOpenPledges(adminId)
     {
-        let ids = []
-        for(let admin of admins)
-            ids.push(admin)
+        let propertiesFilter = {}
+        let delegationFilter = {adminId:adminId, level:0, reverseLevel:true}
+        let pledges = this.getPledges(propertiesFilter, delegationFilter)
+        return pledges
     }
+
 
 }
 
