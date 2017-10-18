@@ -119,10 +119,8 @@ class LiquidPledgingState extends LiquidPledgingController {
     {
         let propertiesFilter = {}
         let delegationFilter = {adminId:adminId, level:0, reverseLevel:true}
-        let pledges = this.getPledges(propertiesFilter, delegationFilter)
-        console.log(pledges)
+        let pledges = this.getPledges(propertiesFilter, delegationFilter)    
         pledges = Filter.hasIntendedProject(pledges, false)
-        console.log(pledges)
         return pledges
     }
 
