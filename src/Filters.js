@@ -1,5 +1,5 @@
 
-class Filters {
+module.exports = {
 
 
     filterByProperty(array, property, value)
@@ -17,7 +17,7 @@ class Filters {
                 
             return false
         })
-    }
+    },
 
     filterByDelegationLevel(array, adminId, level, reverseLevel = false)
     {
@@ -50,5 +50,3 @@ class Filters {
     }
 
 }
-
-export default  Filters

@@ -1,5 +1,6 @@
 import LiquidPledgingController from "./LiquidPledgingController"
-import Filters from "./Filters"
+const Filters = require('./Filters.js');
+
 
 const adminTypes = {GIVER:'Giver', DELEGATE:'delegate', PROJECT:'project'}
 
@@ -17,7 +18,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         let filtered  = this.state.admins
 
         for (const property of Object.keys(propertiesFilter)) 
-            filtered = this.filterByProperty(filtered, property, propertiesFilter[property])
+            filtered = Filters.filterByProperty(filtered, property, propertiesFilter[property])
         
         return filtered
     }
@@ -31,65 +32,19 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     getPledges(propertiesFilter={}, delegationFilter)
     {
+
+        console.log(Filters)
         let filtered  = this.state.pledges
 
         for (const property of Object.keys(propertiesFilter))
-            filtered = this.filterByProperty(filtered, property, propertiesFilter[property])
+            filtered = Filters.filterByProperty(filtered, property, propertiesFilter[property])
 
         if(delegationFilter && delegationFilter.adminId)
-            filtered = this.filterByDelegationLevel(filtered, delegationFilter.adminId, delegationFilter.level, delegationFilter.reverseLevel)
+            filtered = Filters.filterByDelegationLevel(filtered, delegationFilter.adminId, delegationFilter.level, delegationFilter.reverseLevel)
 
         return filtered
     }
 
-    filterByProperty(array, property, value)
-    {
-        return array.filter((element)=>{
-
-            if(!element || !element[property])
-                return false
-
-            if(!value)
-                return true
-
-            if(element[property] === value)
-                return true
-                
-            return false
-        })
-    }
-
-    filterByDelegationLevel(array, adminId, level, reverseLevel = false)
-    {
-
-        if(reverseLevel)
-        {
-            return array.filter((pledge)=>{
-
-                if(!pledge.delegates[pledge.delegates.length-1-level])
-                    return false
-
-                if(parseInt(pledge.delegates[pledge.delegates.length-1-level].id, 10) === adminId)
-                    return true
-
-                return false
-            })
-        }
-        else
-        {
-            return array.filter((pledge)=>{
-
-                if(!pledge.delegates[level])
-                    return false
-
-                if(parseInt(pledge.delegates[level].id, 10) === adminId)
-                    return true
-
-                return false
-            })
-        }
-            
-    }
 
     /*getParentPledgeChain(pledgeId, chain = [])
     {
