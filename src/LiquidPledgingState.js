@@ -18,7 +18,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         let filtered  = this.state.admins
 
         for (const property of Object.keys(propertiesFilter)) 
-            filtered = Filter.byProperty(filtered, property, propertiesFilter[property])
+            filtered = Filter.property(filtered, property, propertiesFilter[property])
         
         return filtered
     }
@@ -35,10 +35,10 @@ class LiquidPledgingState extends LiquidPledgingController {
         let filtered  = this.state.pledges
 
         for (const property of Object.keys(propertiesFilter))
-            filtered = Filter.byProperty(filtered, property, propertiesFilter[property])
+            filtered = Filter.property(filtered, property, propertiesFilter[property])
 
         if(delegationFilter && delegationFilter.adminId)
-            filtered = Filter.byDelegationLevel(filtered, delegationFilter.adminId, delegationFilter.level, delegationFilter.reverseLevel)
+            filtered = Filter.delegationLevel(filtered, delegationFilter.adminId, delegationFilter.level, delegationFilter.reverseLevel)
 
         return filtered
     }
@@ -120,6 +120,9 @@ class LiquidPledgingState extends LiquidPledgingController {
         let propertiesFilter = {}
         let delegationFilter = {adminId:adminId, level:0, reverseLevel:true}
         let pledges = this.getPledges(propertiesFilter, delegationFilter)
+        console.log(pledges)
+        pledges = Filter.hasIntendedProject(pledges, false)
+        console.log(pledges)
         return pledges
     }
 
