@@ -21,6 +21,21 @@ export const Icons = {
 export const Styles = {
 
     indentPadding:16,
+
+    page:{
+        
+        center:{
+            display:"flex",
+            justifyContent:"center",
+            alignItems:"flexStart"
+        },
+
+        container:{
+            margin:20,
+            maxWidth:600,
+            minWidth:400
+        }
+    },
    
     delegation:
     {

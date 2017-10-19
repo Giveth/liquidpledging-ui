@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 
+import { Styles } from './Styles'
+
 class Page extends Component
 {
     render(){
 
         return (
             <div>
-                <div style={{ display:"flex", justifyContent:"center", alignItems:"flexStart" }}>                     
-                    <div style={{margin:20, maxWidth:600, minWidth:400}}> 
+                <div style={Styles.page.center}>                     
+                    <div style={Styles.page.container}> 
                          
                          {this.props.children}
 
