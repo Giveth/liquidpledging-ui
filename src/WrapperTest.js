@@ -38,7 +38,7 @@ class LPStateTest extends Component {
     }
 
     render() {
-        console.log(this.state.tree)
+
         return (
             <div >
                 <DelegationsList treeChildren={this.state.tree} indentLevel={0}/>
