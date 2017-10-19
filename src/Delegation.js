@@ -50,7 +50,7 @@ class Delegation extends Component {
         {
             colapseButton = (
                 <IconButton
-                    tooltip={displayTooltip}
+                   
                     onClick = {this.onTooggleChildren}
                     iconStyle={{width: 16, height: 16, color:'grey'}}
                     style={{width: 32,height: 32, padding:4, margin:8}}>
