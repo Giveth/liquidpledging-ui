@@ -23,7 +23,6 @@ class Delegation extends Component {
     render() {
 
         let indentLevel = this.props.indentLevel
-
         let displayTooltip = 'Show delegations'
         let tooggleIcon = <Icons.colapse size={20}/>
         let children = <div style = {Styles.delegation.bodyColapsed}>
@@ -46,7 +45,7 @@ class Delegation extends Component {
         }
 
         let colapseButton = <div/>
-        if(this.props.tree.children.length)
+        if(this.props.tree && this.props.tree.children && this.props.tree.children.length)
         {
             colapseButton = (
                 <IconButton
