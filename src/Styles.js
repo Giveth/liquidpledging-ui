@@ -23,7 +23,7 @@ export const Styles = {
     indentPadding:16,
 
     page:{
-        
+
         center:{
             display:"flex",
             justifyContent:"center",
@@ -79,6 +79,11 @@ export const Styles = {
             display:'none'
         },
     },
+
+    givethLogo:{
+        WebkitFilter: 'grayscale(100%)', 
+       justifyContent:"center"
+    }
 }
 
 export const Format = {
