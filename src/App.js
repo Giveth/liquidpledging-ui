@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import WrapperTest from './WrapperTest.js'
+import Page from './Page.js'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends Component {
@@ -17,7 +18,9 @@ class App extends Component {
             <div>
                 
                 <MuiThemeProvider>
-                     <WrapperTest/>
+                    <Page>
+                        <WrapperTest/>
+                    </Page>
                 </MuiThemeProvider>
                
             </div>
