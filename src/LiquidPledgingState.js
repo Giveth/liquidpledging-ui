@@ -4,13 +4,7 @@ const adminTypes = {GIVER:'Giver', DELEGATE:'delegate', PROJECT:'project'}
 
 class LiquidPledgingState extends LiquidPledgingController {
 
-    getAdmin(adminId)
-    {
-        if(!this.state.admins || adminId >= this.state.admins.length )
-            return {}
-        return this.state.admins[adminId]
-    }
-
+    
     getAdmins(propertiesFilter={})
     {
         let filtered  = this.state.admins

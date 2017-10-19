@@ -65,24 +65,30 @@ class LiquidPledgingController extends ProviderHelper {
     {
         this.state = data
 
+        if(this.state.admins)
+        {
+            this.state.admins=this.setIds(this.state.admins)
+            this.state.admins.shift()
+        }
+        else
+        {
+           this.this.state.admins=[]            
+        }
+
         if(this.state.pledges)
         {
             this.state.pledges=this.setIds(this.state.pledges)
             this.state.pledges.shift() //first item is always null
             this.state.pledges=this.setRightTypes(this.state.pledges)
-
             this.delegations = this.createDelegations(this.state.pledges)
         }
         else
-            this.state.pledges=[]
-
-        if(this.state.admins)
         {
-            this.state.admins=this.setIds(this.state.admins)
-            this.state.pledges.shift()
+            this.state.pledges=[]
         }
-        else
-            this.this.state.pledges=[]
+
+       
+       
 
         this.emit(this.STATE_CHANGED)
     }
@@ -143,7 +149,11 @@ class LiquidPledgingController extends ProviderHelper {
                 parentId = this.getDelegationId(0, [], 0)
                 adminId = pledge.owner
             }
+
+            let admin = this.getAdmin(adminId)
             
+            console.log(admin)
+
             let delegation={
                 id:id,
                 parentId:parentId,
@@ -152,8 +162,11 @@ class LiquidPledgingController extends ProviderHelper {
                 availableAmount:pledge.amount,
                 pledgeId:pledge.id,
                 intendedProject:pledge.intendedProject,
-                adminId:adminId
-            }
+                adminId:adminId,
+                type:admin.type,
+                name:admin.name,
+                url:admin.url
+               }
             
             delegationsArray.push(delegation)
         }
@@ -194,6 +207,14 @@ class LiquidPledgingController extends ProviderHelper {
             delegatesChain = delegatesChain.concat([intendedProject])
         return delegatesChain.toString()
     }
+
+    getAdmin(adminId)
+    {
+        if( adminId >= this.state.admins.length )
+            return {}
+        return this.state.admins[adminId-1]
+    }
+
 
 }
 
