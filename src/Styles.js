@@ -77,6 +77,28 @@ export const Format = {
     {
         let number = Numeral(wei);
         number.divide(1000000000000000000)
-        return number.value()
+        return number.format('$0,0.00')
     }
 }
+
+Numeral.register('locale', 'eth', {
+    delimiters: {
+        thousands: ' ',
+        decimal: ','
+    },
+    abbreviations: {
+        thousand: 'k',
+        million: 'm',
+        billion: 'b',
+        trillion: 't'
+    },
+    /*ordinal : function (number) {
+        return number === 1 ? 'er' : 'ème';
+    },*/
+    currency: {
+        symbol: 'ETH '
+    }
+});
+
+Numeral.locale('eth');
+
