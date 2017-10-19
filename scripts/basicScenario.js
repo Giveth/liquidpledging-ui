@@ -94,13 +94,15 @@ await liquidPledging.transfer(1, 3, utils.toWei(0.5), 1, { from: user1, gas: 200
     await liquidPledging.transfer(8, 8, utils.toWei(0.1 ), 14, { from: user3}); //#11
 
 
+    //Another Giver to ensure we render them all
+    await liquidPledging.addGiver('Giver2User1', 'URLGiver2User1', 600, 0, { from: user1 }); //#16
+    await liquidPledging.donate(1, 16, { from: user1, value: utils.toWei(0.01) }); //#1
+
     const st = await liquidPledgingState.getState();
     console.log(JSON.stringify(st, null, 2));
     console.log(liquidPledging.$address);
 
 }
-
-console.log("")
 
 run().then(() =>  {
     console.log("Finalized!");
