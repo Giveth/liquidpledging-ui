@@ -1,7 +1,7 @@
 
 module.exports = {
 
-    property(array, property, value)
+    byProperty(array, property, value)
     {
         return array.filter((element)=>{
 
@@ -10,6 +10,10 @@ module.exports = {
 
             if(!value)
                 return true
+
+            if(element[property] instanceof Array)
+                if(element[property].toString() === value.toString())
+                    return true
 
             if(element[property] === value)
                 return true
@@ -56,5 +60,25 @@ module.exports = {
             return hasIntendedProject
         })
     },
+
+    byOwners(pledges, admins)
+    {
+        let allPledges=[]
+        for(let admin of admins)
+        {
+            let filtered = this.byOwner(pledges, admin.id)
+            allPledges=allPledges.concat(filtered)
+        }
+        return allPledges
+    },
+
+    byOwner(pledges, owner)
+    {
+        return pledges.filter((pledge)=>{
+           if(pledge.owner === owner)
+                return true
+            return false
+        })
+    }
 
 }
