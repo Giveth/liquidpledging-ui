@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import DelegationsList from './DelegationsList'
+import { Styles } from './Styles'
+
 
 class Delegation extends Component {
 
@@ -14,12 +16,26 @@ class Delegation extends Component {
         let indentLevel = this.props.indentLevel
 
         return (
-            <div>
-                <h3 key = {"name"} > {this.props.tree.delegation.name} </h3>
-                <h3 key = {"url"} > {this.props.tree.delegation.url} </h3>
-                <h3 key = {"type"} > {this.props.tree.delegation.type} </h3>
-                <pre key = {"address"} > {this.props.tree.delegation.assignedAmount} </pre>
-                <DelegationsList treeChildren={this.props.tree.children} indentLevel={indentLevel}/>
+            <div style = {Styles.delegation.container}>
+
+                 <div style = {Styles.delegation.header}>
+
+                    {Styles.subDelegateIcon}
+
+                    <p key = {"name"}  style= {Styles.delegation.title}>
+                        {this.props.tree.delegation.name}
+                    </p>
+
+                    <p key = {"address"} key = {"address"} >
+                        {this.props.tree.delegation.assignedAmount}
+                    </p>
+
+                </div>
+        
+                 <div style = {Styles.delegation.body}>
+                    <DelegationsList treeChildren={this.props.tree.children} indentLevel={indentLevel}/>
+
+                </div>
             </div>
         )
     }

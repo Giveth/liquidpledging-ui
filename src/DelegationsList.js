@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Delegation from './Delegation'
-import Styles from './Styles'
+import { Styles } from './Styles'
 
 class DelegationList extends Component {
 
