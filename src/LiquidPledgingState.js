@@ -10,7 +10,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         let filtered  = this.state.admins
 
         for (const property of Object.keys(propertiesFilter)) 
-            filtered = Filter.property(filtered, property, propertiesFilter[property])
+            filtered = Filter.byProperty(filtered, property, propertiesFilter[property])
         
         return filtered
     }
@@ -27,17 +27,12 @@ class LiquidPledgingState extends LiquidPledgingController {
         let filtered  = this.state.pledges
 
         for (const property of Object.keys(propertiesFilter))
-            filtered = Filter.property(filtered, property, propertiesFilter[property])
+            filtered = Filter.byProperty(filtered, property, propertiesFilter[property])
 
         if(delegationFilter && delegationFilter.adminId)
             filtered = Filter.delegationLevel(filtered, delegationFilter.adminId, delegationFilter.level, delegationFilter.reverseLevel)
 
         return filtered
-    }
-
-    getDelegation(delegationId)
-    {
-        return this.delegations[delegationId]
     }
 
     getAdminForLevel(pledge, level)
@@ -104,9 +99,10 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     getGiverDelegations(address)
     {
-        console.log(address)
-        let propertiesFilter = {}
-        let pledges = this.getPledges(propertiesFilter)
+        let admins = this.getAdmins( {addr:address, type:adminTypes.GIVER} )
+        let pledges = this.getPledges({delegates:[]})
+        console.log(pledges)
+        pledges = Filter.byOwners(pledges, admins)
         console.log(pledges)
         let delegations = this.getDelegations(pledges)
         let trees = this.getDelegationsTrees(delegations)
