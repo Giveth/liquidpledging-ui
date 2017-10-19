@@ -206,6 +206,11 @@ class LiquidPledgingController extends ProviderHelper {
         return delegatesChain.toString()
     }
 
+    getDelegation(delegationId)
+    {
+        return this.delegations[delegationId]
+    }
+
     getAdmin(adminId)
     {
         if( adminId >= this.state.admins.length )
