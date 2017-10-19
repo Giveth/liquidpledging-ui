@@ -1,15 +1,32 @@
 
 import SubDelegateIcon from 'react-icons/lib/md/subdirectory-arrow-right'
 
+import ColapseIcon from 'react-icons/lib/md/keyboard-arrow-up'
+import ShownIcon from 'react-icons/lib/md/keyboard-arrow-right'
+
+import Numeral from 'numeral'
+import FontIcon from 'material-ui/FontIcon'
+
+
 export const Colors = {
     highlight:'#4caf50',
     secondary:'#9c9c9c'
 }
 
+export const Icons = {
+
+    subDelegate: SubDelegateIcon,
+    colapse: ColapseIcon,
+    shown:ShownIcon,
+
+
+}
+
+
 export const Styles = {
 
-    indentPadding:30,
-    subDelegateIcon: SubDelegateIcon,
+    indentPadding:16,
+   
     delegation:
     {
         container:{
@@ -20,20 +37,46 @@ export const Styles = {
 
         header:{
             display: 'flex',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            paddingLeft: 5,
+            paddingRight: 10,
+            paddingTop: 0,
+            paddingBottom: 0,
         },
 
         title:{
             color:Colors.highlight,
-            margin: 0
+            paddingLeft: 5,
+            paddingRight: 10,
+            paddingTop: 0,
+            paddingBottom: 0,
         },
 
         assignedAmount:{
             color:Colors.secondary,
-            margin: 0
-        }
+            
+        },
 
+        colapseButton:{
+            width:32
+        },
 
+        bodyShown:{
+
+        },
+
+        bodyColapsed:{
+            display:'none'
+        },
     },
+}
 
+export const Format = {
+
+    toEther(wei)
+    {
+        let number = Numeral(wei);
+        number.divide(1000000000000000000)
+        return number.value()
+    }
 }
