@@ -28,7 +28,23 @@ async function run() {
     await vault.setLiquidPledging(liquidPledging.$address);
     liquidPledgingState = new LiquidPledgingState(liquidPledging);
 
+/*
 
+//Redelegation
+
+await liquidPledging.addGiver('Giver1User1', 'URLGiver1User1', 600, 0, { from: user1 }); //crea admin #1
+await liquidPledging.addDelegate('Delegate1User2', 'URLDelegate1User2', 0, 0, { from: user2 }); //crea admin #2
+await liquidPledging.addDelegate('Delegate1User3', 'URLDelegate1User3', 0, 0, { from: user3 }); //crea admin #3
+await liquidPledging.addDelegate('Delegate1User4', 'URLDelegate1User4', 0, 0, { from: user4 }); //crea admin #4
+await liquidPledging.donate(1, 1, { from: user1, value: utils.toWei(1) }); //Crea pledge #1
+
+await liquidPledging.transfer(1, 1, utils.toWei(0.5), 2, { from: user1 });  //Delega de #1 a #2, crea pledge #2
+await liquidPledging.transfer(2, 2, utils.toWei(0.5), 3, { from: user2 });  //Delega de #2 a #3, crea pledge #3
+
+
+await liquidPledging.transfer(1, 3, utils.toWei(0.5), 1, { from: user1, gas: 2000000 }); 
+
+*/
 
 //Let's create all the admins fiirst. 5 givers, 5delegates and 5 proejcts. 15 in total
     await liquidPledging.addGiver('Giver1User1', 'URLGiver1User1', 600, 0, { from: user1 }); //#1
@@ -60,7 +76,7 @@ async function run() {
 //Now let's create a long chain of pledges from giver1 to project15 passing through all delegates
 
     //From GiverUser1(#1), pledge #1(first donate) to DelegateUser2(#2)
-    await liquidPledging.transfer(1, 1, utils.toWei(0.7), 7, { from: user1 }); //#6
+    await liquidPledging.transfer(1, 1, utils.toWei(0.5), 7, { from: user1 }); //#6
 
     //From DelegateUser2(#7, pledge #6 (previous pledge) to DelegateUser3(#8)
     await liquidPledging.transfer(7, 6, utils.toWei(0.5), 8, { from: user2 }); //#7
@@ -70,6 +86,12 @@ async function run() {
 
     //From DelegateUser4(#9, pledge #8 (previous pledge) to ProjectUser5(#15)
     await liquidPledging.transfer(9, 8, utils.toWei(0.3), 15, { from: user4 }); //#9
+
+    //Let's undo the last transfer by assigning the funds back to the issuer
+    await liquidPledging.transfer(8, 9, utils.toWei(0.3), 8, { from: user3, gas: 2000000 }); //#10
+
+    //And move funds to somewhere else
+    await liquidPledging.transfer(8, 8, utils.toWei(0.1 ), 14, { from: user3}); //#11
 
 
     const st = await liquidPledgingState.getState();
