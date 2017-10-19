@@ -151,8 +151,6 @@ class LiquidPledgingController extends ProviderHelper {
             }
 
             let admin = this.getAdmin(adminId)
-            
-            console.log(admin)
 
             let delegation={
                 id:id,

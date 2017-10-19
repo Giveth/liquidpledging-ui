@@ -37,13 +37,12 @@ class LPStateTest extends Component {
     }
 
     render() {
-        console.log(this.state.treeChildren)
+        console.log(this.state.tree)
         return (
             <div >
                 <DelegationsList treeChildren={this.state.tree} indentLevel={0}/>
                 <h3 key = {"account"} style ={{wordWrap: 'break-word'}}> {this.state.account} </h3>
                 <pre key = {"data"} style ={{wordWrap: 'break-word'}}> {this.state.data} </pre>
-            
             </div>
         )
     }
