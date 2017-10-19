@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Delegation from './Delegation'
-const INDENT_SIZE = 10
+import Styles from './Styles'
 
 class DelegationList extends Component {
 
@@ -22,7 +22,7 @@ class DelegationList extends Component {
 
         return (
             <div >
-                <div style={{paddingLeft:indentLevel*INDENT_SIZE}}>
+                <div style={{paddingLeft:indentLevel* Styles.indentPadding}}>
                     {list}
                 </div>
             </div>
