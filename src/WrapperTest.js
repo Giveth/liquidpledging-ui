@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
 import DelegationsList from './DelegationsList'
+
 class LPStateTest extends Component {
 
     constructor(){
@@ -20,7 +21,6 @@ class LPStateTest extends Component {
     onStateChanged=()=>{
 
         let delegation = LPState.getDelegation("1")
-        console.log()
         this.setState({
             tree:[LPState.getDelegationTree(delegation)]
         })
