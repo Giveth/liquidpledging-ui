@@ -3,8 +3,6 @@ import ProviderHelper from "./Web3ProviderHelper"
 const liquidpledging = require('liquidpledging');
 const LiquidPledging = liquidpledging.LiquidPledging;
 const LiquidPledgingState = liquidpledging.LiquidPledgingState;
-//const EventEmitter = require('events')
-
 const testRPCProvider = 'ws://localhost:8546'
 const liquidPledgingContractAddress = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24'
 const NO_PARENT = "0"
@@ -86,9 +84,6 @@ class LiquidPledgingController extends ProviderHelper {
         {
             this.state.pledges=[]
         }
-
-       
-       
 
         this.emit(this.STATE_CHANGED)
     }
@@ -196,8 +191,7 @@ class LiquidPledgingController extends ProviderHelper {
         return delegations
     }
 
-    //returns an string made of all delegations. including the owner at the begining and the project at the end (if it exists)
-    getDelegationId(owner, delegates, intendedProject)
+   getDelegationId(owner, delegates, intendedProject)
     {
         let delegatesChain = [owner]
         delegatesChain = delegatesChain.concat(delegates)
@@ -213,14 +207,10 @@ class LiquidPledgingController extends ProviderHelper {
 
     getAdmin(adminId)
     {
-        if( adminId >= this.state.admins.length )
+        if( adminId > this.state.admins.length )
             return {}
         return this.state.admins[adminId-1]
     }
-
-
 }
-
-
 
 export default LiquidPledgingController
