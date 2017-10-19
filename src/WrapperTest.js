@@ -22,7 +22,8 @@ class LPStateTest extends Component {
 
         let delegation = LPState.getDelegation("1")
         this.setState({
-            tree:[LPState.getDelegationTree(delegation)]
+            tree:LPState.getGiverDelegations(this.state.account)
+            //tree:[LPState.getDelegationTree(delegation)]
         })
     }
 

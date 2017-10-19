@@ -82,12 +82,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         return this.getPledges(filter)
     }
 
-    getAvailableDelegations()
-    {
-        let pledges = this.getAvailablePledges()
-        let delegations = this.getDelegations(pledges)
-        return delegations
-    }
+    
 
 /////////////////////////////////////////
 
@@ -100,7 +95,48 @@ class LiquidPledgingState extends LiquidPledgingController {
         return pledges
     }
 
+    getAvailableDelegations()
+    {
+        let pledges = this.getAvailablePledges()
+        let delegations = this.getDelegations(pledges)
+        return delegations
+    }
 
+    getGiverDelegations(address)
+    {
+        console.log(address)
+        let propertiesFilter = {}
+        let pledges = this.getPledges(propertiesFilter)
+        console.log(pledges)
+        let delegations = this.getDelegations(pledges)
+        let trees = this.getDelegationsTrees(delegations)
+        return trees
+    }
+
+    getDelegations(pledges)
+    {
+        let delegations = []
+        for (let pledge of pledges)
+        {
+            let delegationId = this.getDelegationId(pledge.owner, pledge.delegates, pledge.intendedProject)
+            let delegation = this.getDelegation(delegationId)
+            delegations.push(delegation)
+        }
+
+        return delegations
+    }
+
+    getDelegationsTrees(delegations)
+    {
+        let trees = []
+        for(let delegation of delegations)
+        {
+            let delegationTree = this.getDelegationTree(delegation)
+            trees.push(delegationTree)
+        }
+
+        return trees
+    }
 }
 
 export default new LiquidPledgingState ()
