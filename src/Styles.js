@@ -3,6 +3,7 @@ import FontIcon from 'material-ui/FontIcon'
 import SubDelegateIcon from 'react-icons/lib/md/subdirectory-arrow-right'
 import ColapsedIcon from 'react-icons/lib/md/keyboard-arrow-up'
 import ShownIcon from 'react-icons/lib/md/keyboard-arrow-right'
+import AddIcon from 'react-icons/lib/md/add-circle'
 
 import Numeral from 'numeral'
 
@@ -17,6 +18,7 @@ export const Icons = {
     subDelegate: SubDelegateIcon,
     colapsed: ColapsedIcon,
     shown:ShownIcon,
+    add:AddIcon,
 }
 
 export const Styles = {

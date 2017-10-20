@@ -33,6 +33,21 @@ class GiverHeader extends Component {
                 </IconButton>)
         }
 
+        let addFundsButton = <div/>
+
+         if(this.props.userAddress == this.props.adminAddress)
+        {
+            addFundsButton = (
+                <IconButton
+                 
+                    onClick = {this.onToggle}>
+
+                    <Icons.add size={30}/>
+
+                </IconButton>)
+        }
+
+
         let totalAmount = this.props.assignedAmount
         let availableAmount = this.props.availableAmount
         let usedAmount = totalAmount - availableAmount
@@ -52,6 +67,10 @@ class GiverHeader extends Component {
                     <p key = {"amount"} style = {Styles.delegation.amount} >
                         {Currency.symbol+ " "+Currency.toEther(usedAmount) +' / '+ Currency.toEther(totalAmount)}
                     </p>
+
+                    <div style = {Styles.delegation.colapseButton}>
+                        {addFundsButton}
+                    </div>
 
             </div>
         )
