@@ -35,6 +35,11 @@ class GiverHeader extends Component {
     {
         this.setState({isHovering:false})
     }
+
+    onBackgroundClick=()=>
+    {
+        this.props.onToggle(!this.props.colapsed)
+    }
    
     render() {
         let tooggleIcon = <Icons.shown size={20}/>
@@ -90,7 +95,8 @@ class GiverHeader extends Component {
                  <div
                     style = {Merge(Styles.delegation.header, Styles.delegation.giverHeader, Styles.delegation.getHoverStyle(this.state.isHovering))}
                     onMouseEnter = {this.onMouseEnter}
-                    onMouseLeave = {this.onMouseLeave}>
+                    onMouseLeave = {this.onMouseLeave}
+                    onClick = {this.onBackgroundClick}>
                    
                     <div style = {Styles.delegation.colapseButton}>
                         {colapseButton}
