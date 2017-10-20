@@ -32,13 +32,13 @@ class CreateProjectPage extends React.Component
             <FlatButton
               label="Cancel"
               primary={true}
-              onTouchTap={this.onCancel}
+              onClick={this.onCancel}
             />,
             <FlatButton
               label="Create"
               primary={true}
               keyboardFocused={true}
-              onTouchTap={this.onDone}
+              onClick={this.onDone}
             />
         ]
 
