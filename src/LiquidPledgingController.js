@@ -88,7 +88,7 @@ class LiquidPledgingController extends ProviderHelper {
             this.pledges=Formatter.setIds(this.pledges)
             this.pledges.shift() //first item is always null
             this.pledges=Formatter.setRightTypes(this.pledges)
-            this.delegations = Formatter.createDelegations(this.pledges)
+            this.delegations = Formatter.createDelegations(this.pledges, this.admins)
             this.nodes = Formatter.setNodes(this.nodes, this.delegations)
         }
         else

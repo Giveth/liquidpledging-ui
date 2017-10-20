@@ -32,8 +32,17 @@ class DataFormatter {
         })
     }
 
-    createDelegations(pledges)
+    createDelegations(pledges, admins)
     {
+
+        function getAdmin(adminId)
+        {
+            if( adminId > admins.length )
+                return {}
+            return admins[adminId-1]
+        }
+
+
         let delegationsArray = []
 
         //lets create unique identifier for each pledge. And let's add al convinient data. 
@@ -56,7 +65,7 @@ class DataFormatter {
                 adminId = pledge.owner
             }
 
-            let admin = this.getAdmin(adminId)
+            let admin = getAdmin(adminId)
 
             let delegation={
                 id:id,
@@ -151,4 +160,4 @@ class DataFormatter {
     }
 }
 
-export default DataFormatter
+export default new DataFormatter()

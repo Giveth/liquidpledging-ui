@@ -1,4 +1,5 @@
 import LiquidPledgingController from "./LiquidPledgingController"
+import Formatter from './DataFormatter'
 const Filter = require('./Filter.js');
 const adminTypes = {GIVER:'Giver', DELEGATE:'delegate', PROJECT:'project'}
 
@@ -7,7 +8,7 @@ class LiquidPledgingState extends LiquidPledgingController {
     
     getAdmins(propertiesFilter={})
     {
-        let filtered  = this.state.admins
+        let filtered  = this.admins
 
         for (const property of Object.keys(propertiesFilter)) 
             filtered = Filter.byProperty(filtered, property, propertiesFilter[property])
@@ -17,14 +18,14 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     /*getPledge(pledgeId)
     {
-        if(!this.state.pledges || pledgeId >= this.state.pledges.length )
+        if(!this.pledges || pledgeId >= this.pledges.length )
             return {}
-        return this.state.pledges[pledgeId]
+        return this.pledges[pledgeId]
     }*/
 
     getPledges(propertiesFilter={}, delegationFilter)
     {
-        let filtered  = this.state.pledges
+        let filtered  = this.pledges
 
         for (const property of Object.keys(propertiesFilter))
             filtered = Filter.byProperty(filtered, property, propertiesFilter[property])
@@ -114,7 +115,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         let delegations = []
         for (let pledge of pledges)
         {
-            let delegationId = this.getDelegationId(pledge.owner, pledge.delegates, pledge.intendedProject)
+            let delegationId = Formatter.getDelegationId(pledge.owner, pledge.delegates, pledge.intendedProject)
             let delegation = this.getDelegation(delegationId)
             delegations.push(delegation)
         }
