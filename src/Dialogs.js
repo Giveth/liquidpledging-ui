@@ -28,7 +28,6 @@ class Dialogs extends Component {
         //this.setState({network:newNetwork})
     }
 
-
     onShowDonate=(data)=>
     {
         this.setState({
@@ -59,7 +58,7 @@ class Dialogs extends Component {
             <div>            
                 <DonateDialog
                     open={this.state.donateOpen}
-                    onCanel ={this.donateOnCancel}
+                    onCancel ={this.donateOnCancel}
                     onDone ={this.donateOnDone}
                     data={this.state.donateData}/>
 
