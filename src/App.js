@@ -6,6 +6,7 @@ import Page from './Page.js'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Styles } from './Styles'
 import GivethLogo from './logo.svg'
+import GreyTheme from './GreyTheme'
 
 class App extends Component {
 
@@ -17,7 +18,7 @@ class App extends Component {
     render() {
         return (
             <div>            
-                <MuiThemeProvider>
+                <MuiThemeProvider muiTheme={GreyTheme}>
                     <Page>
                         <div style={{textAlign: 'center'}}>
                             <img
