@@ -7,7 +7,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Styles } from './Styles'
 import GivethLogo from './logo.svg'
 import GreyTheme from './GreyTheme'
-import DonateDialog from './DonateDialog'
+import Dialogs from './Dialogs'
+
 
 class App extends Component {
 
@@ -34,8 +35,10 @@ class App extends Component {
                             <h2 className="App-title">Liquid Pledging</h2>
                             
                             <WrapperTest/>
+
                         </Page>
 
+                        <Dialogs/>
                        
                     </div>
                 </MuiThemeProvider>
