@@ -13,8 +13,13 @@ class LiquidPledgingController extends ProviderHelper {
     {
         super()
         this.STATE_CHANGED = "stateChanged"
+        
+        this.admins=[]
+        this.pledges=[]
+        this.delegations={}
+        this.nodes={}
+
         this.setupWeb3()
-        this.state={} 
     }
 
     setupWeb3(){
@@ -60,30 +65,31 @@ class LiquidPledgingController extends ProviderHelper {
 
     setState(data)
     {
-        this.state = data
+        this.admins = data.admins
+        this.pledges = data.pledges
 
-        if(this.state.admins)
+        if(this.admins)
         {
-            this.state.admins=Formatter.setIds(this.state.admins)
-            this.state.admins.shift()
-            this.nodes = Formatter.initNodes(this.state.admins)
+            this.admins=Formatter.setIds(this.admins)
+            this.admins.shift()
+            this.nodes = Formatter.initNodes(this.admins)
         }
         else
         {
-           this.this.state.admins=[]            
+           this.this.admins=[]            
         }
 
-        if(this.state.pledges)
+        if(this.pledges)
         {
-            this.state.pledges=Formatter.setIds(this.state.pledges)
-            this.state.pledges.shift() //first item is always null
-            this.state.pledges=Formatter.setRightTypes(this.state.pledges)
-            this.delegations = Formatter.createDelegations(this.state.pledges)
+            this.pledges=Formatter.setIds(this.pledges)
+            this.pledges.shift() //first item is always null
+            this.pledges=Formatter.setRightTypes(this.pledges)
+            this.delegations = Formatter.createDelegations(this.pledges)
             this.nodes = Formatter.setNodes(this.nodes, this.delegations)
         }
         else
         {
-            this.state.pledges=[]
+            this.pledges=[]
         }
 
         this.emit(this.STATE_CHANGED)
@@ -96,9 +102,9 @@ class LiquidPledgingController extends ProviderHelper {
 
     getAdmin(adminId)
     {
-        if( adminId > this.state.admins.length )
+        if( adminId > this.admins.length )
             return {}
-        return this.state.admins[adminId-1]
+        return this.admins[adminId-1]
     }
 
     donate(giverId, receiverId, amount )
