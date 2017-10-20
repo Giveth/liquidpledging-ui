@@ -13,6 +13,9 @@ class LiquidPledgingController extends ProviderHelper {
     {
         super()
         this.STATE_CHANGED = "stateChanged"
+
+        this.liquidpledging={}
+        this.liquidPledgingState={}
         
         this.admins=[]
         this.pledges=[]
@@ -32,8 +35,8 @@ class LiquidPledgingController extends ProviderHelper {
 
     setupLiquidPledging()
     {
-        const liquidPledging = new LiquidPledging(this.web3, liquidPledgingContractAddress);
-        this.liquidPledgingState = new LiquidPledgingState(liquidPledging);
+        this.liquidPledging = new LiquidPledging(this.web3, liquidPledgingContractAddress);
+        this.liquidPledgingState = new LiquidPledgingState(this.liquidPledging);
 
         
         /*this.web3.eth.subscribe('newBlockHeaders',(err,block)=>
@@ -49,6 +52,7 @@ class LiquidPledgingController extends ProviderHelper {
 
         this.retriveStateData()
 
+        //TODO remove when doesn't need more testing
         setInterval(()=>{
             this.retriveStateData()
         }, 10000);
@@ -95,6 +99,8 @@ class LiquidPledgingController extends ProviderHelper {
         this.emit(this.STATE_CHANGED)
     }
 
+    //SET
+
     getDelegation(delegationId)
     {
         return this.delegations[delegationId]
@@ -106,6 +112,8 @@ class LiquidPledgingController extends ProviderHelper {
             return {}
         return this.admins[adminId-1]
     }
+
+    //GET
 
     donate(giverId, receiverId, amount )
     {
