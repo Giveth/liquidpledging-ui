@@ -3,6 +3,7 @@ import DelegationsList from './DelegationsList'
 import { Styles, Format, Icons } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import GiverHeader from './GiverHeader'
+import DelegateHeader from './DelegateHeader'
 
 class Delegation extends Component {
 
@@ -24,7 +25,6 @@ class Delegation extends Component {
     render() {
 
         let indentLevel = this.props.indentLevel
-        let displayTooltip = 'Show delegations'
         let tooggleIcon = <Icons.colapsed size={20}/>
         let children = <div style = {Styles.delegation.bodyColapsed}>
                 <DelegationsList
@@ -35,7 +35,6 @@ class Delegation extends Component {
 
         if(this.state.isColapsed)
         {
-            displayTooltip = 'Hide delegations'
             tooggleIcon =<Icons.shown size={20}/>
             children = <div style = {Styles.delegation.bodyShown}>
                 <DelegationsList
@@ -58,50 +57,36 @@ class Delegation extends Component {
                 </IconButton>)
         }
 
+        let header = <DelegateHeader 
+            id={this.props.tree.delegation.id}
+            name={this.props.tree.delegation.name}
+            assignedAmount = {this.props.tree.delegation.assignedAmount}
+            availableAmouont = {this.props.tree.delegation.availableAmount}
+
+            showColapseButton = {(this.props.tree && this.props.tree.children && this.props.tree.children.length)}
+            onToggle = {this.onHeaderToggle}
+            colapsed = {this.state.isColapsed}
+            />
+
+        if(this.props.tree.delegation.type == "Giver")
+            header = <GiverHeader 
+            id={this.props.tree.delegation.id}
+            name={this.props.tree.delegation.name}
+            assignedAmount = {this.props.tree.delegation.assignedAmount}
+            availableAmount = {this.props.tree.delegation.availableAmount}
+
+            showColapseButton = {(this.props.tree && this.props.tree.children && this.props.tree.children.length)}
+            onToggle = {this.onHeaderToggle}
+            colapsed = {this.state.isColapsed}
+            />
+
         return (
             <div style = {Styles.delegation.container}>
-
-                <GiverHeader 
-                id={this.props.tree.delegation.id}
-                name={this.props.tree.delegation.name}
-                assignedAmount = {this.props.tree.delegation.assignedAmount}
-
-                showColapseButton = {(this.props.tree && this.props.tree.children && this.props.tree.children.length)}
-                onToggle = {this.onHeaderToggle}
-                colapsed = {this.state.isColapsed}
-                />
-
-            
+                {header}     
                 {children}
-                
             </div>
         )
     }
 }
-/*
-
-                 <div style = {Styles.delegation.header}>
-                   
-                    <div style = {Styles.delegation.colapseButton}>
-                        {colapseButton}
-                    </div>
-                    
-                    
-                    <p key = {"id"}  style= {Styles.delegation.assignedAmount}>
-                        {this.props.tree.delegation.id}
-                    </p>
-
-
-                    <p key = {"name"}  style= {Styles.delegation.title}>
-                        {this.props.tree.delegation.name}
-                    </p>
-
-                    <p key = {"address"} style = {Styles.delegation.assignedAmount} >
-                        {Format.toEther(this.props.tree.delegation.assignedAmount)}
-                    </p>
-
-                </div>
-
-                */
 
 export default Delegation

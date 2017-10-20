@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Styles, Currency, Icons, Merge } from './Styles'
 import IconButton from 'material-ui/IconButton'
 
-class GiverHeader extends Component {
+class DelegateHeader extends Component {
 
     constructor(props){
         super()
@@ -33,13 +33,9 @@ class GiverHeader extends Component {
                 </IconButton>)
         }
 
-        let totalAmount = this.props.assignedAmount
-        let availableAmount = this.props.availableAmount
-        let usedAmount = totalAmount - availableAmount
-
         return (
 
-                 <div style = {Merge(Styles.delegation.header, Styles.delegation.giverHeader)}>
+                 <div style = {Merge(Styles.delegation.header, Styles.delegation.delegateHeader)}>
                    
                     <div style = {Styles.delegation.colapseButton}>
                         {colapseButton}
@@ -50,12 +46,13 @@ class GiverHeader extends Component {
                     </p>
 
                     <p key = {"amount"} style = {Styles.delegation.assignedAmount} >
-                        {Currency.symbol+ " "+Currency.toEther(usedAmount) +' / '+ Currency.toEther(totalAmount)}
+                        {Currency.symbol+ " "+ Currency.toEther(this.props.availableAmount) +' / '+ Currency.toEther(this.props.assignedAmount)}
                     </p>
 
+                
             </div>
         )
     }
 }
 
-export default GiverHeader
+export default DelegateHeader

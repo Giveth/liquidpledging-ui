@@ -7,8 +7,9 @@ import ShownIcon from 'react-icons/lib/md/keyboard-arrow-right'
 import Numeral from 'numeral'
 
 export const Colors = {
-    highlight:'#4caf50',
-    secondary:'#9c9c9c'
+    highlight:'#333',
+    backgroundHighlight:'rgba(0, 0, 0, 0.03)',
+    secondary:'#666'
 }
 
 export const Icons = {
@@ -33,7 +34,8 @@ export const Styles = {
         container:{
             margin:20,
             maxWidth:600,
-            minWidth:400
+            minWidth:400,
+            width:600
         }
     },
    
@@ -52,6 +54,18 @@ export const Styles = {
             paddingRight: 10,
             paddingTop: 0,
             paddingBottom: 0,
+        },
+
+        giverHeader:{
+            backgroundColor: Colors.backgroundHighlight,
+            paddingLeft: 10,
+            paddingRight: 10,
+            paddingTop: 10,
+            paddingBottom: 10,
+            marginTop: 5
+        },
+
+        delegateHeader:{
         },
 
         title:{
@@ -86,20 +100,26 @@ export const Styles = {
     }
 }
 
-export const Format = {
+export function Merge (style1, style2) {
+    return Object.assign({},style1, style2)
+}
+
+export const Currency = {
 
     toEther(wei)
     {
         let number = Numeral(wei);
         number.divide(1000000000000000000)
-        return number.format('$0,0.00')
-    }
+        return number.format('$0,0.[0000]')
+    },
+
+    symbol : 'Ξ' 
 }
 
 Numeral.register('locale', 'eth', {
     delimiters: {
         thousands: ' ',
-        decimal: ','
+        decimal: '.'
     },
     abbreviations: {
         thousand: 'k',
@@ -111,7 +131,7 @@ Numeral.register('locale', 'eth', {
         return number === 1 ? 'er' : 'ème';
     },*/
     currency: {
-        symbol: 'ETH '
+        symbol: ''
     }
 });
 
