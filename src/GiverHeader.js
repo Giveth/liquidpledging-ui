@@ -16,7 +16,13 @@ class GiverHeader extends Component {
 
     onAddButton=()=>
     {
-        Caller.donate(this.props.adminId, this.props.adminId, 2.3)
+        let donateData={
+            giverName:this.props.name,
+            emiter:this.props.adminId,
+            reciever:this.props.adminId,
+            amount:undefined
+        }
+        Caller.showDonateDialog(donateData)
     }
    
     render() {
