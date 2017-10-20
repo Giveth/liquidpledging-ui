@@ -45,7 +45,7 @@ class DelegateHeader extends Component {
                         {this.props.name}
                     </p>
 
-                    <p key = {"amount"} style = {Styles.delegation.assignedAmount} >
+                    <p key = {"amount"} style = {Styles.delegation.amount} >
                         {Currency.symbol+ " "+ Currency.toEther(this.props.availableAmount) +' / '+ Currency.toEther(this.props.assignedAmount)}
                     </p>
 

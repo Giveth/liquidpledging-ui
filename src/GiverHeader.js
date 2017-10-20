@@ -49,7 +49,7 @@ class GiverHeader extends Component {
                         {this.props.name}
                     </p>
 
-                    <p key = {"amount"} style = {Styles.delegation.assignedAmount} >
+                    <p key = {"amount"} style = {Styles.delegation.amount} >
                         {Currency.symbol+ " "+Currency.toEther(usedAmount) +' / '+ Currency.toEther(totalAmount)}
                     </p>
 

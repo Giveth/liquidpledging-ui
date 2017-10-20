@@ -50,6 +50,7 @@ export const Styles = {
         header:{
             display: 'flex',
             flexDirection: 'row',
+            justifyContent:'flex-start',
             paddingLeft: 5,
             paddingRight: 10,
             paddingTop: 0,
@@ -76,11 +77,6 @@ export const Styles = {
             paddingBottom: 0,
         },
 
-        assignedAmount:{
-            color:Colors.secondary,
-            
-        },
-
         colapseButton:{
             width:32
         },
@@ -92,6 +88,16 @@ export const Styles = {
         bodyColapsed:{
             display:'none'
         },
+
+        amount:{
+            color:Colors.secondary,
+            /*borderRadius: 4,
+            MoBborderRadius: 4,
+            WebkitBorderRadius: 4,
+            backgroundColor: Colors.backgroundHighlight,
+            padding: 10,
+            margin: 0,*/
+        }
     },
 
     givethLogo:{
