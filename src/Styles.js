@@ -5,6 +5,9 @@ import AddIcon from 'react-icons/lib/md/add-circle'
 
 import Numeral from 'numeral'
 
+const MAX_CONTENT_WIDTH = 600
+const MIN_CONTENT_WIDTH = 400
+
 export const Colors = {
     highlight:'#333',
     backgroundHighlight:'rgba(0, 0, 0, 0.05)',
@@ -33,9 +36,9 @@ export const Styles = {
 
         container:{
             margin:20,
-            maxWidth:600,
-            minWidth:400,
-            width:600
+            maxWidth:MAX_CONTENT_WIDTH,
+            minWidth:MIN_CONTENT_WIDTH,
+            width:MAX_CONTENT_WIDTH
         }
     },
    
@@ -103,6 +106,12 @@ export const Styles = {
     givethLogo:{
         WebkitFilter: 'grayscale(100%)', 
        justifyContent:"center"
+    },
+
+    dialogs:{
+        narrow: {
+            width: MIN_CONTENT_WIDTH
+        }
     }
 }
 
