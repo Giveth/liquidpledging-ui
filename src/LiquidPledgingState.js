@@ -15,12 +15,12 @@ class LiquidPledgingState extends LiquidPledgingController {
         return filtered
     }
 
-    getPledge(pledgeId)
+    /*getPledge(pledgeId)
     {
         if(!this.state.pledges || pledgeId >= this.state.pledges.length )
             return {}
         return this.state.pledges[pledgeId]
-    }
+    }*/
 
     getPledges(propertiesFilter={}, delegationFilter)
     {
@@ -35,12 +35,12 @@ class LiquidPledgingState extends LiquidPledgingController {
         return filtered
     }
 
-    getAdminForLevel(pledge, level)
+    /*getAdminForLevel(pledge, level)
     {
         if(pledge.delegates.length > level)
             return pledge.delegates[pledge.delegates.length - 1 - level]
         return -1
-    }
+    }*/
 
     getDelegationTree(delegation)
     {
@@ -79,21 +79,21 @@ class LiquidPledgingState extends LiquidPledgingController {
 
 /////////////////////////////////////////
 
-    getOpenPledges(adminId)
+    /*getOpenPledges(adminId)
     {
         let propertiesFilter = {}
         let delegationFilter = {adminId:adminId, level:0, reverseLevel:true}
         let pledges = this.getPledges(propertiesFilter, delegationFilter)    
         pledges = Filter.hasIntendedProject(pledges, false)
         return pledges
-    }
+    }*/
 
-    getAvailableDelegations()
+    /*getAvailableDelegations()
     {
         let pledges = this.getAvailablePledges()
         let delegations = this.getDelegations(pledges)
         return delegations
-    }
+    }*/
 
     getGiversDelegations(address)
     {
