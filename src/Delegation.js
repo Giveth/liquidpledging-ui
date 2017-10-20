@@ -64,6 +64,7 @@ class Delegation extends Component {
             adminAddress = {this.props.tree.delegation.adminAddress}
             userAddress={this.props.userAddress}
 
+
             showColapseButton = {(this.props.tree && this.props.tree.children && this.props.tree.children.length)}
             onToggle = {this.onHeaderToggle}
             colapsed = {this.state.isColapsed}
@@ -76,6 +77,7 @@ class Delegation extends Component {
             assignedAmount = {this.props.tree.delegation.assignedAmount}
             availableAmount = {this.props.tree.delegation.availableAmount}
             adminAddress = {this.props.tree.delegation.adminAddress}
+            adminId={this.props.tree.delegation.adminId}
             userAddress={this.props.userAddress}
 
             showColapseButton = {(this.props.tree && this.props.tree.children && this.props.tree.children.length)}

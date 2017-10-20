@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Styles, Currency, Icons, Merge } from './Styles'
 import IconButton from 'material-ui/IconButton'
+import Caller from './LiquidPledgingCaller'
 
 class GiverHeader extends Component {
 
@@ -11,6 +12,11 @@ class GiverHeader extends Component {
     onToggle=()=>
     {
         this.props.onToggle(!this.props.colapsed)
+    }
+
+    onAddButton=()=>
+    {
+        Caller.donate(this.props.adminId, this.props.adminId, 2.3)
     }
    
     render() {
@@ -40,7 +46,7 @@ class GiverHeader extends Component {
             addFundsButton = (
                 <IconButton
                  
-                    onClick = {this.onToggle}>
+                    onClick = {this.onAddButton}>
 
                     <Icons.add size={30}/>
 
