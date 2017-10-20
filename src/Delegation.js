@@ -66,6 +66,12 @@ class Delegation extends Component {
                         {colapseButton}
                     </div>
                     
+                    
+                    <p key = {"id"}  style= {Styles.delegation.assignedAmount}>
+                        {this.props.tree.delegation.id}
+                    </p>
+
+
                     <p key = {"name"}  style= {Styles.delegation.title}>
                         {this.props.tree.delegation.name}
                     </p>
