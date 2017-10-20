@@ -20,22 +20,24 @@ class App extends Component {
         return (
             <div>            
                 <MuiThemeProvider muiTheme={GreyTheme}>
-                    <Page>
-                        <div style={{textAlign: 'center'}}>
+                    <div> 
+                        <Page>
+                            <div style={{textAlign: 'center'}}>
 
-                            <img
-                                src={logo}
-                                className="App-logo"
-                                alt="Building the Future of Giving" 
-                                style={Styles.givethLogo}/>
-                            </div>
+                                <img
+                                    src={logo}
+                                    className="App-logo"
+                                    alt="Building the Future of Giving" 
+                                    style={Styles.givethLogo}/>
+                                </div>
 
-                        <h2 className="App-title">Liquid Pledging</h2>
-                        
-                        <WrapperTest/>
-                    </Page>
+                            <h2 className="App-title">Liquid Pledging</h2>
+                            
+                            <WrapperTest/>
+                        </Page>
 
-                    <DonateDialog open={true}/>
+                       
+                    </div>
                 </MuiThemeProvider>
             </div>
         )
