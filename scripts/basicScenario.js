@@ -102,11 +102,12 @@ await liquidPledging.transfer(1, 3, utils.toWei(0.5), 1, { from: user1, gas: 200
     await liquidPledging.donate(1, 16, { from: user1, value: utils.toWei(0.1) }); //Doesn't create pledge
     await liquidPledging.donate(1, 16, { from: user1, value: utils.toWei(0.1) }); //Doesn't create pledge
 
-    //Delegaing from different donors to the same one
+    //Delegaing from different donors to the same one (#A17)
 
     await liquidPledging.addDelegate('Delegate2User1', 'URLDelegate2User1', 0, 0, { from: user1 }); //#A17
     await liquidPledging.transfer(16, 11, utils.toWei(0.2), 17, { from: user1 }); //#12
     await liquidPledging.transfer(2, 2, utils.toWei(0.5), 17, { from: user2 }); //#P13
+    await liquidPledging.transfer(3, 3, utils.toWei(1), 17, { from: user3 }); //#P13
 
     const st = await liquidPledgingState.getState();
     console.log(JSON.stringify(st, null, 2));
