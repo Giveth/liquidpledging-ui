@@ -2,18 +2,25 @@ import React from 'react'
 import TextField from 'material-ui/TextField'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
+import {Styles, Currency} from './Styles'
 
-class CreateProjectPage extends React.Component
+class DonateDialog extends React.Component
 {
     constructor(props)
     {
         super();
-        this.state = {"projectName" : ""}
+        this.state={
+            amount:'',
+            okDisabled:true
+        }
     }
 
     onDone=()=>
     {
-        this.props.onDone(this.state.projectName)
+        let data = this.props.data
+        data.amount = this.state.amount
+        this.props.onDone(data)
+        this.state={amount:''}
     }   
 
     onCancel=()=>
@@ -21,9 +28,19 @@ class CreateProjectPage extends React.Component
         this.props.onCancel()
     }  
 
+    //TODO: Check
     onTextChange = (e, newText) => {
-        if(newText.length<32)
-            this.setState({projectName:newText})
+        let state = {}
+
+        if(!isNaN(newText))
+            state.amount=newText
+
+        if(!newText || isNaN(newText) )
+            state.okDisabled=true
+        else
+           state.okDisabled=false
+
+       this.setState(state)
     }
 
     render()
@@ -35,26 +52,31 @@ class CreateProjectPage extends React.Component
               onClick={this.onCancel}
             />,
             <FlatButton
-              label="Create"
+              label="Add funds"
               primary={true}
               keyboardFocused={true}
               onClick={this.onDone}
+              disabled={this.state.okDisabled}
             />
         ]
 
+        let title = "Add funds to "+ this.props.data.giverName
+
         return (
             <Dialog
-                title="Add funds to the account"
+                title={title}
                 actions={actions}
                 modal={false}
                 open={this.props.open}
-                onRequestClose={this.onCancel}>
+                onRequestClose={this.onCancel}
+                contentStyle={Styles.dialogs.narrow}>
 
                 <TextField
+                    
                     autoFocus={true}
                     id="inputText"
-                    hintText="Project name"
-                    value={this.state.projectName}
+                    hintText={'Ether to add'}
+                    value={this.state.amount}
                     onChange={this.onTextChange}/>
                    
             </Dialog>
@@ -62,4 +84,4 @@ class CreateProjectPage extends React.Component
     }
 }
 
-export default CreateProjectPage;
+export default DonateDialog;
