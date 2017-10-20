@@ -158,6 +158,7 @@ class LiquidPledgingController extends ProviderHelper {
                 pledgeId:pledge.id,
                 intendedProject:pledge.intendedProject,
                 adminId:adminId,
+                adminAddress:admin.addr,
                 type:admin.type,
                 name:admin.name,
                 url:admin.url

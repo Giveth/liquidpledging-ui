@@ -18,7 +18,12 @@ class DelegationList extends Component {
         let list = []
         if(this.props.treeChildren)
             list = this.props.treeChildren.map((tree,index) => {
-                return <Delegation key={index} tree={tree} indentLevel={indentLevel+1}/>})
+                return <Delegation
+                    key={index}
+                    tree={tree}
+                    indentLevel={indentLevel+1}
+                    userAddress={this.props.userAddress} 
+                />})
 
         return (
             <div style={{paddingLeft:indentLevel* Styles.indentPadding}}>

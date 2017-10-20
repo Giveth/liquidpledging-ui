@@ -49,7 +49,6 @@ class Delegation extends Component {
         {
             colapseButton = (
                 <IconButton
-                   
                     onClick = {this.onTooggleChildren}
                     iconStyle={{width: 16, height: 16, color:'grey'}}
                     style={{width: 32,height: 32, padding:4, margin:8}}>
@@ -62,6 +61,8 @@ class Delegation extends Component {
             name={this.props.tree.delegation.name}
             assignedAmount = {this.props.tree.delegation.assignedAmount}
             availableAmouont = {this.props.tree.delegation.availableAmount}
+            adminAddress = {this.props.tree.delegation.adminAddress}
+            userAddress={this.props.userAddress}
 
             showColapseButton = {(this.props.tree && this.props.tree.children && this.props.tree.children.length)}
             onToggle = {this.onHeaderToggle}
@@ -74,6 +75,8 @@ class Delegation extends Component {
             name={this.props.tree.delegation.name}
             assignedAmount = {this.props.tree.delegation.assignedAmount}
             availableAmount = {this.props.tree.delegation.availableAmount}
+            adminAddress = {this.props.tree.delegation.adminAddress}
+            userAddress={this.props.userAddress}
 
             showColapseButton = {(this.props.tree && this.props.tree.children && this.props.tree.children.length)}
             onToggle = {this.onHeaderToggle}
