@@ -11,6 +11,7 @@ const MIN_CONTENT_WIDTH = 400
 export const Colors = {
     highlight:'#333',
     backgroundHighlight:'rgba(0, 0, 0, 0.05)',
+    backgroundActive:'rgba(0, 0, 0, 0.1)',
     secondary:'#666'
 }
 
@@ -58,6 +59,17 @@ export const Styles = {
             paddingRight: 10,
             paddingTop: 0,
             paddingBottom: 0,
+        },
+
+        
+        getHoverStyle : function (isHovering)
+        {
+            let style={}
+            
+            if(isHovering)
+                style.backgroundColor = Colors.backgroundActive
+
+            return style
         },
 
         giverHeader:{
@@ -115,8 +127,8 @@ export const Styles = {
     }
 }
 
-export function Merge (style1, style2) {
-    return Object.assign({},style1, style2)
+export function Merge (style1, style2, style3={}) {
+    return Object.assign({},style1, style2, style3)
 }
 
 export const Currency = {
