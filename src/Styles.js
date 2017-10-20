@@ -1,6 +1,6 @@
 import SubDelegateIcon from 'react-icons/lib/md/subdirectory-arrow-right'
 import ColapsedIcon from 'react-icons/lib/md/keyboard-arrow-up'
-import ShownIcon from 'react-icons/lib/md/keyboard-arrow-right'
+import ShownIcon from 'react-icons/lib/md/keyboard-arrow-down'
 import AddIcon from 'react-icons/lib/md/add-circle'
 
 import Numeral from 'numeral'
@@ -47,8 +47,7 @@ export const Styles = {
     {
         container:{
             display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between'
+            flexDirection: 'column'
         },
 
         header:{
@@ -60,7 +59,6 @@ export const Styles = {
             paddingTop: 0,
             paddingBottom: 0,
         },
-
         
         getHoverStyle : function (isHovering)
         {
@@ -74,11 +72,18 @@ export const Styles = {
 
         giverHeader:{
             backgroundColor: Colors.backgroundHighlight,
-            paddingLeft: 10,
-            paddingRight: 10,
+            paddingLeft: 20,
+            paddingRight: 20,
             paddingTop: 10,
             paddingBottom: 10,
-            marginTop: 5
+            marginTop: 5,
+            justifyContent:'space-between',
+        },
+
+        headerCell:{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent:'flex-start',
         },
 
         delegateHeader:{

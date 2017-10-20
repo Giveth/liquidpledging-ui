@@ -54,9 +54,7 @@ class GiverHeader extends Component {
         {
             colapseButton = (
                 <IconButton
-                    onClick = {this.onToggle}
-                    iconStyle={{width: 16, height: 16, color:'grey'}}
-                    style={{width: 32,height: 32, padding:4, margin:8}}>
+                    onClick = {this.onToggle}>
                     {tooggleIcon}
                 </IconButton>)
         }
@@ -97,21 +95,29 @@ class GiverHeader extends Component {
                     onMouseEnter = {this.onMouseEnter}
                     onMouseLeave = {this.onMouseLeave}
                     onClick = {this.onBackgroundClick}>
+
+                    <div style = {Styles.delegation.headerCell}>
                    
-                    <div style = {Styles.delegation.colapseButton}>
-                        {colapseButton}
+                        <p key = {"name"}  style= {Styles.delegation.title}>
+                            {this.props.name}
+                        </p>
+
+                        <p key = {"amount"} style = {Styles.delegation.amount} >
+                            {Currency.symbol+ " "+Currency.toEther(usedAmount) +' / '+ Currency.toEther(totalAmount)}
+                        </p>
+
                     </div>
 
-                    <p key = {"name"}  style= {Styles.delegation.title}>
-                        {this.props.name}
-                    </p>
+                    <div style = {Styles.delegation.headerCell}>
+                        {actionButons}
+                    </div>
 
-                    <p key = {"amount"} style = {Styles.delegation.amount} >
-                        {Currency.symbol+ " "+Currency.toEther(usedAmount) +' / '+ Currency.toEther(totalAmount)}
-                    </p>
 
-                    {actionButons}
-                    
+                    <div style = {Styles.delegation.headerCell}>
+                        <div style = {Styles.delegation.colapseButton}>
+                            {colapseButton}
+                        </div>
+                    </div>
 
             </div>
         )
