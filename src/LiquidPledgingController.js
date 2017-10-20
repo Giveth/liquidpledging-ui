@@ -67,6 +67,7 @@ class LiquidPledgingController extends ProviderHelper {
         {
             this.state.admins=this.setIds(this.state.admins)
             this.state.admins.shift()
+            this.nodes = this.initNodes(this.state.admins)
         }
         else
         {
@@ -79,6 +80,7 @@ class LiquidPledgingController extends ProviderHelper {
             this.state.pledges.shift() //first item is always null
             this.state.pledges=this.setRightTypes(this.state.pledges)
             this.delegations = this.createDelegations(this.state.pledges)
+            this.nodes = this.setNodes(this.nodes, this.delegations)
         }
         else
         {
@@ -210,6 +212,44 @@ class LiquidPledgingController extends ProviderHelper {
         if( adminId > this.state.admins.length )
             return {}
         return this.state.admins[adminId-1]
+    }
+
+    initNodes(admins)
+    {
+        let nodes = {}
+        for(let admin of admins)
+        {
+            let nodeId = this.getNodeId(admin) //same as adminID???
+
+            let receiver = {
+                id:nodeId,
+                delegationsIn:[],
+                delegationsOut:[]
+            }
+            nodes[nodeId]=receiver
+        }
+
+        return nodes
+    }
+
+    setNodes(nodes, delegations)
+    {
+        for (let delegationId in delegations) {
+            if (delegations.hasOwnProperty(delegationId)) {
+                let d = delegations[delegationId]          
+                let nodeId = parseInt(d.adminId, 10)
+                nodes[nodeId].delegationsIn.push(d.id)
+                nodes[nodeId].delegationsOut = nodes[nodeId].delegationsOut.concat(d.delegations)
+            }
+        }
+
+        return nodes
+
+    }
+
+    getNodeId(admin)
+    {
+        return admin.id.toString()//+admin.name.toString()
     }
 }
 
