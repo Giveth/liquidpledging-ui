@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Styles } from './Styles'
 import GivethLogo from './logo.svg'
 import GreyTheme from './GreyTheme'
+import DonateDialog from './DonateDialog'
 
 class App extends Component {
 
@@ -21,16 +22,20 @@ class App extends Component {
                 <MuiThemeProvider muiTheme={GreyTheme}>
                     <Page>
                         <div style={{textAlign: 'center'}}>
+
                             <img
                                 src={logo}
                                 className="App-logo"
                                 alt="Building the Future of Giving" 
                                 style={Styles.givethLogo}/>
                             </div>
-                         <h2 className="App-title">Liquid Pledging</h2>
+
+                        <h2 className="App-title">Liquid Pledging</h2>
                         
                         <WrapperTest/>
                     </Page>
+
+                    <DonateDialog open={true}/>
                 </MuiThemeProvider>
             </div>
         )
