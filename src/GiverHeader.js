@@ -7,6 +7,7 @@ class GiverHeader extends Component {
 
     constructor(props){
         super()
+        this.state={isHovering:false}
     }
 
     onToggle=()=>
@@ -23,6 +24,16 @@ class GiverHeader extends Component {
             amount:undefined
         }
         Caller.showDonateDialog(donateData)
+    }
+
+    onMouseEnter=()=>
+    {
+        this.setState({isHovering:true})
+    }
+
+    onMouseLeave=()=>
+    {
+        this.setState({isHovering:false})
     }
    
     render() {
@@ -64,9 +75,22 @@ class GiverHeader extends Component {
         let availableAmount = this.props.availableAmount
         let usedAmount = totalAmount - availableAmount
 
+        let actionButons = <div/>
+
+        if(this.state.isHovering)
+        {
+            actionButons =(
+                <div style = {Styles.delegation.colapseButton}>
+                    {addFundsButton}
+                </div>)
+        }
+
         return (
 
-                 <div style = {Merge(Styles.delegation.header, Styles.delegation.giverHeader)}>
+                 <div
+                    style = {Merge(Styles.delegation.header, Styles.delegation.giverHeader, Styles.delegation.getHoverStyle(this.state.isHovering))}
+                    onMouseEnter = {this.onMouseEnter}
+                    onMouseLeave = {this.onMouseLeave}>
                    
                     <div style = {Styles.delegation.colapseButton}>
                         {colapseButton}
@@ -80,9 +104,8 @@ class GiverHeader extends Component {
                         {Currency.symbol+ " "+Currency.toEther(usedAmount) +' / '+ Currency.toEther(totalAmount)}
                     </p>
 
-                    <div style = {Styles.delegation.colapseButton}>
-                        {addFundsButton}
-                    </div>
+                    {actionButons}
+                    
 
             </div>
         )
