@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DelegationsList from './DelegationsList'
 import { Styles, Format, Icons } from './Styles'
 import IconButton from 'material-ui/IconButton'
+import GiverHeader from './GiverHeader'
 
 class Delegation extends Component {
 
@@ -9,14 +10,14 @@ class Delegation extends Component {
         super()
 
         this.state={
-            showChildren:true
+            isColapsed:true
         }
     }
 
-    onTooggleChildren=()=>
+    onHeaderToggle=(colapsed)=>
     {
         this.setState({
-            showChildren : !this.state.showChildren
+            isColapsed : colapsed
         })
     }
    
@@ -24,7 +25,7 @@ class Delegation extends Component {
 
         let indentLevel = this.props.indentLevel
         let displayTooltip = 'Show delegations'
-        let tooggleIcon = <Icons.colapse size={20}/>
+        let tooggleIcon = <Icons.colapsed size={20}/>
         let children = <div style = {Styles.delegation.bodyColapsed}>
                 <DelegationsList
                     treeChildren={this.props.tree.children}
@@ -32,7 +33,7 @@ class Delegation extends Component {
                 />
             </div>
 
-        if(this.state.showChildren)
+        if(this.state.isColapsed)
         {
             displayTooltip = 'Hide delegations'
             tooggleIcon =<Icons.shown size={20}/>
@@ -60,6 +61,25 @@ class Delegation extends Component {
         return (
             <div style = {Styles.delegation.container}>
 
+                <GiverHeader 
+                id={this.props.tree.delegation.id}
+                name={this.props.tree.delegation.name}
+                assignedAmount = {this.props.tree.delegation.assignedAmount}
+
+                showColapseButton = {(this.props.tree && this.props.tree.children && this.props.tree.children.length)}
+                onToggle = {this.onHeaderToggle}
+                colapsed = {this.state.isColapsed}
+                />
+
+            
+                {children}
+                
+            </div>
+        )
+    }
+}
+/*
+
                  <div style = {Styles.delegation.header}>
                    
                     <div style = {Styles.delegation.colapseButton}>
@@ -81,12 +101,7 @@ class Delegation extends Component {
                     </p>
 
                 </div>
-    
-                {children}
-                
-            </div>
-        )
-    }
-}
+
+                */
 
 export default Delegation

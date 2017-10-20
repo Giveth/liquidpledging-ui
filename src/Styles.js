@@ -1,7 +1,7 @@
 
 import FontIcon from 'material-ui/FontIcon'
 import SubDelegateIcon from 'react-icons/lib/md/subdirectory-arrow-right'
-import ColapseIcon from 'react-icons/lib/md/keyboard-arrow-up'
+import ColapsedIcon from 'react-icons/lib/md/keyboard-arrow-up'
 import ShownIcon from 'react-icons/lib/md/keyboard-arrow-right'
 
 import Numeral from 'numeral'
@@ -14,7 +14,7 @@ export const Colors = {
 export const Icons = {
 
     subDelegate: SubDelegateIcon,
-    colapse: ColapseIcon,
+    colapsed: ColapsedIcon,
     shown:ShownIcon,
 }
 
