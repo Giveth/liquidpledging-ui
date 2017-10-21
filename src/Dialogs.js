@@ -45,10 +45,10 @@ class Dialogs extends Component {
         this.setState({  donateOpen:false })
     }
 
-    donateOnDone=(donateData)=>
+    donateOnDone=(transfer)=>
     {
         this.setState({ donateOpen:false })
-        Caller.donate(donateData)
+        Caller.donate(transfer)
     }
 
     //Transfer
@@ -65,11 +65,10 @@ class Dialogs extends Component {
         this.setState({ transferOpen:false })
     }
 
-    transferOnDone=(donateData)=>
+    transferOnDone=(data)=>
     {
         this.setState({  transferOpen:false })
-
-        Caller.donate(donateData)
+        Caller.transfer(data)
     }
 
     render() {
