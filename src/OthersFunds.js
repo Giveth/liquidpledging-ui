@@ -29,9 +29,9 @@ class OthersFunds extends Component {
 
     getTrees=()=>
     {
-        let delegations = LPState.getDelegations(this.state.currentAddress,"Delegate")
-        let tree = LPState.getDelegationsTrees(delegations)
-        return tree
+        let rootDelegations = LPState.getDelegations(this.state.currentAddress,"Delegate")
+        let trees = LPState.getDelegationsTrees(rootDelegations,{assignedAmount:undefined})
+        return trees
     }
 
     onAccountChanged=()=>{
