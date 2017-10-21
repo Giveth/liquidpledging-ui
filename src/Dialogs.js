@@ -18,11 +18,20 @@ class Dialogs extends Component {
             transferMetadata:{emiters:[]}
         }
 
+        LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
         LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
         LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
 
         Caller.on(Caller.DONATE_DIALOG, this.donateOnShow)
         Caller.on(Caller.TRANSFER_DIALOG, this.transferOnShow)
+    }
+
+    onStateChanged=()=>{
+
+        let emiters = LPState.getDelegations(this.state.currentAddress)
+        let transferMetadata={}
+        transferMetadata.emiters=emiters
+        this.setState({ transferMetadata:transferMetadata})
     }
 
     onAccountChanged=()=>{
@@ -54,10 +63,7 @@ class Dialogs extends Component {
     //Transfer
     transferOnShow=(data)=>
     {
-        let emiters = LPState.getDelegations(this.state.currentAddress)
-        let transferMetadata={}
-        transferMetadata.emiters=emiters
-        this.setState({ transferData:data, transferOpen:true, transferMetadata:transferMetadata})
+        this.setState({ transferData:data, transferOpen:true})
     }
 
     transferOnCancel=()=>
