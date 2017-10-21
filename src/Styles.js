@@ -12,7 +12,8 @@ export const Colors = {
     highlight:'#333',
     backgroundHighlight:'rgba(0, 0, 0, 0.05)',
     backgroundActive:'rgba(0, 0, 0, 0.1)',
-    secondary:'#666'
+    secondary:'#666',
+    subtle:'#bbb',
 }
 
 export const Icons = {
@@ -41,6 +42,21 @@ export const Styles = {
             minWidth:MIN_CONTENT_WIDTH,
             width:MAX_CONTENT_WIDTH
         }
+    },
+
+    subtitle:{
+        color:Colors.secondary,
+        textTransform: 'uppercase',
+        margin:0,
+    },
+
+    addressSubtle:{
+        color:Colors.subtle,
+        display: 'inline',
+        whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
+        overflow: "hidden",
+        fontSize:'0.8em',
     },
    
     delegation:
@@ -145,7 +161,7 @@ export const Currency = {
 
     format(amount)
     {
-        let number = Numeral(amount);
+        let number = Numeral(amount)
         return number.format('$0,0.[0000]')
     },
 
@@ -171,5 +187,5 @@ Numeral.register('locale', 'eth', {
     }
 });
 
-Numeral.locale('eth');
+Numeral.locale('eth')
 

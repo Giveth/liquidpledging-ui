@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
 import DelegationsList from './DelegationsList'
+import {Styles} from './Styles'
+
+const title = 'My Funds'
 
 class MyFunds extends Component {
 
@@ -20,8 +23,7 @@ class MyFunds extends Component {
 
     onStateChanged=()=>{
         this.setState({
-            //tree:LPState.getDelegations(this.state.currentAddress)
-            tree:LPState.getDelegationsTrees(LPState.getDelegations())
+            tree:LPState.getDelegationsTrees(LPState.getDelegations(this.state.currentAddress))
         })
     }
 
@@ -39,8 +41,9 @@ class MyFunds extends Component {
 
         return (
             <div >
+                <p key = {"title"} style ={Styles.subtitle}> {title} </p>
+                <p key = {"currentAddress"} style ={Styles.addressSubtle}> {this.state.currentAddress} </p>
                 <DelegationsList treeChildren={this.state.tree} indentLevel={0} userAddress={this.state.currentAddress}/>
-                <p key = {"currentAddress"} style ={{wordWrap: 'break-word'}}> {this.state.currentAddress} </p>
                 <pre key = {"data"} style ={{wordWrap: 'break-word'}}> {this.state.data} </pre>
             </div>
         )
