@@ -43,7 +43,7 @@ class TransferDialog extends React.Component
 
         if(!isNaN(newText))
             state.amount=newText
-
+       
         state.okDisabled=!this.isReady(newText, this.state.selectedEmiter)
 
        this.setState(state)
@@ -59,11 +59,31 @@ class TransferDialog extends React.Component
 
     isReady=(amount, selectedEmiter)=>
     {
+        if(!this.hasEnoughAmount(amount, selectedEmiter))
+            return false
+
         if(!amount || isNaN(amount))
             return false
+
         if(!selectedEmiter)
             return false
+
         return true
+    }
+
+    hasEnoughAmount=(amount, selectedEmiter)=>
+    {
+        let availableAmount = Currency.toEther(this.getDelegationFromId(selectedEmiter).availableAmount)
+        let enough = (amount <= availableAmount)
+        let state= {}
+        state.error = ''
+
+        if(!enough || isNaN(amount))
+            state.error = 'Not enough funds'
+
+        this.setState(state)
+
+        return enough
     }
 
     getDelegationFromId=(delegationId)=>
@@ -76,7 +96,6 @@ class TransferDialog extends React.Component
 
     render()
     {
-        console.log(this.props.data)
         const actions = [
             <FlatButton
               label="Cancel"
@@ -133,8 +152,8 @@ class TransferDialog extends React.Component
                     id="inputText"
                     hintText={'Ether to delegate'}
                     value={this.state.amount}
-                    onChange={this.onTextChange}/>
-                   
+                    onChange={this.onTextChange}
+                    errorText = {this.state.error}/>
             </Dialog>
         )
     }
