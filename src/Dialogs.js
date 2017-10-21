@@ -10,10 +10,12 @@ class Dialogs extends Component {
     {
         super() 
         this.state={
+            currentAddress:'',
             donateOpen:false,
             donateData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
             transferOpen:false,
-            transferData:{reciever:0, emiter:0, amount:0, giverName:'unga'}
+            transferData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
+            transferMetadata:{givers:[]}
         }
 
         LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
@@ -24,7 +26,7 @@ class Dialogs extends Component {
     }
 
     onAccountChanged=()=>{
-        let newAccount = LPState.getCurrentAccount()
+        this.setState({ currentAddress:LPState.getCurrentAccount()})
     }
 
     onNetworkChanged=()=>{
@@ -52,7 +54,10 @@ class Dialogs extends Component {
     //Transfer
     transferOnShow=(data)=>
     {
-        this.setState({ transferData:data, transferOpen:true})
+        let givers = []// LPState.getGivers()
+        let transferMetadata={}
+        transferMetadata.givers=givers
+        this.setState({ transferData:data, transferOpen:true, transferMetadata:transferMetadata})
     }
 
     transferOnCancel=()=>
