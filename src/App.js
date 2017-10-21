@@ -13,31 +13,27 @@ class App extends Component {
 
     render() {
         return (
-            <div>            
-                <MuiThemeProvider muiTheme={GreyTheme}>
-                    <div> 
-                        <Page>
-                            <div style={{textAlign: 'center'}}>
+                        
+            <MuiThemeProvider muiTheme={GreyTheme}>
+                <div> 
 
-                                <img
-                                    src={logo}
-                                    className="App-logo"
-                                    alt="Building the Future of Giving" 
-                                    style={Styles.givethLogo}/>
-                                </div>
+                    <Page>
+                        <div style={{textAlign: 'center'}}>
+                            <img
+                                src={logo}
+                                className="App-logo"
+                                alt="Building the Future of Giving" 
+                                style={Styles.givethLogo}/>
+                        </div>
+                        
+                        <WrapperTest/>
+                    </Page>
 
-                            <h2 className="App-title">Liquid Pledging</h2>
-                            
-                            <WrapperTest/>
+                    <Dialogs/>
 
-                        </Page>
-
-                        <Dialogs/>
-                       
-                    </div>
-                    
-                </MuiThemeProvider>
-            </div>
+                </div>
+            </MuiThemeProvider>
+            
         )
     }
 }
