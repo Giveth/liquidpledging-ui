@@ -32,7 +32,6 @@ class DataFormatter {
             })
 
             return pledge
-            
         })
     }
 
@@ -57,16 +56,18 @@ class DataFormatter {
             let id = this.getDelegationId(pledge.owner, pledge.delegates, pledge.intendedProject)
             let parentDelegates = pledge.delegates.slice()
             parentDelegates.splice(-1,1)
-            let parentId = this.getDelegationId(pledge.owner, parentDelegates, 0)
-            let adminId =  pledge.delegates[pledge.delegates.length-1]
 
-            if(pledge.intendedProject)
-                parentId = this.getDelegationId(pledge.owner, pledge.delegates, 0)
+            let parentId = this.getDelegationId(pledge.owner, parentDelegates, 0)
+
+            let delegationChainId =  this.getDelegationChainId(pledge.owner, pledge.delegates, pledge.intendedProject)
+            let adminId =  delegationChainId[delegationChainId.length - 1]
+            let parentAdminId = delegationChainId[delegationChainId.length - 2]
 
             if(pledge.delegates.length===0)
             {
                 parentId = this.getDelegationId(0, [], 0)
                 adminId = pledge.owner
+                parentAdminId = NO_PARENT
             }
 
             let admin = getAdmin(adminId)
@@ -74,6 +75,7 @@ class DataFormatter {
             let delegation={
                 id:id,
                 parentId:parentId,
+                parentAdminId:parentAdminId,
                 delegations:[],
                 assignedAmount:pledge.amount,//pledge.amount = available amount. Down below we'll add the used one 
                 availableAmount:pledge.amount,
@@ -116,13 +118,19 @@ class DataFormatter {
         return delegations
     }
 
-   getDelegationId(owner, delegates, intendedProject)
+    getDelegationId(owner, delegates, intendedProject)
+    {
+        let delegatesChain =this.getDelegationChainId(owner, delegates,intendedProject)
+        return delegatesChain.toString()
+    }
+
+    getDelegationChainId(owner, delegates, intendedProject)
     {
         let delegatesChain = [owner]
         delegatesChain = delegatesChain.concat(delegates)
         if(intendedProject)
             delegatesChain = delegatesChain.concat([intendedProject])
-        return delegatesChain.toString()
+        return delegatesChain
     }
 
     initNodes(admins)
@@ -155,12 +163,11 @@ class DataFormatter {
         }
 
         return nodes
-
     }
 
     getNodeId(admin)
     {
-        return admin.id.toString()//+admin.name.toString()
+        return admin.id
     }
 
 
