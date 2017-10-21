@@ -2,6 +2,7 @@ import SubDelegateIcon from 'react-icons/lib/md/subdirectory-arrow-right'
 import ColapsedIcon from 'react-icons/lib/md/keyboard-arrow-up'
 import ShownIcon from 'react-icons/lib/md/keyboard-arrow-down'
 import AddIcon from 'react-icons/lib/md/add'
+import CanelIcon from 'react-icons/lib/md/clear'
 
 import Numeral from 'numeral'
 
@@ -22,6 +23,7 @@ export const Icons = {
     colapsed: ColapsedIcon,
     shown:ShownIcon,
     add:AddIcon,
+    cancel:CanelIcon,
 }
 
 export const Styles = {

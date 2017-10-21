@@ -25,6 +25,18 @@ class DelegateHeader extends Component {
 
         Caller.showTransferDialog(transferData)
     }
+
+    onCancel=()=>
+    {
+        let cancelData={
+            giverName:this.props.name,
+            emiterId:0,
+            recieverId:this.props.adminId,
+            amount:this.props.availableAmount
+        }
+
+        Caller.showCancelDialog(cancelData)
+    }
    
     render() {
         let tooggleIcon = <Icons.colapsed size={20}/>
@@ -50,6 +62,12 @@ class DelegateHeader extends Component {
                 <Icons.add size={30}/>
             </IconButton>)
 
+        let CancelDelegateButton = (
+            <IconButton
+                onClick = {this.onCancel}>
+                <Icons.cancel size={30}/>
+            </IconButton>)
+
         return (
 
             <div style = {Merge(Styles.delegation.header, Styles.delegation.delegateHeader)}>
@@ -68,6 +86,7 @@ class DelegateHeader extends Component {
                 <div style = {Styles.delegation.headerCell}>
 
                    {addFundsButton}
+                   {CancelDelegateButton}
                     
                 </div>
 
