@@ -20,6 +20,7 @@ class LiquidPledgingController extends ProviderHelper {
         this.admins=[]
         this.pledges=[]
         this.delegations={}
+        this.delegationsArray=[]
         this.nodes={}
 
         this.setupWeb3()
@@ -89,6 +90,7 @@ class LiquidPledgingController extends ProviderHelper {
             this.pledges.shift() //first item is always null
             this.pledges=Formatter.setRightTypes(this.pledges)
             this.delegations = Formatter.createDelegations(this.pledges, this.admins)
+            this.delegationsArray = Formatter.getDelegationsArray(this.delegations)
             this.nodes = Formatter.setNodes(this.nodes, this.delegations)
         }
         else

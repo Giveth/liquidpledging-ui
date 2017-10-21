@@ -22,6 +22,16 @@ module.exports = {
         })
     },
 
+    byProperties(array, propertiesFilter)
+    {
+        let filtered  = array
+
+        for (const property of Object.keys(propertiesFilter))
+            filtered = this.byProperty(filtered, property, propertiesFilter[property])
+
+        return filtered
+    },
+
     delegationLevel(pledges, adminId, level, reverseLevel = false)
     {
         if(reverseLevel)

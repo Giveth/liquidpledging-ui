@@ -58,10 +58,11 @@ class LiquidPledgingState extends LiquidPledgingController {
         return tree
     }
 
-    getAvailablePledges()
+
+    /*getAvailablePledges(address)
     {
         //Let's get all the admins controled by current account
-        let admins = this.getAdmins({addr:this.currentAccount})
+        let admins = this.getAdmins({addr:address})
         //for each admin we get all the pledges where he is involved
 
         let allPledges = []
@@ -75,7 +76,8 @@ class LiquidPledgingState extends LiquidPledgingController {
         }
         let filter={addr:this.currentAccount}
         return this.getPledges(filter)
-    }
+
+    }*/
 
 /////////////////////////////////////////
 
@@ -95,23 +97,22 @@ class LiquidPledgingState extends LiquidPledgingController {
         return delegations
     }*/
 
+    
+
     getDelegations(address, type)
     {
         let propertiesFilter = {}
         if(address)
-            propertiesFilter.addr = address
+            propertiesFilter.adminAddress = address
         if(type)
             propertiesFilter.type = type
 
-        let admins = this.getAdmins(propertiesFilter)
-        let pledges = this.getPledges({delegates:[]}) //the ones with no delegates
-        pledges = Filter.byOwners(pledges, admins)
-        let delegations = this.getDelegationsFromPledges(pledges)
+        let delegations = Filter.byProperties(this.delegationsArray, propertiesFilter)
     
         return delegations
     }
 
-    getDelegationsFromPledges(pledges)
+    /*getDelegationsFromPledges(pledges)
     {
         let delegations = []
         for (let pledge of pledges)
@@ -122,7 +123,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         }
 
         return delegations
-    }
+    }*/
 
     getDelegationsTrees(delegations)
     {

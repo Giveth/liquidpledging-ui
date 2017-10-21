@@ -162,6 +162,18 @@ class DataFormatter {
     {
         return admin.id.toString()//+admin.name.toString()
     }
+
+
+    getDelegationsArray(delegations)
+    {
+        let list = []
+        
+        for (let delegationId in delegations)
+            if (delegations.hasOwnProperty(delegationId)) 
+               list.push(delegations[delegationId])
+
+        return list
+    }
 }
 
 export default new DataFormatter()

@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import MyFunds from './MyFunds.js'
+
 import Page from './Page.js'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Styles } from './Styles'
 import GreyTheme from './GreyTheme'
 import Dialogs from './Dialogs'
-
+import MyFunds from './MyFunds.js'
+import OthersFunds from './OthersFunds.js'
 
 class App extends Component {
 
@@ -26,6 +27,8 @@ class App extends Component {
                                 style={Styles.givethLogo}/>
                         </div>
 
+                        
+                        <OthersFunds/>
                         <MyFunds/>
                     </Page>
 

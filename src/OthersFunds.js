@@ -3,9 +3,9 @@ import LPState from "./LiquidPledgingState.js"
 import DelegationsList from './DelegationsList'
 import {Styles} from './Styles'
 
-const title = 'My funds'
+const title = "Other's funds"
 
-class MyFunds extends Component {
+class OthersFunds extends Component {
 
     constructor(){
         super()
@@ -23,8 +23,15 @@ class MyFunds extends Component {
 
     onStateChanged=()=>{
         this.setState({
-            tree:LPState.getDelegationsTrees(LPState.getDelegations(this.state.currentAddress, "Giver"))
+            tree:this.getTrees()
         })
+    }
+
+    getTrees=()=>
+    {
+        let delegations = LPState.getDelegations(this.state.currentAddress,"Delegate")
+        let tree = LPState.getDelegationsTrees(delegations)
+        return tree
     }
 
     onAccountChanged=()=>{
@@ -50,4 +57,4 @@ class MyFunds extends Component {
     }
 }
 
-export default MyFunds
+export default OthersFunds
