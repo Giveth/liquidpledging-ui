@@ -62,6 +62,7 @@ class Delegation extends Component {
             assignedAmount = {this.props.tree.delegation.assignedAmount}
             availableAmouont = {this.props.tree.delegation.availableAmount}
             adminAddress = {this.props.tree.delegation.adminAddress}
+            adminId={this.props.tree.delegation.adminId}
             userAddress={this.props.userAddress}
 
 
