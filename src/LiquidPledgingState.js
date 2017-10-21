@@ -42,13 +42,16 @@ class LiquidPledgingState extends LiquidPledgingController {
         return -1
     }*/
 
-    getDelegationTree(delegation)
+    getDelegationTree(delegation, childrenPropertiesFilter)
     {
         let children = []
+
         for( let delegationId of delegation.delegations)
         {
             let child = this.getDelegation(delegationId)
-            children.push(this.getDelegationTree(child))
+            let filtered = Filter.byProperties([child],childrenPropertiesFilter)
+            if(filtered[0])
+                children.push(this.getDelegationTree(filtered[0],childrenPropertiesFilter))
         }
         
         let tree = {
@@ -58,6 +61,30 @@ class LiquidPledgingState extends LiquidPledgingController {
         return tree
     }
 
+    getDelegationsTrees(delegations, childrenPropertiesFilter)
+    {
+        let trees = []
+        for(let delegation of delegations)
+        {
+            let delegationTree = this.getDelegationTree(delegation, childrenPropertiesFilter)
+            trees.push(delegationTree)
+        }
+
+        return trees
+    }
+
+    getDelegations(address, type)
+    {
+        let propertiesFilter = {}
+        if(address)
+            propertiesFilter.adminAddress = address
+        if(type)
+            propertiesFilter.type = type
+
+        let delegations = Filter.byProperties(this.delegationsArray, propertiesFilter)
+    
+        return delegations
+    }
 
     /*getAvailablePledges(address)
     {
@@ -99,18 +126,7 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     
 
-    getDelegations(address, type)
-    {
-        let propertiesFilter = {}
-        if(address)
-            propertiesFilter.adminAddress = address
-        if(type)
-            propertiesFilter.type = type
 
-        let delegations = Filter.byProperties(this.delegationsArray, propertiesFilter)
-    
-        return delegations
-    }
 
     /*getDelegationsFromPledges(pledges)
     {
@@ -125,17 +141,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         return delegations
     }*/
 
-    getDelegationsTrees(delegations)
-    {
-        let trees = []
-        for(let delegation of delegations)
-        {
-            let delegationTree = this.getDelegationTree(delegation)
-            trees.push(delegationTree)
-        }
 
-        return trees
-    }
 }
 
 export default new LiquidPledgingState ()

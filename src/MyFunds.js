@@ -22,8 +22,11 @@ class MyFunds extends Component {
     }
 
     onStateChanged=()=>{
+        let trees = LPState.getDelegationsTrees(LPState.getDelegations(this.state.currentAddress, "Giver"),{assignedAmount:undefined})
+        console.log(trees)
         this.setState({
-            tree:LPState.getDelegationsTrees(LPState.getDelegations(this.state.currentAddress, "Giver"))
+
+            tree:trees
         })
     }
 

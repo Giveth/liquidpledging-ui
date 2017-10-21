@@ -26,8 +26,9 @@ module.exports = {
     {
         let filtered  = array
 
-        for (const property of Object.keys(propertiesFilter))
-            filtered = this.byProperty(filtered, property, propertiesFilter[property])
+        if(propertiesFilter)
+            for (const property of Object.keys(propertiesFilter))
+                filtered = this.byProperty(filtered, property, propertiesFilter[property])
 
         return filtered
     },
