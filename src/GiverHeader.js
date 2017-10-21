@@ -18,9 +18,9 @@ class GiverHeader extends Component {
     onAddButton=()=>
     {
         let donateData={
-            giverName:this.props.name,
-            emiterId:this.props.adminId,
-            recieverId:this.props.adminId,
+            giverName:this.props.delegation.name,
+            emiterId:this.props.delegation.adminId,
+            recieverId:this.props.delegation.adminId,
             amount:undefined
         }
         Caller.showDonateDialog(donateData)
@@ -62,7 +62,7 @@ class GiverHeader extends Component {
 
         let addFundsButton = <div style = {Styles.emptyButton} />
 
-         if(this.props.userAddress === this.props.adminAddress)
+         if(this.props.userAddress === this.props.delegation.adminAddress)
         {
             addFundsButton = (
                 <IconButton
@@ -74,8 +74,8 @@ class GiverHeader extends Component {
         }
 
 
-        let totalAmount = this.props.assignedAmount
-        let availableAmount = this.props.availableAmount
+        let totalAmount = this.props.delegation.assignedAmount
+        let availableAmount = this.props.delegation.availableAmount
         let usedAmount = totalAmount - availableAmount
 
         let actionButons = <div/>
@@ -99,7 +99,7 @@ class GiverHeader extends Component {
                     <div style = {Styles.delegation.headerCell}>
                    
                         <p key = {"name"}  style= {Styles.delegation.title}>
-                            {this.props.name}
+                            {this.props.delegation.name}
                         </p>
 
                         <p key = {"amount"} style = {Styles.delegation.amount} >

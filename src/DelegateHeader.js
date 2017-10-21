@@ -17,9 +17,9 @@ class DelegateHeader extends Component {
     onAddButton=()=>
     {
         let transferData={
-            giverName:this.props.name,
+            giverName:this.props.delegation.name,
             emiterId:0,
-            recieverId:this.props.adminId,
+            recieverId:this.props.delegation.adminId,
             amount:undefined
         }
 
@@ -29,10 +29,10 @@ class DelegateHeader extends Component {
     onCancel=()=>
     {
         let cancelData={
-            giverName:this.props.name,
+            giverName:this.props.delegation.name,
             emiterId:0,
-            recieverId:this.props.adminId,
-            amount:this.props.availableAmount
+            recieverId:this.props.delegation.adminId,
+            amount:this.props.delegation.availableAmount
         }
 
         Caller.showCancelDialog(cancelData)
@@ -77,17 +77,16 @@ class DelegateHeader extends Component {
 
                 <div style = {Styles.delegation.headerCell}>
                      <p key = {"name"}  style= {Styles.delegation.title}>
-                        {this.props.name}
+                        {this.props.delegation.ame}
                     </p>
 
                     <p key = {"amount"} style = {Styles.delegation.amount} >
-                        {Currency.symbol+ " "+ Currency.format(Currency.toEther(this.props.availableAmount)) +' / '+ Currency.format(Currency.toEther(this.props.assignedAmount))}
+                        {Currency.symbol+ " "+ Currency.format(Currency.toEther(this.props.delegation.availableAmount)) +' / '+ Currency.format(Currency.toEther(this.props.delegation.assignedAmount))}
                     </p>
                    
                 </div>
 
                 <div style = {Styles.delegation.headerCell}>
-
                    
                 </div>
 
