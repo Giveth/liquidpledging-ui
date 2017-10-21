@@ -42,11 +42,11 @@ class GiverHeader extends Component {
     }
    
     render() {
-        let tooggleIcon = <Icons.shown size={20}/>
+        let tooggleIcon = <Icons.colapsed size={20}/>
 
         if(this.props.colapsed)
         {
-            tooggleIcon =<Icons.colapsed size={20}/>
+            tooggleIcon =<Icons.shown size={20}/>
         }
 
         let colapseButton = <div/>
