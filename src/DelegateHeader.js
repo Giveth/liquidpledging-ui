@@ -18,15 +18,13 @@ class DelegateHeader extends Component {
     {
         let transferData={
             giverName:this.props.name,
-            emiter:this.props.adminId,
-            reciever:this.props.adminId,
+            emiterId:0,
+            recieverId:this.props.adminId,
             amount:undefined
         }
 
         Caller.showTransferDialog(transferData)
     }
-
-
    
     render() {
         let tooggleIcon = <Icons.shown size={20}/>
