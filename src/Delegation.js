@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import DelegationsList from './DelegationsList'
-import { Styles, Format, Icons } from './Styles'
-import IconButton from 'material-ui/IconButton'
+import { Styles } from './Styles'
 import GiverHeader from './GiverHeader'
 import DelegateHeader from './DelegateHeader'
 
@@ -25,7 +24,6 @@ class Delegation extends Component {
     render() {
 
         let indentLevel = this.props.indentLevel
-        let tooggleIcon = <Icons.colapsed size={20}/>
         let children = <div style = {Styles.delegation.bodyColapsed}>
                 <DelegationsList
                     treeChildren={this.props.tree.children}
@@ -35,25 +33,12 @@ class Delegation extends Component {
 
         if(this.state.isColapsed)
         {
-            tooggleIcon =<Icons.shown size={20}/>
             children = <div style = {Styles.delegation.bodyShown}>
                 <DelegationsList
                     treeChildren={this.props.tree.children}
                     indentLevel={indentLevel}
                 />
             </div>
-        }
-
-        let colapseButton = <div/>
-        if(this.props.tree && this.props.tree.children && this.props.tree.children.length)
-        {
-            colapseButton = (
-                <IconButton
-                    onClick = {this.onTooggleChildren}
-                    iconStyle={{width: 16, height: 16, color:'grey'}}
-                    style={{width: 32,height: 32, padding:4, margin:8}}>
-                    {tooggleIcon}
-                </IconButton>)
         }
 
         let header = <DelegateHeader 
@@ -71,7 +56,7 @@ class Delegation extends Component {
             colapsed = {this.state.isColapsed}
             />
 
-        if(this.props.tree.delegation.type == "Giver")
+        if(this.props.tree.delegation.type === "Giver")
             header = <GiverHeader 
             id={this.props.tree.delegation.id}
             name={this.props.tree.delegation.name}

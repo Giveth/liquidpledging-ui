@@ -1,7 +1,6 @@
 import LiquidPledgingController from "./LiquidPledgingController"
 import Formatter from './DataFormatter'
 const Filter = require('./Filter.js');
-const adminTypes = {GIVER:'Giver', DELEGATE:'delegate', PROJECT:'project'}
 
 class LiquidPledgingState extends LiquidPledgingController {
 

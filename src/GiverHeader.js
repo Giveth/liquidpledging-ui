@@ -61,7 +61,7 @@ class GiverHeader extends Component {
 
         let addFundsButton = <div/>
 
-         if(this.props.userAddress == this.props.adminAddress)
+         if(this.props.userAddress === this.props.adminAddress)
         {
             addFundsButton = (
                 <IconButton

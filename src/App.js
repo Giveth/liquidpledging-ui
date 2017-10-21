@@ -5,17 +5,11 @@ import WrapperTest from './WrapperTest.js'
 import Page from './Page.js'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Styles } from './Styles'
-import GivethLogo from './logo.svg'
 import GreyTheme from './GreyTheme'
 import Dialogs from './Dialogs'
 
 
 class App extends Component {
-
-    constructor()
-    {
-        super() 
-    }
 
     render() {
         return (
@@ -41,6 +35,7 @@ class App extends Component {
                         <Dialogs/>
                        
                     </div>
+                    
                 </MuiThemeProvider>
             </div>
         )

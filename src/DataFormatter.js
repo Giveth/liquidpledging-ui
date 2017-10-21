@@ -10,6 +10,10 @@ class DataFormatter {
                 item.id=index
                 return item
             }
+            else
+            {
+                return item
+            }
         })
     }
 
