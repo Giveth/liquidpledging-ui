@@ -6,7 +6,7 @@ import {Styles, Currency} from './Styles'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 
-class DonateDialog extends React.Component
+class TransferDialog extends React.Component
 {
     constructor(props)
     {
@@ -20,10 +20,16 @@ class DonateDialog extends React.Component
 
     onDone=()=>
     {
-        let data = this.props.data
-        data.amount = this.state.amount
+        let data = {}
+        let delegation = this.getDelegationFromId(this.state.selectedEmiter)
+
+        data.emiterId = delegation.adminId
+        data.pledgeId = delegation.pledgeId
+        data.recieverId = this.props.data.recieverId
+        data.amount = parseFloat(this.state.amount,10)
+
         this.props.onDone(data)
-        this.state={amount:''}
+        this.state={amount:'', selectedEmiter:0}
     }   
 
     onCancel=()=>
@@ -38,22 +44,39 @@ class DonateDialog extends React.Component
         if(!isNaN(newText))
             state.amount=newText
 
-        if(!newText || isNaN(newText) )
-            state.okDisabled=true
-        else
-           state.okDisabled=false
+        state.okDisabled=!this.isReady(newText, this.state.selectedEmiter)
 
        this.setState(state)
     }
 
     onEmiterChanged = (event, index, selectedEmiter) =>
     {
-        this.setState({selectedEmiter})
+        let state = {}
+        state.selectedEmiter = selectedEmiter
+        state.okDisabled=!this.isReady(this.state.amount, selectedEmiter)
+        this.setState(state)
     }
 
+    isReady=(amount, selectedEmiter)=>
+    {
+        if(!amount || isNaN(amount))
+            return false
+        if(!selectedEmiter)
+            return false
+        return true
+    }
+
+    getDelegationFromId=(delegationId)=>
+    {
+        for(let delegation of this.props.meta.emiters)
+            if(delegation.id === delegationId)
+                return delegation
+        return {}
+    }
 
     render()
     {
+        console.log(this.props.data)
         const actions = [
             <FlatButton
               label="Cancel"
@@ -61,7 +84,7 @@ class DonateDialog extends React.Component
               onClick={this.onCancel}
             />,
             <FlatButton
-              label="Add funds"
+              label="Delegate funds"
               primary={true}
               keyboardFocused={true}
               onClick={this.onDone}
@@ -72,14 +95,20 @@ class DonateDialog extends React.Component
         let title = "Delegate funds to "+ this.props.data.giverName
         let emiters = this.props.meta.emiters
 
-        let defaultItem =  <MenuItem value={0} primaryText={'Move from?'} disabled={true} />
+        let defaultItem =  <MenuItem key= {0} alue={0} primaryText={'Delegate from...'} disabled={true} />
 
         if(!emiters.length)
-            defaultItem =  <MenuItem value={0} primaryText={'No available accounts'} disabled={true} />
+            defaultItem =  <MenuItem key= {0} value={0} primaryText={'No available accounts'} disabled={true} />
 
         let emitersList = [defaultItem]
         emitersList=emitersList.concat(emiters.map((delegation, index)=>{
-                return <MenuItem value={delegation.id} primaryText={delegation.name} />}))
+
+            let label = delegation.name+ " ("+Currency.symbol+" "+Currency.toEther(delegation.availableAmount)+")"
+            return <MenuItem
+                key= {delegation.id}
+                value={delegation.id}
+                primaryText={label} />
+        }))
 
         return (
             <Dialog
@@ -93,16 +122,16 @@ class DonateDialog extends React.Component
                 <DropDownMenu
                     value={this.state.selectedEmiter}
                     onChange={this.onEmiterChanged}
-                    style={{width:200}}
-                    autoWidth={false}>
+                    autoWidth={true}>
+
                     {emitersList}
+
                 </DropDownMenu>
 
                 <TextField
-                    
                     autoFocus={true}
                     id="inputText"
-                    hintText={'Ether to add'}
+                    hintText={'Ether to delegate'}
                     value={this.state.amount}
                     onChange={this.onTextChange}/>
                    
@@ -111,4 +140,4 @@ class DonateDialog extends React.Component
     }
 }
 
-export default DonateDialog;
+export default TransferDialog;
