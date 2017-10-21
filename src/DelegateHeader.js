@@ -39,9 +39,7 @@ class DelegateHeader extends Component {
         {
             colapseButton = (
                 <IconButton
-                    onClick = {this.onToggle}
-                    iconStyle={{width: 16, height: 16, color:'grey'}}
-                    style={{width: 32,height: 32, padding:4, margin:8}}>
+                    onClick = {this.onToggle}>
                     {tooggleIcon}
                 </IconButton>)
         }
@@ -54,23 +52,32 @@ class DelegateHeader extends Component {
 
         return (
 
-                 <div style = {Merge(Styles.delegation.header, Styles.delegation.delegateHeader)}>
-                   
-                    <div style = {Styles.delegation.colapseButton}>
-                        {colapseButton}
-                    </div>
+            <div style = {Merge(Styles.delegation.header, Styles.delegation.delegateHeader)}>
 
-                    <p key = {"name"}  style= {Styles.delegation.title}>
+                <div style = {Styles.delegation.headerCell}>
+                     <p key = {"name"}  style= {Styles.delegation.title}>
                         {this.props.name}
                     </p>
 
                     <p key = {"amount"} style = {Styles.delegation.amount} >
                         {Currency.symbol+ " "+ Currency.format(Currency.toEther(this.props.availableAmount)) +' / '+ Currency.format(Currency.toEther(this.props.assignedAmount))}
                     </p>
+                   
+                </div>
 
-                    {addFundsButton}
+                <div style = {Styles.delegation.headerCell}>
 
-                
+                   {addFundsButton}
+                    
+                </div>
+
+                 <div style = {Styles.delegation.headerCell}>
+
+                    <div style = {Styles.delegation.colapseButton}>
+                        {colapseButton}
+                    </div>
+
+                </div>       
             </div>
         )
     }
