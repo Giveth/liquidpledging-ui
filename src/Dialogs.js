@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Caller from './LiquidPledgingCaller'
 import DonateDialog from './DonateDialog'
+import TransferDialog from './TransferDialog'
 import LPState from "./LiquidPledgingState.js"
 
 class Dialogs extends Component {
@@ -10,13 +11,16 @@ class Dialogs extends Component {
         super() 
         this.state={
             donateOpen:false,
-            donateData:{reciever:0, emiter:0, amount:0, giverName:'unga'}
+            donateData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
+            transferOpen:false,
+            transferData:{reciever:0, emiter:0, amount:0, giverName:'unga'}
         }
 
         LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
         LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
 
-        Caller.on(Caller.DONATE_DIALOG, this.onShowDonate)
+        Caller.on(Caller.DONATE_DIALOG, this.donateOnShow)
+        Caller.on(Caller.TRANSFER_DIALOG, this.transferOnShow)
     }
 
     onAccountChanged=()=>{
@@ -28,27 +32,37 @@ class Dialogs extends Component {
         //this.setState({network:newNetwork})
     }
 
-    onShowDonate=(data)=>
+    //Donate
+    donateOnShow=(data)=>
     {
-        this.setState({
-            donateData:data,
-            donateOpen:true
-        })
+        this.setState({ donateData:data, donateOpen:true})
     }
 
     donateOnCancel=()=>
     {
-        this.setState({
-            donateOpen:false
-        })
+        this.setState({  donateOpen:false })
     }
 
     donateOnDone=(donateData)=>
     {
-        this.setState({
+        this.setState({ donateOpen:false })
+        Caller.donate(donateData)
+    }
 
-            donateOpen:false
-        })
+    //Transfer
+    transferOnShow=(data)=>
+    {
+        this.setState({ transferData:data, transferOpen:true})
+    }
+
+    transferOnCancel=()=>
+    {
+        this.setState({ transferOpen:false })
+    }
+
+    transferOnDone=(donateData)=>
+    {
+        this.setState({  transferOpen:false })
 
         Caller.donate(donateData)
     }
@@ -61,6 +75,12 @@ class Dialogs extends Component {
                     onCancel ={this.donateOnCancel}
                     onDone ={this.donateOnDone}
                     data={this.state.donateData}/>
+
+                <TransferDialog
+                    open={this.state.transferOpen}
+                    onCancel ={this.transferOnCancel}
+                    onDone ={this.transferOnDone}
+                    data={this.state.transferData}/>
 
             </div>
         )
