@@ -18,7 +18,7 @@ class Caller extends EventEmitter
 
     donate(data)
     {
-       LiquidPledging.donate(data.emiter, data.reciever, data.amount )
+       LiquidPledging.donate(data.emiterId, data.recieverId, data.amount )
        .then((data) => {
             console.log("Donated", data)
         })
@@ -32,14 +32,11 @@ class Caller extends EventEmitter
 
     transfer(data)
     {
-        LiquidPledging.transfer(data.giverId, data.pledgeId, data.receiverId, data.amount)
+       LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount)
        .then((data) => {
-            console.log("Donated", data)
+            console.log("Transfered", data)
         })
     }
-
-
-
 }
 
 const instance = new Caller()
