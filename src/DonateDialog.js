@@ -18,7 +18,7 @@ class DonateDialog extends React.Component
     onDone=()=>
     {
         let data = this.props.data
-        data.amount = this.state.amount
+        data.amount = parseFloat(this.state.amount,10)
         this.props.onDone(data)
         this.state={amount:''}
     }   
@@ -31,6 +31,7 @@ class DonateDialog extends React.Component
     //TODO: Check
     onTextChange = (e, newText) => {
         let state = {}
+
 
         if(!isNaN(newText))
             state.amount=newText
