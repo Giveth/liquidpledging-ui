@@ -28,14 +28,8 @@ class DelegateHeader extends Component {
 
     onCancel=()=>
     {
-        let cancelData={
-            giverName:this.props.delegation.name,
-            emiterId:0,
-            recieverId:this.props.delegation.adminId,
-            amount:this.props.delegation.availableAmount
-        }
-
-        Caller.showCancelDialog(cancelData)
+        console.log(this.props.delegation)
+        Caller.showCancelDialog(this.props.delegation)
     }
    
     render() {
@@ -77,7 +71,7 @@ class DelegateHeader extends Component {
 
                 <div style = {Styles.delegation.headerCell}>
                      <p key = {"name"}  style= {Styles.delegation.title}>
-                        {this.props.delegation.ame}
+                        {this.props.delegation.name}
                     </p>
 
                     <p key = {"amount"} style = {Styles.delegation.amount} >

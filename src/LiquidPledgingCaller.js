@@ -40,18 +40,27 @@ class Caller extends EventEmitter
     }
 
     //CANCEL
-    showCancelDialog(data)
+    showCancelDialog(delegation)
     {
+        console.log(delegation)
+        let data = {
+            emiterId:delegation.parentAdminId,
+            pledgeId:delegation.pledgeId,
+            recieverId:delegation.parentAdminId,
+            amount:delegation.assignedAmount
+        }
+
         console.log(data)
         //this.emit(this.TRANSFER_DIALOG, data)
-        //this.cancel(data)
+        this.cancel(data)
     }
 
     cancel(data)
     {
-       LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount)
+        let boostGast = true
+       LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount, boostGast)
        .then((data) => {
-            console.log("Transfered", data)
+            console.log("Canceled", data)
         })
     }
 }
