@@ -19,8 +19,8 @@ class GiverHeader extends Component {
     {
         let donateData={
             giverName:this.props.name,
-            emiter:this.props.adminId,
-            reciever:this.props.adminId,
+            emiterId:this.props.adminId,
+            recieverId:this.props.adminId,
             amount:undefined
         }
         Caller.showDonateDialog(donateData)
