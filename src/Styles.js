@@ -69,11 +69,27 @@ export const Styles = {
         header:{
             display: 'flex',
             flexDirection: 'row',
+            justifyContent:'space-between',
+            paddingLeft: 20,
+            paddingRight: 20,
+
+        },
+
+        giverHeader:{
+            backgroundColor: Colors.backgroundHighlight,
+            paddingTop: 10,
+            paddingBottom: 10,
+            marginTop: 5,
+            
+        },
+
+        delegateHeader:{
+        },
+
+        headerCell:{
+            display: 'flex',
+            flexDirection: 'row',
             justifyContent:'flex-start',
-            paddingLeft: 5,
-            paddingRight: 10,
-            paddingTop: 0,
-            paddingBottom: 0,
         },
         
         getHoverStyle : function (isHovering)
@@ -84,25 +100,6 @@ export const Styles = {
                 style.backgroundColor = Colors.backgroundActive
 
             return style
-        },
-
-        giverHeader:{
-            backgroundColor: Colors.backgroundHighlight,
-            paddingLeft: 20,
-            paddingRight: 20,
-            paddingTop: 10,
-            paddingBottom: 10,
-            marginTop: 5,
-            justifyContent:'space-between',
-        },
-
-        headerCell:{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent:'flex-start',
-        },
-
-        delegateHeader:{
         },
 
         title:{
