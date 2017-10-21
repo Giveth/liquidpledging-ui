@@ -119,6 +119,11 @@ class LiquidPledgingController extends ProviderHelper {
     {
         return this.liquidPledging.donate(giverId, receiverId, { from: this.currentAccount, value: this.web3.utils.toWei(amount) })
     }
+
+    transfer(giverId, pledgeId, receiverId, amount )
+    {
+        return this.liquidPledging.transfer(giverId, pledgeId, this.web3.utils.toWei(amount), receiverId, { from: this.currentAccount }); //#P9
+    }
 }
 
 export default LiquidPledgingController
