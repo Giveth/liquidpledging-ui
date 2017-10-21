@@ -100,9 +100,9 @@ class LiquidPledgingState extends LiquidPledgingController {
     {
         let propertiesFilter = {}
         if(address)
-            propertiesFilter.addr === address
+            propertiesFilter.addr = address
         if(type)
-            propertiesFilter.type === type
+            propertiesFilter.type = type
 
         let admins = this.getAdmins(propertiesFilter)
         let pledges = this.getPledges({delegates:[]}) //the ones with no delegates
