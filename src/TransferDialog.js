@@ -60,7 +60,7 @@ class DonateDialog extends React.Component
             />
         ]
 
-        let title = "Add funds to "+ this.props.data.giverName
+        let title = "Delegate funds to "+ this.props.data.giverName
 
         return (
             <Dialog
