@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Styles, Currency, Icons, Merge } from './Styles'
 import IconButton from 'material-ui/IconButton'
+import Caller from './LiquidPledgingCaller'
 
 class DelegateHeader extends Component {
 
@@ -12,6 +13,20 @@ class DelegateHeader extends Component {
     {
         this.props.onToggle(!this.props.colapsed)
     }
+
+    onAddButton=()=>
+    {
+        let transferData={
+            giverName:this.props.name,
+            emiter:this.props.adminId,
+            reciever:this.props.adminId,
+            amount:undefined
+        }
+
+        Caller.showTransferDialog(transferData)
+    }
+
+
    
     render() {
         let tooggleIcon = <Icons.shown size={20}/>
@@ -33,6 +48,12 @@ class DelegateHeader extends Component {
                 </IconButton>)
         }
 
+        let addFundsButton = (
+            <IconButton
+                onClick = {this.onAddButton}>
+                <Icons.add size={30}/>
+            </IconButton>)
+
         return (
 
                  <div style = {Merge(Styles.delegation.header, Styles.delegation.delegateHeader)}>
@@ -48,6 +69,8 @@ class DelegateHeader extends Component {
                     <p key = {"amount"} style = {Styles.delegation.amount} >
                         {Currency.symbol+ " "+ Currency.toEther(this.props.availableAmount) +' / '+ Currency.toEther(this.props.assignedAmount)}
                     </p>
+
+                    {addFundsButton}
 
                 
             </div>
