@@ -28,12 +28,13 @@ class TransferDialog extends React.Component
         data.recieverId = this.props.data.recieverId
         data.amount = parseFloat(this.state.amount,10)
 
+        this.setState({amount:'', selectedEmiter:0, okDisabled:true})
         this.props.onDone(data)
-        this.state={amount:'', selectedEmiter:0}
     }   
 
     onCancel=()=>
     {
+        this.setState({amount:'', selectedEmiter:0, okDisabled:true})
         this.props.onCancel()
     }  
 

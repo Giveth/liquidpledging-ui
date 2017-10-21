@@ -20,11 +20,12 @@ class DonateDialog extends React.Component
         let data = this.props.data
         data.amount = parseFloat(this.state.amount,10)
         this.props.onDone(data)
-        this.state={amount:''}
+        this.state={amount:'', okDisabled:true}
     }   
 
     onCancel=()=>
     {
+        this.setState({amount:'', okDisabled:true})
         this.props.onCancel()
     }  
 
