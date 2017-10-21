@@ -1,8 +1,8 @@
 import SubDelegateIcon from 'react-icons/lib/md/subdirectory-arrow-right'
 import ColapsedIcon from 'react-icons/lib/md/keyboard-arrow-up'
 import ShownIcon from 'react-icons/lib/md/keyboard-arrow-down'
-import AddIcon from 'react-icons/lib/md/add'
-import CanelIcon from 'react-icons/lib/md/clear'
+import AddIcon from 'react-icons/lib/fa/plus'
+import CanelIcon from 'react-icons/lib/fa/close'
 
 import Numeral from 'numeral'
 
@@ -30,8 +30,17 @@ export const Styles = {
 
     indentPadding:16,
 
-    page:{
+    emptyButton:{
+        width:48
+    },
 
+    row:{
+        display:"flex",
+        flexDirection: 'row',
+        //justifyContent:'space-between',
+    },
+
+    page:{
         center:{
             display:"flex",
             justifyContent:"center",
@@ -113,7 +122,7 @@ export const Styles = {
         },
 
         colapseButton:{
-            width:32
+            //width:32
         },
 
         bodyShown:{

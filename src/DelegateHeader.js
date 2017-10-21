@@ -46,7 +46,7 @@ class DelegateHeader extends Component {
             toggleIcon =<Icons.shown size={20}/>
         }
 
-        let colapseButton = <div/>
+        let colapseButton = <div style = {Styles.emptyButton} />
         if(this.props.showColapseButton)
         {
             colapseButton = (
@@ -58,14 +58,17 @@ class DelegateHeader extends Component {
 
         let addFundsButton = (
             <IconButton
-                onClick = {this.onAddButton}>
-                <Icons.add size={30}/>
+                onClick = {this.onAddButton}
+                style = {{color:'grey'}}>
+
+                <Icons.add size={15}/>
             </IconButton>)
 
         let CancelDelegateButton = (
             <IconButton
-                onClick = {this.onCancel}>
-                <Icons.cancel size={30}/>
+                onClick = {this.onCancel}
+                style = {{color:'grey'}}>
+                <Icons.cancel size={15}/>
             </IconButton>)
 
         return (
@@ -85,16 +88,15 @@ class DelegateHeader extends Component {
 
                 <div style = {Styles.delegation.headerCell}>
 
-                   {addFundsButton}
-                   {CancelDelegateButton}
-                    
+                   
                 </div>
 
-                 <div style = {Styles.delegation.headerCell}>
+                 <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
 
-                    <div style = {Styles.delegation.colapseButton}>
-                        {colapseButton}
-                    </div>
+                    {CancelDelegateButton}
+                    {addFundsButton}
+                    {colapseButton}
+                   
 
                 </div>       
             </div>

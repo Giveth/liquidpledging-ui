@@ -54,23 +54,23 @@ class GiverHeader extends Component {
         {
             colapseButton = (
                 <IconButton
+                    style = {Styles.inline}
                     onClick = {this.onToggle}>
                     {toggleIcon}
                 </IconButton>)
         }
 
-        let addFundsButton = <div/>
+        let addFundsButton = <div style = {Styles.emptyButton} />
 
          if(this.props.userAddress === this.props.adminAddress)
         {
             addFundsButton = (
                 <IconButton
-                 
-                    onClick = {this.onAddButton}>
+                onClick = {this.onAddButton}
+                style = {{color:'grey'}}>
 
-                    <Icons.add size={30}/>
-
-                </IconButton>)
+                <Icons.add size={15}/>
+            </IconButton>)
         }
 
 
@@ -83,7 +83,7 @@ class GiverHeader extends Component {
         if(this.state.isHovering)
         {
             actionButons =(
-                <div style = {Styles.delegation.colapseButton}>
+                <div style = {Styles.inline}>
                     {addFundsButton}
                 </div>)
         }
@@ -109,14 +109,13 @@ class GiverHeader extends Component {
                     </div>
 
                     <div style = {Styles.delegation.headerCell}>
-                        {actionButons}
+                        
                     </div>
 
 
-                    <div style = {Styles.delegation.headerCell}>
-                        <div style = {Styles.delegation.colapseButton}>
-                            {colapseButton}
-                        </div>
+                    <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
+                        {actionButons}
+                        {colapseButton}
                     </div>
 
             </div>
