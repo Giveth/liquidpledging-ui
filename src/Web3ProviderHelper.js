@@ -153,13 +153,17 @@ class Web3ProviderHelper extends EventEmitter
             else
                 return false
         }
-        else if (this.isUrl(providerRef))
+        else if (this.isHttp(providerRef))
         {
             this.provider = new Web3.providers.HttpProvider(providerRef)
         }
+        else if (this.isWebSockets(providerRef))
+        {
+            this.provider = providerRef
+        }
         else
         {
-            console.error("Unkown provider, trying to use it anyway", providerRef)
+            console.warn("Unkown provider, trying to use it anyway", providerRef)
             this.provider = providerRef
         }
 
@@ -181,9 +185,14 @@ class Web3ProviderHelper extends EventEmitter
         return this.setupFinished
     } 
 
-    isUrl=(url)=>
+    isHttp=(url)=>
     {  //TODO: Do a proper check
-        return url.indexOf("http")!==-1
+        return url.toLowerCase().indexOf("http")!==-1
+    }
+
+    isWebSockets=(url)=>
+    {  //TODO: Do a proper check
+        return url.toLowerCase().indexOf("ws")!==-1
     }
 
     isProviderType=(providersList, providerId)=>
