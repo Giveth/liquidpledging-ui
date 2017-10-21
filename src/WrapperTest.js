@@ -9,7 +9,7 @@ class LPStateTest extends Component {
 
         this.state={
             network:"",
-            account:"",
+            currentAddress:"",
             treeChildren:[]
         }
 
@@ -19,17 +19,15 @@ class LPStateTest extends Component {
     }
 
     onStateChanged=()=>{
-
-        let delegation = LPState.getDelegation("1")
         this.setState({
-            tree:LPState.getDelegations()
-            //tree:[LPState.getDelegationTree(delegation)]
+            //tree:LPState.getDelegations(this.state.currentAddress)
+            tree:LPState.getDelegationsTrees(LPState.getDelegations())
         })
     }
 
     onAccountChanged=()=>{
         let newAccount = LPState.getCurrentAccount()
-        this.setState({account:newAccount})
+        this.setState({currentAddress:newAccount})
     }
 
     onNetworkChanged=()=>{
@@ -41,8 +39,8 @@ class LPStateTest extends Component {
 
         return (
             <div >
-                <DelegationsList treeChildren={this.state.tree} indentLevel={0} userAddress={this.state.account}/>
-                <h3 key = {"account"} style ={{wordWrap: 'break-word'}}> {this.state.account} </h3>
+                <DelegationsList treeChildren={this.state.tree} indentLevel={0} userAddress={this.state.currentAddress}/>
+                <h3 key = {"currentAddress"} style ={{wordWrap: 'break-word'}}> {this.state.currentAddress} </h3>
                 <pre key = {"data"} style ={{wordWrap: 'break-word'}}> {this.state.data} </pre>
             </div>
         )

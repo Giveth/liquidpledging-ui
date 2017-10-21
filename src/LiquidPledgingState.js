@@ -108,8 +108,8 @@ class LiquidPledgingState extends LiquidPledgingController {
         let pledges = this.getPledges({delegates:[]}) //the ones with no delegates
         pledges = Filter.byOwners(pledges, admins)
         let delegations = this.getDelegationsFromPledges(pledges)
-        let trees = this.getDelegationsTrees(delegations)
-        return trees
+    
+        return delegations
     }
 
     getDelegationsFromPledges(pledges)
