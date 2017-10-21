@@ -39,11 +39,11 @@ class DelegateHeader extends Component {
     }
    
     render() {
-        let tooggleIcon = <Icons.colapsed size={20}/>
+        let toggleIcon = <Icons.colapsed size={20}/>
 
         if(this.props.colapsed)
         {
-            tooggleIcon =<Icons.shown size={20}/>
+            toggleIcon =<Icons.shown size={20}/>
         }
 
         let colapseButton = <div/>
@@ -52,7 +52,7 @@ class DelegateHeader extends Component {
             colapseButton = (
                 <IconButton
                     onClick = {this.onToggle}>
-                    {tooggleIcon}
+                    {toggleIcon}
                 </IconButton>)
         }
 
