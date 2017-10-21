@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
 import DelegationsList from './DelegationsList'
 
-class LPStateTest extends Component {
+class MyFunds extends Component {
 
     constructor(){
         super()
@@ -40,11 +40,11 @@ class LPStateTest extends Component {
         return (
             <div >
                 <DelegationsList treeChildren={this.state.tree} indentLevel={0} userAddress={this.state.currentAddress}/>
-                <h3 key = {"currentAddress"} style ={{wordWrap: 'break-word'}}> {this.state.currentAddress} </h3>
+                <p key = {"currentAddress"} style ={{wordWrap: 'break-word'}}> {this.state.currentAddress} </p>
                 <pre key = {"data"} style ={{wordWrap: 'break-word'}}> {this.state.data} </pre>
             </div>
         )
     }
 }
 
-export default LPStateTest
+export default MyFunds

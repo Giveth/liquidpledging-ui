@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import WrapperTest from './WrapperTest.js'
+import MyFunds from './MyFunds.js'
 import Page from './Page.js'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Styles } from './Styles'
@@ -25,8 +25,8 @@ class App extends Component {
                                 alt="Building the Future of Giving" 
                                 style={Styles.givethLogo}/>
                         </div>
-                        
-                        <WrapperTest/>
+
+                        <MyFunds/>
                     </Page>
 
                     <Dialogs/>
