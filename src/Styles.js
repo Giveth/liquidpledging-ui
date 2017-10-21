@@ -140,8 +140,12 @@ export const Currency = {
 
     toEther(wei)
     {
-        let number = Numeral(wei);
-        number.divide(1000000000000000000)
+        return wei/1000000000000000000
+    },
+
+    format(amount)
+    {
+        let number = Numeral(amount);
         return number.format('$0,0.[0000]')
     },
 
