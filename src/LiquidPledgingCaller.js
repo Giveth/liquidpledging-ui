@@ -16,9 +16,9 @@ class Caller extends EventEmitter
         this.emit(this.DONATE_DIALOG, data)
     }
 
-    donate(donateData)
+    donate(data)
     {
-       LiquidPledging.donate(donateData.emiter, donateData.reciever, donateData.amount )
+       LiquidPledging.donate(data.emiter, data.reciever, data.amount )
        .then((data) => {
             console.log("Donated", data)
         })
@@ -27,13 +27,12 @@ class Caller extends EventEmitter
     //TRANSFER
     showTransferDialog(data)
     {
-        console.log(data)
         this.emit(this.TRANSFER_DIALOG, data)
     }
 
-    transfer(donateData)
+    transfer(data)
     {
-       LiquidPledging.donate(donateData.emiter, donateData.reciever, donateData.amount )
+        LiquidPledging.transfer(data.giverId, data.pledgeId, data.receiverId, data.amount)
        .then((data) => {
             console.log("Donated", data)
         })
