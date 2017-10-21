@@ -15,7 +15,7 @@ class Dialogs extends Component {
             donateData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
             transferOpen:false,
             transferData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
-            transferMetadata:{givers:[]}
+            transferMetadata:{emiters:[]}
         }
 
         LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
@@ -54,9 +54,9 @@ class Dialogs extends Component {
     //Transfer
     transferOnShow=(data)=>
     {
-        let givers = []// LPState.getGivers()
+        let emiters = LPState.getDelegations(this.state.currentAddress)
         let transferMetadata={}
-        transferMetadata.givers=givers
+        transferMetadata.emiters=emiters
         this.setState({ transferData:data, transferOpen:true, transferMetadata:transferMetadata})
     }
 
@@ -85,7 +85,8 @@ class Dialogs extends Component {
                     open={this.state.transferOpen}
                     onCancel ={this.transferOnCancel}
                     onDone ={this.transferOnDone}
-                    data={this.state.transferData}/>
+                    data={this.state.transferData}
+                    meta={this.state.transferMetadata}/>
 
             </div>
         )
