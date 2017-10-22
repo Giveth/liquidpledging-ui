@@ -25,7 +25,7 @@ class Caller extends EventEmitter
        LiquidPledging.donate(data.emiterId, data.recieverId, data.amount )
        .then((data) => {
             console.log("Donated", data)
-            LiquidPledging.retrieveData()
+            LiquidPledging.retriveStateData()
         }).catch((error)=>console.error(error))
     }
 
@@ -40,7 +40,7 @@ class Caller extends EventEmitter
        LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount)
        .then((data) => {
             console.log("Transfered", data)
-            LiquidPledging.retrieveData()
+            LiquidPledging.retriveStateData()
         }).catch((error)=>console.error(error))
     }
 
@@ -66,7 +66,7 @@ class Caller extends EventEmitter
         LiquidPledging.cancel(data.emiterId, data.pledgeId, data.recieverId, data.amount)
         .then((data) => {
             console.log("Canceled", data)
-            LiquidPledging.retrieveData()
+            LiquidPledging.retriveStateData()
         }).catch((error)=>console.error(error))
     }
 
@@ -82,21 +82,21 @@ class Caller extends EventEmitter
         if(data.type==="Giver")
             LiquidPledging.addGiver(data.name, data.url).then((data) => {
                 console.log("Giver added", data, LiquidPledging.admins)
-                LiquidPledging.retrieveData()
+                LiquidPledging.retriveStateData()
             }).catch((error)=>console.error(error))
 
 
         else if(data.type==="Delegate")
             LiquidPledging.addDelegate(data.name, data.url).then((data) => {
                 console.log("Delgate added", data)
-                LiquidPledging.retrieveData()
+                LiquidPledging.retriveStateData()
             }).catch((error)=>console.error(error))
 
 
         else if(data.type==="Project")
             LiquidPledging.addProject(data.name, data.url).then((data) => {
                 console.log("Project added", data)
-                LiquidPledging.retrieveData()
+                LiquidPledging.retriveStateData()
             }).catch((error)=>console.error(error))
     }
 }
