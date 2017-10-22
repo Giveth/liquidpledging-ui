@@ -5,7 +5,8 @@ const liquidpledging = require('liquidpledging');
 const LiquidPledging = liquidpledging.LiquidPledging;
 const LiquidPledgingState = liquidpledging.LiquidPledgingState;
 const testRPCProvider = 'ws://localhost:8546'
-const liquidPledgingContractAddress = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24'
+//const liquidPledgingContractAddress = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24'
+const liquidPledgingContractAddress = '0x18658A1A7cB8b0Be97b155D051769b3651b2943c'
 
 class LiquidPledgingController extends ProviderHelper {
 
@@ -27,7 +28,7 @@ class LiquidPledgingController extends ProviderHelper {
     }
 
     setupWeb3(){
-        this.setup([testRPCProvider]).then(()=>{
+        this.setup(['*',testRPCProvider]).then(()=>{
 
             this.setupLiquidPledging()
 
@@ -40,7 +41,7 @@ class LiquidPledgingController extends ProviderHelper {
         this.liquidPledgingState = new LiquidPledgingState(this.liquidPledging);
 
         
-        /*this.web3.eth.subscribe('newBlockHeaders',(err,block)=>
+        this.web3.eth.subscribe('newBlockHeaders',(err,block)=>
         {
             if (err) {
                 console.error("ERROR", err);
@@ -49,14 +50,13 @@ class LiquidPledgingController extends ProviderHelper {
                 this.retriveStateData()
             }
         })
-        */
-
+        
         this.retriveStateData()
-
+        /*
         //TODO remove when doesn't need more testing
         setInterval(()=>{
             this.retriveStateData()
-        }, 10000);
+        }, 10000);*/
     }
 
     retriveStateData()
@@ -122,13 +122,15 @@ class LiquidPledgingController extends ProviderHelper {
         return this.liquidPledging.donate(emiterId, receiverId, { from: this.currentAccount, value: this.web3.utils.toWei(amount) })
     }
 
-    transfer(emiterId, pledgeId, receiverId, amount, boostGas )
+    transfer(emiterId, pledgeId, receiverId, amount )
     {
-        let properties = {from: this.currentAccount }
-        if(boostGas)
-            properties.gas = 2000000
+        return this.liquidPledging.transfer(emiterId, pledgeId, this.web3.utils.toWei(amount), receiverId, {from: this.currentAccount })
+    }
 
-        return this.liquidPledging.transfer(emiterId, pledgeId, this.web3.utils.toWei(amount), receiverId, properties)
+    cancel(emiterId, pledgeId, receiverId, amount)
+    {
+        console.log(emiterId, pledgeId, receiverId, amount)
+        return this.liquidPledging.transfer(emiterId, pledgeId, this.web3.utils.toWei(0.3), receiverId, { from: this.currentAccount, gas: 2000000 })
     }
 }
 
