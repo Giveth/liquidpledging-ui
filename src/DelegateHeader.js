@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Styles, Currency, Icons, Merge } from './Styles'
+import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
 
@@ -44,49 +44,43 @@ class DelegateHeader extends Component {
 
     onBackgroundClick=()=>
     {
-        this.props.onToggle(!this.props.colapsed)
+        //this.props.onToggle(!this.props.colapsed)
     }
    
     render() {
-        let toggleIcon = <Icons.colapsed size={20}/>
 
+        let isAdmin = (this.props.userAddress === this.props.delegation.adminAddress)
+        let canCancel = true
+
+        let toggleIcon = <Icons.colapsed size={20}/>
         if(this.props.colapsed)
-        {
             toggleIcon =<Icons.shown size={20}/>
-        }
 
         let colapseButton = <div style = {Styles.emptyButton} />
         if(this.props.showColapseButton)
+            colapseButton = (<IconButton onClick = {this.onToggle}> {toggleIcon} </IconButton>)
+
+
+        let delegateFundsButton = (
+        <IconButton
+            onClick = {this.onAddButton}
+            style = {{color:'grey'}}>
+            <Icons.add size={15}/>
+        </IconButton>)
+
+
+        let cancelDelegateButton = <div style = {Styles.emptyButton} />
+        
+        if(canCancel)
         {
-            colapseButton = (
-                <IconButton
-                    onClick = {this.onToggle}>
-                    {toggleIcon}
-                </IconButton>)
-        }
-
-
-         let addFundsButton = <div style = {Styles.emptyButton} />
-
-         if(this.props.userAddress)
-        {
-            addFundsButton = (
-            <IconButton
-                onClick = {this.onAddButton}
-                style = {{color:'grey'}}>
-
-                <Icons.add size={15}/>
-            </IconButton>)
-        }
-
-        let cancelDelegateButton = (
+            cancelDelegateButton=(
             <IconButton
                 onClick = {this.onCancel}
                 style = {{color:'grey'}}>
                 <Icons.cancel size={15}/>
             </IconButton>)
-
-
+        }
+        
         let actionButons = <div/>
         
         if(this.state.isHovering)
@@ -94,22 +88,23 @@ class DelegateHeader extends Component {
             actionButons =(
                 <div style = {Styles.inline}>
                     {cancelDelegateButton}
-                    {addFundsButton}
+                    {delegateFundsButton}
                 </div>)
         }
 
 
+        let headerStyle = Merge(Styles.delegation.header, Styles.delegation.delegateHeader)
+
         return (
 
             <div
-                style = {Merge(Styles.delegation.header, Styles.delegation.delegateHeader)}
+                style = {MergeIf(headerStyle, Styles.delegation.delegateBackgroundHover, this.state.isHovering)}
                 onMouseEnter = {this.onMouseEnter}
                 onMouseLeave = {this.onMouseLeave}
                 onClick = {this.onBackgroundClick}>
 
-
                 <div style = {Styles.delegation.headerCell}>
-                     <p key = {"name"}  style= {Styles.delegation.title}>
+                     <p key = {"name"}  style= {MergeIf(Styles.delegation.title, Styles.AdminColor, isAdmin)}>
                         {this.props.delegation.name}
                     </p>
 
@@ -126,8 +121,7 @@ class DelegateHeader extends Component {
                  <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
 
                     {actionButons}
-                    {colapseButton}
-                   
+                    {colapseButton}     
 
                 </div>       
             </div>

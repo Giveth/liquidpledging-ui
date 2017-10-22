@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Styles, Currency, Icons, Merge } from './Styles'
+import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
 
@@ -90,10 +90,13 @@ class GiverHeader extends Component {
                 </div>)
         }
 
-        return (
 
-                 <div
-                    style = {Merge(Styles.delegation.header, Styles.delegation.giverHeader, Styles.delegation.getHoverStyle(this.state.isHovering))}
+        let headerStyle = Merge(Styles.delegation.header, Styles.delegation.giverHeader)
+
+        return (
+            
+            <div
+                    style = {MergeIf(headerStyle, Styles.delegation.giverBackgroundHover, this.state.isHovering)}
                     onMouseEnter = {this.onMouseEnter}
                     onMouseLeave = {this.onMouseLeave}
                     onClick = {this.onBackgroundClick}>
@@ -102,7 +105,7 @@ class GiverHeader extends Component {
                    
                         <p
                             key = {"name"} 
-                            style= {Merge(Styles.delegation.title, Styles.colorForAdmin(isAdmin))}>
+                            style= {MergeIf(Styles.delegation.title, Styles.adminColor, isAdmin)}>
 
                             {this.props.delegation.name}
                         </p>

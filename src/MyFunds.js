@@ -61,7 +61,7 @@ class MyFunds extends Component {
         return (
             <div >
                 <p key = {"title"} style ={Styles.subtitle}> {title} </p>
-                <p key = {"currentAddress"} style ={Merge(Styles.addressSubtle,Styles.colorForAdmin(true))}> {this.state.currentAddress} </p>
+                <p key = {"currentAddress"} style ={Merge(Styles.addressSubtle, Styles.adminColor)}> {this.state.currentAddress} </p>
                 <DelegationsList treeChildren={this.state.treeChildren} indentLevel={0} userAddress={this.state.currentAddress}/>
             </div>
         )

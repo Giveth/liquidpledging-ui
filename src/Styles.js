@@ -17,8 +17,10 @@ export const Colors = {
     secondary:'#666',
     subtle:'#bbb',
     admin:'#ff3366',
-    giverBackground:'rgba(0, 0, 0, 0.05)',
-    delegateBackground:'rgba(0, 0, 0, 0.05)',
+    giverBackground:'rgba(0, 0, 0, 0.07)',
+    delegateBackground:'rgba(0, 0, 0, 0.0)',
+    giverBackgroundHover:'rgba(0, 0, 0, 0.1)',
+    delegateBackgroundHover:'rgba(0, 0, 0, 0.02)',
 }
 
 export const Icons = {
@@ -75,14 +77,8 @@ export const Styles = {
         fontSize:'0.8em',
     },
 
-    colorForAdmin : function (isAdmin)
-    {
-        let style={}
-        
-        if(isAdmin)
-            style.color = Colors.admin
-
-        return style
+    adminColor:{
+        color:Colors.admin
     },
    
     delegation:
@@ -121,15 +117,13 @@ export const Styles = {
             flexDirection: 'row',
             justifyContent:'flex-start',
         },
-        
-        getHoverStyle : function (isHovering)
-        {
-            let style={}
-            
-            if(isHovering)
-                style.backgroundColor = Colors.backgroundActive
 
-            return style
+        giverBackgroundHover:{
+            backgroundColor : Colors.giverBackgroundHover
+        },
+        
+        delegateBackgroundHover:{
+            backgroundColor : Colors.delegateBackgroundHover
         },
 
         title:{
@@ -189,6 +183,13 @@ export const Styles = {
 
 export function Merge (style1, style2, style3={}) {
     return Object.assign({},style1, style2, style3)
+}
+
+export function MergeIf (style1, style2, condition){
+    if(condition)
+        return Object.assign({},style1, style2)
+    else
+        return style1
 }
 
 export const Currency = {
