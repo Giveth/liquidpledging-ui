@@ -72,8 +72,8 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     getFirstDelegationForNode(node)
     {
-        if(node.delegationsOut.length)
-            return this.getDelegation(node.delegationsOut[0])
+        if(node.delegationsIn.length)
+            return this.getDelegation(node.delegationsIn[0])
         else
             return Formatter.getRootDelegationFromNode(node) 
     }
