@@ -1,4 +1,6 @@
 import LiquidPledging from './LiquidPledgingState'
+import {Currency} from './Styles'
+
 const EventEmitter = require('events')
 
 class Caller extends EventEmitter
@@ -22,7 +24,7 @@ class Caller extends EventEmitter
        LiquidPledging.donate(data.emiterId, data.recieverId, data.amount )
        .then((data) => {
             console.log("Donated", data)
-        })
+        }).catch((error)=>console.error(error))
     }
 
     //TRANSFER
@@ -36,32 +38,32 @@ class Caller extends EventEmitter
        LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount)
        .then((data) => {
             console.log("Transfered", data)
-        })
+        }).catch((error)=>console.error(error))
     }
 
     //CANCEL
-    showCancelDialog(delegation)
+    showCancelDialog(currentDelegation)
     {
-        console.log(delegation)
+        let delegation = LiquidPledging.getDelegation(currentDelegation.parentId)
+        console.log(currentDelegation, delegation)
+
         let data = {
             emiterId:delegation.parentAdminId,
-            pledgeId:delegation.pledgeId,
+            pledgeId:currentDelegation.pledgeId,
             recieverId:delegation.parentAdminId,
-            amount:delegation.assignedAmount
+            amount:Currency.toEther(currentDelegation.assignedAmount)
         }
 
-        console.log(data)
-        //this.emit(this.TRANSFER_DIALOG, data)
         this.cancel(data)
     }
 
     cancel(data)
     {
-        let boostGast = true
-       LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount, boostGast)
-       .then((data) => {
+
+        LiquidPledging.cancel(data.emiterId, data.pledgeId, data.recieverId, data.amount)
+        .then((data) => {
             console.log("Canceled", data)
-        })
+        }).catch((error)=>console.error(error))
     }
 }
 
