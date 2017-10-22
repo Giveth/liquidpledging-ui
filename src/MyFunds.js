@@ -22,9 +22,13 @@ class MyFunds extends Component {
     }
 
     onStateChanged=()=>{
-        let rootDelegations = LPState.getDelegations(this.state.currentAddress, "Giver") //only the ones with userAddress that are 'Giver'
+        let address = this.state.currentAddress
+        address = ''
+        let rootDelegations = LPState.getDelegations(address) //only the ones with userAddress that are 'Giver'
         let trees = LPState.getDelegationsTrees(rootDelegations,{assignedAmount:undefined}) //All the children except the ones with assignedAmount = 0
         this.setState({ tree:trees })
+
+        console.log('my nodes', LPState.getNodesByAddress(this.state.currentAddress))
     }
 
     onAccountChanged=()=>{
