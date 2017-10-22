@@ -41,10 +41,12 @@ class Delegation extends Component {
             </div>
         }
 
+        let hasChildren = (this.props.tree && this.props.tree.children && this.props.tree.children.length)
+        
         let header = <DelegateHeader 
             delegation = {this.props.tree.delegation}
             userAddress={this.props.userAddress}
-            showColapseButton = {(this.props.tree && this.props.tree.children && this.props.tree.children.length)}
+            showColapseButton = {hasChildren}
             onToggle = {this.onHeaderToggle}
             colapsed = {this.state.isColapsed}
             />
@@ -53,7 +55,7 @@ class Delegation extends Component {
             header = <GiverHeader 
             delegation = {this.props.tree.delegation}
             userAddress={this.props.userAddress}
-            showColapseButton = {(this.props.tree && this.props.tree.children && this.props.tree.children.length)}
+            showColapseButton = {hasChildren}
             onToggle = {this.onHeaderToggle}
             colapsed = {this.state.isColapsed}
             />
