@@ -72,6 +72,23 @@ class Caller extends EventEmitter
     {
         this.emit(this.ADD_ADMIN_DIALOG)
     }
+
+    addAdmin(data)
+    {
+        console.log(data)
+        if(data.type==="Giver")
+            LiquidPledging.addGiver(data.name, data.url).then((data) => {console.log("Giver added", data, LiquidPledging.admins)}).catch((error)=>console.error(error))
+
+        else if(data.type==="Delegate")
+            LiquidPledging.addDelegate(data.name, data.url).then((data) => {
+                console.log("Delgate added", data)
+            }).catch((error)=>console.error(error))
+
+        else if(data.type==="Project")
+            LiquidPledging.addProject(data.name, data.url).then((data) => {
+                console.log("Project added", data)
+            }).catch((error)=>console.error(error))
+    }
 }
 
 const instance = new Caller()

@@ -36,6 +36,7 @@ class AddAdmin extends React.Component
         super();
         this.state={
             name:'',
+            url:'',
             okDisabled:true,
             selectedType:0
         }
@@ -43,17 +44,13 @@ class AddAdmin extends React.Component
 
     onDone=()=>
     {
-        /*let data = {}
-        let delegation = this.getDelegationFromId(this.state.selectedType)
+        let data = {}
+        data.type = types[this.state.selectedType].label
+        data.name = this.state.name
+        data.url = this.state.url
 
-        data.emiterId = delegation.adminId
-        data.pledgeId = delegation.pledgeId
-        data.recieverId = this.props.data.recieverId
-        data.amount = parseFloat(this.state.amount,10)
-
-        this.setState({amount:'', selectedType:0, okDisabled:true})
+        this.setState({name:'', url:'', selectedType:0, okDisabled:true})
         this.props.onDone(data)
-        */
     }   
 
     onCancel=()=>
@@ -62,12 +59,22 @@ class AddAdmin extends React.Component
         this.props.onCancel()
     }  
 
-    //TODO: Check
-    onTextChange = (e, newText) => {
+    onNameChanged = (e, newText) => {
         let state = {}
 
-        if(!isNaN(newText))
+        if(newText.length < 64)
             state.name=newText
+       
+        state.okDisabled=!this.isReady(newText, this.state.selectedType)
+
+       this.setState(state)
+    }
+
+     onUrlChanged = (e, newText) => {
+        let state = {}
+
+        if(newText.length < 256)
+            state.url=newText
        
         state.okDisabled=!this.isReady(newText, this.state.selectedType)
 
@@ -147,9 +154,16 @@ class AddAdmin extends React.Component
                     autoFocus={true}
                     id="inputText"
                     hintText={'Name'}
-                    value={this.state.amount}
-                    onChange={this.onTextChange}
-                    errorText = {this.state.error}/>
+                    value={this.state.name}
+                    onChange={this.onNameChanged}/>
+
+                 <TextField
+                    autoFocus={true}
+                    id="inputText"
+                    hintText={'Url'}
+                    value={this.state.url}
+                    onChange={this.onUrlChanged}/>
+
             </Dialog>
         )
     }
