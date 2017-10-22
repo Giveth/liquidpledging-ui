@@ -58,10 +58,9 @@ class OthersFunds extends Component {
     }
 
     render() {
-
+        //       <p key = {"title"} style ={Styles.subtitle}> {title} </p>
         return (
             <div >
-                <p key = {"title"} style ={Styles.subtitle}> {title} </p>
                 <p key = {"currentAddress"} style ={Merge(Styles.addressSubtle, Styles.adminColor)}> {this.state.currentAddress} </p>
                 <DelegationsList treeChildren={this.state.treeChildren} indentLevel={-1} userAddress={this.state.currentAddress}/>
             </div>

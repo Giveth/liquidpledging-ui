@@ -47,15 +47,15 @@ class App extends Component {
                             value={this.state.currentTab}
                             onChange={this.onTabChange}>
 
-                            <Tab label="Tab A" value={0}>
+                            <Tab label="My funds" value={0}>
                                 <MyFunds/>
                             </Tab>
 
-                            <Tab label="Tab B" value={1}>
+                            <Tab label="Other's funds" value={1}>
                                 <OthersFunds/>
                             </Tab>
 
-                            <Tab label="Tab C" value={2}>
+                            <Tab label="Explorer" value={2}>
                                 <Explorer/>
                             </Tab>
 
