@@ -40,8 +40,6 @@ class LiquidPledgingController extends ProviderHelper {
         this.liquidPledging = new LiquidPledging(this.web3, liquidPledgingContractAddress);
         this.liquidPledgingState = new LiquidPledgingState(this.liquidPledging);
 
-        
-
         this.web3.eth.subscribe('newBlockHeaders',(err,block)=>
         {
             if (err) {

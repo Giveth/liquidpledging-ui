@@ -11,7 +11,7 @@ class DelegationList extends Component {
     }
    
     render() {
-        let indentLevel = this.props.indentLevel + 1 
+        let indentLevel = this.props.indentLevel + 1
         let list = []
 
         if(this.props.treeChildren)
