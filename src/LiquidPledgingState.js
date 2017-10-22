@@ -81,8 +81,6 @@ class LiquidPledgingState extends LiquidPledgingController {
         if(type)
             propertiesFilter.type = type
 
-        console.log(propertiesFilter)
-
         let delegations = Filter.byProperties(this.delegationsArray, propertiesFilter)
     
         return delegations
