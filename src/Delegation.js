@@ -37,6 +37,7 @@ class Delegation extends Component {
                 <DelegationsList
                     treeChildren={this.props.tree.children}
                     indentLevel={indentLevel}
+                    userAddress={this.props.userAddress}
                 />
             </div>
         }
