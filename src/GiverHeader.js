@@ -39,7 +39,7 @@ class GiverHeader extends Component {
 
     onBackgroundClick=()=>
     {
-        this.props.onToggle(!this.props.colapsed)
+        //this.props.onToggle(!this.props.colapsed)
     }
    
     render() {
@@ -100,11 +100,17 @@ class GiverHeader extends Component {
 
                     <div style = {Styles.delegation.headerCell}>
                    
-                        <p key = {"name"}  style= {Merge(Styles.delegation.title, Styles.colorForAdmin(isAdmin))}>
+                        <p
+                            key = {"name"} 
+                            style= {Merge(Styles.delegation.title, Styles.colorForAdmin(isAdmin))}>
+
                             {this.props.delegation.name}
                         </p>
 
-                        <p key = {"amount"} style = {Styles.delegation.amount} >
+                        <p
+                            key = {"amount"}
+                            style = {Styles.delegation.amount} >
+
                             {Currency.symbol+ " "+Currency.format(Currency.toEther(usedAmount)) +' / '+ Currency.format(Currency.toEther(totalAmount))}
                         </p>
 
