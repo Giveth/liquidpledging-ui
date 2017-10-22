@@ -10,7 +10,8 @@ class Caller extends EventEmitter
         super()
         this.DONATE_DIALOG = 'donateDialog'
         this.TRANSFER_DIALOG = 'transferDialog'
-        this.CANCEL_DIALOG = 'cancelDialog'
+        this.CANCEL_DIALOG = 'cancelDialog',
+        this.ADD_ADMIN_DIALOG = 'addAdmin'
     }
 
     //DONATE
@@ -64,6 +65,12 @@ class Caller extends EventEmitter
         .then((data) => {
             console.log("Canceled", data)
         }).catch((error)=>console.error(error))
+    }
+
+     //AddAdmin
+    showAddAdminDialog()
+    {
+        this.emit(this.ADD_ADMIN_DIALOG)
     }
 }
 

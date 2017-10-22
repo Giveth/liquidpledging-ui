@@ -12,7 +12,7 @@ class AddAdmin extends Component {
 
     onAddButton=()=>
     {
-        Caller.addAdmin()
+        Caller.showAddAdminDialog()
     }
 
    
