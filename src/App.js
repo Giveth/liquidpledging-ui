@@ -8,6 +8,7 @@ import { Styles } from './Styles'
 import GreyTheme from './GreyTheme'
 import Dialogs from './Dialogs'
 import MyFunds from './MyFunds.js'
+import AddAdmin from './AddAdmin.js'
 import OthersFunds from './OthersFunds.js'
 
 class App extends Component {
@@ -31,6 +32,7 @@ class App extends Component {
                         <OthersFunds/>
                         <MyFunds/>
                     </Page>
+                    <AddAdmin/>
 
                     <Dialogs/>
 
