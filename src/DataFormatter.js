@@ -142,6 +142,7 @@ class DataFormatter {
 
             let receiver = {
                 id:nodeId,
+                address:admin.addr,
                 delegationsIn:[],
                 delegationsOut:[]
             }
@@ -161,6 +162,8 @@ class DataFormatter {
                 nodes[nodeId].delegationsOut = nodes[nodeId].delegationsOut.concat(d.delegations)
             }
         }
+
+        console.log(nodes)
 
         return nodes
     }
