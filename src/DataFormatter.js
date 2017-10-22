@@ -169,7 +169,7 @@ class DataFormatter {
 
     initNodes(admins)
     {
-        let nodes = [{}]
+        let nodes = [null]
         for(let admin of admins)
         {
             let nodeId = this.getNodeId(admin) //same as adminID???

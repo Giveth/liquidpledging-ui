@@ -65,13 +65,19 @@ class LiquidPledgingState extends LiquidPledgingController {
     {
         let delegations = []
         for(let node of nodes)
-            delegations.push(this.getFirstDelegationForNode(node))
+        {
+            let delegation = this.getFirstDelegationForNode(node)
+            if(delegation)
+                delegations.push(delegation)
+        }
         
         return delegations
     }
 
     getFirstDelegationForNode(node)
     {
+        if(!node)
+            return null
         if(node.delegationsIn.length)
             return this.getDelegation(node.delegationsIn[0])
         else
