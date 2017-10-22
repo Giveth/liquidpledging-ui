@@ -15,12 +15,12 @@ class LiquidPledgingState extends LiquidPledgingController {
         return filtered
     }
 
-    /*getPledge(pledgeId)
+    getPledge(pledgeId)
     {
-        if(!this.pledges || pledgeId >= this.pledges.length )
-            return {}
-        return this.pledges[pledgeId]
-    }*/
+        //[0]-->id 1
+        let index = pledgeId-1
+        return this.pledges[index]
+    }
 
     getPledges(propertiesFilter={}, delegationFilter)
     {
@@ -80,6 +80,8 @@ class LiquidPledgingState extends LiquidPledgingController {
             propertiesFilter.adminAddress = address
         if(type)
             propertiesFilter.type = type
+
+        console.log(propertiesFilter)
 
         let delegations = Filter.byProperties(this.delegationsArray, propertiesFilter)
     
