@@ -1,4 +1,4 @@
-const NO_PARENT = 0
+const NONE = 0
 
 class DataFormatter {
 
@@ -37,7 +37,6 @@ class DataFormatter {
 
     createDelegations(pledges, admins)
     {
-
         function getAdmin(adminId)
         {
             if( adminId > admins.length )
@@ -66,7 +65,7 @@ class DataFormatter {
             {
                 parentId = this.getDelegationId(0, [], 0)
                 adminId = pledge.owner
-                parentAdminId = NO_PARENT
+                parentAdminId = NONE
             }
 
             let admin = getAdmin(adminId)
@@ -99,7 +98,7 @@ class DataFormatter {
             for(let j= i + 1 ; j < delegationsArray.length; j++) //current plus self
             {
                 
-                if(current.parentId===NO_PARENT.toString())
+                if(current.parentId===NONE.toString())
                     break
 
                 if( current.parentId === delegationsArray[j].id)
@@ -114,7 +113,43 @@ class DataFormatter {
             delegations[current.id] = current
         }
 
+       /*
+        //Let's create delegations for admins that haven't got any transcation yet
+
+        for(let admin of admins)
+        {
+            let delegationsChain = []
+            if(admin.type!=="Giver")
+               delegationsChain=[NONE]
+
+            delegationsChain.push(admin.id)
+            let rootDelegationId =  delegationsChain.toString()
+            if(!delegations[rootDelegationId])
+            {
+                console.log("new", rootDelegationId)
+            }
+        }*/
+
         return delegations
+    }
+
+    getRootDelegationFromNode(node)
+    {
+        return {
+            id:node.id.toString(),
+            parentId:NONE.toString(),
+            parentAdminId:NONE,
+            delegations:node.delegationsOut,
+            assignedAmount:0,
+            availableAmount:0,
+            pledgeId:NONE.toString(),
+            intendedProject:NONE,
+            adminId:node.id,
+            adminAddress:node.address,
+            type:node.type,
+            name:node.name,
+            url:node.url,
+           }
     }
 
     getDelegationId(owner, delegates, intendedProject)
