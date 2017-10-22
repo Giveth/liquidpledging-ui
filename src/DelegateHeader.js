@@ -121,6 +121,7 @@ class DelegateHeader extends Component {
                  <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
 
                     {actionButons}
+                    <div style = {Styles.emptyButton} />
                     {colapseButton}     
 
                 </div>       

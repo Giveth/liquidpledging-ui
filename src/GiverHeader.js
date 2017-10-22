@@ -51,7 +51,7 @@ class GiverHeader extends Component {
             toggleIcon =<Icons.shown size={20}/>
         }
 
-        let colapseButton = <div/>
+        let colapseButton = <div style = {Styles.emptyButton} />
         if(this.props.showColapseButton)
         {
             colapseButton = (
@@ -126,6 +126,7 @@ class GiverHeader extends Component {
 
                     <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
                         {actionButons}
+                        <div style = {Styles.emptyButton} />
                         {colapseButton}
                     </div>
 
