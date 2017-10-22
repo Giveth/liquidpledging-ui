@@ -134,7 +134,6 @@ class LiquidPledgingController extends ProviderHelper {
 
     cancel(emiterId, pledgeId, receiverId, amount)
     {
-        console.log(emiterId, pledgeId, receiverId, amount)
         return this.liquidPledging.transfer(emiterId, pledgeId, this.web3.utils.toWei(0.3), receiverId, { from: this.currentAccount, gas: 2000000 })
     }
 

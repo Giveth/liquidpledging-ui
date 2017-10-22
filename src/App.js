@@ -28,10 +28,9 @@ class App extends Component {
                                 style={Styles.givethLogo}/>
                         </div>
 
-                        
-                        <OthersFunds/>
                         <MyFunds/>
                     </Page>
+                    
                     <AddAdmin/>
 
                     <Dialogs/>
