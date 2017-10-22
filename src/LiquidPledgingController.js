@@ -1,7 +1,7 @@
 import ProviderHelper from './Web3ProviderHelper'
 import Formatter from './DataFormatter'
 
-const liquidpledging = require('liquidpledging');
+const liquidpledging = require('./liquidpledging');
 const LiquidPledging = liquidpledging.LiquidPledging;
 const LiquidPledgingState = liquidpledging.LiquidPledgingState;
 const testRPCProvider = 'ws://localhost:8546'
