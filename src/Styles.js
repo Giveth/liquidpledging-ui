@@ -16,6 +16,9 @@ export const Colors = {
     backgroundActive:'rgba(0, 0, 0, 0.1)',
     secondary:'#666',
     subtle:'#bbb',
+    admin:'#ff3366',
+    giverBackground:'rgba(0, 0, 0, 0.05)',
+    delegateBackground:'rgba(0, 0, 0, 0.05)',
 }
 
 export const Icons = {
@@ -71,6 +74,16 @@ export const Styles = {
         overflow: "hidden",
         fontSize:'0.8em',
     },
+
+    colorForAdmin : function (isAdmin)
+    {
+        let style={}
+        
+        if(isAdmin)
+            style.color = Colors.admin
+
+        return style
+    },
    
     delegation:
     {
@@ -89,7 +102,7 @@ export const Styles = {
         },
 
         giverHeader:{
-            backgroundColor: Colors.backgroundHighlight,
+            backgroundColor: Colors.giverBackground,
             paddingTop: 10,
             paddingBottom: 10,
             marginTop: 5,
@@ -97,6 +110,10 @@ export const Styles = {
         },
 
         delegateHeader:{
+            backgroundColor: Colors.delegateBackground,
+            paddingTop: 10,
+            paddingBottom: 10,
+            marginTop: 5,
         },
 
         headerCell:{

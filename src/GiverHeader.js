@@ -8,6 +8,7 @@ class GiverHeader extends Component {
     constructor(props){
         super()
         this.state={isHovering:false}
+
     }
 
     onToggle=()=>
@@ -42,6 +43,7 @@ class GiverHeader extends Component {
     }
    
     render() {
+        let isAdmin = (this.props.userAddress === this.props.delegation.adminAddress)
         let toggleIcon = <Icons.colapsed size={20}/>
 
         if(this.props.colapsed)
@@ -62,7 +64,7 @@ class GiverHeader extends Component {
 
         let addFundsButton = <div style = {Styles.emptyButton} />
 
-         if(this.props.userAddress === this.props.delegation.adminAddress)
+         if(isAdmin)
         {
             addFundsButton = (
                 <IconButton
@@ -98,7 +100,7 @@ class GiverHeader extends Component {
 
                     <div style = {Styles.delegation.headerCell}>
                    
-                        <p key = {"name"}  style= {Styles.delegation.title}>
+                        <p key = {"name"}  style= {Merge(Styles.delegation.title, Styles.colorForAdmin(isAdmin))}>
                             {this.props.delegation.name}
                         </p>
 
