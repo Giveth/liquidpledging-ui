@@ -26,16 +26,20 @@ class MyFunds extends Component {
         //let nodes = this.getNodes({filter:this.state.currentAddress})
 
         let rootDelegations = LPState.getDelegations(address) //only the ones with userAddress that are 'Giver'
-        let trees = LPState.getDelegationsTrees(rootDelegations,{assignedAmount:undefined}) //All the children except the ones with assignedAmount = 0
-        //console.log('trees', trees)
+       //console.log('trees', trees)
 
-        this.setState({ tree:trees })
+       
         let myFilter = {address:this.state.currentAddress}
         let myNodes =  LPState.getNodes(myFilter)
         console.log('my nodes',myNodes)
 
         let dFromNodes = LPState.getFirstDelegationsForNodes(myNodes)
         console.log('delegations from nodes', dFromNodes)
+
+        let trees = LPState.getDelegationsTrees(dFromNodes)
+
+        console.log(trees)
+         this.setState({ tree:trees })
 
        // console.log('my delegations', LPState.getDelegations())
     }
