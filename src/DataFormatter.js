@@ -1,4 +1,4 @@
-const NO_PARENT = "0"
+const NO_PARENT = 0
 
 class DataFormatter {
 
@@ -44,7 +44,6 @@ class DataFormatter {
                 return {}
             return admins[adminId-1]
         }
-
 
         let delegationsArray = []
 
@@ -100,7 +99,7 @@ class DataFormatter {
             for(let j= i + 1 ; j < delegationsArray.length; j++) //current plus self
             {
                 
-                if(current.parentId===NO_PARENT)
+                if(current.parentId===NO_PARENT.toString())
                     break
 
                 if( current.parentId === delegationsArray[j].id)
@@ -135,7 +134,7 @@ class DataFormatter {
 
     initNodes(admins)
     {
-        let nodes = []
+        let nodes = [{}]
         for(let admin of admins)
         {
             let nodeId = this.getNodeId(admin) //same as adminID???
@@ -165,8 +164,6 @@ class DataFormatter {
                 nodes[nodeIndex].delegationsOut = nodes[nodeIndex].delegationsOut.concat(d.delegations)
             }
         }
-
-        console.log(nodes)
 
         return nodes
     }
