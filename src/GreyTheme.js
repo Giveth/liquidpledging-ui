@@ -11,7 +11,7 @@ const getTheme = () => {
         "canvasColor": "#F8F7F5"
     },
     "tabs": {
-        "backgroundColor": "#F8F7F5",
+        "backgroundColor": "#FFFFFF",
         "textColor": "rgba(0, 0, 0, 0.54)",
         "selectedTextColor": "#424242"
     }
