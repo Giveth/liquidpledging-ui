@@ -2,7 +2,8 @@ import SubDelegateIcon from 'react-icons/lib/md/subdirectory-arrow-right'
 import ColapsedIcon from 'react-icons/lib/md/keyboard-arrow-up'
 import ShownIcon from 'react-icons/lib/md/keyboard-arrow-down'
 import AddIcon from 'react-icons/lib/fa/plus'
-import CanelIcon from 'react-icons/lib/fa/close'
+import CancelIcon from 'react-icons/lib/fa/close'
+import AddAdminIcon from 'react-icons/lib/md/group-add'
 
 import Numeral from 'numeral'
 
@@ -23,7 +24,8 @@ export const Icons = {
     colapsed: ColapsedIcon,
     shown:ShownIcon,
     add:AddIcon,
-    cancel:CanelIcon,
+    cancel:CancelIcon,
+    addAdmin:AddAdminIcon
 }
 
 export const Styles = {
@@ -153,7 +155,19 @@ export const Styles = {
         narrow: {
             width: MIN_CONTENT_WIDTH
         }
+    },
+
+    floatingBottomRight:{
+        margin: 0,
+        top: 'auto',
+        right: 20,
+        bottom: 20,
+        left: 'auto',
+        position: 'fixed',
+        zIndex:100,
+        backgroundColor:'grey'
     }
+
 }
 
 export function Merge (style1, style2, style3={}) {
