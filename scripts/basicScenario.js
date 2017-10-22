@@ -79,18 +79,20 @@ await liquidPledging.transfer(1, 3, utils.toWei(0.5), 1, { from: user1, gas: 200
     await liquidPledging.transfer(1, 1, utils.toWei(0.5), 7, { from: user1 }); //#P6
 
     //From DelegateUser2(#7, pledge #6 (previous pledge) to DelegateUser3(#8)
-    await liquidPledging.transfer(7, 6, utils.toWei(0.5), 8, { from: user2 }); //#P7
+    //await liquidPledging.transfer(7, 6, utils.toWei(0.5), 8, { from: user2 }); //#P7
+    await liquidPledging.transfer(7, 6, utils.toWei(0.5), 6, { from: user2 }); //#P7
 
     //From DelegateUser3(#8, pledge #7 (previous pledge) to DelegateUser4(#9)
-    await liquidPledging.transfer(8, 7, utils.toWei(0.5), 9, { from: user3 }); //#P8
+   // await liquidPledging.transfer(8, 7, utils.toWei(0.5), 9, { from: user3 }); //#P8
+    await liquidPledging.transfer(6, 7, utils.toWei(0.5), 9, { from: user1 }); //#P8
 
     //From DelegateUser4(#9, pledge #8 (previous pledge) to ProjectUser5(#15)
-    await liquidPledging.transfer(9, 8, utils.toWei(0.3), 15, { from: user4 }); //#P9
+    await liquidPledging.transfer(9, 8, utils.toWei(0.3), 10, { from: user4 }); //#P9
 
-
+/*
     //Let's undo the last transfer by assigning the funds back to the issuer
-    await liquidPledging.transfer(8, 9, utils.toWei(0.3), 8, { from: user3, gas: 2000000 }); //Does not create pledge! (moving funds to self)
-
+    await liquidPledging.transfer(6, 9, utils.toWei(0.3), 6, { from: user1, gas: 2000000 }); //Does not create pledge! (moving funds to self)
+    
     //And move funds to somewhere else
     await liquidPledging.transfer(8, 8, utils.toWei(0.1 ), 14, { from: user3}); //#P10
 
@@ -108,6 +110,7 @@ await liquidPledging.transfer(1, 3, utils.toWei(0.5), 1, { from: user1, gas: 200
     await liquidPledging.transfer(16, 11, utils.toWei(0.2), 17, { from: user1 }); //#12
     await liquidPledging.transfer(2, 2, utils.toWei(0.5), 17, { from: user2 }); //#P13
     await liquidPledging.transfer(3, 3, utils.toWei(1), 17, { from: user3 }); //#P13
+*/
 
     const st = await liquidPledgingState.getState();
     console.log(JSON.stringify(st, null, 2));
