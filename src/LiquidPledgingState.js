@@ -61,6 +61,23 @@ class LiquidPledgingState extends LiquidPledgingController {
         return delegations
     }
 
+    getFirstDelegationsForNodes(nodes)
+    {
+        let delegations = []
+        for(let node of nodes)
+            delegations.push(this.getFirstDelegationForNode(node))
+        
+        return delegations
+    }
+
+    getFirstDelegationForNode(node)
+    {
+        if(node.delegationsOut.length)
+            return this.getDelegation(node.delegationsOut[0])
+        else
+            return Formatter.getRootDelegationFromNode(node) 
+    }
+
     //DELEGATION TREES
 
     getDelegationTree(delegation, childrenPropertiesFilter)
@@ -74,10 +91,13 @@ class LiquidPledgingState extends LiquidPledgingController {
             if(filtered[0])
                 children.push(this.getDelegationTree(filtered[0],childrenPropertiesFilter))
         }
+
+        let node = this.getNode(delegation.adminId)
         
         let tree = {
             delegation:delegation,
-            children:children
+            children:children,
+            node:node
         }
         return tree
     }
