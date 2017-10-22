@@ -96,10 +96,8 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     //NODES
 
-    getNodesByAddress(address)
+    getNodes(filter)
     {
-        let filter = {address:address}
-        console.log(filter)
         return Filter.byProperties(this.nodes, filter)
     }
 
