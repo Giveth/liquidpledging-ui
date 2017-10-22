@@ -45,8 +45,8 @@ class OthersFunds extends Component {
             return
         }
 
-        let myGiversFilter = {address:address, type:'Delegate'}
-        let myNodes =  LPState.getNodes(myGiversFilter)
+        let myDelegatesFilter = {address:address, type:'Delegate'}
+        let myNodes =  LPState.getNodes(myDelegatesFilter)
         let myDelegations = LPState.getFirstDelegationsForNodes(myNodes)
         let onlyDelegationsWithMoneyFilter= {assignedAmount:undefined}
         let myTrees = LPState.getDelegationsTrees(myDelegations, onlyDelegationsWithMoneyFilter)
