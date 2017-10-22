@@ -29,7 +29,6 @@ class DelegateHeader extends Component {
 
     onCancel=()=>
     {
-        console.log(this.props.delegation)
         Caller.showCancelDialog(this.props.delegation)
     }
 
@@ -66,24 +65,48 @@ class DelegateHeader extends Component {
                 </IconButton>)
         }
 
-        let addFundsButton = (
+
+         let addFundsButton = <div style = {Styles.emptyButton} />
+
+         if(this.props.userAddress)
+        {
+            addFundsButton = (
             <IconButton
                 onClick = {this.onAddButton}
                 style = {{color:'grey'}}>
 
                 <Icons.add size={15}/>
             </IconButton>)
+        }
 
-        let CancelDelegateButton = (
+        let cancelDelegateButton = (
             <IconButton
                 onClick = {this.onCancel}
                 style = {{color:'grey'}}>
                 <Icons.cancel size={15}/>
             </IconButton>)
 
+
+        let actionButons = <div/>
+        
+        if(this.state.isHovering)
+        {
+            actionButons =(
+                <div style = {Styles.inline}>
+                    {cancelDelegateButton}
+                    {addFundsButton}
+                </div>)
+        }
+
+
         return (
 
-            <div style = {Merge(Styles.delegation.header, Styles.delegation.delegateHeader)}>
+            <div
+                style = {Merge(Styles.delegation.header, Styles.delegation.delegateHeader)}
+                onMouseEnter = {this.onMouseEnter}
+                onMouseLeave = {this.onMouseLeave}
+                onClick = {this.onBackgroundClick}>
+
 
                 <div style = {Styles.delegation.headerCell}>
                      <p key = {"name"}  style= {Styles.delegation.title}>
@@ -102,8 +125,7 @@ class DelegateHeader extends Component {
 
                  <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
 
-                    {CancelDelegateButton}
-                    {addFundsButton}
+                    {actionButons}
                     {colapseButton}
                    
 
