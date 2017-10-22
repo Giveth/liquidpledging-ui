@@ -10,6 +10,7 @@ import Dialogs from './Dialogs'
 import MyFunds from './MyFunds.js'
 import AddAdmin from './AddAdmin.js'
 import OthersFunds from './OthersFunds.js'
+import Explorer from './Explorer.js'
 
 class App extends Component {
 
@@ -30,6 +31,7 @@ class App extends Component {
 
                         <MyFunds/>
                         <OthersFunds/>
+                        <Explorer/>
                     </Page>
                     
                     <AddAdmin/>
