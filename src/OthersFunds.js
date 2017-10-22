@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
 import DelegationsList from './DelegationsList'
-import {Styles} from './Styles'
+import {Styles, Merge} from './Styles'
 
-const title = "Other's funds"
+const title = "Other's Funds"
 
 class OthersFunds extends Component {
 
@@ -12,7 +12,6 @@ class OthersFunds extends Component {
 
         this.state={
             network:"",
-            currentAddress:"",
             treeChildren:[]
         }
 
@@ -22,26 +21,40 @@ class OthersFunds extends Component {
     }
 
     onStateChanged=()=>{
-        this.setState({
-            tree:this.getTrees()
-        })
-    }
-
-    getTrees=()=>
-    {
-        let rootDelegations = LPState.getDelegations(this.state.currentAddress,"Delegate")
-        let trees = LPState.getDelegationsTrees(rootDelegations,{assignedAmount:undefined})
-        return trees
+        this.setDelegations()
     }
 
     onAccountChanged=()=>{
-        let newAccount = LPState.getCurrentAccount()
-        this.setState({currentAddress:newAccount})
+        this.setDelegations()
     }
 
     onNetworkChanged=()=>{
-        let newNetwork = LPState.getCurrentNetwork().name
-        this.setState({network:newNetwork})
+        this.setDelegations()
+    }
+
+    setDelegations=()=>
+    {
+        let address = LPState.getCurrentAccount()
+
+        if(!address)
+        {
+            this.setState({
+                treeChildren:[],
+                currentAddress:'Not connected to Ethereum...  (╯°□°）╯︵ ┻━┻',
+            })
+            return
+        }
+
+        let myGiversFilter = {address:address, type:'Delegate'}
+        let myNodes =  LPState.getNodes(myGiversFilter)
+        let myDelegations = LPState.getFirstDelegationsForNodes(myNodes)
+        let onlyDelegationsWithMoneyFilter= {assignedAmount:undefined}
+        let myTrees = LPState.getDelegationsTrees(myDelegations, onlyDelegationsWithMoneyFilter)
+
+        this.setState({
+            treeChildren:myTrees,
+            currentAddress:address,
+        })
     }
 
     render() {
@@ -49,9 +62,8 @@ class OthersFunds extends Component {
         return (
             <div >
                 <p key = {"title"} style ={Styles.subtitle}> {title} </p>
-                <p key = {"currentAddress"} style ={Styles.addressSubtle}> {this.state.currentAddress} </p>
-                <DelegationsList treeChildren={this.state.tree} indentLevel={0} userAddress={this.state.currentAddress}/>
-                <pre key = {"data"} style ={{wordWrap: 'break-word'}}> {this.state.data} </pre>
+                <p key = {"currentAddress"} style ={Merge(Styles.addressSubtle, Styles.adminColor)}> {this.state.currentAddress} </p>
+                <DelegationsList treeChildren={this.state.treeChildren} indentLevel={0} userAddress={this.state.currentAddress}/>
             </div>
         )
     }
