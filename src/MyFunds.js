@@ -45,11 +45,12 @@ class MyFunds extends Component {
             return
         }
 
-        let myFilter = {address:address}
-        let myNodes =  LPState.getNodes()
-        console.log(myNodes)
+        let myGiversFilter = {address:address, type:'Giver'}
+        let myNodes =  LPState.getNodes(myGiversFilter)
         let myDelegations = LPState.getFirstDelegationsForNodes(myNodes)
-        let myTrees = LPState.getDelegationsTrees(myDelegations)
+        let onlyDelegationsWithMoneyFilter= {assignedAmount:undefined}
+        let myTrees = LPState.getDelegationsTrees(myDelegations, onlyDelegationsWithMoneyFilter)
+
         this.setState({
             treeChildren:myTrees,
             currentAddress:address,
