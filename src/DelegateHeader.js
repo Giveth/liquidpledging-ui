@@ -7,6 +7,7 @@ class DelegateHeader extends Component {
 
     constructor(props){
         super()
+        this.state={isHovering:false}
     }
 
     onToggle=()=>
@@ -30,6 +31,21 @@ class DelegateHeader extends Component {
     {
         console.log(this.props.delegation)
         Caller.showCancelDialog(this.props.delegation)
+    }
+
+    onMouseEnter=()=>
+    {
+        this.setState({isHovering:true})
+    }
+
+    onMouseLeave=()=>
+    {
+        this.setState({isHovering:false})
+    }
+
+    onBackgroundClick=()=>
+    {
+        this.props.onToggle(!this.props.colapsed)
     }
    
     render() {
