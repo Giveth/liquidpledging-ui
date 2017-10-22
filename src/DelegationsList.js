@@ -11,10 +11,7 @@ class DelegationList extends Component {
     }
    
     render() {
-        let indentLevel = this.props.indentLevel
-        if(!indentLevel)
-            indentLevel = 0
-
+        let indentLevel = this.props.indentLevel + 1 
         let list = []
 
         if(this.props.treeChildren)
@@ -23,11 +20,11 @@ class DelegationList extends Component {
                 return <Delegation
                     key={index}
                     tree={tree}
-                    indentLevel={indentLevel+1}
+                    indentLevel={indentLevel}
                     userAddress={this.props.userAddress} 
                 />})
         }
-
+        
         return (
             <div style={{paddingLeft:indentLevel* Styles.indentPadding}}>
                 {list}

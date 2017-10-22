@@ -49,6 +49,7 @@ class Delegation extends Component {
             showColapseButton = {hasChildren}
             onToggle = {this.onHeaderToggle}
             colapsed = {this.state.isColapsed}
+            indentLevel = {this.props.indentLevel}
             />
 
         if(this.props.tree.delegation.type === "Giver")
@@ -58,6 +59,7 @@ class Delegation extends Component {
             showColapseButton = {hasChildren}
             onToggle = {this.onHeaderToggle}
             colapsed = {this.state.isColapsed}
+            indentLevel = {this.props.indentLevel}
             />
 
         return (

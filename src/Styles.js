@@ -21,6 +21,7 @@ export const Colors = {
     delegateBackground:'rgba(0, 0, 0, 0.0)',
     giverBackgroundHover:'rgba(0, 0, 0, 0.1)',
     delegateBackgroundHover:'rgba(0, 0, 0, 0.02)',
+    rootHeaderBackground:'rgba(0, 0, 0, 0.05)',
 }
 
 export const Icons = {
@@ -65,7 +66,7 @@ export const Styles = {
     subtitle:{
         color:Colors.secondary,
         textTransform: 'uppercase',
-        paddingTop:20,
+        paddingTop:40,
         margin:0,
     },
 
@@ -98,7 +99,10 @@ export const Styles = {
             paddingTop: 5,
             paddingBottom: 5,
             marginTop: 5,
+        },
 
+        rootHeader:{
+            backgroundColor: Colors.rootHeaderBackground
         },
 
         giverHeader:{

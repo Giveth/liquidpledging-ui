@@ -92,8 +92,7 @@ class DelegateHeader extends Component {
                 </div>)
         }
 
-
-        let headerStyle = Merge(Styles.delegation.header, Styles.delegation.delegateHeader)
+        let headerStyle = MergeIf(Styles.delegation.header, Styles.delegation.rootHeader, (this.props.indentLevel===0))
 
         return (
 

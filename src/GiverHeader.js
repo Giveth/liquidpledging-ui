@@ -91,7 +91,7 @@ class GiverHeader extends Component {
         }
 
 
-        let headerStyle = Merge(Styles.delegation.header, Styles.delegation.giverHeader)
+        let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
 
         return (
             
