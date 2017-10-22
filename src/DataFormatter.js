@@ -135,18 +135,18 @@ class DataFormatter {
 
     initNodes(admins)
     {
-        let nodes = {}
+        let nodes = []
         for(let admin of admins)
         {
             let nodeId = this.getNodeId(admin) //same as adminID???
 
-            let receiver = {
+            let node = {
                 id:nodeId,
                 address:admin.addr,
                 delegationsIn:[],
                 delegationsOut:[]
             }
-            nodes[nodeId]=receiver
+            nodes.push(node)
         }
 
         return nodes
@@ -157,9 +157,9 @@ class DataFormatter {
         for (let delegationId in delegations) {
             if (delegations.hasOwnProperty(delegationId)) {
                 let d = delegations[delegationId]          
-                let nodeId = parseInt(d.adminId, 10)
-                nodes[nodeId].delegationsIn.push(d.id)
-                nodes[nodeId].delegationsOut = nodes[nodeId].delegationsOut.concat(d.delegations)
+                let nodeIndex = parseInt(d.adminId, 10)
+                nodes[nodeIndex].delegationsIn.push(d.id)
+                nodes[nodeIndex].delegationsOut = nodes[nodeIndex].delegationsOut.concat(d.delegations)
             }
         }
 

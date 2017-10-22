@@ -22,7 +22,7 @@ class LiquidPledgingController extends ProviderHelper {
         this.pledges=[]
         this.delegations={}
         this.delegationsArray=[]
-        this.nodes={}
+        this.nodes=[]
 
         this.setupWeb3()
     }
