@@ -145,7 +145,7 @@ class LiquidPledgingController extends ProviderHelper {
 
     addDelegate(name, url)
     {
-        return this.liquidPledging.addGiver(name, url, 0, 0, { from: this.currentAccount })
+        return this.liquidPledging.addDelegate(name, url, 0, 0, { from: this.currentAccount })
     }
 
     addProject(name, url)
