@@ -25,6 +25,7 @@ class Caller extends EventEmitter
        LiquidPledging.donate(data.emiterId, data.recieverId, data.amount )
        .then((data) => {
             console.log("Donated", data)
+            LiquidPledging.retrieveData()
         }).catch((error)=>console.error(error))
     }
 
@@ -39,6 +40,7 @@ class Caller extends EventEmitter
        LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount)
        .then((data) => {
             console.log("Transfered", data)
+            LiquidPledging.retrieveData()
         }).catch((error)=>console.error(error))
     }
 
@@ -64,6 +66,7 @@ class Caller extends EventEmitter
         LiquidPledging.cancel(data.emiterId, data.pledgeId, data.recieverId, data.amount)
         .then((data) => {
             console.log("Canceled", data)
+            LiquidPledging.retrieveData()
         }).catch((error)=>console.error(error))
     }
 
@@ -77,16 +80,23 @@ class Caller extends EventEmitter
     {
         console.log(data)
         if(data.type==="Giver")
-            LiquidPledging.addGiver(data.name, data.url).then((data) => {console.log("Giver added", data, LiquidPledging.admins)}).catch((error)=>console.error(error))
+            LiquidPledging.addGiver(data.name, data.url).then((data) => {
+                console.log("Giver added", data, LiquidPledging.admins)
+                LiquidPledging.retrieveData()
+            }).catch((error)=>console.error(error))
+
 
         else if(data.type==="Delegate")
             LiquidPledging.addDelegate(data.name, data.url).then((data) => {
                 console.log("Delgate added", data)
+                LiquidPledging.retrieveData()
             }).catch((error)=>console.error(error))
+
 
         else if(data.type==="Project")
             LiquidPledging.addProject(data.name, data.url).then((data) => {
                 console.log("Project added", data)
+                LiquidPledging.retrieveData()
             }).catch((error)=>console.error(error))
     }
 }
