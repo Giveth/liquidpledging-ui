@@ -1,6 +1,8 @@
 # Liquid Pledging User Interface
 
-This is a test interface for the [liquid pledging](https://github.com/Giveth/liquidpledging) smart contract.
+This is a generig user interface implementation for the [liquid pledging](https://github.com/Giveth/liquidpledging) smart contract.
+
+You an try a live version [here](https://giveth.github.io/liquidpledging-ui/).
 
 ## Basic Install
 
