@@ -65,6 +65,7 @@ export const Styles = {
     subtitle:{
         color:Colors.secondary,
         textTransform: 'uppercase',
+        paddingTop:20,
         margin:0,
     },
 
@@ -92,24 +93,21 @@ export const Styles = {
             display: 'flex',
             flexDirection: 'row',
             justifyContent:'space-between',
-            paddingLeft: 20,
-            paddingRight: 20,
+            paddingLeft: 15,
+            paddingRight: 15,
+            paddingTop: 5,
+            paddingBottom: 5,
+            marginTop: 5,
 
         },
 
         giverHeader:{
-            backgroundColor: Colors.giverBackground,
-            paddingTop: 10,
-            paddingBottom: 10,
-            marginTop: 5,
-            
+            backgroundColor: Colors.giverBackground,            
         },
 
         delegateHeader:{
             backgroundColor: Colors.delegateBackground,
-            paddingTop: 10,
-            paddingBottom: 10,
-            marginTop: 5,
+            
         },
 
         headerCell:{
