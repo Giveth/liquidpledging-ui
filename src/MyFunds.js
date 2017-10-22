@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
 import DelegationsList from './DelegationsList'
-import {Styles} from './Styles'
+import {Styles, Merge} from './Styles'
 
 const title = 'My funds'
 
@@ -45,8 +45,9 @@ class MyFunds extends Component {
             return
         }
 
-        let myFilter = {address:this.state.currentAddress}
-        let myNodes =  LPState.getNodes(myFilter)
+        let myFilter = {address:address}
+        let myNodes =  LPState.getNodes()
+        console.log(myNodes)
         let myDelegations = LPState.getFirstDelegationsForNodes(myNodes)
         let myTrees = LPState.getDelegationsTrees(myDelegations)
         this.setState({
@@ -60,7 +61,7 @@ class MyFunds extends Component {
         return (
             <div >
                 <p key = {"title"} style ={Styles.subtitle}> {title} </p>
-                <p key = {"currentAddress"} style ={Styles.addressSubtle}> {this.state.currentAddress} </p>
+                <p key = {"currentAddress"} style ={Merge(Styles.addressSubtle,Styles.colorForAdmin(true))}> {this.state.currentAddress} </p>
                 <DelegationsList treeChildren={this.state.treeChildren} indentLevel={0} userAddress={this.state.currentAddress}/>
             </div>
         )
