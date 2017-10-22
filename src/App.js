@@ -11,8 +11,22 @@ import MyFunds from './MyFunds.js'
 import AddAdmin from './AddAdmin.js'
 import OthersFunds from './OthersFunds.js'
 import Explorer from './Explorer.js'
+import {Tabs, Tab} from 'material-ui/Tabs';
 
 class App extends Component {
+
+    constructor()
+    {
+        super()
+        this.state={currentTab:0}
+    }
+
+    onTabChange=(value)=>
+    {
+        this.setState({
+          currentTab: value,
+        });
+    }
 
     render() {
         return (
@@ -29,9 +43,24 @@ class App extends Component {
                                 style={Styles.givethLogo}/>
                         </div>
 
-                        <MyFunds/>
-                        <OthersFunds/>
-                        <Explorer/>
+                         <Tabs
+                            value={this.state.currentTab}
+                            onChange={this.onTabChange}>
+
+                            <Tab label="Tab A" value={0}>
+                                <MyFunds/>
+                            </Tab>
+
+                            <Tab label="Tab B" value={1}>
+                                <OthersFunds/>
+                            </Tab>
+
+                            <Tab label="Tab C" value={2}>
+                                <Explorer/>
+                            </Tab>
+
+                          </Tabs>
+
                     </Page>
                     
                     <AddAdmin/>

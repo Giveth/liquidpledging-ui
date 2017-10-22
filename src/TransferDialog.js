@@ -115,7 +115,7 @@ class TransferDialog extends React.Component
         let title = "Delegate funds to "+ this.props.data.giverName
         let emiters = this.props.meta.emiters
 
-        let defaultItem =  <MenuItem key= {0} alue={0} primaryText={'Delegate from...'} disabled={true} />
+        let defaultItem =  <MenuItem key= {0} value={0} primaryText={'Delegate from...'} disabled={true} />
 
         if(!emiters.length)
             defaultItem =  <MenuItem key= {0} value={0} primaryText={'No available accounts'} disabled={true} />
