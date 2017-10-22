@@ -12,7 +12,6 @@ class MyFunds extends Component {
 
         this.state={
             network:"",
-            currentAddress:"",
             treeChildren:[]
         }
 
@@ -22,36 +21,38 @@ class MyFunds extends Component {
     }
 
     onStateChanged=()=>{
-        let address = this.state.currentAddress
-        //let nodes = this.getNodes({filter:this.state.currentAddress})
-
-        let rootDelegations = LPState.getDelegations(address) //only the ones with userAddress that are 'Giver'
-       //console.log('trees', trees)
-
-       
-        let myFilter = {address:this.state.currentAddress}
-        let myNodes =  LPState.getNodes(myFilter)
-        console.log('my nodes',myNodes)
-
-        let dFromNodes = LPState.getFirstDelegationsForNodes(myNodes)
-        console.log('delegations from nodes', dFromNodes)
-
-        let trees = LPState.getDelegationsTrees(dFromNodes)
-
-        console.log(trees)
-         this.setState({ tree:trees })
-
-       // console.log('my delegations', LPState.getDelegations())
+        this.setDelegations()
     }
 
     onAccountChanged=()=>{
-        let newAccount = LPState.getCurrentAccount()
-        this.setState({currentAddress:newAccount})
+        this.setDelegations()
     }
 
     onNetworkChanged=()=>{
-        let newNetwork = LPState.getCurrentNetwork().name
-        this.setState({network:newNetwork})
+        this.setDelegations()
+    }
+
+    setDelegations=()=>
+    {
+        let address = LPState.getCurrentAccount()
+
+        if(!address)
+        {
+            this.setState({
+                treeChildren:[],
+                currentAddress:'Not connected to Ethereum...  (╯°□°）╯︵ ┻━┻',
+            })
+            return
+        }
+
+        let myFilter = {address:this.state.currentAddress}
+        let myNodes =  LPState.getNodes(myFilter)
+        let myDelegations = LPState.getFirstDelegationsForNodes(myNodes)
+        let myTrees = LPState.getDelegationsTrees(myDelegations)
+        this.setState({
+            treeChildren:myTrees,
+            currentAddress:address,
+        })
     }
 
     render() {
@@ -60,8 +61,7 @@ class MyFunds extends Component {
             <div >
                 <p key = {"title"} style ={Styles.subtitle}> {title} </p>
                 <p key = {"currentAddress"} style ={Styles.addressSubtle}> {this.state.currentAddress} </p>
-                <DelegationsList treeChildren={this.state.tree} indentLevel={0} userAddress={this.state.currentAddress}/>
-                <pre key = {"data"} style ={{wordWrap: 'break-word'}}> {this.state.data} </pre>
+                <DelegationsList treeChildren={this.state.treeChildren} indentLevel={0} userAddress={this.state.currentAddress}/>
             </div>
         )
     }
