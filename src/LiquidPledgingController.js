@@ -41,32 +41,23 @@ class LiquidPledgingController extends ProviderHelper {
         this.liquidPledgingState = new LiquidPledgingState(this.liquidPledging);
 
         
-        if(this.providerInfo.id !== 'MetaMask')
+
+        this.web3.eth.subscribe('newBlockHeaders',(err,block)=>
         {
-            this.web3.eth.subscribe('newBlockHeaders',(err,block)=>
-            {
-                if (err) {
-                    console.error("ERROR", err);
-                } else {
-                    //console.log("block: " + block.number )
-                    this.retriveStateData()
-                }
-            })
-        }
-        else
-        {
-            setInterval(()=>{
+            if (err) {
+                console.error("ERROR", err);
+            } else {
+                //console.log("block: " + block.number )
                 this.retriveStateData()
-            },10000)
-        }
-        
-        
-        this.retriveStateData()
-        /*
-        //TODO remove when doesn't need more testing
+            }
+        })   
+
+        //TODO: This needs to be gone. It is just because some providers don't support the subscribe method yet
         setInterval(()=>{
             this.retriveStateData()
-        }, 10000);*/
+        },20000) 
+        
+        this.retriveStateData()
     }
 
     retriveStateData()
