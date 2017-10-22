@@ -143,6 +143,9 @@ class DataFormatter {
             let node = {
                 id:nodeId,
                 address:admin.addr,
+                type:admin.type,
+                name:admin.name,
+                url:admin.url,
                 delegationsIn:[],
                 delegationsOut:[]
             }
