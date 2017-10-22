@@ -128,14 +128,6 @@ export const Styles = {
             backgroundColor : Colors.delegateBackgroundHover
         },
 
-        title:{
-            color:Colors.highlight,
-            paddingLeft: 5,
-            paddingRight: 10,
-            paddingTop: 0,
-            paddingBottom: 0,
-        },
-
         colapseButton:{
             //width:32
         },
@@ -148,14 +140,32 @@ export const Styles = {
             display:'none'
         },
 
+        title:{
+            color:Colors.highlight,
+            paddingLeft: 5,
+            paddingRight: 10,
+            paddingTop: 0,
+            paddingBottom: 0,
+            whiteSpace:'nowrap',
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+        },
+
+        shrink:{
+            flex:1,
+            minWidth: 0,
+            flexBasis:'auto'
+        },
+
+        actionButons:
+        {
+            flexShrink:0,
+            display: 'inlineBlock',
+        },
+
         amount:{
             color:Colors.secondary,
-            /*borderRadius: 4,
-            MoBborderRadius: 4,
-            WebkitBorderRadius: 4,
-            backgroundColor: Colors.backgroundHighlight,
-            padding: 10,
-            margin: 0,*/
+            width:100,
         }
     },
 

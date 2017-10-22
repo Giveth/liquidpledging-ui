@@ -85,7 +85,7 @@ class GiverHeader extends Component {
         if(this.state.isHovering)
         {
             actionButons =(
-                <div style = {Styles.inline}>
+                <div style = {Styles.delegation.actionButons}>
                     {addFundsButton}
                 </div>)
         }
@@ -126,7 +126,6 @@ class GiverHeader extends Component {
 
                     <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
                         {actionButons}
-                        <div style = {Styles.emptyButton} />
                         {colapseButton}
                     </div>
 

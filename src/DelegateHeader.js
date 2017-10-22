@@ -86,7 +86,7 @@ class DelegateHeader extends Component {
         if(this.state.isHovering)
         {
             actionButons =(
-                <div style = {Styles.inline}>
+                <div style = {Styles.delegation.actionButons}>
                     {cancelDelegateButton}
                     {delegateFundsButton}
                 </div>)
@@ -102,7 +102,7 @@ class DelegateHeader extends Component {
                 onMouseLeave = {this.onMouseLeave}
                 onClick = {this.onBackgroundClick}>
 
-                <div style = {Styles.delegation.headerCell}>
+                <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.shrink)}>
                      <p key = {"name"}  style= {MergeIf(Styles.delegation.title, Styles.adminColor, isAdmin)}>
                         {this.props.delegation.name}
                     </p>
@@ -113,14 +113,9 @@ class DelegateHeader extends Component {
                    
                 </div>
 
-                <div style = {Styles.delegation.headerCell}>
-                   
-                </div>
-
                  <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
 
                     {actionButons}
-                    <div style = {Styles.emptyButton} />
                     {colapseButton}     
 
                 </div>       
