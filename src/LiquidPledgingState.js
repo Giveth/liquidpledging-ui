@@ -5,15 +5,7 @@ const Filter = require('./Filter.js');
 class LiquidPledgingState extends LiquidPledgingController {
 
     
-    getAdmins(propertiesFilter={})
-    {
-        let filtered  = this.admins
-
-        for (const property of Object.keys(propertiesFilter)) 
-            filtered = Filter.byProperty(filtered, property, propertiesFilter[property])
-        
-        return filtered
-    }
+    //PLEDGES
 
     getPledge(pledgeId)
     {
@@ -35,12 +27,41 @@ class LiquidPledgingState extends LiquidPledgingController {
         return filtered
     }
 
+    //ADMINS
+
+    getAdmins(propertiesFilter={})
+    {
+        let filtered  = this.admins
+
+        for (const property of Object.keys(propertiesFilter)) 
+            filtered = Filter.byProperty(filtered, property, propertiesFilter[property])
+        
+        return filtered
+    }
     /*getAdminForLevel(pledge, level)
     {
         if(pledge.delegates.length > level)
             return pledge.delegates[pledge.delegates.length - 1 - level]
         return -1
     }*/
+
+
+    //DELEGATIONS
+
+    getDelegations(address, type)
+    {
+        let propertiesFilter = {}
+        if(address)
+            propertiesFilter.adminAddress = address
+        if(type)
+            propertiesFilter.type = type
+
+        let delegations = Filter.byProperties(this.delegationsArray, propertiesFilter)
+    
+        return delegations
+    }
+
+    //DELEGATION TREES
 
     getDelegationTree(delegation, childrenPropertiesFilter)
     {
@@ -73,18 +94,13 @@ class LiquidPledgingState extends LiquidPledgingController {
         return trees
     }
 
-    getDelegations(address, type)
-    {
-        let propertiesFilter = {}
-        if(address)
-            propertiesFilter.adminAddress = address
-        if(type)
-            propertiesFilter.type = type
-
-        let delegations = Filter.byProperties(this.delegationsArray, propertiesFilter)
+    //NODES
     
-        return delegations
+    getNodesByAddress(address)
+    {
+        return Filter.byProperty(this.nodes, 'address', address)
     }
+
 
     /*getAvailablePledges(address)
     {
