@@ -104,7 +104,7 @@ class DelegateHeader extends Component {
                 onClick = {this.onBackgroundClick}>
 
                 <div style = {Styles.delegation.headerCell}>
-                     <p key = {"name"}  style= {MergeIf(Styles.delegation.title, Styles.AdminColor, isAdmin)}>
+                     <p key = {"name"}  style= {MergeIf(Styles.delegation.title, Styles.adminColor, isAdmin)}>
                         {this.props.delegation.name}
                     </p>
 
