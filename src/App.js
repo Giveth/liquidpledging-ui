@@ -29,6 +29,7 @@ class App extends Component {
                         </div>
 
                         <MyFunds/>
+                        <OthersFunds/>
                     </Page>
                     
                     <AddAdmin/>
