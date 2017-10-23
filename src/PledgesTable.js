@@ -26,6 +26,7 @@ class PledgesTable extends React.Component {
               Header: "Pledges",
               columns: [
                 {
+                    Header: "Id",
                     amount: "Id",
                     accessor: "id"
                 },
@@ -35,7 +36,37 @@ class PledgesTable extends React.Component {
                     accessor: d => d.amount,
                     Cell: row => Currency.format(Currency.toEther(row.row.amount))
                 },
-
+                {
+                    Header: "Delegates",
+                    id: "delegates",
+                    accessor: d => d.delegates,
+                    Cell: row => row.row.delegates.toString()
+                },
+                {
+                    Header: "Owner",
+                    id: "owner",
+                    accessor: d => d.owner,
+                },
+                {
+                    Header: "Intended project",
+                    id: "intendedProject",
+                    accessor: d => d.intendedProject,
+                },
+                {
+                    Header: "Commit time",
+                    id: "commmitTime",
+                    accessor: d => d.commmitTime,
+                },
+                {
+                    Header: "Old pledge",
+                    id: "oldPledge",
+                    accessor: d => d.oldPledge,
+                },
+                {
+                    Header: "Payment state",
+                    id: "paymentState",
+                    accessor: d => d.paymentState,
+                },
               ]
             }
           ]}
