@@ -15,15 +15,14 @@ import {Tabs, Tab} from 'material-ui/Tabs'
 
 class LayoutController extends Component {
 
-    constructor()
+    constructor(props)
     {
         super()
-        this.state={currentTab:0, windowWidth:window.innerWidth}
+        this.state={currentTab:props.defaultTab, windowWidth:window.innerWidth}
 
         window.addEventListener('resize', ()=>{
             this.setState({windowWidth:window.innerWidth})
         })
-       
     }
 
     onTabChange=(value)=>
@@ -64,7 +63,7 @@ class LayoutController extends Component {
                     if(item.props.label)
                         label = item.props.label
 
-                    return (<Tab label={label} value={index}> {item} </Tab>)
+                    return (<Tab key={index} label={label} value={index}> {item} </Tab>)
                 })
 
                 view = <Tabs value={this.state.currentTab} onChange={this.onTabChange}> {tabs} </Tabs>
