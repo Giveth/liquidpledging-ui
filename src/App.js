@@ -2,16 +2,17 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
 
-import Page from './Page.js'
+import Page from './Page'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Styles } from './Styles'
 import GreyTheme from './GreyTheme'
 import Dialogs from './Dialogs'
-import MyFunds from './MyFunds.js'
-import AddAdmin from './AddAdmin.js'
-import OthersFunds from './OthersFunds.js'
-import Explorer from './Explorer.js'
-import {Tabs, Tab} from 'material-ui/Tabs';
+import MyFunds from './MyFunds'
+import AddAdmin from './AddAdmin'
+import OthersFunds from './OthersFunds'
+import Explorer from './Explorer'
+import {Tabs, Tab} from 'material-ui/Tabs'
+import LayoutController from './LayoutController'
 
 class App extends Component {
 
@@ -43,23 +44,13 @@ class App extends Component {
                                 style={Styles.givethLogo}/>
                         </div>
 
-                         <Tabs
-                            value={this.state.currentTab}
-                            onChange={this.onTabChange}>
+                        <LayoutController>
 
-                            <Tab label="My funds" value={0}>
-                                <MyFunds/>
-                            </Tab>
+                            <MyFunds label="My funds"/>
+                            <OthersFunds label="Other's funds" />
+                            <Explorer label="Explorer" />
 
-                            <Tab label="Other's funds" value={1}>
-                                <OthersFunds/>
-                            </Tab>
-
-                            <Tab label="Explorer" value={2}>
-                                <Explorer/>
-                            </Tab>
-
-                          </Tabs>
+                        </LayoutController>
 
                     </Page>
                     
