@@ -56,7 +56,7 @@ class LayoutController extends Component {
         }
         else if (viewsNumber > 1)
         {
-            if(isTabLayout)
+            if(true)//isTabLayout
             {
                 let tabs = this.props.children.map((item, index)=>
                 {
@@ -68,8 +68,11 @@ class LayoutController extends Component {
                 })
 
                 view = <Tabs value={this.state.currentTab} onChange={this.onTabChange}> {tabs} </Tabs>
-
-            }   
+            }
+            else
+            {
+                //Make alternative layout here
+            }
         }
 
         return (
