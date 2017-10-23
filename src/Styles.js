@@ -7,7 +7,7 @@ import AddAdminIcon from 'react-icons/lib/md/group-add'
 
 import Numeral from 'numeral'
 
-const MAX_CONTENT_WIDTH = 600
+const MAX_CONTENT_WIDTH = 800
 const MIN_CONTENT_WIDTH = 400
 
 export const Colors = {
