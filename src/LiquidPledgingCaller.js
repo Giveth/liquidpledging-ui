@@ -51,7 +51,7 @@ class Caller extends EventEmitter
         console.log(currentDelegation, delegation)
 
         let data = {
-            emiterId:delegation.parentAdminId,
+            emiterId:currentDelegation.adminId,
             pledgeId:currentDelegation.pledgeId,
             recieverId:delegation.parentAdminId,
             amount:Currency.toEther(currentDelegation.assignedAmount)

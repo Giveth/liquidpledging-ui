@@ -50,7 +50,7 @@ class DelegateHeader extends Component {
     render() {
 
         let isAdmin = (this.props.userAddress === this.props.delegation.adminAddress)
-        let canCancel = false
+        let canCancel = true
 
         let toggleIcon = <Icons.colapsed size={20}/>
         if(this.props.colapsed)
