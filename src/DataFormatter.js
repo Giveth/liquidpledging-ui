@@ -21,7 +21,7 @@ class DataFormatter {
     {
         return pledges.map((pledge, index)=>{
 
-            pledge.commitTime=parseInt(pledge.commitTime,10)
+            pledge.commmitTime=parseInt(pledge.commmitTime,10)
             pledge.intendedProject=parseInt(pledge.intendedProject,10)
             pledge.oldPledge=parseInt(pledge.oldPledge,10)
             pledge.amount=parseInt(pledge.amount,10) //it may give problems with bigNumber
