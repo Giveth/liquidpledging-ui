@@ -34,9 +34,12 @@ export const Icons = {
     addAdmin:AddAdminIcon
 }
 
+
 export const Styles = {
 
     indentPadding:16,
+    minContentWidth:MIN_CONTENT_WIDTH,
+    maxContentWidth:MAX_CONTENT_WIDTH,
 
     emptyButton:{
         width:48

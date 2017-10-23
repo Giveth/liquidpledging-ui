@@ -18,7 +18,12 @@ class LayoutController extends Component {
     constructor()
     {
         super()
-        this.state={currentTab:0}
+        this.state={currentTab:0, windowWidth:window.innerWidth}
+
+        window.addEventListener('resize', ()=>{
+            this.setState({windowWidth:window.innerWidth})
+        })
+       
     }
 
     onTabChange=(value)=>
@@ -41,7 +46,7 @@ class LayoutController extends Component {
     render() {
 
         let viewsNumber = this.getNumberOfViews()
-        let isTabLayout = ((Styles.minContentWidth * viewsNumber) > window.innerWidth)
+        let isTabLayout = ((Styles.minContentWidth * viewsNumber) > this.state.windowWidth)
 
         let view = <div/>
 
