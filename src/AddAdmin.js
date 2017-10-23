@@ -14,11 +14,9 @@ class AddAdmin extends Component {
     {
         Caller.showAddAdminDialog()
     }
-
-   
+    
     render() {
-       
-    console.log(Styles.floatingBottomRight)
+
         return (
 
             <div style = {{backgroundColor:'red'}}>
