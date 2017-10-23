@@ -13,20 +13,13 @@ import OthersFunds from './OthersFunds'
 import Explorer from './Explorer'
 import {Tabs, Tab} from 'material-ui/Tabs'
 import LayoutController from './LayoutController'
+import PledgesView from './PledgesView'
 
 class App extends Component {
 
     constructor()
     {
         super()
-        this.state={currentTab:0}
-    }
-
-    onTabChange=(value)=>
-    {
-        this.setState({
-          currentTab: value,
-        });
     }
 
     render() {
@@ -44,18 +37,18 @@ class App extends Component {
                                 style={Styles.givethLogo}/>
                         </div>
 
-                        <LayoutController>
+                        <LayoutController defaultTab = {3}>
 
                             <MyFunds label="My funds"/>
                             <OthersFunds label="Other's funds" />
                             <Explorer label="Explorer" />
+                            <PledgesView label="Pledges" />
 
                         </LayoutController>
 
                     </Page>
                     
                     <AddAdmin/>
-
                     <Dialogs/>
 
                 </div>
