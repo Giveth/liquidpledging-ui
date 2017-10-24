@@ -23,6 +23,7 @@ class DelegationList extends Component {
                     indentLevel={indentLevel}
                     userAddress={this.props.userAddress}
                     defaultColapsed ={this.props.defaultColapsed}
+                    defaultColapsedRoot ={this.props.defaultColapsedRoot}
                 />})
         }
         

@@ -69,7 +69,8 @@ class GiverView extends Component {
                     treeChildren={this.state.treeChildren}
                     indentLevel={-1}
                     userAddress={this.state.currentAddress}
-                    defaultColapsed = {false}/>
+                    defaultColapsed = {false}
+                    defaultColapsedRoot={true}/>
 
             </div>
         )

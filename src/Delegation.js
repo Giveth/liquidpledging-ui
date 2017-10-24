@@ -10,8 +10,20 @@ class Delegation extends Component {
     constructor(props){
         super()
 
+        let colapsed = false
+        if ((props.indentLevel === 0) && (!isNaN(props.defaultColapsedRoot)))
+        {
+            colapsed=props.defaultColapsedRoot
+        }
+        else if (!isNaN(props.defaultColapsed))
+        {
+            colapsed=props.defaultColapsed
+        }
+
+        console.log(props.indentLevel, props.defaultColapsed, colapsed)
+
         this.state={
-            isColapsed:props.defaultColapsed
+            isColapsed:colapsed
         }
     }
 
@@ -29,6 +41,9 @@ class Delegation extends Component {
                 <DelegationsList
                     treeChildren={this.props.tree.children}
                     indentLevel={indentLevel}
+                    userAddress={this.props.userAddress}
+                    defaultColapsedRoot={this.props.defaultColapsedRoot}
+                    defaultColapsed={this.props.defaultColapsed}
                 />
             </div>
 
@@ -39,6 +54,8 @@ class Delegation extends Component {
                     treeChildren={this.props.tree.children}
                     indentLevel={indentLevel}
                     userAddress={this.props.userAddress}
+                    defaultColapsedRoot={this.props.defaultColapsedRoot}
+                    defaultColapsed={this.props.defaultColapsed}
                 />
             </div>
         }
