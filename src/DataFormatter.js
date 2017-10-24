@@ -21,7 +21,7 @@ class DataFormatter {
     {
         return pledges.map((pledge, index)=>{
 
-            pledge.commitTime=parseInt(pledge.commitTime,10)
+            pledge.commmitTime=parseInt(pledge.commmitTime,10)
             pledge.intendedProject=parseInt(pledge.intendedProject,10)
             pledge.oldPledge=parseInt(pledge.oldPledge,10)
             pledge.amount=parseInt(pledge.amount,10) //it may give problems with bigNumber
@@ -57,9 +57,10 @@ class DataFormatter {
 
             let parentId = this.getDelegationId(pledge.owner, parentDelegates, 0)
 
-            let delegationChainId =  this.getDelegationChainId(pledge.owner, pledge.delegates, pledge.intendedProject)
-            let adminId =  delegationChainId[delegationChainId.length - 1]
-            let parentAdminId = delegationChainId[delegationChainId.length - 2]
+            let delegationChain =  this.getDelegationChain(pledge.owner, pledge.delegates, pledge.intendedProject)
+
+            let adminId =  delegationChain[delegationChain.length - 1]
+            let parentAdminId = delegationChain[delegationChain.length - 2]
 
             if(pledge.delegates.length===0)
             {
@@ -90,7 +91,7 @@ class DataFormatter {
         }
 
         let delegations = {}
-        //we go over the just created delegations and assign them their child delegations
+        //we go over the just created delegations and assign them their child delegations and we add up to the assigned amount
         for(let i = 0; i < delegationsArray.length; i++)
         {
             let current = delegationsArray[i]
@@ -105,30 +106,12 @@ class DataFormatter {
                 {
                     delegationsArray[j].assignedAmount += current.assignedAmount
                     delegationsArray[j].delegations.push(current.id)
-
-                    break //there is only one parent
+                    break //delegation has one parent only
                 }
             }
            
             delegations[current.id] = current
         }
-
-       /*
-        //Let's create delegations for admins that haven't got any transcation yet
-
-        for(let admin of admins)
-        {
-            let delegationsChain = []
-            if(admin.type!=="Giver")
-               delegationsChain=[NONE]
-
-            delegationsChain.push(admin.id)
-            let rootDelegationId =  delegationsChain.toString()
-            if(!delegations[rootDelegationId])
-            {
-                console.log("new", rootDelegationId)
-            }
-        }*/
 
         return delegations
     }
@@ -152,18 +135,20 @@ class DataFormatter {
            }
     }
 
-    getDelegationId(owner, delegates, intendedProject)
+    getDelegationId( owner, delegates, intendedProject)
     {
-        let delegatesChain =this.getDelegationChainId(owner, delegates,intendedProject)
+        let delegatesChain = this.getDelegationChain(owner, delegates,intendedProject)
+        //delegatesChain.unshift(oldPledge)
         return delegatesChain.toString()
     }
 
-    getDelegationChainId(owner, delegates, intendedProject)
+    getDelegationChain(owner, delegates, intendedProject)
     {
-        let delegatesChain = [owner]
+        let delegatesChain = []
+        delegatesChain.push(owner)
         delegatesChain = delegatesChain.concat(delegates)
         if(intendedProject)
-            delegatesChain = delegatesChain.concat([intendedProject])
+            delegatesChain.push(intendedProject)
         return delegatesChain
     }
 
@@ -207,7 +192,6 @@ class DataFormatter {
     {
         return admin.id
     }
-
 
     getDelegationsArray(delegations)
     {
