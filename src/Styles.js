@@ -4,6 +4,7 @@ import ShownIcon from 'react-icons/lib/md/keyboard-arrow-down'
 import AddIcon from 'react-icons/lib/fa/plus'
 import CancelIcon from 'react-icons/lib/fa/close'
 import AddAdminIcon from 'react-icons/lib/md/group-add'
+import ProjectIcon from 'react-icons/lib/fa/flask'
 
 import Numeral from 'numeral'
 
@@ -31,7 +32,8 @@ export const Icons = {
     shown:ShownIcon,
     add:AddIcon,
     cancel:CancelIcon,
-    addAdmin:AddAdminIcon
+    addAdmin:AddAdminIcon,
+    project:ProjectIcon
 }
 
 
@@ -42,7 +44,11 @@ export const Styles = {
     maxContentWidth:MAX_CONTENT_WIDTH,
 
     emptyButton:{
-        width:48
+        display:"flex",
+        flexDirection: 'row',
+        justifyContent:'center',
+        alignItems:'center',
+        width:48,
     },
 
     row:{
