@@ -20,8 +20,6 @@ class Delegation extends Component {
             colapsed=props.defaultColapsed
         }
 
-        console.log(props.indentLevel, props.defaultColapsed, colapsed)
-
         this.state={
             isColapsed:colapsed
         }
