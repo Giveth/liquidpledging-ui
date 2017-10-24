@@ -14,6 +14,7 @@ import Explorer from './Explorer'
 import {Tabs, Tab} from 'material-ui/Tabs'
 import LayoutController from './LayoutController'
 import PledgesView from './PledgesView'
+import GiverView from './GiverView'
 
 class App extends Component {
 
@@ -37,8 +38,8 @@ class App extends Component {
                                 style={Styles.givethLogo}/>
                         </div>
 
-                        <LayoutController defaultTab = {3}>
-
+                        <LayoutController defaultTab = {0}>
+                             <GiverView label="Giver"/>
                             <MyFunds label="My funds"/>
                             <OthersFunds label="Other's funds" />
                             <Explorer label="Explorer" />
