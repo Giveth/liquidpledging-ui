@@ -11,9 +11,7 @@ class PledgesTable extends React.Component {
 
   render() {
 
-    console.log(this.props.pledges)
-
-    let rows = 10
+    let rows = 1
     if(this.props.pledges.length)
         rows = this.props.pledges.length
 

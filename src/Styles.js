@@ -174,7 +174,7 @@ export const Styles = {
 
         amount:{
             color:Colors.secondary,
-            width:100,
+            width:120,
         }
     },
 
