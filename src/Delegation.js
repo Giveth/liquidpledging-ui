@@ -11,7 +11,7 @@ class Delegation extends Component {
         super()
 
         this.state={
-            isColapsed:true
+            isColapsed:props.defaultColapsed
         }
     }
 
@@ -32,7 +32,7 @@ class Delegation extends Component {
                 />
             </div>
 
-        if(this.state.isColapsed)
+        if(!this.state.isColapsed)
         {
             children = <div style = {Styles.delegation.bodyShown}>
                 <DelegationsList

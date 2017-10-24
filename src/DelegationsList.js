@@ -21,7 +21,8 @@ class DelegationList extends Component {
                     key={index}
                     tree={tree}
                     indentLevel={indentLevel}
-                    userAddress={this.props.userAddress} 
+                    userAddress={this.props.userAddress}
+                    defaultColapsed ={this.props.defaultColapsed}
                 />})
         }
         
