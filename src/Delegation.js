@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import DelegationsList from './DelegationsList'
-import { Styles } from './Styles'
+import { Styles, MergeIf} from './Styles'
 import GiverHeader from './GiverHeader'
 import DelegateHeader from './DelegateHeader'
 import ProjectHeader from './ProjectHeader'
@@ -37,7 +37,7 @@ class Delegation extends Component {
     render() {
 
         let indentLevel = this.props.indentLevel
-        let children = <div style = {Styles.delegation.bodyColapsed}>
+        let children = <div style = {MergeIf(Styles.delegation.body, Styles.delegation.bodyColapsed, this.state.isColapsed) }>
                 <DelegationsList
                     treeChildren={this.props.tree.children}
                     indentLevel={indentLevel}
@@ -46,19 +46,6 @@ class Delegation extends Component {
                     defaultColapsed={this.props.defaultColapsed}
                 />
             </div>
-
-        if(!this.state.isColapsed)
-        {
-            children = <div style = {Styles.delegation.bodyShown}>
-                <DelegationsList
-                    treeChildren={this.props.tree.children}
-                    indentLevel={indentLevel}
-                    userAddress={this.props.userAddress}
-                    defaultColapsedRoot={this.props.defaultColapsedRoot}
-                    defaultColapsed={this.props.defaultColapsed}
-                />
-            </div>
-        }
 
         let hasChildren = (this.props.tree && this.props.tree.children && this.props.tree.children.length)
         

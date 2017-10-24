@@ -141,7 +141,7 @@ export const Styles = {
             //width:32
         },
 
-        bodyShown:{
+        body:{
 
         },
 
