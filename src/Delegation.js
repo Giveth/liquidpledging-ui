@@ -3,6 +3,7 @@ import DelegationsList from './DelegationsList'
 import { Styles } from './Styles'
 import GiverHeader from './GiverHeader'
 import DelegateHeader from './DelegateHeader'
+import ProjectHeader from './ProjectHeader'
 
 class Delegation extends Component {
 
@@ -45,6 +46,16 @@ class Delegation extends Component {
         let hasChildren = (this.props.tree && this.props.tree.children && this.props.tree.children.length)
         
         let header = <DelegateHeader 
+            delegation = {this.props.tree.delegation}
+            userAddress={this.props.userAddress}
+            showColapseButton = {hasChildren}
+            onToggle = {this.onHeaderToggle}
+            colapsed = {this.state.isColapsed}
+            indentLevel = {this.props.indentLevel}
+            />
+
+        if(this.props.tree.delegation.type === "Project")
+            header = <ProjectHeader 
             delegation = {this.props.tree.delegation}
             userAddress={this.props.userAddress}
             showColapseButton = {hasChildren}
