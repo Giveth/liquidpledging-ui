@@ -44,6 +44,7 @@ class AddressSelector extends React.Component
         })
 
         return (
+            <div style = {Styles.floatingAddressSelectorTopLeft}>
                 <DropDownMenu
                     value={this.state.selectedIndex}
                     onChange={this.onSelected}
@@ -52,6 +53,7 @@ class AddressSelector extends React.Component
                     {list}
 
                 </DropDownMenu>
+            </div>
         )
     }
 }
