@@ -35,7 +35,7 @@ class Dialogs extends Component {
 
     onStateChanged=()=>{
 
-        let emiters = LPState.getDelegations(this.state.currentAddress)
+        let emiters = LPState.getDelegationsByAddress(this.state.currentAddress)
         let transferMetadata={}
         transferMetadata.emiters=emiters
         this.setState({ transferMetadata:transferMetadata})
