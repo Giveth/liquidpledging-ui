@@ -47,23 +47,23 @@ await liquidPledging.transfer(1, 3, utils.toWei(0.5), 1, { from: user1, gas: 200
 */
 
 //Let's create all the admins fiirst. 5 givers, 5delegates and 5 proejcts. 15 in total
-    await liquidPledging.addGiver('Giver1User1', 'URLGiver1User1', 600, 0, { from: user1 }); //#A1 --> Means: Admin[1] is created
-    await liquidPledging.addGiver('Giver1User2', 'URLGiver1User2', 600, 0, { from: user2 }); //#A2
-    await liquidPledging.addGiver('Giver1User3', 'URLGiver1User3', 600, 0, { from: user3 }); //#A3
-    await liquidPledging.addGiver('Giver1User4', 'URLGiver1User4', 600, 0, { from: user4 }); //#A4
-    await liquidPledging.addGiver('Giver1User5', 'URLGiver1User5', 600, 0, { from: user5 }); //#A5
+    await liquidPledging.addGiver('Giver1User1', 'URLGiver1User1', 60, 0, { from: user1 }); //#A1 --> Means: Admin[1] is created
+    await liquidPledging.addGiver('Giver1User2', 'URLGiver1User2', 60, 0, { from: user2 }); //#A2
+    await liquidPledging.addGiver('Giver1User3', 'URLGiver1User3', 60, 0, { from: user3 }); //#A3
+    await liquidPledging.addGiver('Giver1User4', 'URLGiver1User4', 60, 0, { from: user4 }); //#A4
+    await liquidPledging.addGiver('Giver1User5', 'URLGiver1User5', 60, 0, { from: user5 }); //#A5
 
-    await liquidPledging.addDelegate('Delegate1User1', 'URLDelegate1User1', 0, 0, { from: user1 }); //#A6
-    await liquidPledging.addDelegate('Delegate1User2', 'URLDelegate1User2', 0, 0, { from: user2 }); //#A7
-    await liquidPledging.addDelegate('Delegate1User3', 'URLDelegate1User3', 0, 0, { from: user3 }); //#A8
-    await liquidPledging.addDelegate('Delegate1User4', 'URLDelegate1User4', 0, 0, { from: user4 }); //#A9
-    await liquidPledging.addDelegate('Delegate1User5', 'URLDelegate1User5', 0, 0, { from: user5 }); //#A10
+    await liquidPledging.addDelegate('Delegate1User1', 'URLDelegate1User1', 60, 0, { from: user1 }); //#A6
+    await liquidPledging.addDelegate('Delegate1User2', 'URLDelegate1User2', 60, 0, { from: user2 }); //#A7
+    await liquidPledging.addDelegate('Delegate1User3', 'URLDelegate1User3', 60, 0, { from: user3 }); //#A8
+    await liquidPledging.addDelegate('Delegate1User4', 'URLDelegate1User4', 60, 0, { from: user4 }); //#A9
+    await liquidPledging.addDelegate('Delegate1User5', 'URLDelegate1User5', 60, 0, { from: user5 }); //#A10
 
-    await liquidPledging.addProject('Project1User1', 'URLProject1User1', user4, 0, 86400, 0, { from: user1 }); //#A11
-    await liquidPledging.addProject('Project1User2', 'URLProject1User2', user4, 0, 86400, 0, { from: user2 }); //#A12
-    await liquidPledging.addProject('Project1User3', 'URLProject1User3', user4, 0, 86400, 0, { from: user3 }); //#A13
-    await liquidPledging.addProject('Project1User4', 'URLProject1User4', user4, 0, 86400, 0, { from: user4 }); //#A14
-    await liquidPledging.addProject('Project1User5', 'URLProject1User5', user4, 0, 86400, 0, { from: user5 }); //#A15
+    await liquidPledging.addProject('Project1User1', 'URLProject1User1', user4, 0, 60, 0, { from: user1 }); //#A11
+    await liquidPledging.addProject('Project1User2', 'URLProject1User2', user4, 0, 60, 0, { from: user2 }); //#A12
+    await liquidPledging.addProject('Project1User3', 'URLProject1User3', user4, 0, 60, 0, { from: user3 }); //#A13
+    await liquidPledging.addProject('Project1User4', 'URLProject1User4', user4, 0, 60, 0, { from: user4 }); //#A14
+    await liquidPledging.addProject('Project1User5', 'URLProject1User5', user4, 0, 60, 0, { from: user5 }); //#A15
 
 //-------------------    
 
