@@ -51,6 +51,11 @@ export const Styles = {
         width:48,
     },
 
+    space:{
+        width:24,
+        height:24,
+    },
+
     row:{
         display:"flex",
         flexDirection: 'row',
@@ -90,6 +95,21 @@ export const Styles = {
 
     adminColor:{
         color:Colors.admin
+    },
+
+    delegateRootTitle:
+    {
+        fontSize:'1.2em'
+    },
+
+    section:
+    {
+        fontSize:'0.8em',
+        color:Colors.subtle,
+        fontWeight: 200,
+        textTransform: 'uppercase',
+        marginBottom:10,
+        marginTop:10,
     },
    
     delegation:
