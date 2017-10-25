@@ -44,6 +44,7 @@ class ProjectHeader extends Component {
 
     onBackgroundClick=()=>
     {
+        console.log(this.props.delegation)
         //this.props.onToggle(!this.props.colapsed)
     }
    
