@@ -36,6 +36,8 @@ class Web3ProviderHelper extends EventEmitter
         this.ACCOUNT_CHANGED = 'accountCanged'
         this.NETWORK_CHANGED = 'networkChanged'
 
+        this.accounts = []
+        this.currentAccountIndex = 1
         this.currentAccount = undefined
         this.currentNetworkId = undefined
         this.injectedProvider = undefined
@@ -98,12 +100,17 @@ class Web3ProviderHelper extends EventEmitter
             if(error)
                 console.error(error)
         
-            this.checkAccountChange(accounts[0])
+            this.checkAccountChange(accounts)
         })
     }
 
-    checkAccountChange=(newAddress)=>
+    checkAccountChange=(accounts)=>
     {
+        let newAddress = accounts[this.currentAccountIndex]
+
+        //TODO check if any account is different
+        this.accounts = accounts
+
         if(newAddress)
             this.providerInfo.canWrite = true
         else
@@ -119,6 +126,25 @@ class Web3ProviderHelper extends EventEmitter
     getCurrentAccount=()=>
     {
         return this.currentAccount
+    }
+
+    getAccounts=()=>
+    {
+        return this.accounts
+    }
+
+    getCurrentAccountIndex=()=>
+    {
+        return this.currentAccountIndex
+    }
+
+    setAccount=(index)=>
+    {
+        if(index > this.accounts.length)
+            return
+
+        this.currentAccountIndex = index
+        this.checkAccountChange(this.accounts)
     }
 
     //checks if we still on the same Ethereum network: Mainnet/Ropsten...
