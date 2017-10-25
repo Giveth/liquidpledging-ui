@@ -15,6 +15,7 @@ import {Tabs, Tab} from 'material-ui/Tabs'
 import LayoutController from './LayoutController'
 import PledgesView from './PledgesView'
 import GiverView from './GiverView'
+import AddressSelector from './AddressSelector'
 
 class App extends Component {
 
@@ -28,14 +29,11 @@ class App extends Component {
                         
             <MuiThemeProvider muiTheme={GreyTheme}>
                 <div> 
-
+                    <AddressSelector/>
+                    
                     <Page>
                         <div style={{textAlign: 'center'}}>
-                            <img
-                                src={logo}
-                                className="App-logo"
-                                alt="Building the Future of Giving" 
-                                style={Styles.givethLogo}/>
+                            <img src={logo} className="App-logo" alt="Building the Future of Giving"  style={Styles.givethLogo}/>
                         </div>
 
                         <LayoutController defaultTab = {0}>
