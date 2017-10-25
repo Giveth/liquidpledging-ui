@@ -5,8 +5,8 @@ const liquidpledging = require('./liquidpledging');
 const LiquidPledging = liquidpledging.LiquidPledging;
 const LiquidPledgingState = liquidpledging.LiquidPledgingState;
 const testRPCProvider = 'ws://localhost:8546'
-//const liquidPledgingContractAddress = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24' //TESTRPC DETERMINISTIC
-const liquidPledgingContractAddress = '0x18658A1A7cB8b0Be97b155D051769b3651b2943c' //ROPSTEN
+const liquidPledgingContractAddress = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24' //TESTRPC DETERMINISTIC
+//const liquidPledgingContractAddress = '0x18658A1A7cB8b0Be97b155D051769b3651b2943c' //ROPSTEN
 
 class LiquidPledgingController extends ProviderHelper {
 
@@ -53,7 +53,7 @@ class LiquidPledgingController extends ProviderHelper {
         //TODO: This needs to be gone. It is just because some providers don't support the subscribe method yet
         setInterval(()=>{
             this.retriveStateData()
-        },20000) 
+        },10000) 
         
         this.retriveStateData()
     }
@@ -144,7 +144,7 @@ class LiquidPledgingController extends ProviderHelper {
 
     addDelegate(name, url)
     {
-        return this.liquidPledging.addDelegate(name, url, 0, 0, { from: this.currentAccount })
+        return this.liquidPledging.addDelegate(name, url, 600, 0, { from: this.currentAccount })
     }
 
     addProject(name, url)
