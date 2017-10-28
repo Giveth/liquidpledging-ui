@@ -37,7 +37,7 @@ class Web3ProviderHelper extends EventEmitter
         this.NETWORK_CHANGED = 'networkChanged'
 
         this.accounts = []
-        this.currentAccountIndex = 1
+        this.currentAccountIndex = 0
         this.currentAccount = undefined
         this.currentNetworkId = undefined
         this.injectedProvider = undefined
@@ -68,7 +68,6 @@ class Web3ProviderHelper extends EventEmitter
             }
 
             this.providerInfo = this.getCurrentProviderInfo()
-            console.log(this.providerInfo)
 
             this.checkNetwork()
 
@@ -197,7 +196,7 @@ class Web3ProviderHelper extends EventEmitter
         window.web3 = this.web3
 
         this.web3.eth.net.isListening().then((id)=>{
-            console.log(id)
+            //console.log(id)
         })
 
         //https://github.com/ethereum/web3.js/issues/440
