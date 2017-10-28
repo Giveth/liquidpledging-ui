@@ -97,10 +97,7 @@ class GiverCard extends Component {
 
         return ( 
             
-            <div >
-                 <p key = {"name"}  style= {MergeIf(Styles.delegateRootTitle, Styles.adminColor, true)}>
-                     {this.props.giverNode.name}
-                </p>
+            <div>
 
                 <GiverCardHeader 
                     node = {this.props.giverNode}
@@ -108,7 +105,7 @@ class GiverCard extends Component {
                     />
 
                 <div style ={Styles.section}>{'Delegating to..'}</div>
-                
+
                 <DelegationsList
                     key='Delegations'
                     treeChildren={this.props.delegatesChildren}

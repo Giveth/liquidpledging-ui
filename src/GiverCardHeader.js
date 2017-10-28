@@ -47,45 +47,33 @@ class GiverCardHeader extends Component {
             <div style = {Styles.delegation.actionButons}>
                 {addFundsButton}
             </div>)
-       
-
-
-        let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
 
         return (
             
-            <div
-                    style = {Merge(headerStyle, Styles.delegation.giverBackgroundHover)}
-                    onMouseEnter = {this.onMouseEnter}
-                    onMouseLeave = {this.onMouseLeave}
-                    onClick = {this.onBackgroundClick}>
+            <div style = {Styles.giverCardHeader}>
 
-                    <div style = {Styles.delegation.headerCell}>
-                   
-                        <p
-                            key = {"name"} 
-                            style= {MergeIf(Styles.delegation.title, Styles.adminColor, isAdmin)}>
+                <div style = {Styles.delegation.headerCell}>
+                
+                    <p key = {"name"}  style= {MergeIf(Styles.delegateRootTitle, Styles.adminColor, true)}>
+                        {this.props.node.name}
+                    </p>
 
-                            {this.props.node.name}
-                        </p>
+                    <p
+                        key = {"amount"}
+                        style = {Styles.delegation.amount} >
 
-                        <p
-                            key = {"amount"}
-                            style = {Styles.delegation.amount} >
+                        {Currency.symbol+ " "+Currency.format(Currency.toEther(usedAmount)) +' / '+ Currency.format(Currency.toEther(totalAmount))}
+                    </p>
 
-                            {Currency.symbol+ " "+Currency.format(Currency.toEther(usedAmount)) +' / '+ Currency.format(Currency.toEther(totalAmount))}
-                        </p>
+                </div>
 
-                    </div>
+                <div style = {Styles.delegation.headerCell}>
+                    
+                </div>
 
-                    <div style = {Styles.delegation.headerCell}>
-                        
-                    </div>
-
-
-                    <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
-                        {actionButons}
-                    </div>
+                <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
+                    {actionButons}
+                </div>
 
             </div>
         )

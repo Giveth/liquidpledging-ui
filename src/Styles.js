@@ -198,6 +198,15 @@ export const Styles = {
         }
     },
 
+    giverCardHeader:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent:'space-between',
+        paddingTop: 5,
+        paddingBottom: 5,
+        marginTop: 5,
+    },
+
     givethLogo:{
         WebkitFilter: 'grayscale(100%)', 
        justifyContent:"center"
