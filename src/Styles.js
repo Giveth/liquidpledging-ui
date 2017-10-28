@@ -235,7 +235,7 @@ export const Styles = {
         right: 20,
         bottom: 'auto',
         left: 'auto',
-        position: 'fixed',
+        //position: 'fixed',
         zIndex:100,
     }
 
