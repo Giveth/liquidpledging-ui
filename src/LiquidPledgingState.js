@@ -154,6 +154,15 @@ class LiquidPledgingState extends LiquidPledgingController {
         let amount = 0
         for(let delegationId of node.delegationsIn)
             amount += this.getDelegation(delegationId).assignedAmount
+
+        return amount
+    }
+
+    getNodeDelegatedAmount(node)
+    {
+        let amount = 0
+        for(let delegationId of node.delegationsOut)
+            amount += this.getDelegation(delegationId).assignedAmount
         
         return amount
     }
