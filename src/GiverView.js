@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
 import DelegationsList from './DelegationsList'
 import {Styles, Merge, MergeIf} from './Styles'
+import GiverCard from './GiverCard'
 
 const title = 'My funds'
 
@@ -11,8 +12,8 @@ class GiverView extends Component {
         super()
 
         this.state={
-            network:"",
-            treeChildren:[]
+            giverNodes:[],
+            currentAddress:''
         }
 
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
@@ -34,47 +35,58 @@ class GiverView extends Component {
 
     setDelegations=()=>
     {
-        let address = LPState.getCurrentAccount()
-
-        if(!address)
-        {
-            this.setState({
-                treeChildren:[],
-                currentAddress:'Not connected to Ethereum...  (╯°□°）╯︵ ┻━┻',
-            })
-            return
-        }
-
-        let myGiversFilter = {address:address, type:'Giver'}
-        let myNodes =  LPState.getNodes(myGiversFilter)
-        let firstNode = myNodes[0]
-        let delegateChildren = []
-        let projectsChildren = []
-
-        if(firstNode)
-        {
-            let delegations = LPState.getDelegations(firstNode.delegationsOut)
-            console.log('delegations', firstNode)
-            let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
-            delegateChildren = LPState.getDelegationsTrees(delegations, onlyDelegationsWithMoneyFilter)
-
-
-
-            let onlyProjectsFilter= {type:'Project'}
-            let projectDelegations = LPState.getDelegationsFromTreeChildren(delegateChildren, onlyProjectsFilter)
-            let projectsChildren = LPState.getDelegationsTrees(delegations, onlyDelegationsWithMoneyFilter)
-        }
+        let currentAddress = LPState.getCurrentAccount()
+        let myGiversFilter = {adminAddress:currentAddress, type:'Giver'}
+        let giverNodes = LPState.getNodes(myGiversFilter)
 
         this.setState({
-            delegateChildren:delegateChildren,
-            projectsChildren:projectsChildren,
-            currentAddress:address,
+            giverNodes:giverNodes,
+            currentAddress:currentAddress
         })
+    }
+
+    createGiverCards=()=>
+    {
+        let cards = []
+        for(let giverNode of this.state.giverNodes)
+        {
+            let delegations = LPState.getDelegations(giverNode.delegationsOut)
+            let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
+            let delegatesChildren = LPState.getDelegationsTrees(delegations, onlyDelegationsWithMoneyFilter)
+
+            let onlyProjectsFilter= {type:'Project'}
+            let projectDelegations = LPState.getDelegationsFromTreeChildren(delegatesChildren, onlyProjectsFilter)
+
+            console.log(projectDelegations)
+            let projectsChildren = LPState.getDelegationsTrees(projectDelegations)
+
+            let card = <GiverCard
+                key={giverNode.id}
+                giverNode = {giverNode}
+                delegatesChildren={delegatesChildren}
+                projectsChildren={projectsChildren}
+                userAddress={this.state.currentAddress}/>
+
+            cards.push(card)
+        }
+        return cards
     }
 
     render() {
 
-        return (
+        let cards = this.createGiverCards()
+
+        return  (
+            <div >
+                 {cards}
+            </div>
+        )
+
+    }
+    
+}
+
+/*
             <div >
                  <p key = {"name"}  style= {MergeIf(Styles.delegateRootTitle, Styles.adminColor, true)}>
                      {'This is a giver name'}
@@ -83,7 +95,7 @@ class GiverView extends Component {
                 <div style ={Styles.section}>{'Delegating to..'}</div>
                 <DelegationsList
                     key='Delegations'
-                    treeChildren={this.state.delegateChildren}
+                    treeChildren={this.state.delegatesChildren}
                     indentLevel={-1}
                     userAddress={this.state.currentAddress}
                     defaultColapsed = {false}
@@ -106,8 +118,5 @@ class GiverView extends Component {
 
 
             </div>
-        )
-    }
-}
-
+            */
 export default GiverView
