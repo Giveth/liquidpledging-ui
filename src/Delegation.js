@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import DelegationsList from './DelegationsList'
 import { Styles, MergeIf} from './Styles'
-import GiverHeader from './GiverHeader'
+import GiverDelegationHeader from './GiverDelegationHeader'
 import DelegateHeader from './DelegateHeader'
 import ProjectHeader from './ProjectHeader'
 
 class Delegation extends Component {
+
 
     constructor(props){
         super()
@@ -67,7 +68,7 @@ class Delegation extends Component {
             />
 
         if(this.props.tree.delegation.type === "Giver")
-            header = <GiverHeader 
+            header = <GiverDelegationHeader 
             delegation = {this.props.tree.delegation}
             userAddress={this.props.userAddress}
             showColapseButton = {hasChildren}
