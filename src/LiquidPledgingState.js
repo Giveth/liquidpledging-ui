@@ -119,6 +119,7 @@ class LiquidPledgingState extends LiquidPledgingController {
     getDelegationsTrees(delegations, childrenPropertiesFilter)
     {
         let trees = []
+
         for(let delegation of delegations)
         {
             let delegationTree = this.getDelegationTree(delegation, childrenPropertiesFilter)
@@ -130,10 +131,13 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     getDelegationsFromTreeChildren(children, filter)
     {
-        let delegations = Filter.byProperties(children, filter)
+        let delegations = []
 
-        for(let tree of children)
-            delegations = delegations.concat( this.getDelegationsFromTreeChildren(tree.children, filter))
+        for(let child of children)
+            delegations = delegations.concat(Filter.byProperties([child.delegation], filter))
+
+        for(let child of children)
+            delegations = delegations.concat( this.getDelegationsFromTreeChildren(child.children, filter))
 
         return delegations
     }
