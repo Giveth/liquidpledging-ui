@@ -4,7 +4,6 @@ const Filter = require('./Filter.js');
 
 class LiquidPledgingState extends LiquidPledgingController {
 
-    
     //PLEDGES
 
     getPledge(pledgeId)
@@ -25,6 +24,24 @@ class LiquidPledgingState extends LiquidPledgingController {
             filtered = Filter.delegationLevel(filtered, delegationFilter.adminId, delegationFilter.level, delegationFilter.reverseLevel)
 
         return filtered
+    }
+
+    getPledgesFromIds(ids)
+    {
+       let pledges = []
+        for (let id of ids)
+            pledges.push(this.getPledge(id))
+        return pledges
+    }
+
+
+    getPledgesIdsFromDelegations(delegations)
+    {
+        let pledgeIds = []
+        for(let delegation of delegations)
+            pledgeIds.push(delegation.pledgeId)
+        
+        return pledgeIds
     }
 
     //ADMINS
@@ -146,11 +163,8 @@ class LiquidPledgingState extends LiquidPledgingController {
     {
         let parentDelegations = []
         for(let delegation of delegations)
-        {
-            console.log(delegation)
             parentDelegations.push(this.getDelegation(delegation.parentId))
-        }
-        
+
         return parentDelegations
     }
 

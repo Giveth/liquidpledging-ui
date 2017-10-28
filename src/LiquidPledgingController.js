@@ -119,6 +119,11 @@ class LiquidPledgingController extends ProviderHelper {
         return this.nodes[adminId]
     }
 
+    getPledge(pledgeId)
+    {
+        return this.pledges[pledgeId]
+    }
+
     //SET
 
     donate(emiterId, receiverId, amount )
