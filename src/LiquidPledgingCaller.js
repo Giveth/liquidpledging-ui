@@ -10,8 +10,9 @@ class Caller extends EventEmitter
         super()
         this.DONATE_DIALOG = 'donateDialog'
         this.TRANSFER_DIALOG = 'transferDialog'
-        this.CANCEL_DIALOG = 'cancelDialog',
+        this.CANCEL_DIALOG = 'cancelDialog'
         this.ADD_ADMIN_DIALOG = 'addAdmin'
+        this.PLEDGES = 'pledges'
     }
 
     //DONATE
@@ -98,6 +99,12 @@ class Caller extends EventEmitter
                 console.log("Project added", data)
                 LiquidPledging.retriveStateData()
             }).catch((error)=>console.error(error))
+    }
+    //Pledges
+
+    showPledgesDialog()
+    {
+        this.emit(this.PLEDGES)
     }
 }
 

@@ -18,6 +18,11 @@ class DelegateCard extends Component {
         this.props.onToggle(!this.props.colapsed)
     }
 
+    onPledges=()=>
+    {
+        Caller.showPledgesDialog({})
+    }
+
     onAddButton=()=>
     {
         let donateData={
@@ -113,7 +118,7 @@ class DelegateCard extends Component {
             
             <Paper style={{padding:20, marginTop:10, marginBottom:10}} zDepth={1}>
 
-                  <div style ={Styles.section}>{assignedDelegationsSubtitle}</div>
+                <div style ={Styles.section}>{assignedDelegationsSubtitle}</div>
 
                  <DelegationsList
                     key='IncomingDelegations'
@@ -151,6 +156,13 @@ class DelegateCard extends Component {
                     defaultColapsedRoot={true}/>
 
                 <div style ={Styles.space}/>
+
+                <IconButton
+                    style = {Styles.inline}
+                    onClick = {this.onPledges}>
+                    <Icons.pledges size={20}/>
+                </IconButton>
+
             </Paper>
         )
     }

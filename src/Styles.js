@@ -5,7 +5,7 @@ import AddIcon from 'react-icons/lib/fa/plus'
 import CancelIcon from 'react-icons/lib/fa/close'
 import AddAdminIcon from 'react-icons/lib/md/group-add'
 import ProjectIcon from 'react-icons/lib/fa/flask'
-
+import PledgesIcon from 'react-icons/lib/fa/code'
 import Numeral from 'numeral'
 
 const MAX_CONTENT_WIDTH = 800
@@ -33,7 +33,8 @@ export const Icons = {
     add:AddIcon,
     cancel:CancelIcon,
     addAdmin:AddAdminIcon,
-    project:ProjectIcon
+    project:ProjectIcon,
+    pledges:PledgesIcon,
 }
 
 

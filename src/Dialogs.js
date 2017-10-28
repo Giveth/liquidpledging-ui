@@ -19,9 +19,13 @@ class Dialogs extends Component {
             transferData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
             transferMetadata:{emiters:[]},
 
-           addAdminOpen:false,
-           addAdminData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
-           addAdminMetadata:{emiters:[]}
+            addAdminOpen:false,
+            addAdminData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
+            addAdminMetadata:{emiters:[]},
+
+            pledgesOpen:false,
+            pledgesData:{},
+            pledgesMetadata:{emiters:[]}
         }
 
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
@@ -31,6 +35,7 @@ class Dialogs extends Component {
         Caller.on(Caller.DONATE_DIALOG, this.donateOnShow)
         Caller.on(Caller.TRANSFER_DIALOG, this.transferOnShow)
         Caller.on(Caller.ADD_ADMIN_DIALOG, this.addAdminOnShow)
+        Caller.on(Caller.PLEDGES, this.pledgesOnShow)
     }
 
     onStateChanged=()=>{
@@ -101,6 +106,17 @@ class Dialogs extends Component {
         Caller.addAdmin(data)
     }
 
+    //Pledges
+    pledgesOnShow=(data)=>
+    {
+        this.setState({ pledgesData:data, pledgesOpen:true})
+    }
+
+    pledgesOnCancel=()=>
+    {
+        this.setState({ pledgesOpen:false })
+    }
+
     render() {
         return (
             <div>            
@@ -122,6 +138,11 @@ class Dialogs extends Component {
                     onCancel ={this.addAdminOnCancel}
                     onDone ={this.addAdminOnDone}
                     data={this.state.addAdminData}/>
+
+                 <AddAdminDialog
+                    open={this.state.pledgesOpen}
+                    onCancel ={this.pledgesOnCancel}
+                    data={this.state.pledgesData}/>
 
             </div>
         )
