@@ -161,12 +161,13 @@ class DataFormatter {
 
             let node = {
                 id:nodeId,
-                address:admin.addr,
+                adminId:admin.id,
+                adminAddress:admin.addr,
                 type:admin.type,
                 name:admin.name,
                 url:admin.url,
                 delegationsIn:[],
-                delegationsOut:[]
+                delegationsOut:[],
             }
             nodes.push(node)
         }
