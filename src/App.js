@@ -29,7 +29,7 @@ class App extends Component {
                         
             <MuiThemeProvider muiTheme={GreyTheme}>
                 <div> 
-                    <AddressSelector/>
+                    <AddressSelector />
                     
                     <Page>
                         <div style={{textAlign: 'center'}}>

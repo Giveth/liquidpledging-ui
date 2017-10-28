@@ -194,7 +194,7 @@ export const Styles = {
 
         amount:{
             color:Colors.secondary,
-            width:120,
+            minWidth:120,
         }
     },
 
@@ -202,6 +202,7 @@ export const Styles = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent:'space-between',
+        alignItems:'center',
         paddingTop: 5,
         paddingBottom: 5,
         marginTop: 5,

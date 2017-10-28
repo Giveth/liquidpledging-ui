@@ -50,6 +50,7 @@ class Explorer extends Component {
         let projectsFilter = {type:'Project'}
         let projectNodes =  LPState.getNodes(projectsFilter)
 
+        //let delegations = LPState.getFirstDelegationsForNodes(projectNodes)
         let delegations = LPState.getFirstDelegationsForNodes(projectNodes.concat(delegatesNodes))
         let onlyDelegationsWithMoneyFilter= {assignedAmount:undefined}
         let myTrees = LPState.getDelegationsTrees(delegations, onlyDelegationsWithMoneyFilter)
