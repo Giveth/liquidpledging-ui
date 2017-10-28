@@ -21,9 +21,9 @@ class DelegateCard extends Component {
     onAddButton=()=>
     {
         let donateData={
-            giverName:this.props.giverNode.name,
-            emiterId:this.props.giverNode.adminId,
-            recieverId:this.props.giverNode.adminId,
+            giverName:this.props.delegateNode.name,
+            emiterId:this.props.delegateNode.adminId,
+            recieverId:this.props.delegateNode.adminId,
             amount:undefined
         }
         Caller.showDonateDialog(donateData)
@@ -46,7 +46,7 @@ class DelegateCard extends Component {
    
     render() {
 
-        let isAdmin = (this.props.currentAddress === this.props.giverNode.adminAddress)
+        let isAdmin = (this.props.currentAddress === this.props.delegateNode.adminAddress)
         let toggleIcon = <Icons.colapsed size={20}/>
 
         if(this.props.colapsed)
@@ -79,8 +79,8 @@ class DelegateCard extends Component {
         }
 
 
-        let totalAmount = 0//this.props.giverNode.assignedAmount
-        let availableAmount = 0//this.props.giverNode.availableAmount
+        let totalAmount = 0//this.props.delegateNode.assignedAmount
+        let availableAmount = 0//this.props.delegateNode.availableAmount
         let usedAmount = totalAmount - availableAmount
 
         let actionButons = <div/>
@@ -93,14 +93,14 @@ class DelegateCard extends Component {
                 </div>)
         }
 
-
         let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
-        let delegationsSubtitle = 'Delegating to ...'
+        let assignedDelegationsSubtitle = 'Assigned to you ...'
+        let delegatedDelegationsSubtitle = 'Delegating to ...'
         let projectsSubtitle = 'Intended projects ...'
 
         if(!this.props.delegatesChildren.length)
         {
-            delegationsSubtitle = 'No funds have been delegated'
+            delegatedDelegationsSubtitle = 'No funds have been delegated'
             projectsSubtitle = ''
         }
         else
@@ -113,20 +113,22 @@ class DelegateCard extends Component {
             
             <Paper style={{padding:20, marginTop:10, marginBottom:10}} zDepth={1}>
 
+                  <div style ={Styles.section}>{assignedDelegationsSubtitle}</div>
+
                  <DelegationsList
                     key='IncomingDelegations'
-                    treeChildren={this.props.delegatesParent}
+                    treeChildren={this.props.delegatesParents}
                     indentLevel={-1}
                     userAddress={this.props.currentAddress}
                     defaultColapsed = {false}
                     defaultColapsedRoot={true}/>
 
                 <GiverCardHeader 
-                    node = {this.props.giverNode}
+                    node = {this.props.delegateNode}
                     userAddress={this.props.userAddress}
                     />
 
-                <div style ={Styles.section}>{delegationsSubtitle}</div>
+                <div style ={Styles.section}>{delegatedDelegationsSubtitle}</div>
 
                 <DelegationsList
                     key='Delegations'

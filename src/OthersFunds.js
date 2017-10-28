@@ -12,7 +12,7 @@ class OthersFunds extends Component {
         super()
 
         this.state={
-            giverNodes:[],
+            delegateNodes:[],
             currentAddress:''
         }
 
@@ -36,11 +36,11 @@ class OthersFunds extends Component {
     setDelegations=()=>
     {
         let currentAddress = LPState.getCurrentAccount()
-        let myGiversFilter = {adminAddress:currentAddress, type:'Giver'}
-        let giverNodes = LPState.getNodes(myGiversFilter)
+        let myGiversFilter = {adminAddress:currentAddress, type:'Delegate'}
+        let delegateNodes = LPState.getNodes(myGiversFilter)
 
         this.setState({
-            giverNodes:giverNodes,
+            delegateNodes:delegateNodes,
             currentAddress:currentAddress
         })
     }
@@ -48,11 +48,15 @@ class OthersFunds extends Component {
     createDelegateCards=()=>
     {
         let cards = []
-        for(let giverNode of this.state.giverNodes)
+        for(let delegateNode of this.state.delegateNodes)
         {
-            let delegations = LPState.getDelegations(giverNode.delegationsOut)
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
-            let delegatesChildren = LPState.getDelegationsTrees(delegations, onlyDelegationsWithMoneyFilter)
+
+            let delegatedDelegations = LPState.getDelegations(delegateNode.delegationsOut)
+            let delegatesChildren = LPState.getDelegationsTrees(delegatedDelegations, onlyDelegationsWithMoneyFilter)
+
+            let assignedDelegations = LPState.getDelegations(delegateNode.delegationsIn)
+            let delegatesParents = LPState.getDelegationsTrees(assignedDelegations, onlyDelegationsWithMoneyFilter)
 
             let onlyProjectsFilter= {type:'Project'}
             let projectDelegations = LPState.getDelegationsFromTreeChildren(delegatesChildren, onlyProjectsFilter)
@@ -61,8 +65,9 @@ class OthersFunds extends Component {
             let projectsChildren = LPState.getDelegationsTrees(projectDelegations)
 
             let card = <DelegateCard
-                key={giverNode.id}
-                giverNode = {giverNode}
+                key={delegateNode.id}
+                delegateNode = {delegateNode}
+                delegatesParents={delegatesParents}
                 delegatesChildren={delegatesChildren}
                 projectsChildren={projectsChildren}
                 userAddress={this.state.currentAddress}/>
