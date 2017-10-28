@@ -24,6 +24,10 @@ class DelegateCard extends Component {
     {
         let parentPledgesIds = LPState.getPledgesIdsFromDelegations(this.props.parentDelegations)
         let parentPledges = LPState.getPledgesFromIds(parentPledgesIds)
+
+        let delegatedPledgesIds = LPState.getPledgesIdsFromDelegations(this.props.delegatedDelegations)
+        let delegatedPledges = LPState.getPledgesFromIds(delegatedPledgesIds)
+
         let data = {
             pledgesBlocks:
             [
@@ -32,7 +36,7 @@ class DelegateCard extends Component {
                     title:"Assigned"
                 },
                 {
-                    pledges:parentPledges,
+                    pledges:delegatedPledges,
                     title:"Delegated"
                 },
             ],
