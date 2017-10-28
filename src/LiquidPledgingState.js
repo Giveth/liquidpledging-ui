@@ -149,6 +149,15 @@ class LiquidPledgingState extends LiquidPledgingController {
         return Filter.byProperties(this.nodes, filter)
     }
 
+    getNodeAssignedAmount(node)
+    {
+        let amount = 0
+        for(let delegationId of node.delegationsIn)
+            amount += this.getDelegation(delegationId).assignedAmount
+        
+        return amount
+    }
+
 
     /*getAvailablePledges(address)
     {
