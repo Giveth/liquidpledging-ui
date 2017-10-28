@@ -3,7 +3,7 @@ import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
 
-class ProjectHeader extends Component {
+class ProjecDelegationtHeader extends Component {
 
     constructor(props){
         super()
@@ -130,4 +130,4 @@ class ProjectHeader extends Component {
     }
 }
 
-export default ProjectHeader
+export default ProjecDelegationtHeader

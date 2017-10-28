@@ -3,7 +3,7 @@ import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
 
-class DelegateHeader extends Component {
+class DelegateDelegationHeader extends Component {
 
     constructor(props){
         super()
@@ -124,4 +124,4 @@ class DelegateHeader extends Component {
     }
 }
 
-export default DelegateHeader
+export default DelegateDelegationHeader
