@@ -8,7 +8,6 @@ class GiverDelegationHeader extends Component {
     constructor(props){
         super()
         this.state={isHovering:false}
-
     }
 
     onToggle=()=>
@@ -106,14 +105,12 @@ class GiverDelegationHeader extends Component {
                         <p
                             key = {"name"} 
                             style= {MergeIf(Styles.delegation.title, Styles.adminColor, isAdmin)}>
-
                             {this.props.delegation.name}
                         </p>
 
                         <p
                             key = {"amount"}
                             style = {Styles.delegation.amount} >
-
                             {Currency.symbol+ " "+Currency.format(Currency.toEther(usedAmount)) +' / '+ Currency.format(Currency.toEther(totalAmount))}
                         </p>
 
@@ -122,7 +119,6 @@ class GiverDelegationHeader extends Component {
                     <div style = {Styles.delegation.headerCell}>
                         
                     </div>
-
 
                     <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
                         {actionButons}
