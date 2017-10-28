@@ -223,12 +223,11 @@ export const Styles = {
     floatingAddressSelectorTopLeft:{
         margin: 0,
         top: 10,
-        left: 20,
+        right: 20,
         bottom: 'auto',
         left: 'auto',
         position: 'fixed',
         zIndex:100,
-        backgroundColor:'red'
     }
 
 }

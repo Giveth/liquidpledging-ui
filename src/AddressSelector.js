@@ -19,7 +19,6 @@ class AddressSelector extends React.Component
 
     onAccountChanged=()=>
     {
-        console.log("Hello")
         this.setState({
             accounts:LPState.getAccounts(),
             selectedIndex:LPState.getCurrentAccountIndex()
@@ -33,13 +32,14 @@ class AddressSelector extends React.Component
    
     render()
     {
-        console.log(this.state.accounts, this.state.selectedIndex)
         let list = this.state.accounts.map((account, index)=>{
 
-            let label = account
+            let label = index +' - '+account
             return <MenuItem
+
                 key= {index}
                 value={index}
+                style={{fontSize:'0.8em'}}
                 primaryText={label} />
         })
 
@@ -48,7 +48,9 @@ class AddressSelector extends React.Component
                 <DropDownMenu
                     value={this.state.selectedIndex}
                     onChange={this.onSelected}
+                    style={{fontSize:'0.8em'}}
                     autoWidth={true}>
+
 
                     {list}
 
