@@ -14,7 +14,6 @@ import Explorer from './Explorer'
 import {Tabs, Tab} from 'material-ui/Tabs'
 import LayoutController from './LayoutController'
 import PledgesView from './PledgesView'
-import GiverView from './GiverView'
 import AddressSelector from './AddressSelector'
 
 class App extends Component {
@@ -37,8 +36,8 @@ class App extends Component {
                         </div>
 
                         <LayoutController defaultTab = {0}>
-                             <GiverView label="Giver"/>
                             <MyFunds label="My funds"/>
+                           
                             <OthersFunds label="Other's funds" />
                             <Explorer label="Explorer" />
                             <PledgesView label="Pledges" />

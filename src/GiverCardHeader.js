@@ -21,7 +21,6 @@ class GiverCardHeader extends Component {
         }
         Caller.showDonateDialog(donateData)
     }
-
    
     render() {
         let isAdmin = (this.props.userAddress === this.props.node.adminAddress)
@@ -39,7 +38,6 @@ class GiverCardHeader extends Component {
                 <Icons.add size={15}/>
             </IconButton>)
         }
-
 
         let assignedAmount = LPState.getNodeAssignedAmount(this.props.node)
         let delegateddAmount = LPState.getNodeDelegatedAmount(this.props.node)
