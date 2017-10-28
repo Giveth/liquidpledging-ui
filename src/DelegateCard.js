@@ -5,6 +5,8 @@ import Caller from './LiquidPledgingCaller'
 import DelegationsList from './DelegationsList'
 import GiverCardHeader from './GiverCardHeader'
 import Paper from 'material-ui/Paper'
+//Todo. this shouldn't be here
+import LPState from "./LiquidPledgingState.js"
 
 class DelegateCard extends Component {
 
@@ -20,7 +22,25 @@ class DelegateCard extends Component {
 
     onPledges=()=>
     {
-        Caller.showPledgesDialog({})
+        let parentPledgesIds = LPState.getPledgesIdsFromDelegations(this.props.parentDelegations)
+        let parentPledges = LPState.getPledgesFromIds(parentPledgesIds)
+        let data = {
+            pledgesBlocks:
+            [
+                {
+                    pledges:parentPledges,
+                    title:"Assigned"
+                },
+                {
+                    pledges:parentPledges,
+                    title:"Delegated"
+                },
+            ],
+            title: this.props.delegateNode.name
+        }
+        let pledgesBlocks
+
+        Caller.showPledgesDialog(data)
     }
 
     onAddButton=()=>

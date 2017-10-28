@@ -56,7 +56,6 @@ class OthersFunds extends Component {
             let parentDelegations = LPState.getParentDelegations(assignedDelegations)
             let delegatesParents = LPState.getDelegationsTrees(parentDelegations, onlyDelegationsWithMoneyFilter)
 
-
             let delegatedDelegations = LPState.getDelegations(delegateNode.delegationsOut)
             let delegatesChildren = LPState.getDelegationsTrees(delegatedDelegations, onlyDelegationsWithMoneyFilter)
 
@@ -68,7 +67,9 @@ class OthersFunds extends Component {
             let card = <DelegateCard
                 key={delegateNode.id}
                 delegateNode = {delegateNode}
+                parentDelegations = {parentDelegations}
                 delegatesParents={delegatesParents}
+                delegatedDelegations={delegatedDelegations}
                 delegatesChildren={delegatesChildren}
                 projectsChildren={projectsChildren}
                 userAddress={this.state.currentAddress}/>

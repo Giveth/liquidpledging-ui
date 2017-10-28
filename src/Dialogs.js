@@ -4,6 +4,7 @@ import LPState from "./LiquidPledgingState.js"
 import DonateDialog from './DonateDialog'
 import TransferDialog from './TransferDialog'
 import AddAdminDialog from './AddAdminDialog'
+import PledgesDialog from './PledgesDialog'
 
 class Dialogs extends Component {
 
@@ -139,7 +140,7 @@ class Dialogs extends Component {
                     onDone ={this.addAdminOnDone}
                     data={this.state.addAdminData}/>
 
-                 <AddAdminDialog
+                 <PledgesDialog
                     open={this.state.pledgesOpen}
                     onCancel ={this.pledgesOnCancel}
                     data={this.state.pledgesData}/>

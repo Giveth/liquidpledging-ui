@@ -79,7 +79,6 @@ class Caller extends EventEmitter
 
     addAdmin(data)
     {
-        console.log(data)
         if(data.type==="Giver")
             LiquidPledging.addGiver(data.name, data.url).then((data) => {
                 console.log("Giver added", data, LiquidPledging.admins)
@@ -102,9 +101,9 @@ class Caller extends EventEmitter
     }
     //Pledges
 
-    showPledgesDialog()
+    showPledgesDialog(data)
     {
-        this.emit(this.PLEDGES)
+        this.emit(this.PLEDGES,data)
     }
 }
 
