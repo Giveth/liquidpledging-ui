@@ -59,11 +59,11 @@ await liquidPledging.transfer(1, 3, utils.toWei(0.5), 1, { from: user1, gas: 200
     await liquidPledging.addDelegate('Delegate1User4', 'URLDelegate1User4', 60, 0, { from: user4 }); //#A9
     await liquidPledging.addDelegate('Delegate1User5', 'URLDelegate1User5', 60, 0, { from: user5 }); //#A10
 
-    await liquidPledging.addProject('Project1User1', 'URLProject1User1', user4, 0, 60, 0, { from: user1 }); //#A11
-    await liquidPledging.addProject('Project1User2', 'URLProject1User2', user4, 0, 60, 0, { from: user2 }); //#A12
-    await liquidPledging.addProject('Project1User3', 'URLProject1User3', user4, 0, 60, 0, { from: user3 }); //#A13
+    await liquidPledging.addProject('Project1User1', 'URLProject1User1', user1, 0, 60, 0, { from: user1 }); //#A11
+    await liquidPledging.addProject('Project1User2', 'URLProject1User2', user2, 0, 60, 0, { from: user2 }); //#A12
+    await liquidPledging.addProject('Project1User3', 'URLProject1User3', user3, 0, 60, 0, { from: user3 }); //#A13
     await liquidPledging.addProject('Project1User4', 'URLProject1User4', user4, 0, 60, 0, { from: user4 }); //#A14
-    await liquidPledging.addProject('Project1User5', 'URLProject1User5', user4, 0, 60, 0, { from: user5 }); //#A15
+    await liquidPledging.addProject('Project1User5', 'URLProject1User5', user5, 0, 60, 0, { from: user5 }); //#A15
 
 //-------------------    
 
