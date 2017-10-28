@@ -52,16 +52,17 @@ class OthersFunds extends Component {
         {
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
 
+            let assignedDelegations = LPState.getDelegations(delegateNode.delegationsIn)
+            let parentDelegations = LPState.getParentDelegations(assignedDelegations)
+            let delegatesParents = LPState.getDelegationsTrees(parentDelegations, onlyDelegationsWithMoneyFilter)
+
+
             let delegatedDelegations = LPState.getDelegations(delegateNode.delegationsOut)
             let delegatesChildren = LPState.getDelegationsTrees(delegatedDelegations, onlyDelegationsWithMoneyFilter)
-
-            let assignedDelegations = LPState.getDelegations(delegateNode.delegationsIn)
-            let delegatesParents = LPState.getDelegationsTrees(assignedDelegations, onlyDelegationsWithMoneyFilter)
 
             let onlyProjectsFilter= {type:'Project'}
             let projectDelegations = LPState.getDelegationsFromTreeChildren(delegatesChildren, onlyProjectsFilter)
 
-            console.log(projectDelegations)
             let projectsChildren = LPState.getDelegationsTrees(projectDelegations)
 
             let card = <DelegateCard
@@ -73,6 +74,12 @@ class OthersFunds extends Component {
                 userAddress={this.state.currentAddress}/>
 
             cards.push(card)
+
+            /*console.log("---")
+            console.log(delegateNode)
+            console.log(LPState.delegations)
+            console.log(delegatesParents)
+            console.log("---")*/
         }
         return cards
     }

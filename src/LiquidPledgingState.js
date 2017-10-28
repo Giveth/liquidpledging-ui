@@ -142,6 +142,18 @@ class LiquidPledgingState extends LiquidPledgingController {
         return delegations
     }
 
+    getParentDelegations(delegations)
+    {
+        let parentDelegations = []
+        for(let delegation of delegations)
+        {
+            console.log(delegation)
+            parentDelegations.push(this.getDelegation(delegation.parentId))
+        }
+        
+        return parentDelegations
+    }
+
     //NODES
 
     getNodes(filter)
