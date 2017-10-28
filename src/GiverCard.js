@@ -4,6 +4,7 @@ import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
 import DelegationsList from './DelegationsList'
 import GiverCardHeader from './GiverCardHeader'
+import Paper from 'material-ui/Paper'
 
 class GiverCard extends Component {
 
@@ -94,17 +95,30 @@ class GiverCard extends Component {
 
 
         let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
+        let delegationsSubtitle = 'Delegating to ...'
+        let projectsSubtitle = 'Intended projects ...'
+
+        if(!this.props.delegatesChildren.length)
+        {
+            delegationsSubtitle = 'No funds have been delegated'
+            projectsSubtitle = ''
+        }
+        else
+        {
+            if(!this.props.projectsChildren.length)
+                projectsSubtitle = 'No funds have been assigned to a Project'
+        }
 
         return ( 
             
-            <div>
+            <Paper style={{padding:20, marginTop:10, marginBottom:10}} zDepth={1}>
 
                 <GiverCardHeader 
                     node = {this.props.giverNode}
                     userAddress={this.props.userAddress}
                     />
 
-                <div style ={Styles.section}>{'Delegating to..'}</div>
+                <div style ={Styles.section}>{delegationsSubtitle}</div>
 
                 <DelegationsList
                     key='Delegations'
@@ -116,7 +130,7 @@ class GiverCard extends Component {
 
                 <div style ={Styles.space}/>
 
-                <div style ={Styles.section}>{'Intended projects...'}</div>
+                <div style ={Styles.section}>{projectsSubtitle}</div>
 
                 <DelegationsList
                     key='Projects'
@@ -127,7 +141,7 @@ class GiverCard extends Component {
                     defaultColapsedRoot={true}/>
 
                 <div style ={Styles.space}/>
-            </div>
+            </Paper>
         )
     }
 }
