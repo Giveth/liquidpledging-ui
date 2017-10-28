@@ -3,68 +3,31 @@ import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
 
-class GiverHeader extends Component {
+class GiverCardHeader extends Component {
 
     constructor(props){
         super()
-        this.state={isHovering:false}
-
-    }
-
-    onToggle=()=>
-    {
-        this.props.onToggle(!this.props.colapsed)
     }
 
     onAddButton=()=>
     {
         let donateData={
-            giverName:this.props.delegation.name,
-            emiterId:this.props.delegation.adminId,
-            recieverId:this.props.delegation.adminId,
+            giverName:this.props.node.name,
+            emiterId:this.props.node.adminId,
+            recieverId:this.props.node.adminId,
             amount:undefined
         }
         Caller.showDonateDialog(donateData)
     }
 
-    onMouseEnter=()=>
-    {
-        this.setState({isHovering:true})
-    }
-
-    onMouseLeave=()=>
-    {
-        this.setState({isHovering:false})
-    }
-
-    onBackgroundClick=()=>
-    {
-        //this.props.onToggle(!this.props.colapsed)
-    }
    
     render() {
-        let isAdmin = (this.props.userAddress === this.props.delegation.adminAddress)
-        let toggleIcon = <Icons.colapsed size={20}/>
-
-        if(this.props.colapsed)
-        {
-            toggleIcon =<Icons.shown size={20}/>
-        }
-
-        let colapseButton = <div style = {Styles.emptyButton} />
-        if(this.props.showColapseButton)
-        {
-            colapseButton = (
-                <IconButton
-                    style = {Styles.inline}
-                    onClick = {this.onToggle}>
-                    {toggleIcon}
-                </IconButton>)
-        }
+        let isAdmin = (this.props.userAddress === this.props.node.adminAddress)
+       
 
         let addFundsButton = <div style = {Styles.emptyButton} />
 
-         if(isAdmin)
+        if(isAdmin)
         {
             addFundsButton = (
                 <IconButton
@@ -76,19 +39,15 @@ class GiverHeader extends Component {
         }
 
 
-        let totalAmount = this.props.delegation.assignedAmount
-        let availableAmount = this.props.delegation.availableAmount
+        let totalAmount = this.props.node.assignedAmount
+        let availableAmount = this.props.node.availableAmount
         let usedAmount = totalAmount - availableAmount
 
-        let actionButons = <div/>
-
-        if(this.state.isHovering)
-        {
-            actionButons =(
-                <div style = {Styles.delegation.actionButons}>
-                    {addFundsButton}
-                </div>)
-        }
+        let actionButons =(
+            <div style = {Styles.delegation.actionButons}>
+                {addFundsButton}
+            </div>)
+       
 
 
         let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
@@ -96,7 +55,7 @@ class GiverHeader extends Component {
         return (
             
             <div
-                    style = {MergeIf(headerStyle, Styles.delegation.giverBackgroundHover, this.state.isHovering)}
+                    style = {Merge(headerStyle, Styles.delegation.giverBackgroundHover)}
                     onMouseEnter = {this.onMouseEnter}
                     onMouseLeave = {this.onMouseLeave}
                     onClick = {this.onBackgroundClick}>
@@ -107,7 +66,7 @@ class GiverHeader extends Component {
                             key = {"name"} 
                             style= {MergeIf(Styles.delegation.title, Styles.adminColor, isAdmin)}>
 
-                            {this.props.delegation.name}
+                            {this.props.node.name}
                         </p>
 
                         <p
@@ -126,7 +85,6 @@ class GiverHeader extends Component {
 
                     <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
                         {actionButons}
-                        {colapseButton}
                     </div>
 
             </div>
@@ -134,4 +92,4 @@ class GiverHeader extends Component {
     }
 }
 
-export default GiverHeader
+export default GiverCardHeader

@@ -3,6 +3,7 @@ import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
 import DelegationsList from './DelegationsList'
+import GiverCardHeader from './GiverCardHeader'
 
 class GiverCard extends Component {
 
@@ -101,7 +102,13 @@ class GiverCard extends Component {
                      {this.props.giverNode.name}
                 </p>
 
+                <GiverCardHeader 
+                    node = {this.props.giverNode}
+                    userAddress={this.props.userAddress}
+                    />
+
                 <div style ={Styles.section}>{'Delegating to..'}</div>
+                
                 <DelegationsList
                     key='Delegations'
                     treeChildren={this.props.delegatesChildren}
