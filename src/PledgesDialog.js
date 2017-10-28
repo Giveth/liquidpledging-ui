@@ -11,30 +11,11 @@ class TransferDialog extends React.Component
     constructor(props)
     {
         super();
-        this.state={
-            amount:'',
-            okDisabled:true,
-            selectedEmiter:0
-        }
+
     }
-
-    onDone=()=>
-    {
-        let data = {}
-        let delegation = this.getDelegationFromId(this.state.selectedEmiter)
-
-        data.emiterId = delegation.adminId
-        data.pledgeId = delegation.pledgeId
-        data.recieverId = this.props.data.recieverId
-        data.amount = parseFloat(this.state.amount,10)
-
-        this.setState({amount:'', selectedEmiter:0, okDisabled:true})
-        this.props.onDone(data)
-    }   
 
     onCancel=()=>
     {
-        this.setState({amount:'', selectedEmiter:0, okDisabled:true})
         this.props.onCancel()
     } 
     
@@ -48,7 +29,7 @@ class TransferDialog extends React.Component
             />
         ]
 
-        let title = "Pledges for "+this.props.title
+        let title = "Pledges for "+this.props.data.title
        
         let tables = []
         if(this.props.data && this.props.data.pledgesBlocks)
