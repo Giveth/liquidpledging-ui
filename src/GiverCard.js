@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
+import DelegationsList from './DelegationsList'
 
-class Giver extends Component {
+class GiverCard extends Component {
 
     constructor(props){
         super()
@@ -18,9 +19,9 @@ class Giver extends Component {
     onAddButton=()=>
     {
         let donateData={
-            giverName:this.props.delegation.name,
-            emiterId:this.props.delegation.adminId,
-            recieverId:this.props.delegation.adminId,
+            giverName:this.props.giverNode.name,
+            emiterId:this.props.giverNode.adminId,
+            recieverId:this.props.giverNode.adminId,
             amount:undefined
         }
         Caller.showDonateDialog(donateData)
@@ -42,7 +43,8 @@ class Giver extends Component {
     }
    
     render() {
-        let isAdmin = (this.props.userAddress === this.props.delegation.adminAddress)
+
+        let isAdmin = (this.props.currentAddress === this.props.giverNode.adminAddress)
         let toggleIcon = <Icons.colapsed size={20}/>
 
         if(this.props.colapsed)
@@ -75,8 +77,8 @@ class Giver extends Component {
         }
 
 
-        let totalAmount = this.props.delegation.assignedAmount
-        let availableAmount = this.props.delegation.availableAmount
+        let totalAmount = 0//this.props.giverNode.assignedAmount
+        let availableAmount = 0//this.props.giverNode.availableAmount
         let usedAmount = totalAmount - availableAmount
 
         let actionButons = <div/>
@@ -92,45 +94,38 @@ class Giver extends Component {
 
         let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
 
-        return (
+        return ( 
             
-            <div
-                    style = {MergeIf(headerStyle, Styles.delegation.giverBackgroundHover, this.state.isHovering)}
-                    onMouseEnter = {this.onMouseEnter}
-                    onMouseLeave = {this.onMouseLeave}
-                    onClick = {this.onBackgroundClick}>
+            <div >
+                 <p key = {"name"}  style= {MergeIf(Styles.delegateRootTitle, Styles.adminColor, true)}>
+                     {this.props.giverNode.name}
+                </p>
 
-                    <div style = {Styles.delegation.headerCell}>
-                   
-                        <p
-                            key = {"name"} 
-                            style= {MergeIf(Styles.delegation.title, Styles.adminColor, isAdmin)}>
+                <div style ={Styles.section}>{'Delegating to..'}</div>
+                <DelegationsList
+                    key='Delegations'
+                    treeChildren={this.props.delegatesChildren}
+                    indentLevel={-1}
+                    userAddress={this.props.currentAddress}
+                    defaultColapsed = {false}
+                    defaultColapsedRoot={true}/>
 
-                            {this.props.delegation.name}
-                        </p>
+                <div style ={Styles.space}/>
 
-                        <p
-                            key = {"amount"}
-                            style = {Styles.delegation.amount} >
+                <div style ={Styles.section}>{'Intended projects...'}</div>
 
-                            {Currency.symbol+ " "+Currency.format(Currency.toEther(usedAmount)) +' / '+ Currency.format(Currency.toEther(totalAmount))}
-                        </p>
+                <DelegationsList
+                    key='Projects'
+                    treeChildren={this.props.projectsChildren}
+                    indentLevel={-1}
+                    userAddress={this.props.currentAddress}
+                    defaultColapsed = {false}
+                    defaultColapsedRoot={true}/>
 
-                    </div>
-
-                    <div style = {Styles.delegation.headerCell}>
-                        
-                    </div>
-
-
-                    <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
-                        {actionButons}
-                        {colapseButton}
-                    </div>
-
+                <div style ={Styles.space}/>
             </div>
         )
     }
 }
 
-export default Giver
+export default GiverCard
