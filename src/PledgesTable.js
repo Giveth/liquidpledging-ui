@@ -21,7 +21,7 @@ class PledgesTable extends React.Component {
           data={this.props.pledges}
           columns={[
             {
-              Header: "Pledges",
+              Header: this.props.title,
               columns: [
                 {
                     Header: "Id",

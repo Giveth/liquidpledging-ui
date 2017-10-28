@@ -217,6 +217,9 @@ export const Styles = {
     dialogs:{
         narrow: {
             width: MIN_CONTENT_WIDTH
+        },
+        fit:{
+            width: 'fit-content'
         }
     },
 

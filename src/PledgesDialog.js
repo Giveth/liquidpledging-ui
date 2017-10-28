@@ -38,43 +38,30 @@ class TransferDialog extends React.Component
         this.props.onCancel()
     } 
     
-
     render()
     {
         const actions = [
             <FlatButton
-              label="Cancel"
-              primary={true}
-              onClick={this.onCancel}
-            />,
-            <FlatButton
-              label="Delegate funds"
-              primary={true}
-              keyboardFocused={true}
-              onClick={this.onDone}
-              disabled={this.state.okDisabled}
+                label="Close"
+                primary={true}
+                onClick={this.onCancel}
             />
         ]
 
-        let title = "Pledges details"
+        let title = "Pledges for "+this.props.title
        
-       let tables = []
-       if(this.props.data && this.props.data.pledgesBlocks)
-       {
-            tables = this.props.data.pledgesBlocks.map((block, index)=>{
+        let tables = []
+        if(this.props.data && this.props.data.pledgesBlocks)
+        {
+             tables = this.props.data.pledgesBlocks.map((block, index)=>{
 
-            return <PledgesTable
+             return <PledgesTable
                 key= {index}
                 pledges={block.pledges}
                 title={block.title}/>
-            })
-       }
-       
+             })
+        }
         
-
-        console.log(this.props.data.pledgesBlocks)
-        
-
         return (
             <Dialog
                 title={title}
@@ -82,7 +69,7 @@ class TransferDialog extends React.Component
                 modal={false}
                 open={this.props.open}
                 onRequestClose={this.onCancel}
-               >    
+                contentStyle={{width:'100%'}}>    
 
                 {tables}
 
