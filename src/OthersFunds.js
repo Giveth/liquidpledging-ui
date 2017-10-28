@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
 import DelegationsList from './DelegationsList'
 import {Styles, Merge, MergeIf} from './Styles'
-import GiverCard from './GiverCard'
+import DelegateCard from './DelegateCard'
 
 const title = 'My funds'
 
@@ -45,7 +45,7 @@ class OthersFunds extends Component {
         })
     }
 
-    createGiverCards=()=>
+    createDelegateCards=()=>
     {
         let cards = []
         for(let giverNode of this.state.giverNodes)
@@ -60,7 +60,7 @@ class OthersFunds extends Component {
             console.log(projectDelegations)
             let projectsChildren = LPState.getDelegationsTrees(projectDelegations)
 
-            let card = <GiverCard
+            let card = <DelegateCard
                 key={giverNode.id}
                 giverNode = {giverNode}
                 delegatesChildren={delegatesChildren}
@@ -74,7 +74,7 @@ class OthersFunds extends Component {
 
     render() {
 
-        let cards = this.createGiverCards()
+        let cards = this.createDelegateCards()
 
         return  (
             <div >
