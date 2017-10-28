@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
+//TODO remove LiquidPledgingState dependency
+import LPState from "./LiquidPledgingState.js"
 
 class GiverCardHeader extends Component {
 
@@ -39,9 +41,10 @@ class GiverCardHeader extends Component {
         }
 
 
-        let totalAmount = this.props.node.assignedAmount
-        let availableAmount = this.props.node.availableAmount
-        let usedAmount = totalAmount - availableAmount
+        let assignedAmount = LPState.getNodeAssignedAmount(this.props.node)
+        let delegateddAmount = LPState.getNodeDelegatedAmount(this.props.node)
+        console.log(delegateddAmount)
+        let usedAmount = assignedAmount - delegateddAmount
 
         let actionButons =(
             <div style = {Styles.delegation.actionButons}>
@@ -58,17 +61,15 @@ class GiverCardHeader extends Component {
                         {this.props.node.name}
                     </p>
 
+                </div>
+
+                <div style = {Styles.delegation.headerCell}>
                     <p
                         key = {"amount"}
                         style = {Styles.delegation.amount} >
 
-                        {Currency.symbol+ " "+Currency.format(Currency.toEther(usedAmount)) +' / '+ Currency.format(Currency.toEther(totalAmount))}
+                        {" Used: "+Currency.symbol+Currency.format(Currency.toEther(delegateddAmount)) +'  Available: '+Currency.symbol+ Currency.format(Currency.toEther(assignedAmount))}
                     </p>
-
-                </div>
-
-                <div style = {Styles.delegation.headerCell}>
-                    
                 </div>
 
                 <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
