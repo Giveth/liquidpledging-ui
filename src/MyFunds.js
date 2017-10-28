@@ -57,12 +57,12 @@ class MyFunds extends Component {
             let onlyProjectsFilter= {type:'Project'}
             let projectDelegations = LPState.getDelegationsFromTreeChildren(delegatesChildren, onlyProjectsFilter)
 
-            console.log(projectDelegations)
             let projectsChildren = LPState.getDelegationsTrees(projectDelegations)
 
             let card = <GiverCard
                 key={giverNode.id}
                 giverNode = {giverNode}
+                delegatedDelegations={delegations}
                 delegatesChildren={delegatesChildren}
                 projectsChildren={projectsChildren}
                 userAddress={this.state.currentAddress}/>

@@ -5,6 +5,9 @@ import Caller from './LiquidPledgingCaller'
 import DelegationsList from './DelegationsList'
 import GiverCardHeader from './GiverCardHeader'
 import Paper from 'material-ui/Paper'
+//Todo. this shouldn't be here
+import LPState from "./LiquidPledgingState.js"
+
 
 class GiverCard extends Component {
 
@@ -15,7 +18,27 @@ class GiverCard extends Component {
 
     onToggle=()=>
     {
-        this.props.onToggle(!this.props.colapsed)
+    
+    this.props.onToggle(!this.props.colapsed)
+    }
+
+    onPledges=()=>
+    {
+        let delegatedPledgesIds = LPState.getPledgesIdsFromDelegations(this.props.delegatedDelegations)
+        let delegatedPledges = LPState.getPledgesFromIds(delegatedPledgesIds)
+        let data = {
+            pledgesBlocks:
+            [
+                {
+                    pledges:delegatedPledges,
+                    title:"Delegated"
+                },
+            ],
+            title: this.props.giverNode.name
+        }
+        let pledgesBlocks
+
+        Caller.showPledgesDialog(data)
     }
 
     onAddButton=()=>
@@ -141,7 +164,17 @@ class GiverCard extends Component {
                     defaultColapsedRoot={true}/>
 
                 <div style ={Styles.space}/>
+
+                <IconButton
+                    style = {Styles.inline}
+                    onClick = {this.onPledges}>
+                    <Icons.pledges size={20}/>
+                </IconButton>
+
+
             </Paper>
+
+
         )
     }
 }
