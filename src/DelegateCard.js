@@ -130,9 +130,9 @@ class DelegateCard extends Component {
         let assignedAmount = LPState.getNodeAssignedAmount(this.props.delegateNode)
         let assignedText = Currency.symbol+Currency.format(Currency.toEther(assignedAmount))
 
-        let assignedDelegationsSubtitle = 'Assigned to you ...'
-        let delegatedDelegationsSubtitle = 'Delegating to ...'
-        let projectsSubtitle = 'Intended projects ...'
+        let assignedDelegationsSubtitle = 'No funds assigned'
+        let delegatedDelegationsSubtitle = 'No funds delegated'
+        let projectsSubtitle = 'No funds on intended projects'
 
         if(this.props.delegatesParents.length)
         {
