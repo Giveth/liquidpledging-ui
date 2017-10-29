@@ -17,7 +17,7 @@ export const Colors = {
     backgroundActive:'rgba(0, 0, 0, 0.1)',
     secondary:'#666',
     subtle:'#999',
-    admin:'#ff3366',
+    admin:'#49bffc',
     giverBackground:'rgba(0, 0, 0, 0.07)',
     delegateBackground:'rgba(0, 0, 0, 0.0)',
     giverBackgroundHover:'rgba(0, 0, 0, 0.1)',
@@ -211,8 +211,10 @@ export const Styles = {
     },
 
     givethLogo:{
-        WebkitFilter: 'grayscale(100%)', 
-       justifyContent:"center"
+       // WebkitFilter: 'grayscale(100%)', 
+       justifyContent:"center",
+       width:100,
+       height:100,
     },
 
     dialogs:{

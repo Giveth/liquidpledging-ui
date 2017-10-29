@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
+import liquidPledgingLogo from './liquid-pledging.svg'
 import './App.css'
 
 import Page from './Page'
@@ -31,8 +32,19 @@ class App extends Component {
                     <AddressSelector />
                     
                     <Page>
+
+                       
                         <div style={{textAlign: 'center'}}>
-                            <img src={logo} className="App-logo" alt="Building the Future of Giving"  style={Styles.givethLogo}/>
+                            <img
+                                src={liquidPledgingLogo}
+                                alt="Building the Future of Giving"
+                                style={Styles.givethLogo}
+                                />
+                                 <h2 style = {{
+                                    fontWeight: 200,
+                                    textTransform: 'uppercase',
+                                    color:'grey'
+                                 }}> Liquid Pledging </h2>
                         </div>
 
                         <LayoutController defaultTab = {0}>
