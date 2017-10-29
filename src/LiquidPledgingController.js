@@ -28,7 +28,7 @@ class LiquidPledgingController extends ProviderHelper {
     }
 
     setupWeb3(){
-        this.setup([testRPCProvider, '*']).then(()=>{
+        this.setup(['*', testRPCProvider]).then(()=>{
 
             this.setupLiquidPledging()
 
