@@ -68,7 +68,9 @@ class GiverDelegationHeader extends Component {
             addFundsButton = (
                 <IconButton
                 onClick = {this.onAddButton}
-                style = {{color:'grey'}}>
+                style = {{color:'grey'}}
+                tooltip = {'Delegate funds to '+this.props.delegation.name}
+                >
 
                 <Icons.add size={15}/>
             </IconButton>)

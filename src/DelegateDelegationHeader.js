@@ -64,7 +64,9 @@ class DelegateDelegationHeader extends Component {
         let delegateFundsButton = (
         <IconButton
             onClick = {this.onAddButton}
-            style = {{color:'grey'}}>
+            style = {{color:'grey'}}
+            tooltip = {'Delegate funds to '+this.props.delegation.name}
+            >
             <Icons.add size={15}/>
         </IconButton>)
 
@@ -76,7 +78,9 @@ class DelegateDelegationHeader extends Component {
             cancelDelegateButton=(
             <IconButton
                 onClick = {this.onCancel}
-                style = {{color:'grey'}}>
+                style = {{color:'grey'}}
+                tooltip = {'Cancel funding to '+this.props.delegation.name}
+                >
                 <Icons.cancel size={15}/>
             </IconButton>)
         }

@@ -131,7 +131,7 @@ class GiverCard extends Component {
 
         return ( 
             
-            <Paper style={{padding:20, marginTop:10, marginBottom:10}} zDepth={1}>
+          <Paper style={{padding:20, paddingTop:5, marginTop:10, marginBottom:20}} zDepth={1}>
 
                 <GiverCardHeader 
                     node = {this.props.giverNode}
