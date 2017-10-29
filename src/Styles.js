@@ -5,7 +5,7 @@ import AddIcon from 'react-icons/lib/fa/plus'
 import CancelIcon from 'react-icons/lib/fa/close'
 import AddAdminIcon from 'react-icons/lib/md/group-add'
 import ProjectIcon from 'react-icons/lib/fa/flask'
-import PledgesIcon from 'react-icons/lib/fa/code'
+import PledgesIcon from 'react-icons/lib/fa/info'
 import Numeral from 'numeral'
 
 const MAX_CONTENT_WIDTH = 800
@@ -16,7 +16,7 @@ export const Colors = {
     backgroundHighlight:'rgba(0, 0, 0, 0.05)',
     backgroundActive:'rgba(0, 0, 0, 0.1)',
     secondary:'#666',
-    subtle:'#bbb',
+    subtle:'#999',
     admin:'#ff3366',
     giverBackground:'rgba(0, 0, 0, 0.07)',
     delegateBackground:'rgba(0, 0, 0, 0.0)',
@@ -105,7 +105,7 @@ export const Styles = {
 
     section:
     {
-        fontSize:'0.8em',
+        fontSize:'0.9em',
         color:Colors.subtle,
         fontWeight: 200,
         textTransform: 'uppercase',
@@ -148,6 +148,7 @@ export const Styles = {
             display: 'flex',
             flexDirection: 'row',
             justifyContent:'flex-start',
+            alignItems: 'center',
         },
 
         giverBackgroundHover:{
@@ -270,7 +271,8 @@ export const Currency = {
         return number.format('$0,0.[0000]')
     },
 
-    symbol : 'Ξ' 
+    //symbol : 'Ξ' 
+    symbol : 'ETH ' 
 }
 
 Numeral.register('locale', 'eth', {

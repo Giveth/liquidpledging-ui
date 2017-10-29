@@ -7,6 +7,7 @@ import GiverCardHeader from './GiverCardHeader'
 import Paper from 'material-ui/Paper'
 //Todo. this shouldn't be here
 import LPState from "./LiquidPledgingState.js"
+import FlatButton from 'material-ui/FlatButton'
 
 
 class GiverCard extends Component {
@@ -101,11 +102,6 @@ class GiverCard extends Component {
             </IconButton>)
         }
 
-
-        let totalAmount = 0//this.props.giverNode.assignedAmount
-        let availableAmount = 0//this.props.giverNode.availableAmount
-        let usedAmount = totalAmount - availableAmount
-
         let actionButons = <div/>
 
         if(this.state.isHovering)
@@ -118,16 +114,17 @@ class GiverCard extends Component {
 
 
         let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
-        let delegationsSubtitle = 'Delegating to ...'
-        let projectsSubtitle = 'Intended projects ...'
+        let projectsSubtitle = ''
+        let delegationsSubtitle = 'No funds have been delegated'
 
-        if(!this.props.delegatesChildren.length)
+        let delegateddAmount = LPState.getNodeDelegatedAmount(this.props.giverNode)
+        let delegatedText = Currency.symbol+Currency.format(Currency.toEther(delegateddAmount))
+
+        if(this.props.delegatesChildren.length)
         {
-            delegationsSubtitle = 'No funds have been delegated'
-            projectsSubtitle = ''
-        }
-        else
-        {
+            delegationsSubtitle = delegatedText + ' delegated to:'
+            projectsSubtitle = 'Intended projects ...'
+
             if(!this.props.projectsChildren.length)
                 projectsSubtitle = 'No funds have been assigned to a Project'
         }
@@ -170,7 +167,6 @@ class GiverCard extends Component {
                     onClick = {this.onPledges}>
                     <Icons.pledges size={20}/>
                 </IconButton>
-
 
             </Paper>
 

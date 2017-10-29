@@ -4,6 +4,7 @@ import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
 //TODO remove LiquidPledgingState dependency
 import LPState from "./LiquidPledgingState.js"
+import FlatButton from 'material-ui/FlatButton'
 
 class GiverCardHeader extends Component {
 
@@ -30,18 +31,19 @@ class GiverCardHeader extends Component {
 
         if(isAdmin)
         {
-            addFundsButton = (
+           /* addFundsButton = (
                 <IconButton
                 onClick = {this.onAddButton}
                 style = {{color:'grey'}}>
 
                 <Icons.add size={15}/>
-            </IconButton>)
+            </IconButton>)*/
+
+            addFundsButton =  <FlatButton primary = {true} label="Add funds"  />
         }
 
         let assignedAmount = LPState.getNodeAssignedAmount(this.props.node)
         let delegateddAmount = LPState.getNodeDelegatedAmount(this.props.node)
-
         let actionButons =(
             <div style = {Styles.delegation.actionButons}>
                 {addFundsButton}
@@ -59,17 +61,16 @@ class GiverCardHeader extends Component {
 
                 </div>
 
-                <div style = {Styles.delegation.headerCell}>
-                    <p
+                <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
+
+                     <p
                         key = {"amount"}
                         style = {Styles.delegation.amount} >
 
-                        {" Delegated: "+Currency.symbol+Currency.format(Currency.toEther(delegateddAmount)) +'  Assigned: '+Currency.symbol+ Currency.format(Currency.toEther(assignedAmount))}
+                        {Currency.symbol+ Currency.format(Currency.toEther(assignedAmount))}
                     </p>
-                </div>
 
-                <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
-                    {actionButons}
+                    <FlatButton onClick = {this.onAddButton} secondary = {true} label="Add funds"  />
                 </div>
 
             </div>
