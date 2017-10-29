@@ -65,7 +65,13 @@ class Explorer extends Component {
 
         return (
             <div >
-                <DelegationsList treeChildren={this.state.treeChildren} indentLevel={-1} userAddress={this.state.currentAddress}/>
+                <DelegationsList
+                    treeChildren={this.state.treeChildren}
+                    indentLevel={-1}
+                    userAddress={this.state.currentAddress}
+                    defaultColapsed = {false}
+                    defaultColapsedRoot={true}
+                    />
             </div>
         )
     }
