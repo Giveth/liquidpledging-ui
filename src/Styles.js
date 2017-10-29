@@ -196,7 +196,7 @@ export const Styles = {
 
         amount:{
             color:Colors.secondary,
-            minWidth:120,
+           // minWidth:120,
         }
     },
 

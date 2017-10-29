@@ -45,6 +45,7 @@ class GiverCardHeader extends Component {
 
         let assignedAmount = LPState.getNodeAssignedAmount(this.props.node)
         let delegateddAmount = LPState.getNodeDelegatedAmount(this.props.node)
+        let availableAmount = assignedAmount - delegateddAmount
         let actionButons =(
             <div style = {Styles.delegation.actionButons}>
                 {addFundsButton}
@@ -69,6 +70,15 @@ class GiverCardHeader extends Component {
                         style = {Styles.delegation.amount} >
 
                         {Currency.symbol+ Currency.format(Currency.toEther(assignedAmount))}
+                    </p>
+
+                    <div style ={Styles.space}/>
+                    
+                    <p
+                        key = {"amount"}
+                        style = {Merge(Styles.delegation.amount, {fontSize:'0.9em', color:'#bbb'})} >
+
+                        {'('+Currency.symbol+ Currency.format(Currency.toEther(availableAmount))+' available)'}
                     </p>
 
                     {addFundsButton}
