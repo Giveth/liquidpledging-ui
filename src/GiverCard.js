@@ -136,6 +136,7 @@ class GiverCard extends Component {
                 <GiverCardHeader 
                     node = {this.props.giverNode}
                     userAddress={this.props.userAddress}
+                    showAddFundsButton = {true}
                     />
 
                 <div style ={Styles.section}>{delegationsSubtitle}</div>

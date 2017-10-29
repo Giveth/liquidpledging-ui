@@ -27,9 +27,9 @@ class GiverCardHeader extends Component {
         let isAdmin = (this.props.userAddress === this.props.node.adminAddress)
        
 
-        let addFundsButton = <div style = {Styles.emptyButton} />
+        let addFundsButton = <div/>
 
-        if(isAdmin)
+        if(this.props.showAddFundsButton)
         {
            /* addFundsButton = (
                 <IconButton
@@ -39,7 +39,8 @@ class GiverCardHeader extends Component {
                 <Icons.add size={15}/>
             </IconButton>)*/
 
-            addFundsButton =  <FlatButton primary = {true} label="Add funds"  />
+
+            addFundsButton =  <FlatButton onClick = {this.onAddButton} secondary = {true} label="Add funds"  />
         }
 
         let assignedAmount = LPState.getNodeAssignedAmount(this.props.node)
@@ -70,7 +71,7 @@ class GiverCardHeader extends Component {
                         {Currency.symbol+ Currency.format(Currency.toEther(assignedAmount))}
                     </p>
 
-                    <FlatButton onClick = {this.onAddButton} secondary = {true} label="Add funds"  />
+                    {addFundsButton}
                 </div>
 
             </div>

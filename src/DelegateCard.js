@@ -123,17 +123,27 @@ class DelegateCard extends Component {
         }
 
         let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
+
+        let delegateddAmount = LPState.getNodeDelegatedAmount(this.props.delegateNode)
+        let delegatedText = Currency.symbol+Currency.format(Currency.toEther(delegateddAmount))
+
+        let assignedAmount = LPState.getNodeAssignedAmount(this.props.delegateNode)
+        let assignedText = Currency.symbol+Currency.format(Currency.toEther(assignedAmount))
+
         let assignedDelegationsSubtitle = 'Assigned to you ...'
         let delegatedDelegationsSubtitle = 'Delegating to ...'
         let projectsSubtitle = 'Intended projects ...'
 
-        if(!this.props.delegatesChildren.length)
+        if(this.props.delegatesParents.length)
         {
-            delegatedDelegationsSubtitle = 'No funds have been delegated'
-            projectsSubtitle = ''
+            assignedDelegationsSubtitle = assignedText + ' assigned to you'
         }
-        else
+
+        if(this.props.delegatesChildren.length)
         {
+            delegatedDelegationsSubtitle = delegatedText + ' delegated to'
+            projectsSubtitle = 'Intended projects'
+
             if(!this.props.projectsChildren.length)
                 projectsSubtitle = 'No funds have been assigned to a Project'
         }
@@ -142,9 +152,16 @@ class DelegateCard extends Component {
             
             <Paper style={{padding:20, marginTop:10, marginBottom:10}} zDepth={1}>
 
-                <div style ={Styles.section}>{assignedDelegationsSubtitle}</div>
+                 
+                <GiverCardHeader 
+                    node = {this.props.delegateNode}
+                    userAddress={this.props.userAddress}
+                    showAddFundsButton = {false}
+                    />
 
-                 <DelegationsList
+                 <div style ={Styles.section}>{assignedDelegationsSubtitle}</div>
+
+                <DelegationsList
                     key='IncomingDelegations'
                     treeChildren={this.props.delegatesParents}
                     indentLevel={-1}
@@ -152,10 +169,7 @@ class DelegateCard extends Component {
                     defaultColapsed = {false}
                     defaultColapsedRoot={true}/>
 
-                <GiverCardHeader 
-                    node = {this.props.delegateNode}
-                    userAddress={this.props.userAddress}
-                    />
+                <div style ={Styles.space}/>
 
                 <div style ={Styles.section}>{delegatedDelegationsSubtitle}</div>
 
