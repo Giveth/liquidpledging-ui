@@ -122,8 +122,8 @@ class GiverCard extends Component {
 
         if(this.props.delegatesChildren.length)
         {
-            delegationsSubtitle = delegatedText + ' delegated to:'
-            projectsSubtitle = 'Intended projects ...'
+            delegationsSubtitle = delegatedText + ' delegated to'
+            projectsSubtitle = 'Intended projects'
 
             if(!this.props.projectsChildren.length)
                 projectsSubtitle = 'No funds have been assigned to a Project'
@@ -159,14 +159,23 @@ class GiverCard extends Component {
                     userAddress={this.props.currentAddress}
                     defaultColapsed = {false}
                     defaultColapsedRoot={true}/>
-
                 <div style ={Styles.space}/>
 
-                <IconButton
-                    style = {Styles.inline}
-                    onClick = {this.onPledges}>
-                    <Icons.pledges size={20}/>
-                </IconButton>
+                <div style = {{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent:'flex-end',
+                        alignItems: 'center',
+                        color:'grey',
+                    }}>
+
+                    <IconButton
+                        style = {{float: 'right', color:'grey'}}
+                        onClick = {this.onPledges}>
+                        <Icons.pledges size={15}/>
+                    </IconButton>
+
+                </div>
 
             </Paper>
 
