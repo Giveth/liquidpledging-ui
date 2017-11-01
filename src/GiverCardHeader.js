@@ -28,6 +28,7 @@ class GiverCardHeader extends Component {
        
 
         let addFundsButton = <div/>
+        let delegateFundsButton = <div/>
 
         if(this.props.showAddFundsButton)
         {
@@ -40,7 +41,8 @@ class GiverCardHeader extends Component {
             </IconButton>)*/
 
 
-            addFundsButton =  <FlatButton onClick = {this.onAddButton} secondary = {true} label="Add funds"  />
+            addFundsButton =  <FlatButton onClick = {this.onAddButton} secondary = {true} label="Add"  />
+            delegateFundsButton =  <FlatButton onClick = {this.onAddButton} secondary = {true} label="Delegate funds" disabled = {true}  />
         }
 
         let assignedAmount = LPState.getNodeAssignedAmount(this.props.node)
@@ -73,7 +75,7 @@ class GiverCardHeader extends Component {
                     </p>
 
                     <div style ={Styles.space}/>
-                    
+
                     <p
                         key = {"amount"}
                         style = {Merge(Styles.delegation.amount, {fontSize:'0.9em', color:'#bbb'})} >
