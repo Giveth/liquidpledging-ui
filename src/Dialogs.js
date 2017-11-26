@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Caller from './LiquidPledgingCaller'
 import LPState from "./LiquidPledgingState.js"
+import Snackbar from 'material-ui/Snackbar'
+
 import DonateDialog from './DonateDialog'
 import TransferDialog from './TransferDialog'
 import AddAdminDialog from './AddAdminDialog'
@@ -15,6 +17,10 @@ class Dialogs extends Component {
             currentAddress:'',
             donateOpen:false,
             donateData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
+
+            snackbarOpen:false,
+            snackbarMessage:'',
+            snackBarTime:6000,
 
             transferOpen:false,
             transferData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
@@ -32,6 +38,7 @@ class Dialogs extends Component {
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
         LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
         LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
+        LPState.on(LPState.NO_CONTRACT, this.onNoContractFound)
 
         Caller.on(Caller.DONATE_DIALOG, this.donateOnShow)
         Caller.on(Caller.TRANSFER_DIALOG, this.transferOnShow)
@@ -52,8 +59,37 @@ class Dialogs extends Component {
     }
 
     onNetworkChanged=()=>{
+        this.showSnackbar("Connected to " + LPState.getCurrentNetwork().name)
         //let newNetwork = LPState.getCurrentNetwork().name
         //this.setState({network:newNetwork})
+    }
+
+    onNoContractFound=()=>{
+        this.showSnackbar("⚠️  Can't find the contract")
+    }
+
+    //snackBar
+    showSnackbar=(message, time=5000)=>
+    {
+        this.setState({
+            snackbarMessage:message,
+            snackbarTime:time,
+            snackbarOpen:true
+        })
+    }
+
+    closeSnackbar=()=>
+    {
+        this.setState({
+            snackbarOpen:false,
+            snackbarMessage:"",
+            snackBarTime:0,
+        } )
+    }
+
+    snackBarOnDone=(transfer)=>
+    {
+        this.setState({ snackBarOpen:false })
     }
 
     //Donate
@@ -119,8 +155,18 @@ class Dialogs extends Component {
     }
 
     render() {
+        
         return (
-            <div>            
+            <div>
+                <Snackbar
+                    open={this.state.snackbarOpen}
+                    message={this.state.snackbarMessage}
+                    action="Ok"
+                    autoHideDuration={this.state.snackBarTime}
+                    onActionTouchTap={this.closeSnackbar}
+                    onRequestClose={this.closeSnackbar}
+                    />
+
                 <DonateDialog
                     open={this.state.donateOpen}
                     onCancel ={this.donateOnCancel}
@@ -144,6 +190,8 @@ class Dialogs extends Component {
                     open={this.state.pledgesOpen}
                     onCancel ={this.pledgesOnCancel}
                     data={this.state.pledgesData}/>
+
+                
 
             </div>
         )
