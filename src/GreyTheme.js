@@ -7,7 +7,8 @@ const getTheme = () => {
     "fontFamily": "Open Sans Condensed, sans-serif",
     "palette": {
         "primary1Color": "rgba(0, 0, 0, 0.49)",
-        "accent1Color": "rgba(0, 0, 0, 0.87)",
+        "accent1Color": "#49c1fb",
+        //"accent1Color": "rgba(0, 0, 0, 0.87)",
         "canvasColor": "#F8F7F5"
     },
     "tabs": {
