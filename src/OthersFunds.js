@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
-import DelegationsList from './DelegationsList'
-import {Styles, Merge, MergeIf} from './Styles'
 import DelegateCard from './DelegateCard'
-
-const title = 'My funds'
 
 class OthersFunds extends Component {
 

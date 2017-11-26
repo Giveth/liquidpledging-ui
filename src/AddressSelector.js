@@ -1,5 +1,5 @@
 import React from 'react'
-import {Styles, Currency} from './Styles'
+import {Styles} from './Styles'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import LPState from "./LiquidPledgingState.js"

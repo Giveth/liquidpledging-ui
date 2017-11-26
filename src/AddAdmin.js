@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Styles, Icons, Merge } from './Styles'
-import IconButton from 'material-ui/IconButton'
+import { Styles, Icons } from './Styles'
 import Caller from './LiquidPledgingCaller'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 

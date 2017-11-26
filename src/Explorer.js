@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
 import DelegationsList from './DelegationsList'
-import {Styles, Merge} from './Styles'
-
-const title = "Explorer"
 
 class Explorer extends Component {
 

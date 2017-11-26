@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import LPState from './LiquidPledgingState'
 import PledgesTable from './PledgesTable'
-import {Styles, Merge} from './Styles'
 
 class PledgesView extends Component {
 

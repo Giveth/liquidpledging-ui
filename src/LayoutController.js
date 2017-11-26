@@ -1,16 +1,5 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
-import './App.css'
-
-import Page from './Page.js'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Styles } from './Styles'
-import GreyTheme from './GreyTheme'
-import Dialogs from './Dialogs'
-import MyFunds from './MyFunds.js'
-import AddAdmin from './AddAdmin.js'
-import OthersFunds from './OthersFunds.js'
-import Explorer from './Explorer.js'
 import {Tabs, Tab} from 'material-ui/Tabs'
 
 class LayoutController extends Component {
@@ -45,7 +34,7 @@ class LayoutController extends Component {
     render() {
 
         let viewsNumber = this.getNumberOfViews()
-        let isTabLayout = ((Styles.minContentWidth * viewsNumber) > this.state.windowWidth)
+        //let isTabLayout = ((Styles.minContentWidth * viewsNumber) > this.state.windowWidth)
 
         let view = <div/>
 
