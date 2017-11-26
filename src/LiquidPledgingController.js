@@ -14,6 +14,7 @@ class LiquidPledgingController extends ProviderHelper {
     {
         super()
         this.STATE_CHANGED = "stateChanged"
+        this.NO_CONTRACT = "noContract"
 
         this.liquidpledging={}
         this.liquidPledgingState={}
@@ -56,6 +57,7 @@ class LiquidPledgingController extends ProviderHelper {
         },10000) 
         
         this.retriveStateData()
+        
     }
 
     retriveStateData()
@@ -64,7 +66,10 @@ class LiquidPledgingController extends ProviderHelper {
             .then((data) => {
                 this.setState(data)
             })
-            .catch((error)=>{console.error(error)})
+            .catch((error)=>{
+                this.emit(this.NO_CONTRACT)
+                console.error("Retrive state error", error)
+            })
     }
 
     setState(data)
