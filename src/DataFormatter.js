@@ -178,7 +178,6 @@ class DataFormatter {
 
     setNodes(nodes, delegations)
     {
-        
         for (let delegationId in delegations) {
             if (delegations.hasOwnProperty(delegationId)) {
         
@@ -206,11 +205,6 @@ class DataFormatter {
                list.push(delegations[delegationId])
 
         return list
-    }
-
-    log(msg)
-    {
-        console.log( JSON.parse(JSON.stringify(msg)))
     }
 }
 
