@@ -60,8 +60,6 @@ class Dialogs extends Component {
 
     onNetworkChanged=()=>{
         this.showSnackbar("Connected to " + LPState.getCurrentNetwork().name)
-        //let newNetwork = LPState.getCurrentNetwork().name
-        //this.setState({network:newNetwork})
     }
 
     onNoContractFound=()=>{
