@@ -44,7 +44,7 @@ class DelegateDelegationHeader extends Component {
 
     onBackgroundClick=()=>
     {
-        //this.props.onToggle(!this.props.colapsed)
+        console.log(this.props.delegation)
     }
    
     render() {
