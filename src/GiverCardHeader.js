@@ -68,7 +68,7 @@ class GiverCardHeader extends Component {
                 <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
 
                      <p
-                        key = {"amount"}
+                        key = {"assignedAmount"}
                         style = {Styles.delegation.amount} >
 
                         {Currency.symbol+ Currency.format(Currency.toEther(assignedAmount))}
@@ -77,7 +77,7 @@ class GiverCardHeader extends Component {
                     <div style ={Styles.space}/>
 
                     <p
-                        key = {"amount"}
+                        key = {"availableAmount"}
                         style = {Merge(Styles.delegation.amount, {fontSize:'0.9em', color:'#bbb'})} >
 
                         {'('+Currency.symbol+ Currency.format(Currency.toEther(availableAmount))+' available)'}
