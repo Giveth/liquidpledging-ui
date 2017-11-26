@@ -113,7 +113,7 @@ class GiverDelegationHeader extends Component {
                         <p
                             key = {"amount"}
                             style = {Styles.delegation.amount} >
-                            {Currency.symbol+ " "+Currency.format(Currency.toEther(usedAmount)) +' / '+ Currency.format(Currency.toEther(totalAmount))}
+                            {Currency.symbol+ " "+Currency.format(Currency.toEther(availableAmount))}
                         </p>
 
                     </div>

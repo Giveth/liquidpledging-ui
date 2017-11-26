@@ -57,7 +57,7 @@ class GiverCardHeader extends Component {
 
                 <div style = {Styles.delegation.headerCell}>
                 
-                    <p key = {"name"}  style= {MergeIf(Styles.delegateRootTitle, Styles.adminColor, true)}>
+                    <p key = {"name"}  style= {Styles.delegateRootTitle}>
                         {this.props.node.name}
                     </p>
 
@@ -66,20 +66,13 @@ class GiverCardHeader extends Component {
                 <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
 
                      <p
-                        key = {"assignedAmount"}
+                        key = {"availableAmount"}
                         style = {Styles.delegation.amount} >
 
-                        {Currency.symbol+ Currency.format(Currency.toEther(assignedAmount))}
+                        {Currency.symbol+ Currency.format(Currency.toEther(availableAmount))}
                     </p>
 
                     <div style ={Styles.space}/>
-
-                    <p
-                        key = {"availableAmount"}
-                        style = {Merge(Styles.delegation.amount, {fontSize:'0.9em', color:'#bbb'})} >
-
-                        {'('+Currency.symbol+ Currency.format(Currency.toEther(availableAmount))+' available)'}
-                    </p>
 
                     {addFundsButton}
                 </div>
@@ -88,5 +81,14 @@ class GiverCardHeader extends Component {
         )
     }
 }
+
+/*
+                    <p
+                        key = {"availableAmount"}
+                        style = {Merge(Styles.delegation.amount, {fontSize:'0.9em', color:'#bbb'})} >
+
+                        {'('+Currency.symbol+ Currency.format(Currency.toEther(availableAmount))+' available)'}
+                    </p>
+                    */
 
 export default GiverCardHeader

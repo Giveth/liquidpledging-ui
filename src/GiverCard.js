@@ -8,8 +8,6 @@ import Paper from 'material-ui/Paper'
 //Todo. this shouldn't be here
 import LPState from "./LiquidPledgingState.js"
 
-
-
 class GiverCard extends Component {
 
     constructor(props){
@@ -18,9 +16,8 @@ class GiverCard extends Component {
     }
 
     onToggle=()=>
-    {
-    
-    this.props.onToggle(!this.props.colapsed)
+    {  
+        this.props.onToggle(!this.props.colapsed)
     }
 
     onPledges=()=>
