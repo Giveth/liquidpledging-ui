@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
+import { Styles, Currency, Icons } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
 import DelegationsList from './DelegationsList'
@@ -7,7 +7,7 @@ import GiverCardHeader from './GiverCardHeader'
 import Paper from 'material-ui/Paper'
 //Todo. this shouldn't be here
 import LPState from "./LiquidPledgingState.js"
-import FlatButton from 'material-ui/FlatButton'
+
 
 
 class GiverCard extends Component {
@@ -37,7 +37,6 @@ class GiverCard extends Component {
             ],
             title: this.props.giverNode.name
         }
-        let pledgesBlocks
 
         Caller.showPledgesDialog(data)
     }
@@ -70,14 +69,17 @@ class GiverCard extends Component {
    
     render() {
 
-        let isAdmin = (this.props.currentAddress === this.props.giverNode.adminAddress)
-        let toggleIcon = <Icons.colapsed size={20}/>
+        //let isAdmin = (this.props.currentAddress === this.props.giverNode.adminAddress)
+        //let toggleIcon = <Icons.colapsed size={20}/>
 
+        /*
         if(this.props.colapsed)
         {
             toggleIcon =<Icons.shown size={20}/>
         }
-
+        */
+        /*
+        //remove me, been here too longç
         let colapseButton = <div style = {Styles.emptyButton} />
         if(this.props.showColapseButton)
         {
@@ -87,9 +89,9 @@ class GiverCard extends Component {
                     onClick = {this.onToggle}>
                     {toggleIcon}
                 </IconButton>)
-        }
+        }*/
 
-        let addFundsButton = <div style = {Styles.emptyButton} />
+       /* let addFundsButton = <div style = {Styles.emptyButton} />
 
          if(isAdmin)
         {
@@ -101,8 +103,8 @@ class GiverCard extends Component {
                 <Icons.add size={15}/>
             </IconButton>)
         }
-
-        let actionButons = <div/>
+*/
+        /*let actionButons = <div/>
 
         if(this.state.isHovering)
         {
@@ -111,9 +113,9 @@ class GiverCard extends Component {
                     {addFundsButton}
                 </div>)
         }
+        */
 
-
-        let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
+        //let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
         let projectsSubtitle = ''
         let delegationsSubtitle = 'No funds have been delegated'
 

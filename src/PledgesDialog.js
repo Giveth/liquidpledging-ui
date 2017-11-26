@@ -1,9 +1,6 @@
 import React from 'react'
-import TextField from 'material-ui/TextField'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-import {Styles, Currency} from './Styles'
-import DropDownMenu from 'material-ui/DropDownMenu'
 import PledgesTable from './PledgesTable'
 
 class TransferDialog extends React.Component

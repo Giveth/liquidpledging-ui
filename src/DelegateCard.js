@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
+import { Styles, Currency, Icons } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
 import DelegationsList from './DelegationsList'
@@ -42,7 +42,6 @@ class DelegateCard extends Component {
             ],
             title: this.props.delegateNode.name
         }
-        let pledgesBlocks
 
         Caller.showPledgesDialog(data)
     }
@@ -75,14 +74,14 @@ class DelegateCard extends Component {
    
     render() {
 
-        let isAdmin = (this.props.currentAddress === this.props.delegateNode.adminAddress)
-        let toggleIcon = <Icons.colapsed size={20}/>
+        //let isAdmin = (this.props.currentAddress === this.props.delegateNode.adminAddress)
+        /*let toggleIcon = <Icons.colapsed size={20}/>
 
         if(this.props.colapsed)
         {
             toggleIcon =<Icons.shown size={20}/>
-        }
-
+        }*/
+/*
         let colapseButton = <div style = {Styles.emptyButton} />
         if(this.props.showColapseButton)
         {
@@ -93,8 +92,8 @@ class DelegateCard extends Component {
                     {toggleIcon}
                 </IconButton>)
         }
-
-        let addFundsButton = <div style = {Styles.emptyButton} />
+*/
+        /*let addFundsButton = <div style = {Styles.emptyButton} />
 
          if(isAdmin)
         {
@@ -105,14 +104,14 @@ class DelegateCard extends Component {
 
                 <Icons.add size={15}/>
             </IconButton>)
-        }
+        }*/
 
 
-        let totalAmount = 0//this.props.delegateNode.assignedAmount
-        let availableAmount = 0//this.props.delegateNode.availableAmount
-        let usedAmount = totalAmount - availableAmount
+        //let totalAmount = 0//this.props.delegateNode.assignedAmount
+        //let availableAmount = 0//this.props.delegateNode.availableAmount
+       // let usedAmount = totalAmount - availableAmount
 
-        let actionButons = <div/>
+       /* let actionButons = <div/>
 
         if(this.state.isHovering)
         {
@@ -120,9 +119,9 @@ class DelegateCard extends Component {
                 <div style = {Styles.delegation.actionButons}>
                     {addFundsButton}
                 </div>)
-        }
+        }*/
 
-        let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
+        //let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
 
         let delegateddAmount = LPState.getNodeDelegatedAmount(this.props.delegateNode)
         let delegatedText = Currency.symbol+Currency.format(Currency.toEther(delegateddAmount))

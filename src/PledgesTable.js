@@ -1,13 +1,9 @@
 import React from "react"
-import { render } from "react-dom"
 import ReactTable from "react-table"
 import "react-table/react-table.css"
 import {Currency} from './Styles'
 
 class PledgesTable extends React.Component {
-  constructor() {
-    super()
-  }
 
   render() {
 

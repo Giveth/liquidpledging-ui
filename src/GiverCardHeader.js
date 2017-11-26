@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
-import IconButton from 'material-ui/IconButton'
+import { Styles, Currency, Merge, MergeIf } from './Styles'
 import Caller from './LiquidPledgingCaller'
 //TODO remove LiquidPledgingState dependency
 import LPState from "./LiquidPledgingState.js"
@@ -24,11 +23,10 @@ class GiverCardHeader extends Component {
     }
    
     render() {
-        let isAdmin = (this.props.userAddress === this.props.node.adminAddress)
-       
+        //let isAdmin = (this.props.userAddress === this.props.node.adminAddress)
 
         let addFundsButton = <div/>
-        let delegateFundsButton = <div/>
+        //let delegateFundsButton = <div/>
 
         if(this.props.showAddFundsButton)
         {
@@ -40,18 +38,18 @@ class GiverCardHeader extends Component {
                 <Icons.add size={15}/>
             </IconButton>)*/
 
-
             addFundsButton =  <FlatButton onClick = {this.onAddButton} secondary = {true} label="Add"  />
-            delegateFundsButton =  <FlatButton onClick = {this.onAddButton} secondary = {true} label="Delegate funds" disabled = {true}  />
+            //delegateFundsButton =  <FlatButton onClick = {this.onAddButton} secondary = {true} label="Delegate funds" disabled = {true}  />
         }
 
         let assignedAmount = LPState.getNodeAssignedAmount(this.props.node)
         let delegateddAmount = LPState.getNodeDelegatedAmount(this.props.node)
         let availableAmount = assignedAmount - delegateddAmount
-        let actionButons =(
+        /*let actionButons =(
             <div style = {Styles.delegation.actionButons}>
                 {addFundsButton}
             </div>)
+            */
 
         return (
             

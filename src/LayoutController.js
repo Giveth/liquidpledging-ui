@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Styles } from './Styles'
 import {Tabs, Tab} from 'material-ui/Tabs'
 
 class LayoutController extends Component {
