@@ -52,9 +52,11 @@ class DataFormatter {
             let pledge = pledges[i]
             
             let id = this.getDelegationId(pledge.owner, pledge.delegates, pledge.intendedProject)
-            let parentDelegates = pledge.delegates.slice()
-            parentDelegates.splice(-1,1)
+            
 
+            let parentDelegates = pledge.delegates.slice()
+            if(!pledge.intendedProject)
+                parentDelegates.splice(-1,1)
             let parentId = this.getDelegationId(pledge.owner, parentDelegates, 0)
 
             let delegationChain =  this.getDelegationChain(pledge.owner, pledge.delegates, pledge.intendedProject)
@@ -97,8 +99,7 @@ class DataFormatter {
             let current = delegationsArray[i]
 
             for(let j= i + 1 ; j < delegationsArray.length; j++) //current plus self
-            {
-                
+            { 
                 if(current.parentId===NONE.toString())
                     break
 
@@ -177,8 +178,10 @@ class DataFormatter {
 
     setNodes(nodes, delegations)
     {
+        
         for (let delegationId in delegations) {
             if (delegations.hasOwnProperty(delegationId)) {
+        
                 let d = delegations[delegationId]          
                 let nodeIndex = parseInt(d.adminId, 10)
                 nodes[nodeIndex].delegationsIn.push(d.id)
@@ -203,6 +206,11 @@ class DataFormatter {
                list.push(delegations[delegationId])
 
         return list
+    }
+
+    log(msg)
+    {
+        console.log( JSON.parse(JSON.stringify(msg)))
     }
 }
 
