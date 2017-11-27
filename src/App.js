@@ -7,6 +7,7 @@ import { Styles } from './Styles'
 import GreyTheme from './GreyTheme'
 import Dialogs from './Dialogs'
 import MyFunds from './MyFunds'
+import MyProjects from './MyProjects'
 import AddAdmin from './AddAdmin'
 import OthersFunds from './OthersFunds'
 import Explorer from './Explorer'
@@ -42,6 +43,7 @@ class App extends Component {
                             <MyFunds label="My funds"/>
                            
                             <OthersFunds label="Other's funds" />
+                            <MyProjects label="My projects" />
                             <Explorer label="Explorer" />
                             <PledgesView label="Pledges" />
 
