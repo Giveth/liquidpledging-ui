@@ -35,8 +35,6 @@ class AddAdmin extends React.Component
     {
         super ()
 
-        let selectedType = 0
-        
         this.state={
             name:'',
             url:'',
