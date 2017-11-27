@@ -33,7 +33,10 @@ class AddAdmin extends React.Component
 {
     constructor(props)
     {
-        super();
+        super ()
+
+        let selectedType = 0
+        
         this.state={
             name:'',
             url:'',
@@ -103,6 +106,13 @@ class AddAdmin extends React.Component
         return true*/
         return true
     }
+
+    componentWillReceiveProps=(newProps)=>
+    {
+        if(newProps.data)
+            if(newProps.data.defaultAdminType)
+                this.setState({selectedType:newProps.data.defaultAdminType})
+    } 
 
     render()
     {

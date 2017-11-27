@@ -16,18 +16,18 @@ class Dialogs extends Component {
         this.state={
             currentAddress:'',
             donateOpen:false,
-            donateData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
+            donateData:{reciever:0, emiter:0, amount:0, giverName:''},
 
             snackbarOpen:false,
             snackbarMessage:'',
             snackBarTime:6000,
 
             transferOpen:false,
-            transferData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
+            transferData:{reciever:0, emiter:0, amount:0, giverName:''},
             transferMetadata:{emiters:[]},
 
             addAdminOpen:false,
-            addAdminData:{reciever:0, emiter:0, amount:0, giverName:'unga'},
+            addAdminData:{defaultAdminType:0},
             addAdminMetadata:{emiters:[]},
 
             pledgesOpen:false,

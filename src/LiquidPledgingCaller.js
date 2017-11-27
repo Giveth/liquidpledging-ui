@@ -72,9 +72,9 @@ class Caller extends EventEmitter
     }
 
      //AddAdmin
-    showAddAdminDialog()
+    showAddAdminDialog(data)
     {
-        this.emit(this.ADD_ADMIN_DIALOG)
+        this.emit(this.ADD_ADMIN_DIALOG, data)
     }
 
     addAdmin(data)

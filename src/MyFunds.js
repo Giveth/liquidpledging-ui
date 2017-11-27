@@ -4,6 +4,7 @@ import GiverCard from './GiverCard'
 import FlatButton from 'material-ui/FlatButton'
 import IconButton from 'material-ui/IconButton'
 import { Styles, Currency, Icons } from './Styles'
+import Caller from './LiquidPledgingCaller'
 
 class MyFunds extends Component {
 
@@ -45,7 +46,9 @@ class MyFunds extends Component {
 
     onNewGiver=()=>
     {
-        console.log("hello")
+        let giverType = 1
+        let data = {defaultAdminType:giverType}
+        Caller.showAddAdminDialog(data)
     }
 
     createGiverCards=()=>
@@ -89,7 +92,6 @@ class MyFunds extends Component {
                         onClick = {this.onPledges}>
                         <Icons.pledges size={15}/>
                     </IconButton>
-
 
                 </div>
                  {cards}
