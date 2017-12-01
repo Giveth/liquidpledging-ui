@@ -7,6 +7,7 @@ import GiverCardHeader from './GiverCardHeader'
 import Paper from 'material-ui/Paper'
 //Todo. this shouldn't be here
 import LPState from "./LiquidPledgingState.js"
+import SectionHeader from './SectionHeader'
 
 class GiverCard extends Component {
 
@@ -62,6 +63,11 @@ class GiverCard extends Component {
     onBackgroundClick=()=>
     {
         //this.props.onToggle(!this.props.colapsed)
+    }
+
+    onDelegateFunds=()=>
+    {
+
     }
    
     render() {
@@ -139,6 +145,14 @@ class GiverCard extends Component {
                     />
 
                 <div style ={Styles.section}>{delegationsSubtitle}</div>
+
+                <SectionHeader
+                    title='Available'
+                    titleStyle = {{}}
+                    amount= {'123'}
+                    buttonLabel = "Delegate funds"
+                    onActionButton = {this.onDelegateFunds}/>
+
 
                 <DelegationsList
                     key='Delegations'
