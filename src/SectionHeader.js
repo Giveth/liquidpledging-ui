@@ -32,24 +32,25 @@ class SectionHeader extends Component {
 
     onBackgroundClick=()=>
     {
-
     }
    
     render() {
 
         return ( 
-                <div style = {{}}>
-                    <div style ={Styles.section}>{this.props.title}</div>
-                    <IconButton
-                        style = {{color:'grey'}}
-                        onClick = {this.onPledges}>
-                        <Icons.pledges size={15}/>
-                    </IconButton>
+                <div style = {Styles.row}>
+                    <div style = {Styles.sectionFrontCell}>
+                        <div style ={Styles.sectionTitle}>{this.props.title}</div>
+                        <IconButton
+                            style = {{color:'grey'}}
+                            onClick = {this.onPledges}>
+                            <Icons.pledges size={15}/>
+                        </IconButton>
+                    </div>
 
-                    <div style ={Styles.section}>{this.props.amount}</div>
-
-                    <FlatButton onClick = {this.onActionButton} secondary = {true} label={this.props.buttonLabel}  />
-        
+                    <div style = {Styles.sectionMiddleCell}>
+                        <div style ={Styles.section}>{this.props.amount}</div>
+                        <FlatButton onClick = {this.onActionButton} secondary = {true} label={this.props.buttonLabel}  />
+                    </div>
                 </div>
         )
     }

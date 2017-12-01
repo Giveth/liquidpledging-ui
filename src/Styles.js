@@ -103,7 +103,7 @@ export const Styles = {
         fontSize:'1.2em'
     },
 
-    section:
+    sectionTitle:
     {
         fontSize:'0.9em',
         color:Colors.subtle,
@@ -111,6 +111,24 @@ export const Styles = {
         textTransform: 'uppercase',
         marginBottom:10,
         marginTop:10,
+    },
+
+    sectionFrontCell:
+    {
+        minWidth:200,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent:'flex-start',
+        alignItems: 'center',
+    },
+
+    sectionMiddleCell:
+    {
+        minWidth:200,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent:'flex-start',
+        alignItems: 'center',
     },
    
     delegation:
