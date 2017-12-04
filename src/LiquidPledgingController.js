@@ -5,8 +5,8 @@ const liquidpledging = require('./liquidpledging');
 const LiquidPledging = liquidpledging.LiquidPledging;
 const LiquidPledgingState = liquidpledging.LiquidPledgingState;
 const testRPCProvider = 'ws://localhost:8546'
-//const liquidPledgingContractAddress = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24' //TESTRPC DETERMINISTIC
-const liquidPledgingContractAddress = '0x18658A1A7cB8b0Be97b155D051769b3651b2943c' //ROPSTEN
+const liquidPledgingContractAddress = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24' //TESTRPC DETERMINISTIC
+//const liquidPledgingContractAddress = '0x18658A1A7cB8b0Be97b155D051769b3651b2943c' //ROPSTEN
 
 class LiquidPledgingController extends ProviderHelper {
 
@@ -29,7 +29,7 @@ class LiquidPledgingController extends ProviderHelper {
     }
 
     setupWeb3(){
-        this.setup(['*', testRPCProvider]).then(()=>{
+        this.setup([testRPCProvider, '*', testRPCProvider]).then(()=>{
 
             this.setupLiquidPledging()
 
@@ -57,7 +57,6 @@ class LiquidPledgingController extends ProviderHelper {
         },10000) 
         
         this.retriveStateData()
-        
     }
 
     retriveStateData()
