@@ -193,6 +193,39 @@ class LiquidPledgingState extends LiquidPledgingController {
         return amount
     }
 
+    getNodeAssignedToProjectsAmount(node)
+    {
+        let amount = 0
+        let projectType = "Project"
+
+        for(let delegationId of node.delegationsOut)
+        {
+            let delegation = this.getDelegation(delegationId)
+            
+            if (delegation.type===projectType)
+                amount +=  delegation.assignedAmount
+
+            let that = this
+
+            function findAmount(d)
+            {
+                for(let subDelegationId of d.delegations)
+                {
+                    let subDelegation = that.getDelegation(subDelegationId)
+
+                    if (subDelegation.type===projectType)
+                        amount +=  subDelegation.assignedAmount
+                    else
+                        findAmount(subDelegation)              
+                }
+            }
+
+            findAmount(delegation)
+        }
+        
+        return amount
+    }
+
 
     /*getAvailablePledges(address)
     {
