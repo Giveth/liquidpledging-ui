@@ -86,13 +86,6 @@ class MyFunds extends Component {
             <div >
                 <div>
                     <FlatButton onClick = {this.onNewGiver} primary = {true} label="New Giver"  />
-                    
-                    <IconButton
-                        style = {{float: 'right', color:'grey'}}
-                        onClick = {this.onPledges}>
-                        <Icons.pledges size={15}/>
-                    </IconButton>
-
                 </div>
                  {cards}
             </div>
