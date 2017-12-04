@@ -39,7 +39,7 @@ class GiverCard extends Component {
         Caller.showPledgesDialog(data)
     }
 
-    onAddButton=()=>
+    onAddFunds=()=>
     {
         let donateData={
             giverName:this.props.giverNode.name,
@@ -157,7 +157,7 @@ class GiverCard extends Component {
                     title='Available'
                     amount= {availableAmount}
                     buttonLabel = "Add funds"
-                    onActionButton = {this.onDelegateFunds}/>
+                    onActionButton = {this.onAddFunds}/>
 
                 <SectionHeader
                     key = 'Delegated'
