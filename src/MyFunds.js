@@ -84,10 +84,23 @@ class MyFunds extends Component {
 
         return  (
             <div >
-                <div>
-                    <FlatButton onClick = {this.onNewGiver} primary = {true} label="New Giver"  />
+
+                <div style={Styles.row}>
+                    <div style = {Styles.sectionFrontCell}>
+
+                    </div>
+
+                    <div style = {Styles.sectionMiddleCell}>
+                        Total funds ETH 123
+                    </div>
+
+                    <div style = {Styles.sectionBackCell}>
+                        <FlatButton onClick = {this.onNewGiver} primary = {true} label="New Giver"  />
+                    </div>
                 </div>
-                 {cards}
+
+                {cards}
+
             </div>
         )
 

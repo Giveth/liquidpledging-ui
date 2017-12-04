@@ -1,3 +1,4 @@
+import Numeral from 'numeral'
 import SubDelegateIcon from 'react-icons/lib/md/subdirectory-arrow-right'
 import ColapsedIcon from 'react-icons/lib/md/keyboard-arrow-up'
 import ShownIcon from 'react-icons/lib/md/keyboard-arrow-down'
@@ -5,8 +6,8 @@ import AddIcon from 'react-icons/lib/fa/plus'
 import CancelIcon from 'react-icons/lib/fa/close'
 import AddAdminIcon from 'react-icons/lib/md/group-add'
 import ProjectIcon from 'react-icons/lib/fa/flask'
-import PledgesIcon from 'react-icons/lib/fa/info'
-import Numeral from 'numeral'
+import PledgesIcon from 'react-icons/lib/go/search'
+
 
 const MAX_CONTENT_WIDTH = 800
 const MIN_CONTENT_WIDTH = 400
@@ -36,7 +37,6 @@ export const Icons = {
     project:ProjectIcon,
     pledges:PledgesIcon,
 }
-
 
 export const Styles = {
 
@@ -131,6 +131,14 @@ export const Styles = {
         justifyContent:'flex-start',
         alignItems: 'center',
         flex:2,
+    },
+
+    sectionBackCell:
+    {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent:'flex-end',
+        alignItems: 'center',
     },
    
     delegation:

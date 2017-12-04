@@ -141,6 +141,7 @@ class GiverCard extends Component {
             
           <Paper style={{padding:20, marginTop:10, marginBottom:20}} zDepth={1}>
 
+
                 <SectionHeader
                     key = 'title'
                     title= {this.props.giverNode.name}
