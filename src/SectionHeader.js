@@ -61,9 +61,7 @@ class SectionHeader extends Component {
 
                     <div style = {Styles.sectionMiddleCell}>
                         
-                        <div style ={Styles.sectionTitle}>{amountText}</div>
-
-                        <div style ={Styles.space}/>
+                        <div style ={Merge(Styles.sectionTitle, {width:100})}>{amountText}</div>
                         
                         {button}
                         

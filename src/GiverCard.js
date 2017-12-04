@@ -135,24 +135,24 @@ class GiverCard extends Component {
                 projectsSubtitle = 'No funds have been assigned to a Project'
         }*/
 
+        let availableAmount = LPState.getNodeAssignedAmount(this.props.giverNode)
         let delegatedAmount = LPState.getNodeDelegatedAmount(this.props.giverNode)
 
         return ( 
             
           <Paper style={{padding:20, marginTop:10, marginBottom:20}} zDepth={1}>
 
-
                 <SectionHeader
                     key = 'title'
                     title= {this.props.giverNode.name}
-                    titleStyle = {Styles.delegateRootTitle}
+                    titleStyle = {Styles.cardTitle}
                     amount= {delegatedAmount}
                     onPledges = {this.onPledges}/>
 
                 <SectionHeader
                     key = 'Available'
                     title='Available'
-                    amount= {delegatedAmount}
+                    amount= {availableAmount}
                     buttonLabel = "Add funds"
                     onActionButton = {this.onDelegateFunds}/>
 

@@ -13,6 +13,7 @@ const MAX_CONTENT_WIDTH = 800
 const MIN_CONTENT_WIDTH = 400
 
 export const Colors = {
+    base:'#666',
     highlight:'#333',
     backgroundHighlight:'rgba(0, 0, 0, 0.05)',
     backgroundActive:'rgba(0, 0, 0, 0.1)',
@@ -98,9 +99,10 @@ export const Styles = {
         color:Colors.admin
     },
 
-    delegateRootTitle:
+    cardTitle:
     {
-        fontSize:'1.2em'
+        fontSize:'1.2em',
+        color: Colors.base
     },
 
     sectionTitle:

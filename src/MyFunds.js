@@ -81,6 +81,7 @@ class MyFunds extends Component {
     render() {
 
         let cards = this.createGiverCards()
+        let totalFunds = 123
 
         return  (
             <div >
@@ -91,7 +92,9 @@ class MyFunds extends Component {
                     </div>
 
                     <div style = {Styles.sectionMiddleCell}>
-                        Total funds ETH 123
+
+                        {'Total funds ETH '+totalFunds}
+
                     </div>
 
                     <div style = {Styles.sectionBackCell}>
@@ -103,7 +106,6 @@ class MyFunds extends Component {
 
             </div>
         )
-
     }
 }
 export default MyFunds
