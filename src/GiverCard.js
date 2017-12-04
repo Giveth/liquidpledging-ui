@@ -137,6 +137,7 @@ class GiverCard extends Component {
 
         let availableAmount = LPState.getNodeAssignedAmount(this.props.giverNode)
         let delegatedAmount = LPState.getNodeDelegatedAmount(this.props.giverNode)
+        let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(this.props.giverNode) 
 
         return ( 
             
@@ -163,10 +164,18 @@ class GiverCard extends Component {
                     buttonLabel = "Find project to delegate"
                     onActionButton = {this.onDelegateFunds}/>
 
+                <DelegationsList
+                    key='Delegations'
+                    treeChildren={this.props.delegatesChildren}
+                    indentLevel={-1}
+                    userAddress={this.props.currentAddress}
+                    defaultColapsed = {false}
+                    defaultColapsedRoot={true}/>
+
                 <SectionHeader
                     key = 'Intended Projects'
                     title='Intended Projects'
-                    amount= {delegatedAmount}
+                    amount= {assignedToProjectsAmount}
                     />
 
                 <DelegationsList
@@ -188,13 +197,7 @@ class GiverCard extends Component {
                     showAddFundsButton = {true}
                     />
 
-<DelegationsList
-                    key='Delegations'
-                    treeChildren={this.props.delegatesChildren}
-                    indentLevel={-1}
-                    userAddress={this.props.currentAddress}
-                    defaultColapsed = {false}
-                    defaultColapsedRoot={true}/>
+
 
                 <div style ={Styles.space}/>
                 <div style = {{
