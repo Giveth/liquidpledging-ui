@@ -135,9 +135,11 @@ class GiverCard extends Component {
                 projectsSubtitle = 'No funds have been assigned to a Project'
         }*/
 
-        let availableAmount = LPState.getNodeAssignedAmount(this.props.giverNode)
-        let delegatedAmount = LPState.getNodeDelegatedAmount(this.props.giverNode)
         let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(this.props.giverNode) 
+        let delegatedAmount = LPState.getNodeDelegatedAmount(this.props.giverNode) - assignedToProjectsAmount
+        let availableAmount = LPState.getNodeAssignedAmount(this.props.giverNode)
+
+        let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
 
         return ( 
             
@@ -147,7 +149,7 @@ class GiverCard extends Component {
                     key = 'title'
                     title= {this.props.giverNode.name}
                     titleStyle = {Styles.cardTitle}
-                    amount= {delegatedAmount}
+                    amount= {totalAmount}
                     onPledges = {this.onPledges}/>
 
                 <SectionHeader
