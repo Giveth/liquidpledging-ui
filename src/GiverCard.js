@@ -119,51 +119,54 @@ class GiverCard extends Component {
         */
 
         //let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
+        /*
         let projectsSubtitle = ''
         let delegationsSubtitle = 'No funds have been delegated'
 
-        let delegatedAmount = LPState.getNodeDelegatedAmount(this.props.giverNode)
+        
         let delegatedText = Currency.symbol+Currency.format(Currency.toEther(delegatedAmount))
 
         if(this.props.delegatesChildren.length)
         {
-            delegationsSubtitle = delegatedText + ' delegated to'
+            delegationsSubtitle = delegatedText + 'Delegated funds'
             projectsSubtitle = 'Intended projects'
 
             if(!this.props.projectsChildren.length)
                 projectsSubtitle = 'No funds have been assigned to a Project'
-        }
+        }*/
+
+        let delegatedAmount = LPState.getNodeDelegatedAmount(this.props.giverNode)
 
         return ( 
             
           <Paper style={{padding:20, paddingTop:5, marginTop:10, marginBottom:20}} zDepth={1}>
-
-                <GiverCardHeader 
-                    node = {this.props.giverNode}
-                    userAddress={this.props.userAddress}
-                    showAddFundsButton = {true}
-                    />
-
-                <div style ={Styles.section}>{delegationsSubtitle}</div>
+          
+                <SectionHeader
+                    key = 'title'
+                    title= {this.props.giverNode.name}
+                    titleStyle = {Styles.delegateRootTitle}
+                    amount= {delegatedAmount}
+                    onPledges = {this.onPledges}/>
 
                 <SectionHeader
+                    key = 'Available'
                     title='Available'
-                    titleStyle = {{}}
                     amount= {delegatedAmount}
-                    buttonLabel = "Delegate funds"
+                    buttonLabel = "Add funds"
                     onActionButton = {this.onDelegateFunds}/>
 
-                <DelegationsList
-                    key='Delegations'
-                    treeChildren={this.props.delegatesChildren}
-                    indentLevel={-1}
-                    userAddress={this.props.currentAddress}
-                    defaultColapsed = {false}
-                    defaultColapsedRoot={true}/>
+                <SectionHeader
+                    key = 'Delegated'
+                    title='Delegated'
+                    amount= {delegatedAmount}
+                    buttonLabel = "Find project to delegate"
+                    onActionButton = {this.onDelegateFunds}/>
 
-                <div style ={Styles.space}/>
-
-                <div style ={Styles.section}>{projectsSubtitle}</div>
+                <SectionHeader
+                    key = 'Intended Projects'
+                    title='Intended Projects'
+                    amount= {delegatedAmount}
+                    />
 
                 <DelegationsList
                     key='Projects'
@@ -174,6 +177,28 @@ class GiverCard extends Component {
                     defaultColapsedRoot={true}/>
                 <div style ={Styles.space}/>
 
+
+
+            </Paper>
+        )
+    }
+}
+/*
+<GiverCardHeader 
+                    node = {this.props.giverNode}
+                    userAddress={this.props.userAddress}
+                    showAddFundsButton = {true}
+                    />
+
+<DelegationsList
+                    key='Delegations'
+                    treeChildren={this.props.delegatesChildren}
+                    indentLevel={-1}
+                    userAddress={this.props.currentAddress}
+                    defaultColapsed = {false}
+                    defaultColapsedRoot={true}/>
+
+                <div style ={Styles.space}/>
                 <div style = {{
                         display: 'flex',
                         flexDirection: 'row',
@@ -189,10 +214,5 @@ class GiverCard extends Component {
                     </IconButton>
 
                 </div>
-
-            </Paper>
-        )
-    }
-}
-
+                */
 export default GiverCard

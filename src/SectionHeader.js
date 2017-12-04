@@ -27,6 +27,20 @@ class SectionHeader extends Component {
     render() {
 
         let amountText = Currency.symbol+Currency.format(Currency.toEther(this.props.amount))
+        let button = <div/>
+        let titleStyle = Styles.sectionTitle
+
+        if(this.props.buttonLabel)
+            button = <FlatButton
+                onClick = {this.props.onActionButton}
+                secondary = {false}
+                label={this.props.buttonLabel}
+                labelStyle = {{fontSize:11}}
+                />
+
+        if(this.props.titleStyle)
+            titleStyle = this.props.titleStyle
+
         return ( 
                 <div
                     style = {Merge(Styles.row, {height:40})}
@@ -35,18 +49,24 @@ class SectionHeader extends Component {
                     >
                     <div style = {Styles.sectionFrontCell}>
 
-                        <div style ={Styles.sectionTitle}>{this.props.title}</div>
+                        <div style ={titleStyle}>{this.props.title}</div>
 
                         <IconButton
                             style = {MergeIf({color:'grey', display:'none'}, {display:'flex'}, this.state.isHovering)}
                             onClick = {this.props.onPledges}>
                             <Icons.pledges size={10}/>
                         </IconButton>
+
                     </div>
 
                     <div style = {Styles.sectionMiddleCell}>
+                        
                         <div style ={Styles.sectionTitle}>{amountText}</div>
-                        <FlatButton onClick = {this.props.onActionButton} secondary = {true} label={this.props.buttonLabel}  />
+
+                        <div style ={Styles.space}/>
+                        
+                        {button}
+                        
                     </div>
                 </div>
         )
