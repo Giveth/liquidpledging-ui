@@ -120,6 +120,7 @@ export const Styles = {
         flexDirection: 'row',
         justifyContent:'flex-start',
         alignItems: 'center',
+        flex:1,
     },
 
     sectionMiddleCell:
@@ -129,6 +130,7 @@ export const Styles = {
         flexDirection: 'row',
         justifyContent:'flex-start',
         alignItems: 'center',
+        flex:2,
     },
    
     delegation:

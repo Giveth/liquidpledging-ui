@@ -122,8 +122,8 @@ class GiverCard extends Component {
         let projectsSubtitle = ''
         let delegationsSubtitle = 'No funds have been delegated'
 
-        let delegateddAmount = LPState.getNodeDelegatedAmount(this.props.giverNode)
-        let delegatedText = Currency.symbol+Currency.format(Currency.toEther(delegateddAmount))
+        let delegatedAmount = LPState.getNodeDelegatedAmount(this.props.giverNode)
+        let delegatedText = Currency.symbol+Currency.format(Currency.toEther(delegatedAmount))
 
         if(this.props.delegatesChildren.length)
         {
@@ -149,10 +149,9 @@ class GiverCard extends Component {
                 <SectionHeader
                     title='Available'
                     titleStyle = {{}}
-                    amount= {'123'}
+                    amount= {delegatedAmount}
                     buttonLabel = "Delegate funds"
                     onActionButton = {this.onDelegateFunds}/>
-
 
                 <DelegationsList
                     key='Delegations'
@@ -192,8 +191,6 @@ class GiverCard extends Component {
                 </div>
 
             </Paper>
-
-
         )
     }
 }
