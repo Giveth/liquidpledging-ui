@@ -139,8 +139,8 @@ class GiverCard extends Component {
 
         return ( 
             
-          <Paper style={{padding:20, paddingTop:5, marginTop:10, marginBottom:20}} zDepth={1}>
-          
+          <Paper style={{padding:20, marginTop:10, marginBottom:20}} zDepth={1}>
+
                 <SectionHeader
                     key = 'title'
                     title= {this.props.giverNode.name}
@@ -175,9 +175,6 @@ class GiverCard extends Component {
                     userAddress={this.props.currentAddress}
                     defaultColapsed = {false}
                     defaultColapsedRoot={true}/>
-                <div style ={Styles.space}/>
-
-
 
             </Paper>
         )
