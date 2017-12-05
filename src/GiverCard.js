@@ -149,20 +149,20 @@ class GiverCard extends Component {
                     key = 'title'
                     title= {this.props.giverNode.name}
                     titleStyle = {Styles.cardTitle}
-                    amount= {totalAmount}
+                    amount= {this.props.totalAmount}
                     onPledges = {this.onPledges}/>
 
                 <SectionHeader
                     key = 'Available'
                     title='Available'
-                    amount= {availableAmount}
+                    amount= {this.props.availableAmount}
                     buttonLabel = "Add funds"
                     onActionButton = {this.onAddFunds}/>
 
                 <SectionHeader
                     key = 'Delegated'
                     title='Delegated'
-                    amount= {delegatedAmount}
+                    amount= {this.props.delegatedAmount}
                     buttonLabel = "Find project to delegate"
                     onActionButton = {this.onDelegateFunds}/>
 
@@ -177,7 +177,7 @@ class GiverCard extends Component {
                 <SectionHeader
                     key = 'Intended Projects'
                     title='Intended Projects'
-                    amount= {assignedToProjectsAmount}
+                    amount= {this.props.assignedToProjectsAmount}
                     />
 
                 <DelegationsList

@@ -13,7 +13,8 @@ class MyFunds extends Component {
 
         this.state={
             giverNodes:[],
-            currentAddress:''
+            currentAddress:'',
+            totalAmount:0,
         }
 
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
@@ -37,10 +38,9 @@ class MyFunds extends Component {
         let currentAddress = LPState.getCurrentAccount()
         let myGiversFilter = {adminAddress:currentAddress, type:'Giver'}
         let giverNodes = LPState.getNodes(myGiversFilter)
-
+        this.populateCards(giverNodes)
         this.setState({
-            giverNodes:giverNodes,
-            currentAddress:currentAddress
+            currentAddress:currentAddress,
         })
     }
 
@@ -51,10 +51,11 @@ class MyFunds extends Component {
         Caller.showAddAdminDialog(data)
     }
 
-    createGiverCards=()=>
+    populateCards=(giverNodes)=>
     {
         let cards = []
-        for(let giverNode of this.state.giverNodes)
+        let totalGiverAmount = 0
+        for(let giverNode of giverNodes)
         {
             let delegations = LPState.getDelegations(giverNode.delegationsOut)
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
@@ -65,23 +66,39 @@ class MyFunds extends Component {
 
             let projectsChildren = LPState.getDelegationsTrees(projectDelegations)
 
+            let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(giverNode) 
+            let delegatedAmount = LPState.getNodeDelegatedAmount(giverNode) - assignedToProjectsAmount
+            let availableAmount = LPState.getNodeAssignedAmount(giverNode)
+    
+            let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
+            totalGiverAmount += totalAmount
+
             let card = <GiverCard
                 key={giverNode.id}
                 giverNode = {giverNode}
                 delegatedDelegations={delegations}
                 delegatesChildren={delegatesChildren}
                 projectsChildren={projectsChildren}
-                userAddress={this.state.currentAddress}/>
+                userAddress={this.state.currentAddress}
+                
+                availableAmount= {availableAmount}
+                delegatedAmount = {delegatedAmount}
+                assignedToProjectsAmount ={assignedToProjectsAmount}
+                totalAmount = {totalAmount}
+                />
 
             cards.push(card)
         }
-        return cards
+
+        this.setState({
+            cards:cards,
+            totalAmount:totalGiverAmount,
+        })
     }
 
-    render() {
 
-        let cards = this.createGiverCards()
-        let totalFunds = 123
+
+    render() {
 
         return  (
             <div >
@@ -93,7 +110,7 @@ class MyFunds extends Component {
 
                     <div style = {Styles.sectionMiddleCell}>
 
-                        {'Total funds ETH '+totalFunds}
+                        {'Total funds ETH '+this.state.totalAmount}
 
                     </div>
 
@@ -102,7 +119,7 @@ class MyFunds extends Component {
                     </div>
                 </div>
 
-                {cards}
+                {this.state.cards}
 
             </div>
         )
