@@ -230,6 +230,15 @@ export const Styles = {
         }
     },
 
+    rootDelegation:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent:'space-between',
+        padding:10,
+        height:16,
+        marginBottom:5,
+    },
+
     giverCardHeader:{
         display: 'flex',
         flexDirection: 'row',

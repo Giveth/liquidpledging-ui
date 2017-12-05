@@ -82,13 +82,11 @@ class RootDelegation extends Component {
                 </div>)
         }
 
-        let headerStyle = MergeIf(Styles.delegation.header, Styles.delegation.rootHeader, (this.props.indentLevel===0))
-
         return (
             
 
             <div
-                style = {MergeIf(headerStyle, Styles.delegation.delegateBackgroundHover, this.state.isHovering)}
+                style = {Styles.rootDelegation}
                 onMouseEnter = {this.onMouseEnter}
                 onMouseLeave = {this.onMouseLeave}
                 onClick = {this.onBackgroundClick}>
