@@ -107,7 +107,7 @@ export const Styles = {
 
     sectionTitle:
     {
-        fontSize:'0.9em',
+        fontSize:'1em',
         color:Colors.subtle,
         fontWeight: 200,
         textTransform: 'uppercase',
@@ -132,7 +132,7 @@ export const Styles = {
         flexDirection: 'row',
         justifyContent:'flex-start',
         alignItems: 'center',
-        flex:2,
+        flex:1.3,
     },
 
     sectionBackCell:
@@ -203,13 +203,15 @@ export const Styles = {
 
         title:{
             color:Colors.highlight,
-            paddingLeft: 5,
             paddingRight: 10,
             paddingTop: 0,
             paddingBottom: 0,
             whiteSpace:'nowrap',
             textOverflow: 'ellipsis',
             overflow: 'hidden',
+            fontWeight: 300,
+            fontSize: '0.95em',
+        
         },
 
         shrink:{
@@ -234,7 +236,9 @@ export const Styles = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent:'space-between',
-        padding:10,
+        paddingBottom:10,
+        paddingTop:10,
+        paddingLeft:15,
         height:16,
         marginBottom:5,
     },

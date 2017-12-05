@@ -91,22 +91,23 @@ class RootDelegation extends Component {
                 onMouseLeave = {this.onMouseLeave}
                 onClick = {this.onBackgroundClick}>
 
-                <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.shrink)}>
-                     <p key = {"name"}  style= {Styles.delegation.title}>
+                <div style = {Styles.sectionFrontCell}>
+                   
+                     <p key = {"name"}  style= {Merge(Styles.delegation.title, {paddingLeft:20})}>
                         {this.props.delegation.name}
                     </p>
-
-                    <p key = {"amount"} style = {Styles.delegation.amount} >
-                        {Currency.symbol+ " "+ Currency.format(Currency.toEther(amount))}
-                    </p>
-                   
                 </div>
 
-                 <div style = {Merge(Styles.delegation.headerCell, Styles.delegation.row)}>
+                <div style = {Styles.sectionMiddleCell}>
+                    <p key = {"amount"} style= {Merge(Styles.delegation.title, {fontSeize:'0.8em'})} >
+                        {Currency.symbol+ " "+ Currency.format(Currency.toEther(amount))}
+                    </p>
+
+                    <div style ={Styles.space}/>
 
                     {actionButons}
-
-                </div>       
+                </div>   
+                     
             </div>
         )
     }
