@@ -45,6 +45,9 @@ class RootDelegation extends Component {
     render() {
         let canCancel = true
 
+        let amount = this.props.delegation.assignedAmount - this.props.delegation.assignedToProjectsAmount
+       
+
         let delegateFundsButton = (
         <IconButton
             onClick = {this.onAddButton}
@@ -53,7 +56,6 @@ class RootDelegation extends Component {
             >
             <Icons.add size={15}/>
         </IconButton>)
-
 
         let cancelDelegateButton = <div style = {Styles.emptyButton} />
         
@@ -83,6 +85,7 @@ class RootDelegation extends Component {
         let headerStyle = MergeIf(Styles.delegation.header, Styles.delegation.rootHeader, (this.props.indentLevel===0))
 
         return (
+            
 
             <div
                 style = {MergeIf(headerStyle, Styles.delegation.delegateBackgroundHover, this.state.isHovering)}
@@ -96,7 +99,7 @@ class RootDelegation extends Component {
                     </p>
 
                     <p key = {"amount"} style = {Styles.delegation.amount} >
-                        {Currency.symbol+ " "+ Currency.format(Currency.toEther(this.props.delegation.assignedAmount))}
+                        {Currency.symbol+ " "+ Currency.format(Currency.toEther(amount))}
                     </p>
                    
                 </div>
