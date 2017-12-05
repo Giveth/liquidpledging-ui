@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Styles, Currency, Icons } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import Caller from './LiquidPledgingCaller'
-import DelegationsList from './DelegationsList'
+import RootDelegationList from './RootDelegationList'
 import GiverCardHeader from './GiverCardHeader'
 import Paper from 'material-ui/Paper'
 //Todo. this shouldn't be here
@@ -166,7 +166,7 @@ class GiverCard extends Component {
                     buttonLabel = "Find project to delegate"
                     onActionButton = {this.onDelegateFunds}/>
 
-                <DelegationsList
+                <RootDelegationList
                     key='Delegations'
                     treeChildren={this.props.delegatesChildren}
                     indentLevel={-1}
@@ -180,7 +180,7 @@ class GiverCard extends Component {
                     amount= {this.props.assignedToProjectsAmount}
                     />
 
-                <DelegationsList
+                <RootDelegationList
                     key='Projects'
                     treeChildren={this.props.projectsChildren}
                     indentLevel={-1}
