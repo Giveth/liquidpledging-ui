@@ -98,7 +98,7 @@ class MyFunds extends Component {
 
     render() {
         
-        let totalAmountText = 'Total funds ETH '+ Currency.symbol+Currency.format(Currency.toEther(this.state.totalAmount))
+        let totalAmountText = 'Total '+ Currency.symbol+Currency.format(Currency.toEther(this.state.totalAmount))
 
         return  (
             <div >
