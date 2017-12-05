@@ -80,6 +80,7 @@ class DataFormatter {
                 delegations:[],
                 assignedAmount:pledge.amount,//pledge.amount = available amount. Down below we'll add the used one 
                 availableAmount:pledge.amount,
+                assignedToProjectsAmount:0,
                 pledgeId:pledge.id,
                 intendedProject:pledge.intendedProject,
                 adminId:adminId,
@@ -107,6 +108,13 @@ class DataFormatter {
                 {
                     delegationsArray[j].assignedAmount += current.assignedAmount
                     delegationsArray[j].delegations.push(current.id)
+
+                    console.log(current.type)
+                    if(current.type === "Project")
+                        delegationsArray[j].assignedToProjectsAmount += current.assignedAmount
+
+                    delegationsArray[j].assignedToProjectsAmount += current.assignedToProjectsAmount
+
                     break //delegation has one parent only
                 }
             }
