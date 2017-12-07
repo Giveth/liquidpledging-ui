@@ -47,7 +47,7 @@ class TransferDialog extends React.Component
                 modal={false}
                 open={this.props.open}
                 onRequestClose={this.onCancel}
-                contentStyle={{width:'100%'}}>    
+                contentStyle={{maxWidth:'none'}}>    
 
                 {tables}
 
