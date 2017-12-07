@@ -21,37 +21,48 @@ class GiverCard extends Component {
         this.props.onToggle(!this.props.colapsed)
     }
 
-    onPledges=()=>
-    {
-        let pledgesOutIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsOut)
-        let pledgesOut = LPState.getPledgesFromIds(pledgesOutIds)
-
-        let pledgesToProjectIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsToProject)
-        let pledgesToProjects = LPState.getPledgesFromIds(pledgesToProjectIds)
-
-        let pledgesInIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsIn)
-        let pledgesIn = LPState.getPledgesFromIds(pledgesInIds)
-
+    showPledgesDialog=(pledgesGroups)=>{
         let data = {
-            pledgesBlocks:
-            [
-                {
-                    pledges:pledgesIn,
-                    title:"Available"
-                },
-                {
-                    pledges:pledgesOut,
-                    title:"Delegated"
-                },
-                {
-                    pledges:pledgesToProjects,
-                    title:"Assigned to Projects"
-                },
-            ],
+            pledgesBlocks: pledgesGroups,
             title: this.props.giverNode.name
         }
 
         Caller.showPledgesDialog(data)
+    }
+
+    onCardPledges=()=>{
+        console.log(this)
+        let pledgesGroups = [
+            this.getPledgesGroup('Available', this.props.delegationsIn),
+            this.getPledgesGroup('Delegated', this.props.delegationsOut),
+            this.getPledgesGroup('Assigned to Projects', this.props.delegationsToProject)
+        ]
+
+        this.showPledgesDialog(pledgesGroups)
+    }
+
+    onAvailablePledges=()=>{
+
+    }
+
+    onDelegatedPledges=()=>{
+
+    }
+
+    onProjectsPledges=()=>{
+
+    }
+
+    getPledgesGroup(title, delegations)
+    {
+        let pledgesIds = LPState.getPledgesIdsFromDelegations(delegations)
+        let pledges = LPState.getPledgesFromIds(pledgesIds)
+
+        let group = {
+            pledges:pledges,
+            title:title
+        }
+        return group
     }
 
     onAddFunds=()=>
@@ -166,7 +177,7 @@ class GiverCard extends Component {
                     titleStyle = {Styles.cardTitle}
                     amount= {this.props.totalAmount}
                     amountStyle = {Styles.cardTitle}
-                    onPledges = {this.onPledges}/>
+                    onPledges = {this.onCardPledges}/>
 
                 <SectionHeader
                     key = 'Available'
