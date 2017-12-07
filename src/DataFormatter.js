@@ -109,7 +109,6 @@ class DataFormatter {
                     delegationsArray[j].assignedAmount += current.assignedAmount
                     delegationsArray[j].delegations.push(current.id)
 
-                    console.log(current.type)
                     if(current.type === "Project")
                         delegationsArray[j].assignedToProjectsAmount += current.assignedAmount
 
