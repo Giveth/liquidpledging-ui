@@ -29,6 +29,7 @@ class SectionHeader extends Component {
         let amountText = Currency.symbol+Currency.format(Currency.toEther(this.props.amount))
         let button = <div/>
         let titleStyle = Styles.sectionTitle
+        let amountStyle = Styles.sectionTitle
 
         if(this.props.buttonLabel)
             button = <FlatButton
@@ -40,8 +41,11 @@ class SectionHeader extends Component {
 
         if(this.props.titleStyle)
             titleStyle = this.props.titleStyle
+        
+        if(this.props.amountStyle)
+            amountStyle = this.props.amountStyle
 
-        return ( 
+        return (
                 <div
                     style = {Merge(Styles.row, {height:40})}
                     onMouseEnter= {this.onMouseEnter}
@@ -61,8 +65,7 @@ class SectionHeader extends Component {
 
                     <div style = {Styles.sectionMiddleCell}>
                         
-                        <div style ={Merge(Styles.sectionTitle, {width:100})}>{amountText}</div>
-                        
+                        <div style ={Merge(amountStyle, {width:100})}>{amountText}</div>
                         {button}
                         
                     </div>
