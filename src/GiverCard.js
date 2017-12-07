@@ -25,12 +25,20 @@ class GiverCard extends Component {
     {
         let delegatedPledgesIds = LPState.getPledgesIdsFromDelegations(this.props.delegatedDelegations)
         let delegatedPledges = LPState.getPledgesFromIds(delegatedPledgesIds)
+
+        let assignedToProjectsPledgesIds = LPState.getPledgesIdsFromDelegations(this.props.assignedToProjectsDelegations)
+        let assignedToProjectsPledges = LPState.getPledgesFromIds(assignedToProjectsPledgesIds)
+
         let data = {
             pledgesBlocks:
             [
                 {
                     pledges:delegatedPledges,
                     title:"Delegated"
+                },
+                {
+                    pledges:assignedToProjectsPledges,
+                    title:"Assigned to Projects"
                 },
             ],
             title: this.props.giverNode.name
@@ -169,7 +177,7 @@ class GiverCard extends Component {
 
                 <RootDelegationList
                     key='Delegations'
-                    treeChildren={this.props.delegatesChildren}
+                    delegations={this.props.delegatedDelegations}
                     indentLevel={-1}
                     userAddress={this.props.currentAddress}
                     defaultColapsed = {false}
@@ -183,7 +191,7 @@ class GiverCard extends Component {
 
                 <RootDelegationList
                     key='Projects'
-                    treeChildren={this.props.projectsChildren}
+                    delegations={this.props.assignedToProjectsDelegations}
                     indentLevel={-1}
                     userAddress={this.props.currentAddress}
                     defaultColapsed = {false}

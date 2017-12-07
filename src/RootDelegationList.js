@@ -6,10 +6,10 @@ class RootDelegationList extends Component {
        
         let list = []
 
-        if(this.props.treeChildren)
+        if(this.props.delegations)
         {
-            list = this.props.treeChildren.map((tree,index) => {
-                return  <RootDelegation  delegation = {tree.delegation} />})
+            list = this.props.delegations.map((d,index) => {
+                return  <RootDelegation  delegation = {d} />})
         }
         
         return (

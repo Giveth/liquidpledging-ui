@@ -57,14 +57,15 @@ class MyFunds extends Component {
         let totalGiverAmount = 0
         for(let giverNode of giverNodes)
         {
-            let delegations = LPState.getDelegations(giverNode.delegationsOut)
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
-            let delegatesChildren = LPState.getDelegationsTrees(delegations, onlyDelegationsWithMoneyFilter)
-
             let onlyProjectsFilter= {type:'Project'}
-            let projectDelegations = LPState.getDelegationsFromTreeChildren(delegatesChildren, onlyProjectsFilter)
 
-            let projectsChildren = LPState.getDelegationsTrees(projectDelegations)
+            let delegatedDelegations = LPState.getDelegations(giverNode.delegationsOut) //Delegation. To  
+            let delegatedChildren = LPState.getDelegationsTrees(delegatedDelegations, onlyDelegationsWithMoneyFilter)// Children. To. No money
+
+            let assignedToProjectsDelegations = LPState.getDelegationsFromTreeChildren(delegatedChildren, onlyProjectsFilter) //Delegations. Any level. Projects
+
+            //let projectsChildren = LPState.getDelegationsTrees(assignedToProjectsDelegations)//Children. Any level. Projects
 
             let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(giverNode) 
             let delegatedAmount = LPState.getNodeDelegatedAmount(giverNode) - assignedToProjectsAmount
@@ -76,9 +77,9 @@ class MyFunds extends Component {
             let card = <GiverCard
                 key={giverNode.id}
                 giverNode = {giverNode}
-                delegatedDelegations={delegations}
-                delegatesChildren={delegatesChildren}
-                projectsChildren={projectsChildren}
+                delegatedDelegations={delegatedDelegations}
+                //delegatedDelegations={delegatesChildren}
+                assignedToProjectsDelegations={assignedToProjectsDelegations}
                 userAddress={this.state.currentAddress}
                 
                 availableAmount= {availableAmount}
