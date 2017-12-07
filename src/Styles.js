@@ -25,6 +25,7 @@ export const Colors = {
     giverBackgroundHover:'rgba(0, 0, 0, 0.1)',
     delegateBackgroundHover:'rgba(0, 0, 0, 0.02)',
     rootHeaderBackground:'rgba(0, 0, 0, 0.05)',
+    rootDelegationBackround:'rgba(0, 0, 0, 0.05)',
 }
 
 export const Icons = {
@@ -238,9 +239,10 @@ export const Styles = {
         justifyContent:'space-between',
         paddingBottom:10,
         paddingTop:10,
-        paddingLeft:15,
+       // paddingLeft:15,
         height:16,
         marginBottom:5,
+        backgroundColor:Colors.rootDelegationBackround,
     },
 
     giverCardHeader:{

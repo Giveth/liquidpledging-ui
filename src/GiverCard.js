@@ -150,6 +150,7 @@ class GiverCard extends Component {
                     title= {this.props.giverNode.name}
                     titleStyle = {Styles.cardTitle}
                     amount= {this.props.totalAmount}
+                    amountStyle = {Styles.cardTitle}
                     onPledges = {this.onPledges}/>
 
                 <SectionHeader

@@ -93,7 +93,7 @@ class RootDelegation extends Component {
 
                 <div style = {Styles.sectionFrontCell}>
                    
-                     <p key = {"name"}  style= {Merge(Styles.delegation.title, {paddingLeft:20})}>
+                     <p key = {"name"}  style= {Merge(Styles.delegation.title, {paddingLeft:10})}>
                         {this.props.delegation.name}
                     </p>
                 </div>
