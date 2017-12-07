@@ -3,7 +3,7 @@ import LPState from "./LiquidPledgingState.js"
 import GiverCard from './GiverCard'
 import FlatButton from 'material-ui/FlatButton'
 import IconButton from 'material-ui/IconButton'
-import { Styles, Currency, Icons } from './Styles'
+import { Styles, Currency, Icons, Merge } from './Styles'
 import Caller from './LiquidPledgingCaller'
 
 class MyFunds extends Component {
@@ -108,10 +108,8 @@ class MyFunds extends Component {
 
                     </div>
 
-                    <div style = {Styles.sectionMiddleCell}>
-
+                    <div style = {Merge(Styles.sectionMiddleCell, Styles.sectionTitle)}>
                         {totalAmountText}
-
                     </div>
 
                     <div style = {Styles.sectionBackCell}>
