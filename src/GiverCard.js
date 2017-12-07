@@ -29,9 +29,16 @@ class GiverCard extends Component {
         let assignedToProjectsPledgesIds = LPState.getPledgesIdsFromDelegations(this.props.assignedToProjectsDelegations)
         let assignedToProjectsPledges = LPState.getPledgesFromIds(assignedToProjectsPledgesIds)
 
+        let incomingPledgesIds = LPState.getPledgesIdsFromDelegations(this.props.incomingDelegations)
+        let incomingPledges = LPState.getPledgesFromIds(incomingPledgesIds)
+
         let data = {
             pledgesBlocks:
             [
+                {
+                    pledges:incomingPledges,
+                    title:"Available"
+                },
                 {
                     pledges:delegatedPledges,
                     title:"Delegated"
