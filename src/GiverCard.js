@@ -23,28 +23,28 @@ class GiverCard extends Component {
 
     onPledges=()=>
     {
-        let delegatedPledgesIds = LPState.getPledgesIdsFromDelegations(this.props.delegatedDelegations)
-        let delegatedPledges = LPState.getPledgesFromIds(delegatedPledgesIds)
+        let pledgesOutIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsOut)
+        let pledgesOut = LPState.getPledgesFromIds(pledgesOutIds)
 
-        let assignedToProjectsPledgesIds = LPState.getPledgesIdsFromDelegations(this.props.assignedToProjectsDelegations)
-        let assignedToProjectsPledges = LPState.getPledgesFromIds(assignedToProjectsPledgesIds)
+        let pledgesToProjectIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsToProject)
+        let pledgesToProjects = LPState.getPledgesFromIds(pledgesToProjectIds)
 
-        let incomingPledgesIds = LPState.getPledgesIdsFromDelegations(this.props.incomingDelegations)
-        let incomingPledges = LPState.getPledgesFromIds(incomingPledgesIds)
+        let pledgesInIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsIn)
+        let pledgesIn = LPState.getPledgesFromIds(pledgesInIds)
 
         let data = {
             pledgesBlocks:
             [
                 {
-                    pledges:incomingPledges,
+                    pledges:pledgesIn,
                     title:"Available"
                 },
                 {
-                    pledges:delegatedPledges,
+                    pledges:pledgesOut,
                     title:"Delegated"
                 },
                 {
-                    pledges:assignedToProjectsPledges,
+                    pledges:pledgesToProjects,
                     title:"Assigned to Projects"
                 },
             ],
@@ -184,7 +184,7 @@ class GiverCard extends Component {
 
                 <RootDelegationList
                     key='Delegations'
-                    delegations={this.props.delegatedDelegations}
+                    delegations={this.props.delegationsOut}
                     indentLevel={-1}
                     userAddress={this.props.currentAddress}
                     defaultColapsed = {false}
@@ -198,7 +198,7 @@ class GiverCard extends Component {
 
                 <RootDelegationList
                     key='Projects'
-                    delegations={this.props.assignedToProjectsDelegations}
+                    delegations={this.props.delegationsToProject}
                     indentLevel={-1}
                     userAddress={this.props.currentAddress}
                     defaultColapsed = {false}

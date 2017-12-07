@@ -60,12 +60,12 @@ class MyFunds extends Component {
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
             let onlyProjectsFilter= {type:'Project'}
 
-            let incomingDelegations = LPState.getDelegations(giverNode.delegationsIn) 
+            let delegationsIn = LPState.getDelegations(giverNode.delegationsIn) 
 
-            let delegatedDelegations = LPState.getDelegations(giverNode.delegationsOut) //Delegation. To  
-            let delegatedChildren = LPState.getDelegationsTrees(delegatedDelegations, onlyDelegationsWithMoneyFilter)// Children. To. No money
+            let delegationsOut = LPState.getDelegations(giverNode.delegationsOut) //Delegation. To  
+            let childrenOut = LPState.getDelegationsTrees(delegationsOut, onlyDelegationsWithMoneyFilter)// Children. To. No money
 
-            let assignedToProjectsDelegations = LPState.getDelegationsFromTreeChildren(delegatedChildren, onlyProjectsFilter) //Delegations. Any level. Projects
+            let delegationsToProject = LPState.getDelegationsFromTreeChildren(childrenOut, onlyProjectsFilter) //Delegations. Any level. Projects
 
             //let projectsChildren = LPState.getDelegationsTrees(assignedToProjectsDelegations)//Children. Any level. Projects
 
@@ -81,9 +81,9 @@ class MyFunds extends Component {
                 giverNode = {giverNode}
                 userAddress={this.state.currentAddress}
 
-                delegatedDelegations={delegatedDelegations}
-                assignedToProjectsDelegations={assignedToProjectsDelegations}
-                incomingDelegations={incomingDelegations}
+                delegationsIn={delegationsIn}
+                delegationsOut={delegationsOut}
+                delegationsToProject={delegationsToProject}
                 
                 availableAmount= {availableAmount}
                 delegatedAmount = {delegatedAmount}
