@@ -31,7 +31,6 @@ class GiverCard extends Component {
     }
 
     onCardPledges=()=>{
-        console.log(this)
         let pledgesGroups = [
             this.getPledgesGroup('Available', this.props.delegationsIn),
             this.getPledgesGroup('Delegated', this.props.delegationsOut),
@@ -42,15 +41,27 @@ class GiverCard extends Component {
     }
 
     onAvailablePledges=()=>{
+        let pledgesGroups = [
+            this.getPledgesGroup('Available', this.props.delegationsIn)
+        ]
 
+        this.showPledgesDialog(pledgesGroups)
     }
 
     onDelegatedPledges=()=>{
+        let pledgesGroups = [
+            this.getPledgesGroup('Delegated', this.props.delegationsOut),
+        ]
 
+        this.showPledgesDialog(pledgesGroups)
     }
 
     onProjectsPledges=()=>{
+        let pledgesGroups = [
+            this.getPledgesGroup('Assigned to Projects', this.props.delegationsToProject)
+        ]
 
+        this.showPledgesDialog(pledgesGroups)
     }
 
     getPledgesGroup(title, delegations)
@@ -184,14 +195,16 @@ class GiverCard extends Component {
                     title='Available'
                     amount= {this.props.availableAmount}
                     buttonLabel = "Add funds"
-                    onActionButton = {this.onAddFunds}/>
+                    onActionButton = {this.onAddFunds}
+                    onPledges = {this.onAvailablePledges}/>
 
                 <SectionHeader
                     key = 'Delegated'
                     title='Delegated'
                     amount= {this.props.delegatedAmount}
                     buttonLabel = "Find project to delegate"
-                    onActionButton = {this.onDelegateFunds}/>
+                    onActionButton = {this.onDelegateFunds}
+                    onPledges = {this.onDelegatedPledges}/>
 
                 <RootDelegationList
                     key='Delegations'
@@ -205,7 +218,7 @@ class GiverCard extends Component {
                     key = 'Intended Projects'
                     title='Intended Projects'
                     amount= {this.props.assignedToProjectsAmount}
-                    />
+                    onPledges = {this.onProjectsPledges}/>
 
                 <RootDelegationList
                     key='Projects'
