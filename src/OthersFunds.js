@@ -11,7 +11,7 @@ class OthersFunds extends Component {
         super()
 
         this.state={
-            giverNodes:[],
+            delegateNodes:[],
             currentAddress:'',
             totalAmount:0,
         }
@@ -35,9 +35,9 @@ class OthersFunds extends Component {
 
     setDelegations=()=>{
         let currentAddress = LPState.getCurrentAccount()
-        let myGiversFilter = {adminAddress:currentAddress, type:'Giver'}
-        let giverNodes = LPState.getNodes(myGiversFilter)
-        this.populateCards(giverNodes)
+        let myDelegatesFilter = {adminAddress:currentAddress, type:'Delegate'}
+        let delegateNodes = LPState.getNodes(myDelegatesFilter)
+        this.populateCards(delegateNodes)
         this.setState({
             currentAddress:currentAddress,
         })
@@ -50,34 +50,34 @@ class OthersFunds extends Component {
         Caller.showAddAdminDialog(data)
     }
 
-    populateCards=(giverNodes)=>
+    populateCards=(delegateNodes)=>
     {
         let cards = []
         let totalGiverAmount = 0
-        for(let giverNode of giverNodes)
+        for(let delegateNode of delegateNodes)
         {
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
             let onlyProjectsFilter= {type:'Project'}
 
-            let delegationsIn = LPState.getDelegations(giverNode.delegationsIn) 
+            let delegationsIn = LPState.getDelegations(delegateNode.delegationsIn) 
 
-            let delegationsOut = LPState.getDelegations(giverNode.delegationsOut) //Delegation. To  
+            let delegationsOut = LPState.getDelegations(delegateNode.delegationsOut) //Delegation. To  
             let childrenOut = LPState.getDelegationsTrees(delegationsOut, onlyDelegationsWithMoneyFilter)// Children. To. No money
 
             let delegationsToProject = LPState.getDelegationsFromTreeChildren(childrenOut, onlyProjectsFilter) //Delegations. Any level. Projects
 
             //let projectsChildren = LPState.getDelegationsTrees(assignedToProjectsDelegations)//Children. Any level. Projects
 
-            let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(giverNode) 
-            let delegatedAmount = LPState.getNodeDelegatedAmount(giverNode) - assignedToProjectsAmount
-            let availableAmount = LPState.getNodeAssignedAmount(giverNode)
+            let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(delegateNode) 
+            let delegatedAmount = LPState.getNodeDelegatedAmount(delegateNode) - assignedToProjectsAmount
+            let availableAmount = LPState.getNodeAssignedAmount(delegateNode)
     
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
             totalGiverAmount += totalAmount
 
             let card = <GiverCard
-                key={giverNode.id}
-                giverNode = {giverNode}
+                key={delegateNode.id}
+                giverNode = {delegateNode}
                 userAddress={this.state.currentAddress}
 
                 delegationsIn={delegationsIn}
