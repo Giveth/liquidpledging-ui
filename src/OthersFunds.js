@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
-import DelegateCard from './DelegateCard'
+import GiverCard from './GiverCard'
 
-class OthersFunds extends Component {
+class MyProjects extends Component {
 
     constructor(){
         super()
 
         this.state={
-            delegateNodes:[],
+            projectNodes:[],
             currentAddress:''
         }
 
@@ -32,58 +32,45 @@ class OthersFunds extends Component {
     setDelegations=()=>
     {
         let currentAddress = LPState.getCurrentAccount()
-        let myGiversFilter = {adminAddress:currentAddress, type:'Delegate'}
-        let delegateNodes = LPState.getNodes(myGiversFilter)
+        let myGiversFilter = {adminAddress:currentAddress, type:'Project'}
+        let projectNodes = LPState.getNodes(myGiversFilter)
 
         this.setState({
-            delegateNodes:delegateNodes,
+            projectNodes:projectNodes,
             currentAddress:currentAddress
         })
     }
 
-    createDelegateCards=()=>
+    createProjectCards=()=>
     {
         let cards = []
-        for(let delegateNode of this.state.delegateNodes)
+        for(let projectNode of this.state.projectNodes)
         {
+            let delegations = LPState.getDelegations(projectNode.delegationsOut)
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
-
-            let assignedDelegations = LPState.getDelegations(delegateNode.delegationsIn)
-            let parentDelegations = LPState.getParentDelegations(assignedDelegations)
-            let delegatesParents = LPState.getDelegationsTrees(parentDelegations, onlyDelegationsWithMoneyFilter)
-
-            let delegatedDelegations = LPState.getDelegations(delegateNode.delegationsOut)
-            let delegatesChildren = LPState.getDelegationsTrees(delegatedDelegations, onlyDelegationsWithMoneyFilter)
+            let delegatesChildren = LPState.getDelegationsTrees(delegations, onlyDelegationsWithMoneyFilter)
 
             let onlyProjectsFilter= {type:'Project'}
             let projectDelegations = LPState.getDelegationsFromTreeChildren(delegatesChildren, onlyProjectsFilter)
 
             let projectsChildren = LPState.getDelegationsTrees(projectDelegations)
 
-            let card = <DelegateCard
-                key={delegateNode.id}
-                delegateNode = {delegateNode}
-                parentDelegations = {parentDelegations}
-                delegatesParents={delegatesParents}
-                delegatedDelegations={delegatedDelegations}
+            let card = <GiverCard
+                key={projectNode.id}
+                giverNode = {projectNode}
+                delegatedDelegations={delegations}
                 delegatesChildren={delegatesChildren}
                 projectsChildren={projectsChildren}
                 userAddress={this.state.currentAddress}/>
 
             cards.push(card)
-
-            /*console.log("---")
-            console.log(delegateNode)
-            console.log(LPState.delegations)
-            console.log(delegatesParents)
-            console.log("---")*/
         }
         return cards
     }
 
     render() {
 
-        let cards = this.createDelegateCards()
+        let cards = this.createProjectCards()
 
         return  (
             <div >
@@ -93,4 +80,4 @@ class OthersFunds extends Component {
 
     }
 }
-export default OthersFunds
+export default MyProjects
