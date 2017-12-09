@@ -121,11 +121,12 @@ class MyFunds extends Component {
 
             let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(giverNode) 
             let delegatedAmount = LPState.getNodeDelegatedAmount(giverNode) - assignedToProjectsAmount
-            let availableAmount = LPState.getNodeAssignedAmount(giverNode) - delegatedAmount - assignedToProjectsAmount
+            let assignedAmount = LPState.getNodeAssignedAmount(giverNode)
+            let availableAmount = assignedAmount - delegatedAmount - assignedToProjectsAmount
             
     
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
-            totalGiverAmount += totalAmount
+            totalGiverAmount += assignedAmount
 
             let header = this.getHeader(giverNode)
 

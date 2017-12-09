@@ -105,10 +105,11 @@ class OthersFunds extends Component {
 
             let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(delegateNode) 
             let delegatedAmount = LPState.getNodeDelegatedAmount(delegateNode) - assignedToProjectsAmount
-            let availableAmount = LPState.getNodeAssignedAmount(delegateNode) - delegatedAmount - assignedToProjectsAmount
+            let assignedAmount = LPState.getNodeAssignedAmount(delegateNode)
+            let availableAmount = assignedAmount - delegatedAmount - assignedToProjectsAmount
     
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
-            totalGiverAmount += totalAmount
+            totalGiverAmount += assignedAmount
             let header = this.getHeader(delegateNode)
 
             let card = <AdminCard
