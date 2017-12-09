@@ -84,17 +84,6 @@ class AdminCard extends Component {
         return group
     }
 
-    onAddFunds=()=>
-    {
-        let donateData={
-            giverName:this.props.giverNode.name,
-            emiterId:this.props.giverNode.adminId,
-            recieverId:this.props.giverNode.adminId,
-            amount:undefined
-        }
-        Caller.showDonateDialog(donateData)
-    }
-
     onMouseEnter=()=>
     {
         this.setState({isHovering:true})
@@ -121,26 +110,7 @@ class AdminCard extends Component {
             
           <Paper style={{padding:20, marginTop:10, marginBottom:20}} zDepth={1}>
 
-            <div style={Styles.row}>
-                <div style = {Styles.sectionFrontCell}/>
-                <div style = {Styles.sectionMiddleCell}/>
-                
-                <div style = {Styles.sectionBackCell}>
-                    <FlatButton
-                        onClick = {this.onAddFunds}
-                        secondary = {false}
-                        label={'Add Funds'}
-                        labelStyle = {{fontSize:11}}
-                    />
-
-                    <FlatButton
-                        onClick = {this.onDelegateFunds}
-                        secondary = {false}
-                        label={'Find Projects'}
-                        labelStyle = {{fontSize:11}}
-                    />
-                </div>
-            </div>
+                {this.props.header}
 
                 <SectionHeader
                     key = 'title'
