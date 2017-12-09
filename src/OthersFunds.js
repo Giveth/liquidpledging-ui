@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
-import GiverCard from './GiverCard'
+import AdminCard from './AdminCard'
 import FlatButton from 'material-ui/FlatButton'
 import { Styles, Currency, Merge } from './Styles'
 import Caller from './LiquidPledgingCaller'
@@ -77,7 +77,7 @@ class OthersFunds extends Component {
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
             totalGiverAmount += totalAmount
 
-            let card = <GiverCard
+            let card = <AdminCard
                 key={delegateNode.id}
                 giverNode = {delegateNode}
                 userAddress={this.state.currentAddress}

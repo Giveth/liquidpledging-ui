@@ -7,7 +7,7 @@ import LPState from "./LiquidPledgingState.js"
 import SectionHeader from './SectionHeader'
 import FlatButton from 'material-ui/FlatButton'
 
-class GiverCard extends Component {
+class AdminCard extends Component {
 
     constructor(props){
         super()
@@ -191,4 +191,4 @@ class GiverCard extends Component {
     }
 }
 
-export default GiverCard
+export default AdminCard

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
-import GiverCard from './GiverCard'
+import AdminCard from './AdminCard'
 
 class MyProjects extends Component {
 
@@ -55,7 +55,7 @@ class MyProjects extends Component {
 
             let projectsChildren = LPState.getDelegationsTrees(projectDelegations)
 
-            let card = <GiverCard
+            let card = <AdminCard
                 key={projectNode.id}
                 giverNode = {projectNode}
                 delegatedDelegations={delegations}
