@@ -5,7 +5,6 @@ import Caller from './LiquidPledgingCaller'
 import RootDelegationList from './RootDelegationList'
 import GiverCardHeader from './GiverCardHeader'
 import Paper from 'material-ui/Paper'
-//Todo. this shouldn't be here
 import LPState from "./LiquidPledgingState.js"
 import SectionHeader from './SectionHeader'
 import FlatButton from 'material-ui/FlatButton'
@@ -67,7 +66,7 @@ class GiverCard extends Component {
 
     onDelegationPledge=(delegation)=>{
         console.log(delegation,"eureka")
-        
+
         let pledgesGroups = [
             this.getPledgesGroup('', [delegation])
         ]
@@ -120,69 +119,6 @@ class GiverCard extends Component {
    
     render() {
 
-        //let isAdmin = (this.props.currentAddress === this.props.giverNode.adminAddress)
-        //let toggleIcon = <Icons.colapsed size={20}/>
-
-        /*
-        if(this.props.colapsed)
-        {
-            toggleIcon =<Icons.shown size={20}/>
-        }
-        */
-        /*
-        //remove me, been here too longç
-        let colapseButton = <div style = {Styles.emptyButton} />
-        if(this.props.showColapseButton)
-        {
-            colapseButton = (
-                <IconButton
-                    style = {Styles.inline}
-                    onClick = {this.onToggle}>
-                    {toggleIcon}
-                </IconButton>)
-        }*/
-
-       /* let addFundsButton = <div style = {Styles.emptyButton} />
-
-         if(isAdmin)
-        {
-            addFundsButton = (
-                <IconButton
-                onClick = {this.onAddButton}
-                style = {{color:'grey'}}>
-
-                <Icons.add size={15}/>
-            </IconButton>)
-        }
-*/
-        /*let actionButons = <div/>
-
-        if(this.state.isHovering)
-        {
-            actionButons =(
-                <div style = {Styles.delegation.actionButons}>
-                    {addFundsButton}
-                </div>)
-        }
-        */
-
-        //let headerStyle = Merge(Styles.delegation.header, Styles.delegation.rootHeader)
-        /*
-        let projectsSubtitle = ''
-        let delegationsSubtitle = 'No funds have been delegated'
-
-        
-        let delegatedText = Currency.symbol+Currency.format(Currency.toEther(delegatedAmount))
-
-        if(this.props.delegatesChildren.length)
-        {
-            delegationsSubtitle = delegatedText + 'Delegated funds'
-            projectsSubtitle = 'Intended projects'
-
-            if(!this.props.projectsChildren.length)
-                projectsSubtitle = 'No funds have been assigned to a Project'
-        }*/
-
         let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(this.props.giverNode) 
         let delegatedAmount = LPState.getNodeDelegatedAmount(this.props.giverNode) - assignedToProjectsAmount
         let availableAmount = LPState.getNodeAssignedAmount(this.props.giverNode)
@@ -213,8 +149,6 @@ class GiverCard extends Component {
                     />
                 </div>
             </div>
-
-                
 
                 <SectionHeader
                     key = 'title'
@@ -264,30 +198,5 @@ class GiverCard extends Component {
         )
     }
 }
-/*
-<GiverCardHeader 
-                    node = {this.props.giverNode}
-                    userAddress={this.props.userAddress}
-                    showAddFundsButton = {true}
-                    />
 
-
-
-                <div style ={Styles.space}/>
-                <div style = {{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent:'flex-end',
-                        alignItems: 'center',
-                        color:'grey',
-                    }}>
-
-                    <IconButton
-                        style = {{float: 'right', color:'grey'}}
-                        onClick = {this.onPledges}>
-                        <Icons.pledges size={15}/>
-                    </IconButton>
-
-                </div>
-                */
 export default GiverCard
