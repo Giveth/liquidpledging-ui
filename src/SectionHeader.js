@@ -27,23 +27,30 @@ class SectionHeader extends Component {
     render() {
 
         let amountText = Currency.symbol+Currency.format(Currency.toEther(this.props.amount))
-        let button = <div/>
+        //let button = <div/>
         let titleStyle = Styles.sectionTitle
         let amountStyle = Styles.sectionTitle
 
-        if(this.props.buttonLabel)
+       /* if(this.props.buttonLabel)
             button = <FlatButton
                 onClick = {this.props.onActionButton}
                 secondary = {false}
                 label={this.props.buttonLabel}
                 labelStyle = {{fontSize:11}}
                 />
+                */
 
         if(this.props.titleStyle)
             titleStyle = this.props.titleStyle
         
         if(this.props.amountStyle)
             amountStyle = this.props.amountStyle
+
+        let actionButtons = <div/>
+
+        if(!this.props.showOnHovering || this.state.isHovering)
+
+            actionButtons = this.props.children
 
         return (
                 <div
@@ -66,7 +73,7 @@ class SectionHeader extends Component {
                     <div style = {Styles.sectionMiddleCell}>
                         
                         <div style ={Merge(amountStyle, {width:100})}>{amountText}</div>
-                        {button}
+                        {actionButtons}
                         
                     </div>
                 </div>

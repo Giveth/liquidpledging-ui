@@ -1,16 +1,80 @@
 import React, { Component } from 'react'
-import RootDelegation from './RootDelegation'
+import SectionHeader from './SectionHeader'
+import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
+import IconButton from 'material-ui/IconButton'
 
 class RootDelegationList extends Component {   
-    render() {
-       
-        let list = []
 
-        if(this.props.delegations)
-        {
-            list = this.props.delegations.map((d,index) => {
-                return  <RootDelegation  delegation = {d} />})
-        }
+    onPledges=()=>
+    {
+
+    }
+
+    render() {
+
+        if(!this.props.delegations)
+            return <div/>
+            
+        
+        let list = this.props.delegations.map((d,index) => {
+
+            function onPledges()
+            {
+                    console.log(d)
+            }
+
+            let canCancel = true
+            let canDelegate = true
+    
+            if(d.type=="Project")
+                canDelegate = false
+    
+            let cancelDelegateButton = <div style = {Styles.emptyButton} />
+            let delegateFundsButton = <div style = {Styles.emptyButton} />
+    
+            if(canDelegate){
+                delegateFundsButton = (
+                <IconButton
+                    onClick = {this.onAddButton}
+                    style = {{color:'grey'}}
+                    tooltip = {'Delegate funds to '+d.name}
+                    >
+                    <Icons.add size={15}/>
+                </IconButton>)
+            }
+            
+            if(canCancel){
+                cancelDelegateButton=(
+                <IconButton
+                    onClick = {this.onCancel}
+                    style = {{color:'grey'}}
+                    tooltip = {'Cancel funding to '+d.name}
+                    >
+                    <Icons.cancel size={15}/>
+                </IconButton>)
+            }
+            
+            let actionButons =(
+                <div style = {Styles.delegation.actionButons}>
+                    {cancelDelegateButton}
+                    {delegateFundsButton}
+                </div>)
+
+            let amount = d.assignedAmount - d.assignedToProjectsAmount
+            return (
+            <SectionHeader
+                key = {'Delegation'+index}
+                title={d.name}
+                amount= {amount}
+                onPledges = {onPledges}
+                showOnHovering = {true}
+                >
+                
+                {actionButons}
+                
+            </SectionHeader>)
+                
+        })
         
         return (
             <div>
