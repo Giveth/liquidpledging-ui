@@ -43,10 +43,10 @@ class OthersFunds extends Component {
         })
     }
 
-    onNewGiver=()=>
+    onNewDelegate=()=>
     {
-        let giverType = 1
-        let data = {defaultAdminType:giverType}
+        let delegateType = 2
+        let data = {defaultAdminType:delegateType}
         Caller.showAddAdminDialog(data)
     }
 
@@ -118,7 +118,7 @@ class OthersFunds extends Component {
                     </div>
 
                     <div style = {Styles.sectionBackCell}>
-                        <FlatButton onClick = {this.onNewGiver} primary = {true} label="New Giver"  />
+                        <FlatButton onClick = {this.onNewDelegate} primary = {true} label="New ªDelegate"  />
                     </div>
                 </div>
 
