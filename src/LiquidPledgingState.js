@@ -66,6 +66,16 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     //DELEGATIONS
 
+    filterDelegations(delegations, propertiesFilter={})
+    {
+        let filtered  = delegations
+        
+        for (const property of Object.keys(propertiesFilter)) 
+            filtered = Filter.byProperty(filtered, property, propertiesFilter[property])
+                
+        return filtered
+    }
+
     getDelegations(delegationsIds)
     {
         let delegations = []
