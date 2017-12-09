@@ -133,7 +133,7 @@ export const Styles = {
         flexDirection: 'row',
         justifyContent:'flex-start',
         alignItems: 'center',
-        flex:1.3,
+        flex:1,
     },
 
     sectionBackCell:

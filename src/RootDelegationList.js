@@ -65,7 +65,9 @@ class RootDelegationList extends Component {
             <SectionHeader
                 key = {'Delegation'+index}
                 title={d.name}
+                titleStyle =  {Merge(d.title, {paddingLeft:10})}
                 amount= {amount}
+                amountStyle = {Merge(Styles.delegation.title, {fontSeize:'0.8em'})}
                 onPledges = {onPledges}
                 showOnHovering = {true}
                 >
