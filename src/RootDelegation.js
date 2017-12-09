@@ -44,23 +44,29 @@ class RootDelegation extends Component {
    
     render() {
         let canCancel = true
+        let canDelegate = true
+
+        if(this.props.delegation.type=="Project")
+            canDelegate = false
 
         let amount = this.props.delegation.assignedAmount - this.props.delegation.assignedToProjectsAmount
        
 
-        let delegateFundsButton = (
-        <IconButton
-            onClick = {this.onAddButton}
-            style = {{color:'grey'}}
-            tooltip = {'Delegate funds to '+this.props.delegation.name}
-            >
-            <Icons.add size={15}/>
-        </IconButton>)
-
         let cancelDelegateButton = <div style = {Styles.emptyButton} />
+        let delegateFundsButton = <div style = {Styles.emptyButton} />
+
+        if(canDelegate){
+            delegateFundsButton = (
+            <IconButton
+                onClick = {this.onAddButton}
+                style = {{color:'grey'}}
+                tooltip = {'Delegate funds to '+this.props.delegation.name}
+                >
+                <Icons.add size={15}/>
+            </IconButton>)
+        }
         
-        if(canCancel)
-        {
+        if(canCancel){
             cancelDelegateButton=(
             <IconButton
                 onClick = {this.onCancel}
@@ -83,8 +89,6 @@ class RootDelegation extends Component {
         }
 
         return (
-            
-
             <div
                 style = {Styles.rootDelegation}
                 onMouseEnter = {this.onMouseEnter}
