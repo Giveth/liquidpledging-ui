@@ -118,7 +118,7 @@ class OthersFunds extends Component {
                     </div>
 
                     <div style = {Styles.sectionBackCell}>
-                        <FlatButton onClick = {this.onNewDelegate} primary = {true} label="New ªDelegate"  />
+                        <FlatButton onClick = {this.onNewDelegate} primary = {true} label="New Delegate"  />
                     </div>
                 </div>
 
