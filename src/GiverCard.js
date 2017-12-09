@@ -8,6 +8,7 @@ import Paper from 'material-ui/Paper'
 //Todo. this shouldn't be here
 import LPState from "./LiquidPledgingState.js"
 import SectionHeader from './SectionHeader'
+import FlatButton from 'material-ui/FlatButton'
 
 class GiverCard extends Component {
 
@@ -182,6 +183,29 @@ class GiverCard extends Component {
             
           <Paper style={{padding:20, marginTop:10, marginBottom:20}} zDepth={1}>
 
+            <div style={Styles.row}>
+                <div style = {Styles.sectionFrontCell}/>
+                <div style = {Styles.sectionMiddleCell}/>
+                
+                <div style = {Styles.sectionBackCell}>
+                    <FlatButton
+                        onClick = {this.onAddFunds}
+                        secondary = {false}
+                        label={'Add Funds'}
+                        labelStyle = {{fontSize:11}}
+                    />
+
+                    <FlatButton
+                        onClick = {this.onDelegateFunds}
+                        secondary = {false}
+                        label={'Find Project to delegate'}
+                        labelStyle = {{fontSize:11}}
+                    />
+                </div>
+            </div>
+
+                
+
                 <SectionHeader
                     key = 'title'
                     title= {this.props.giverNode.name}
@@ -194,16 +218,12 @@ class GiverCard extends Component {
                     key = 'Available'
                     title='Available'
                     amount= {this.props.availableAmount}
-                    buttonLabel = "Add funds"
-                    onActionButton = {this.onAddFunds}
                     onPledges = {this.onAvailablePledges}/>
 
                 <SectionHeader
                     key = 'Delegated'
                     title='Delegated'
                     amount= {this.props.delegatedAmount}
-                    buttonLabel = "Find project to delegate"
-                    onActionButton = {this.onDelegateFunds}
                     onPledges = {this.onDelegatedPledges}/>
 
                 <RootDelegationList
