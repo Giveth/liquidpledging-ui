@@ -5,11 +5,6 @@ import IconButton from 'material-ui/IconButton'
 
 class RootDelegationList extends Component {   
 
-    onPledges=()=>
-    {
-
-    }
-
     render() {
 
         if(!this.props.delegations)
@@ -17,10 +12,12 @@ class RootDelegationList extends Component {
             
         
         let list = this.props.delegations.map((d,index) => {
+        
+            let that = this
 
             function onPledges()
             {
-                    console.log(d)
+                that.props.onPledges(d)
             }
 
             let canCancel = true
@@ -61,6 +58,7 @@ class RootDelegationList extends Component {
                 </div>)
 
             let amount = d.assignedAmount - d.assignedToProjectsAmount
+
             return (
             <SectionHeader
                 key = {'Delegation'+index}

@@ -65,6 +65,16 @@ class GiverCard extends Component {
         this.showPledgesDialog(pledgesGroups)
     }
 
+    onDelegationPledge=(delegation)=>{
+        console.log(delegation,"eureka")
+        
+        let pledgesGroups = [
+            this.getPledgesGroup('', [delegation])
+        ]
+
+        this.showPledgesDialog(pledgesGroups)
+    }
+
     getPledgesGroup(title, delegations)
     {
         let pledgesIds = LPState.getPledgesIdsFromDelegations(delegations)
@@ -232,7 +242,8 @@ class GiverCard extends Component {
                     indentLevel={-1}
                     userAddress={this.props.currentAddress}
                     defaultColapsed = {false}
-                    defaultColapsedRoot={true}/>
+                    defaultColapsedRoot={true}
+                    onPledges={this.onDelegationPledge}/>
 
                 <SectionHeader
                     key = 'Intended Projects'
@@ -246,7 +257,8 @@ class GiverCard extends Component {
                     indentLevel={-1}
                     userAddress={this.props.currentAddress}
                     defaultColapsed = {false}
-                    defaultColapsedRoot={true}/>
+                    defaultColapsedRoot={true}
+                    onPledges={this.onDelegationPledge}/>
 
             </Paper>
         )
