@@ -13,7 +13,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         return this.pledges[index]
     }
 
-    getPledges(propertiesFilter={}, delegationFilter)
+    /*getPledges(propertiesFilter={}, delegationFilter)
     {
         let filtered  = this.pledges
 
@@ -24,7 +24,7 @@ class LiquidPledgingState extends LiquidPledgingController {
             filtered = Filter.delegationLevel(filtered, delegationFilter.adminId, delegationFilter.level, delegationFilter.reverseLevel)
 
         return filtered
-    }
+    }*/
 
     getPledgesFromIds(ids)
     {
@@ -46,7 +46,7 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     //ADMINS
 
-    getAdmins(propertiesFilter={})
+    /*getAdmins(propertiesFilter={})
     {
         let filtered  = this.admins
 
@@ -54,7 +54,8 @@ class LiquidPledgingState extends LiquidPledgingController {
             filtered = Filter.byProperty(filtered, property, propertiesFilter[property])
         
         return filtered
-    }
+    }*/
+
     /*getAdminForLevel(pledge, level)
     {
         if(pledge.delegates.length > level)
