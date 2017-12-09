@@ -50,6 +50,57 @@ class MyFunds extends Component {
         Caller.showAddAdminDialog(data)
     }
 
+    onAddFunds=(giverNode)=>
+    {
+        let donateData={
+            giverName:giverNode.name,
+            emiterId:giverNode.adminId,
+            recieverId:giverNode.adminId,
+            amount:undefined
+        }
+        Caller.showDonateDialog(donateData)
+    }
+
+    getHeader=(giverNode)=>
+    {
+        let that = this
+
+        function onAddFunds()
+        {
+            that.onAddFunds(giverNode)
+        }
+        
+        function onDelegateFunds()
+        {
+            //that.onDelegateFunds(giverNode)
+        }
+
+        return (
+            <div>
+                <div style={Styles.row}>
+                <div style = {Styles.sectionFrontCell}/>
+                <div style = {Styles.sectionMiddleCell}/>
+                
+                <div style = {Styles.sectionBackCell}>
+                    <FlatButton
+                        onClick = {onAddFunds}
+                        secondary = {false}
+                        label={'Add Funds'}
+                        labelStyle = {{fontSize:11}}
+                    />
+
+                    <FlatButton
+                        onClick = {onDelegateFunds}
+                        secondary = {false}
+                        label={'Find Projects'}
+                        labelStyle = {{fontSize:11}}
+                    />
+                </div>
+            </div>
+         </div>
+        )
+    }
+
     populateCards=(giverNodes)=>
     {
         let cards = []
@@ -75,10 +126,14 @@ class MyFunds extends Component {
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
             totalGiverAmount += totalAmount
 
+            let header = this.getHeader(giverNode)
+
             let card = <AdminCard
                 key={giverNode.id}
                 giverNode = {giverNode}
                 userAddress={this.state.currentAddress}
+
+                header = {header}
 
                 delegationsIn={delegationsIn}
                 delegationsOut={delegationsOut}
