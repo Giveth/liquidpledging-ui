@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SectionHeader from './SectionHeader'
-import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
+import { Styles, Icons, Merge } from './Styles'
 import IconButton from 'material-ui/IconButton'
 
 class RootDelegationList extends Component {   
@@ -23,7 +23,7 @@ class RootDelegationList extends Component {
             let canCancel = true
             let canDelegate = true
     
-            if(d.type=="Project")
+            if(d.type==="Project")
                 canDelegate = false
     
             let cancelDelegateButton = <div style = {Styles.emptyButton} />

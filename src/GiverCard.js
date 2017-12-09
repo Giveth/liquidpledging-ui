@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Styles, Currency, Icons } from './Styles'
-import IconButton from 'material-ui/IconButton'
+import { Styles } from './Styles'
 import Caller from './LiquidPledgingCaller'
 import RootDelegationList from './RootDelegationList'
-import GiverCardHeader from './GiverCardHeader'
 import Paper from 'material-ui/Paper'
 import LPState from "./LiquidPledgingState.js"
 import SectionHeader from './SectionHeader'
@@ -118,13 +116,7 @@ class GiverCard extends Component {
     }
    
     render() {
-
-        let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(this.props.giverNode) 
-        let delegatedAmount = LPState.getNodeDelegatedAmount(this.props.giverNode) - assignedToProjectsAmount
-        let availableAmount = LPState.getNodeAssignedAmount(this.props.giverNode)
-
-        let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
-
+        
         return ( 
             
           <Paper style={{padding:20, marginTop:10, marginBottom:20}} zDepth={1}>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Styles, Currency, Icons, Merge, MergeIf } from './Styles'
 import IconButton from 'material-ui/IconButton'
-import FlatButton from 'material-ui/FlatButton'
 
 class SectionHeader extends Component {
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Styles, Currency, Merge, MergeIf } from './Styles'
+import { Styles, Currency, Merge } from './Styles'
 import Caller from './LiquidPledgingCaller'
 //TODO remove LiquidPledgingState dependency
 import LPState from "./LiquidPledgingState.js"
