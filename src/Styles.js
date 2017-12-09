@@ -103,7 +103,11 @@ export const Styles = {
     cardTitle:
     {
         fontSize:'1.2em',
-        color: Colors.base
+        color: Colors.base,
+        display: 'inline',
+        whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
+        overflow: "hidden",
     },
 
     sectionTitle:
