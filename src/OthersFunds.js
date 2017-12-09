@@ -58,11 +58,13 @@ class OthersFunds extends Component {
         {
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
             let onlyProjectsFilter= {type:'Project'}
+            let onlyDelegatesFilter= {type:'Delegate'}
 
             let delegationsIn = LPState.getDelegations(delegateNode.delegationsIn) 
 
-            let delegationsOut = LPState.getDelegations(delegateNode.delegationsOut) //Delegation. To  
-            let childrenOut = LPState.getDelegationsTrees(delegationsOut, onlyDelegationsWithMoneyFilter)// Children. To. No money
+            let delegationsOutWithProjects = LPState.getDelegations(delegateNode.delegationsOut) //Delegation. To 
+            let delegationsOut = LPState.filterDelegations(delegationsOutWithProjects, onlyDelegatesFilter)
+            let childrenOut = LPState.getDelegationsTrees(delegationsOutWithProjects, onlyDelegationsWithMoneyFilter)// Children. To. No money
 
             let delegationsToProject = LPState.getDelegationsFromTreeChildren(childrenOut, onlyProjectsFilter) //Delegations. Any level. Projects
 
