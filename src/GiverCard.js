@@ -136,7 +136,7 @@ class GiverCard extends Component {
                     <FlatButton
                         onClick = {this.onDelegateFunds}
                         secondary = {false}
-                        label={'Find Project to delegate'}
+                        label={'Find Delegates'}
                         labelStyle = {{fontSize:11}}
                     />
                 </div>
