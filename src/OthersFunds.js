@@ -86,7 +86,7 @@ class OthersFunds extends Component {
     populateCards=(delegateNodes)=>
     {
         let cards = []
-        let totalGiverAmount = 0
+        let totalDelegateAmount = 0
         for(let delegateNode of delegateNodes)
         {
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
@@ -109,7 +109,7 @@ class OthersFunds extends Component {
             let availableAmount = assignedAmount - delegatedAmount - assignedToProjectsAmount
     
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
-            totalGiverAmount += assignedAmount
+            totalDelegateAmount += assignedAmount
             let header = this.getHeader(delegateNode)
 
             let card = <AdminCard
@@ -134,7 +134,7 @@ class OthersFunds extends Component {
 
         this.setState({
             cards:cards,
-            totalAmount:totalGiverAmount,
+            totalAmount:totalDelegateAmount,
         })
     }
 
