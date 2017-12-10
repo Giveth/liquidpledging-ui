@@ -35,6 +35,9 @@ class MyFunds extends Component {
 
     setDelegations=()=>{
         let currentAddress = LPState.getCurrentAccount()
+        if(!currentAddress)
+            return
+            
         let myGiversFilter = {adminAddress:currentAddress, type:'Giver'}
         let giverNodes = LPState.getNodes(myGiversFilter)
         this.populateCards(giverNodes)

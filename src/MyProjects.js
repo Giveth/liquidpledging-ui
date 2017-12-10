@@ -35,6 +35,9 @@ class MyProjects extends Component {
 
     setDelegations=()=>{
         let currentAddress = LPState.getCurrentAccount()
+        if(!currentAddress)
+            return
+
         let myDelegatesFilter = {adminAddress:currentAddress, type:'Project'}
         let projectNodes = LPState.getNodes(myDelegatesFilter)
         this.populateCards(projectNodes)
