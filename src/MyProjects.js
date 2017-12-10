@@ -52,34 +52,9 @@ class MyProjects extends Component {
 
     getHeader=(projectNode)=>
     {
-        let that = this
-
-        function onAddFunds()
-        {
-            that.onAddFunds(projectNode)
-        }
-        
-        function onDelegateFunds()
-        {
-            //that.onDelegateFunds(projectNode)
-        }
-
         return (
             <div>
-                <div style={Styles.row}>
-                <div style = {Styles.sectionFrontCell}/>
-                <div style = {Styles.sectionMiddleCell}/>
-                <div style = {Styles.sectionBackCell}>
-
-                    <FlatButton
-                        onClick = {onDelegateFunds}
-                        secondary = {false}
-                        label={'Find Projects'}
-                        labelStyle = {{fontSize:11}}
-                    />
-                </div>
             </div>
-         </div>
         )
     }
 
@@ -155,7 +130,7 @@ class MyProjects extends Component {
                     </div>
 
                     <div style = {Styles.sectionBackCell}>
-                        <FlatButton onClick = {this.onNewProject} primary = {true} label="New Delegate"  />
+                        <FlatButton onClick = {this.onNewProject} primary = {true} label="New Project"  />
                     </div>
                 </div>
 
