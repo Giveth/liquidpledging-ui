@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
 import AdminCard from './AdminCard'
+import FlatButton from 'material-ui/FlatButton'
+import { Styles, Currency, Merge } from './Styles'
+import Caller from './LiquidPledgingCaller'
 
 class MyProjects extends Component {
 
@@ -8,8 +11,9 @@ class MyProjects extends Component {
         super()
 
         this.state={
-            projectNodes:[],
-            currentAddress:''
+            delegateNodes:[],
+            currentAddress:'',
+            totalAmount:0,
         }
 
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
@@ -29,55 +33,136 @@ class MyProjects extends Component {
         this.setDelegations()
     }
 
-    setDelegations=()=>
-    {
+    setDelegations=()=>{
         let currentAddress = LPState.getCurrentAccount()
-        let myGiversFilter = {adminAddress:currentAddress, type:'Project'}
-        let projectNodes = LPState.getNodes(myGiversFilter)
-
+        let myDelegatesFilter = {adminAddress:currentAddress, type:'Delegate'}
+        let delegateNodes = LPState.getNodes(myDelegatesFilter)
+        this.populateCards(delegateNodes)
         this.setState({
-            projectNodes:projectNodes,
-            currentAddress:currentAddress
+            currentAddress:currentAddress,
         })
     }
 
-    createProjectCards=()=>
+    onNewProject=()=>
+    {
+        let projectType = 3
+        let data = {defaultAdminType:projectType}
+        Caller.showAddAdminDialog(data)
+    }
+
+    getHeader=(projectNode)=>
+    {
+        let that = this
+
+        function onAddFunds()
+        {
+            that.onAddFunds(projectNode)
+        }
+        
+        function onDelegateFunds()
+        {
+            //that.onDelegateFunds(projectNode)
+        }
+
+        return (
+            <div>
+                <div style={Styles.row}>
+                <div style = {Styles.sectionFrontCell}/>
+                <div style = {Styles.sectionMiddleCell}/>
+                <div style = {Styles.sectionBackCell}>
+
+                    <FlatButton
+                        onClick = {onDelegateFunds}
+                        secondary = {false}
+                        label={'Find Projects'}
+                        labelStyle = {{fontSize:11}}
+                    />
+                </div>
+            </div>
+         </div>
+        )
+    }
+
+    populateCards=(delegateNodes)=>
     {
         let cards = []
-        for(let projectNode of this.state.projectNodes)
+        let totalGiverAmount = 0
+        for(let delegateNode of delegateNodes)
         {
-            let delegations = LPState.getDelegations(projectNode.delegationsOut)
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
-            let delegatesChildren = LPState.getDelegationsTrees(delegations, onlyDelegationsWithMoneyFilter)
-
             let onlyProjectsFilter= {type:'Project'}
-            let projectDelegations = LPState.getDelegationsFromTreeChildren(delegatesChildren, onlyProjectsFilter)
+            let onlyDelegatesFilter= {type:'Delegate'}
 
-            let projectsChildren = LPState.getDelegationsTrees(projectDelegations)
+            let delegationsIn = LPState.getDelegations(delegateNode.delegationsIn) 
+
+            let delegationsOutWithProjects = LPState.getDelegations(delegateNode.delegationsOut) //Delegation. To 
+            let delegationsOut = LPState.filterDelegations(delegationsOutWithProjects, onlyDelegatesFilter)
+            let childrenOut = LPState.getDelegationsTrees(delegationsOutWithProjects, onlyDelegationsWithMoneyFilter)// Children. To. No money
+
+            let delegationsToProject = LPState.getDelegationsFromTreeChildren(childrenOut, onlyProjectsFilter) //Delegations. Any level. Projects
+
+            //let projectsChildren = LPState.getDelegationsTrees(assignedToProjectsDelegations)//Children. Any level. Projects
+
+            let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(delegateNode) 
+            let delegatedAmount = LPState.getNodeDelegatedAmount(delegateNode) - assignedToProjectsAmount
+            let assignedAmount = LPState.getNodeAssignedAmount(delegateNode)
+            let availableAmount = assignedAmount - delegatedAmount - assignedToProjectsAmount
+    
+            let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
+            totalGiverAmount += assignedAmount
+            let header = this.getHeader(delegateNode)
 
             let card = <AdminCard
-                key={projectNode.id}
-                giverNode = {projectNode}
-                delegatedDelegations={delegations}
-                delegatesChildren={delegatesChildren}
-                projectsChildren={projectsChildren}
-                userAddress={this.state.currentAddress}/>
+                key={delegateNode.id}
+                giverNode = {delegateNode}
+                userAddress={this.state.currentAddress}
+
+                header = {header}
+
+                delegationsIn={delegationsIn}
+                delegationsOut={delegationsOut}
+                delegationsToProject={delegationsToProject}
+                
+                availableAmount= {availableAmount}
+                delegatedAmount = {delegatedAmount}
+                assignedToProjectsAmount ={assignedToProjectsAmount}
+                totalAmount = {totalAmount}
+                />
 
             cards.push(card)
         }
-        return cards
+
+        this.setState({
+            cards:cards,
+            totalAmount:totalGiverAmount,
+        })
     }
 
     render() {
-
-        let cards = this.createProjectCards()
+        
+        let totalAmountText = 'Total '+ Currency.symbol+Currency.format(Currency.toEther(this.state.totalAmount))
 
         return  (
             <div >
-                 {cards}
+
+                <div style={Styles.row}>
+                    <div style = {Styles.sectionFrontCell}>
+
+                    </div>
+
+                    <div style = {Merge(Styles.sectionMiddleCell, Styles.sectionTitle)}>
+                        {totalAmountText}
+                    </div>
+
+                    <div style = {Styles.sectionBackCell}>
+                        <FlatButton onClick = {this.onNewProject} primary = {true} label="New Delegate"  />
+                    </div>
+                </div>
+
+                {this.state.cards}
+
             </div>
         )
-
     }
 }
 export default MyProjects
