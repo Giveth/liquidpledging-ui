@@ -11,7 +11,6 @@ class RootDelegationList extends Component {
         if(!this.props.delegations)
             return <div/>
             
-        
         let list = this.props.delegations.map((d,index) => {
         
             let that = this
@@ -22,7 +21,7 @@ class RootDelegationList extends Component {
             }
 
             let canCancel = true
-            let canDelegate = true
+            let canDelegate = false
     
             if(d.type==="Project")
                 canDelegate = false
