@@ -53,6 +53,36 @@ class OthersFunds extends Component {
         Caller.showAddAdminDialog(data)
     }
 
+    getAvailableButtons=()=>
+    {
+        function onDelegateFunds()
+        {
+            //that.onDelegateFunds(giverNode)
+        }
+
+        function onAssignToProject()
+        {
+            //that.onDelegateFunds(giverNode)
+        }
+
+        return (<div>
+                    <FlatButton
+                        onClick = {onDelegateFunds}
+                        secondary = {false}
+                        label={'Delegate'}
+                        labelStyle = {{fontSize:11}}
+                    />
+
+                    <FlatButton
+                        onClick = {onAssignToProject}
+                        secondary = {false}
+                        label={'Assign to project'}
+                        labelStyle = {{fontSize:11}}
+                    />
+                </div>
+            )
+    }
+
     getHeader=(giverNode)=>
     {
         let that = this
@@ -114,6 +144,8 @@ class OthersFunds extends Component {
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
             totalDelegateAmount += assignedAmount
             let header = this.getHeader(delegateNode)
+            let availableButtons = this.getAvailableButtons()
+
 
             let card = <AdminCard
                 key={delegateNode.id}
@@ -130,6 +162,8 @@ class OthersFunds extends Component {
                 delegatedAmount = {delegatedAmount}
                 assignedToProjectsAmount ={assignedToProjectsAmount}
                 totalAmount = {totalAmount}
+
+                availableButtons={availableButtons}
                 />
 
             cards.push(card)
