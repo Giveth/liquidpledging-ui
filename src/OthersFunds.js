@@ -143,7 +143,7 @@ class OthersFunds extends Component {
 
     render() {
         
-        let totalAmountText = "Other's funds total " + Currency.symbol+Currency.format(Currency.toEther(this.state.totalAmount))
+        let totalAmountText = "Total delegated to me " + Currency.symbol+Currency.format(Currency.toEther(this.state.totalAmount))
 
         return  (
             <div >
