@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SectionHeader from './SectionHeader'
 import { Styles, Icons, Merge } from './Styles'
 import IconButton from 'material-ui/IconButton'
+import FlatButton from 'material-ui/FlatButton'
 
 class RootDelegationList extends Component {   
 
@@ -42,13 +43,21 @@ class RootDelegationList extends Component {
             
             if(canCancel){
                 cancelDelegateButton=(
-                <IconButton
+                //icon button
+                /*<IconButton
                     onClick = {this.onCancel}
                     style = {{color:'grey'}}
                     tooltip = {'Cancel funding to '+d.name}
                     >
                     <Icons.cancel size={15}/>
-                </IconButton>)
+                </IconButton>)*/
+                //text button
+                <FlatButton
+                    onClick = {this.onCancel}
+                    secondary = {false}
+                    label={'Cancel'}
+                    labelStyle = {{fontSize:11}}
+                />)
             }
             
             let actionButons =(
