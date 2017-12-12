@@ -69,7 +69,7 @@ class OthersFunds extends Component {
                     <FlatButton
                         onClick = {onDelegateFunds}
                         secondary = {false}
-                        label={'Delegate'}
+                        label={'Subdelegate'}
                         labelStyle = {{fontSize:11}}
                     />
 
@@ -85,32 +85,12 @@ class OthersFunds extends Component {
 
     getHeader=(giverNode)=>
     {
-        let that = this
-
-        function onAddFunds()
-        {
-            that.onAddFunds(giverNode)
-        }
-        
-        function onDelegateFunds()
-        {
-            //that.onDelegateFunds(giverNode)
-        }
-
         return (
             <div>
                 <div style={Styles.row}>
                 <div style = {Styles.sectionFrontCell}/>
                 <div style = {Styles.sectionMiddleCell}/>
-                <div style = {Styles.sectionBackCell}>
-
-                    <FlatButton
-                        onClick = {onDelegateFunds}
-                        secondary = {false}
-                        label={'Find Projects'}
-                        labelStyle = {{fontSize:11}}
-                    />
-                </div>
+                <div style = {Styles.sectionBackCell}/>
             </div>
          </div>
         )
