@@ -64,6 +64,36 @@ class MyFunds extends Component {
         Caller.showDonateDialog(donateData)
     }
 
+    getAvailableButtons=()=>
+    {
+        function onDelegateFunds()
+        {
+            //that.onDelegateFunds(giverNode)
+        }
+
+        function onAssignToProject()
+        {
+            //that.onDelegateFunds(giverNode)
+        }
+
+        return (<div>
+                    <FlatButton
+                        onClick = {onDelegateFunds}
+                        secondary = {false}
+                        label={'Delegate'}
+                        labelStyle = {{fontSize:11}}
+                    />
+
+                    <FlatButton
+                        onClick = {onAssignToProject}
+                        secondary = {false}
+                        label={'Assign to project'}
+                        labelStyle = {{fontSize:11}}
+                    />
+                </div>
+            )
+    }
+
     getHeader=(giverNode)=>
     {
         let that = this
@@ -72,32 +102,19 @@ class MyFunds extends Component {
         {
             that.onAddFunds(giverNode)
         }
-        
-        function onDelegateFunds()
-        {
-            //that.onDelegateFunds(giverNode)
-        }
 
         return (
             <div>
                 <div style={Styles.row}>
                 <div style = {Styles.sectionFrontCell}/>
-                <div style = {Styles.sectionMiddleCell}/>
-                
+                <div style = {Styles.sectionMiddleCell}/>   
                 <div style = {Styles.sectionBackCell}>
                     <FlatButton
                         onClick = {onAddFunds}
                         secondary = {false}
                         label={'Add Funds'}
                         labelStyle = {{fontSize:11}}
-                    />
-
-                    <FlatButton
-                        onClick = {onDelegateFunds}
-                        secondary = {false}
-                        label={'Find Projects'}
-                        labelStyle = {{fontSize:11}}
-                    />
+                    />     
                 </div>
             </div>
          </div>
@@ -133,6 +150,8 @@ class MyFunds extends Component {
 
             let header = this.getHeader(giverNode)
 
+            let availableButtons = this.getAvailableButtons()
+
             let card = <AdminCard
                 key={giverNode.id}
                 giverNode = {giverNode}
@@ -148,6 +167,9 @@ class MyFunds extends Component {
                 delegatedAmount = {delegatedAmount}
                 assignedToProjectsAmount ={assignedToProjectsAmount}
                 totalAmount = {totalAmount}
+
+                availableButtons={availableButtons}
+     
                 />
 
             cards.push(card)

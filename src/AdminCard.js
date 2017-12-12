@@ -124,7 +124,8 @@ class AdminCard extends Component {
                     key = 'Available'
                     title='Available'
                     amount= {this.props.availableAmount}
-                    onPledges = {this.onAvailablePledges}/>
+                    onPledges = {this.onAvailablePledges}
+                    children = {this.props.availableButtons}/>
 
                 <SectionHeader
                     key = 'Delegated'
