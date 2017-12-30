@@ -14,7 +14,7 @@
     "web3": "^1.0.0-beta.23"
   },
   "devDependencies": {
-    "ethereumjs-testrpc": "git://github.com/perissology/testrpc.git#7c1160373c28c06ca47820d180c1853487c11983",
+    "ethereumjs-testrpc": "git://github.com/perissology/testrpc.git#963aa7d",
     "gh-pages": "^1.0.0"
   },
   "scripts": {
@@ -24,7 +24,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "testrpc": "./node_modules/.bin/testrpc --ws --deterministic --gasLimit=6000000"
+    "testrpc": "./node_modules/.bin/ganache-cli --ws --deterministic --gasLimit=6000000"
   },
   "homepage": "https://giveth.github.io/liquidpledging-ui"
 }
