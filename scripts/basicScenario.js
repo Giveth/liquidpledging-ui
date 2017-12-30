@@ -28,24 +28,6 @@ async function run() {
     await vault.setLiquidPledging(liquidPledging.$address);
     liquidPledgingState = new LiquidPledgingState(liquidPledging);
 
-/*
-
-//Redelegation
-
-await liquidPledging.addGiver('Giver1User1', 'URLGiver1User1', 600, 0, { from: user1 }); //crea admin #1
-await liquidPledging.addDelegate('Delegate1User2', 'URLDelegate1User2', 0, 0, { from: user2 }); //crea admin #2
-await liquidPledging.addDelegate('Delegate1User3', 'URLDelegate1User3', 0, 0, { from: user3 }); //crea admin #3
-await liquidPledging.addDelegate('Delegate1User4', 'URLDelegate1User4', 0, 0, { from: user4 }); //crea admin #4
-await liquidPledging.donate(1, 1, { from: user1, value: utils.toWei(1) }); //Crea pledge #1
-
-await liquidPledging.transfer(1, 1, utils.toWei(0.5), 2, { from: user1 });  //Delega de #1 a #2, crea pledge #2
-await liquidPledging.transfer(2, 2, utils.toWei(0.5), 3, { from: user2 });  //Delega de #2 a #3, crea pledge #3
-
-
-await liquidPledging.transfer(1, 3, utils.toWei(0.5), 1, { from: user1, gas: 2000000 }); 
-
-*/
-
 //Let's create all the admins fiirst. 5 givers, 5delegates and 5 proejcts. 15 in total
     await liquidPledging.addGiver('Giver1User1', 'URLGiver1User1', 60, 0, { from: user1 }); //#A1 --> Means: Admin[1] is created
     await liquidPledging.addGiver('Giver1User2', 'URLGiver1User2', 60, 0, { from: user2 }); //#A2
@@ -89,29 +71,6 @@ await liquidPledging.transfer(1, 3, utils.toWei(0.5), 1, { from: user1, gas: 200
     //From DelegateUser4(#9, pledge #8 (previous pledge) to ProjectUser5(#15)
     await liquidPledging.transfer(9, 8, utils.toWei(0.3), 10, { from: user4 }); //#P9
 
-/*
-    //Let's undo the last transfer by assigning the funds back to the issuer
-    await liquidPledging.transfer(6, 9, utils.toWei(0.3), 6, { from: user1, gas: 2000000 }); //Does not create pledge! (moving funds to self)
-    
-    //And move funds to somewhere else
-    await liquidPledging.transfer(8, 8, utils.toWei(0.1 ), 14, { from: user3}); //#P10
-
-    //Multiple donations 
-    await liquidPledging.addGiver('Giver2User1', 'URLGiver2User1', 600, 0, { from: user1 }); //#A16
-    await liquidPledging.donate(1, 16, { from: user1, value: utils.toWei(0.1) }); //#P11
-    await liquidPledging.donate(1, 16, { from: user1, value: utils.toWei(0.1) }); //Doesn't create pledge! (Relationship 1-16 already exist)
-    await liquidPledging.donate(1, 16, { from: user1, value: utils.toWei(0.1) }); //Doesn't create pledge
-    await liquidPledging.donate(1, 16, { from: user1, value: utils.toWei(0.1) }); //Doesn't create pledge
-    await liquidPledging.donate(1, 16, { from: user1, value: utils.toWei(0.1) }); //Doesn't create pledge
-
-    //Delegaing from different donors to the same one (#A17)
-
-    await liquidPledging.addDelegate('Delegate2User1', 'URLDelegate2User1', 0, 0, { from: user1 }); //#A17
-    await liquidPledging.transfer(16, 11, utils.toWei(0.2), 17, { from: user1 }); //#12
-    await liquidPledging.transfer(2, 2, utils.toWei(0.5), 17, { from: user2 }); //#P13
-    await liquidPledging.transfer(3, 3, utils.toWei(1), 17, { from: user3 }); //#P13
-*/
-
     const st = await liquidPledgingState.getState();
     console.log(JSON.stringify(st, null, 2));
     console.log(liquidPledging.$address);
@@ -121,4 +80,7 @@ await liquidPledging.transfer(1, 3, utils.toWei(0.5), 1, { from: user1, gas: 200
 run().then(() =>  {
     console.log("Finalized!");
     process.exit(0);
+}).catch((error)=>
+{
+    console.log(error)
 })
