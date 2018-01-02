@@ -1,5 +1,6 @@
 import ProviderHelper from './Web3ProviderHelper'
 import Formatter from './DataFormatter'
+import Bignumber from 'bignumber.js'
 
 const liquidpledging = require('./liquidpledging');
 const LiquidPledging = liquidpledging.LiquidPledging;
@@ -132,17 +133,23 @@ class LiquidPledgingController extends ProviderHelper {
 
     donate(emiterId, receiverId, amount )
     {
-        return this.liquidPledging.donate(emiterId, receiverId, { from: this.currentAccount, value: this.web3.utils.toWei(amount) })
+        let bn = new Bignumber(amount)
+        let weiAmount =this.web3.utils.toWei(bn)
+        return this.liquidPledging.donate(emiterId, receiverId, { from: this.currentAccount, value:weiAmount})
     }
 
     transfer(emiterId, pledgeId, receiverId, amount )
     {
-        return this.liquidPledging.transfer(emiterId, pledgeId, this.web3.utils.toWei(amount), receiverId, {from: this.currentAccount })
+        let bn = new Bignumber(amount)
+        let weiAmount =this.web3.utils.toWei(bn)
+        return this.liquidPledging.transfer(emiterId, pledgeId, weiAmount, receiverId, {from: this.currentAccount })
     }
 
     cancel(emiterId, pledgeId, receiverId, amount)
     {
-        return this.liquidPledging.transfer(emiterId, pledgeId, this.web3.utils.toWei(0.3), receiverId, { from: this.currentAccount, gas: 2000000 })
+        let bn = new Bignumber(0.3)
+        let weiAmount =this.web3.utils.toWei(bn)
+        return this.liquidPledging.transfer(emiterId, pledgeId, weiAmount, receiverId, { from: this.currentAccount, gas: 2000000 })
     }
 
     addGiver(name, url)
