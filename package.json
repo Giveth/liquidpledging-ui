@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bignumber.js": "^5.0.0",
     "liquidpledging": "0.0.10",
     "material-ui": "^0.19.4",
     "numeral": "^2.0.6",
@@ -24,7 +25,9 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "testrpc": "./node_modules/.bin/ganache-cli --ws --deterministic --gasLimit=6000000"
+    "testrpc": "./node_modules/.bin/ganache-cli --ws --deterministic --gasLimit=6000000",
+    "cleanport":"fuser -k -n tcp --port process.env.port &",
+    "go": "npm run cleanport --port:8545 && npm run cleanport --port:8546 &&  npm run cleanport --port:3000 && (npm run testrpc &) && npm start"
   },
   "homepage": "https://giveth.github.io/liquidpledging-ui"
 }
