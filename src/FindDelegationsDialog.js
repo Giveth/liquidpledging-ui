@@ -8,7 +8,6 @@ class FindDelegationsDialog extends React.Component
     constructor(props)
     {
         super();
-
     }
 
     onCancel=()=>
@@ -39,8 +38,6 @@ class FindDelegationsDialog extends React.Component
                 open={this.props.open}
                 onRequestClose={this.onCancel}
                 contentStyle={{maxWidth:'none'}}>    
-
-                
 
             </Dialog>
         )
