@@ -68,7 +68,10 @@ class MyFunds extends Component {
     {
         function onDelegateFunds()
         {
-            //that.onDelegateFunds(giverNode)
+            let findDelegationsData={
+               title:"Unga bunga"
+            }
+            Caller.showFindDelegationsDialog(findDelegationsData)
         }
 
         function onAssignToProject()

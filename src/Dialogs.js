@@ -7,6 +7,7 @@ import DonateDialog from './DonateDialog'
 import TransferDialog from './TransferDialog'
 import AddAdminDialog from './AddAdminDialog'
 import PledgesDialog from './PledgesDialog'
+import FindDelegationsDialog from './FindDelegationsDialog'
 
 class Dialogs extends Component {
 
@@ -32,7 +33,11 @@ class Dialogs extends Component {
 
             pledgesOpen:false,
             pledgesData:{},
-            pledgesMetadata:{emiters:[]}
+            pledgesMetadata:{emiters:[]},
+
+            findDelegationsOpen:false,
+            findDelegationsData:{},
+            findDelegationsMetadata:{emiters:[]}
         }
 
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
@@ -44,6 +49,7 @@ class Dialogs extends Component {
         Caller.on(Caller.TRANSFER_DIALOG, this.transferOnShow)
         Caller.on(Caller.ADD_ADMIN_DIALOG, this.addAdminOnShow)
         Caller.on(Caller.PLEDGES, this.pledgesOnShow)
+        Caller.on(Caller.FIND_DELEGATIONS, this.findDelegationsOnShow)
     }
 
     onStateChanged=()=>{
@@ -63,7 +69,7 @@ class Dialogs extends Component {
     }
 
     onNoContractFound=()=>{
-        this.showSnackbar("⚠️  Can't find the contract")
+        this.showSnackbar("⚠️ Can't find the contract")
     }
 
     //snackBar
@@ -152,6 +158,17 @@ class Dialogs extends Component {
         this.setState({ pledgesOpen:false })
     }
 
+     //Pledges
+    findDelegationsOnShow=(data)=>
+    {
+        this.setState({ findDelegationsData:data, findDelegationsOpen:true})
+    }
+
+    findDelegationsOnCancel=()=>
+    {
+        this.setState({ findDelegationsOpen:false })
+    }
+
     render() {
         
         return (
@@ -188,8 +205,11 @@ class Dialogs extends Component {
                     open={this.state.pledgesOpen}
                     onCancel ={this.pledgesOnCancel}
                     data={this.state.pledgesData}/>
-
                 
+                <FindDelegationsDialog
+                    open={this.state.findDelegationsOpen}
+                    onCancel ={this.findDelegationsOnCancel}
+                    data={this.state.findDelegationsData}/>
 
             </div>
         )

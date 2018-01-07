@@ -13,6 +13,7 @@ class Caller extends EventEmitter
         this.CANCEL_DIALOG = 'cancelDialog'
         this.ADD_ADMIN_DIALOG = 'addAdmin'
         this.PLEDGES = 'pledges'
+        this.FIND_DELEGATIONS = 'findDelegations'
     }
 
     //DONATE
@@ -100,10 +101,15 @@ class Caller extends EventEmitter
             }).catch((error)=>console.error(error))
     }
     //Pledges
-
     showPledgesDialog(data)
     {
         this.emit(this.PLEDGES,data)
+    }
+
+    //Find Delegations
+    showFindDelegationsDialog(data)
+    {
+        this.emit(this.FIND_DELEGATIONS,data)
     }
 }
 
