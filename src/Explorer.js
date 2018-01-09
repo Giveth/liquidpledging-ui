@@ -15,6 +15,11 @@ class Explorer extends Component {
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
         LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
         LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
+        //this.setDelegations()
+    }
+    componentWillMount=()=>
+    {
+        this.setDelegations()
     }
 
     onStateChanged=()=>{

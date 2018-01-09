@@ -170,6 +170,15 @@ class Dialogs extends Component {
     }
 
     render() {
+
+        let findDelegations = <div/>
+        if(this.state.findDelegationsOpen)
+        {
+            findDelegations = <FindDelegationsDialog
+                open={this.state.findDelegationsOpen}
+                onCancel ={this.findDelegationsOnCancel}
+                data={this.state.findDelegationsData}/>
+        }
         
         return (
             <div>
@@ -206,10 +215,7 @@ class Dialogs extends Component {
                     onCancel ={this.pledgesOnCancel}
                     data={this.state.pledgesData}/>
                 
-                <FindDelegationsDialog
-                    open={this.state.findDelegationsOpen}
-                    onCancel ={this.findDelegationsOnCancel}
-                    data={this.state.findDelegationsData}/>
+                {findDelegations}
 
             </div>
         )
