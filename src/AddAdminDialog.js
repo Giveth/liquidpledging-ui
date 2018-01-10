@@ -166,7 +166,7 @@ class AddAdmin extends React.Component
                     onChange={this.onNameChanged}/>
 
                  <TextField
-                    autoFocus={true}
+                    autoFocus={false}
                     id="inputText"
                     hintText={'Url'}
                     value={this.state.url}
