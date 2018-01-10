@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
 import DelegationsList from './DelegationsList'
+import TextField from 'material-ui/TextField'
 
 class Explorer extends Component {
 
@@ -63,10 +64,22 @@ class Explorer extends Component {
         })
     }
 
+    onSearchChanged = (e, newText) => {
+        let state = {searchValue:newText}
+        this.setState(state)
+    }
+
     render() {
 
         return (
             <div >
+                <TextField
+                    autoFocus={true}
+                    id="inputText"
+                    hintText={'Search'}
+                    value={this.state.searchValue}
+                    onChange={this.onSearchChanged}/>
+
                 <DelegationsList
                     treeChildren={this.state.treeChildren}
                     indentLevel={-1}
