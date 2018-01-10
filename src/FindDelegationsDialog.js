@@ -37,10 +37,10 @@ class FindDelegationsDialog extends React.Component
                 open={this.props.open}
                 onRequestClose={this.onCancel}
                 contentStyle={{maxWidth:'none'}}
-                autoScrollBodyContent={true}> 
-                
+                autoScrollBodyContent={false}> 
+                <div style = {{overflow:'auto', height:'100%', display:'inline-block'}}>
                     <Explorer label="Explorer" />
-                
+                </div>
 
             </Dialog>
 
