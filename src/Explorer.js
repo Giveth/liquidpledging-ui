@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
 import DelegationsList from './DelegationsList'
 import TextField from 'material-ui/TextField'
+import {List, ListItem} from 'material-ui/List'
+import Subheader from 'material-ui/Subheader'
+import Divider from 'material-ui/Divider'
 
 class Explorer extends Component {
 
@@ -85,7 +88,24 @@ class Explorer extends Component {
         this.setState(state)
     }
 
+    createList(tree)
+    {
+        let list = []
+        this.state.filtredTree.map((item)=>{
+            list.push(
+                <ListItem
+                    primaryText={item.delegation.name}
+                    secondaryText={item.delegation.type}
+                />)
+            list.push(<Divider/>)
+        })
+
+        return list
+    }
+
     render() {
+
+        let itemsList = this.createList(this.state.filtredTree)
 
         return (
             <div >
@@ -96,13 +116,10 @@ class Explorer extends Component {
                     value={this.state.searchValue}
                     onChange={this.onSearchChanged}/>
 
-                <DelegationsList
-                    treeChildren={this.state.filtredTree}
-                    indentLevel={-1}
-                    userAddress={this.state.currentAddress}
-                    defaultColapsed = {false}
-                    defaultColapsedRoot={true}
-                    />
+                <List>
+                    <Subheader>Choose who to delegate</Subheader>
+                    {itemsList}
+                </List>
             </div>
         )
     }
