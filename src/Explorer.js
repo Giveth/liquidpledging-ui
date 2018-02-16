@@ -81,9 +81,8 @@ class Explorer extends Component {
             searchValue:newText,
             filtredTree: filteredTree
         }
-        console.log(filteredTree)
-        this.setState(state)
 
+        this.setState(state)
     }
 
     render() {
