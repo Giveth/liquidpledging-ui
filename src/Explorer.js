@@ -11,6 +11,7 @@ class Explorer extends Component {
         this.state={
             network:"",
             treeChildren:[],
+            filtredTree: [],
             searchValue:""
         }
 
@@ -62,6 +63,7 @@ class Explorer extends Component {
         this.setState({
             treeChildren:myTrees,
             currentAddress:address,
+            filtredTree: this.filterByText (myTrees, this.state.searchValue)
         })
     }
 
@@ -77,10 +79,11 @@ class Explorer extends Component {
 
         let state = {
             searchValue:newText,
-            treeChildren: filteredTree
+            filtredTree: filteredTree
         }
-
+        console.log(filteredTree)
         this.setState(state)
+
     }
 
     render() {
@@ -95,7 +98,7 @@ class Explorer extends Component {
                     onChange={this.onSearchChanged}/>
 
                 <DelegationsList
-                    treeChildren={this.state.treeChildren}
+                    treeChildren={this.state.filtredTree}
                     indentLevel={-1}
                     userAddress={this.state.currentAddress}
                     defaultColapsed = {false}
