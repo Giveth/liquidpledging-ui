@@ -10,7 +10,8 @@ class Explorer extends Component {
 
         this.state={
             network:"",
-            treeChildren:[]
+            treeChildren:[],
+            searchValue:""
         }
 
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
@@ -64,8 +65,21 @@ class Explorer extends Component {
         })
     }
 
+    filterByText=(tree, text)=>
+    {
+        return tree.filter((value,index, array)=>{
+           return ( value.delegation.name.indexOf(text)!= -1 )
+        })
+    }
+
     onSearchChanged = (e, newText) => {
-        let state = {searchValue:newText}
+        let filteredTree = this.filterByText(this.state.treeChildren, newText)
+
+        let state = {
+            searchValue:newText,
+            treeChildren: filteredTree
+        }
+
         this.setState(state)
     }
 
