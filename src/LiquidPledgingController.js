@@ -38,7 +38,7 @@ class LiquidPledgingController extends ProviderHelper {
     }
 
     setupLiquidPledging()
-    {
+    {this.data = {}
         this.liquidPledging = new LiquidPledging(this.web3, liquidPledgingContractAddress);
         this.liquidPledgingState = new LiquidPledgingState(this.liquidPledging);
 
@@ -74,6 +74,11 @@ class LiquidPledgingController extends ProviderHelper {
 
     setState(data)
     {
+        if((data.admins.length == this.admins.length + 1) && (data.pledges.length == this.pledges.length+1))
+            return
+
+        console.log("New state")
+        
         this.admins = data.admins
         this.pledges = data.pledges
 
