@@ -116,8 +116,9 @@ class Explorer extends Component {
                     primaryText={child.delegation.name}
                     secondaryText={child.delegation.type}
                     onClick={showTransferDialog}
+                    key={child.delegation.id}
                 />)
-            list.push(<Divider/>)
+            list.push(<Divider key={"d"+child.delegation.id}/>)
         })
 
         return list
