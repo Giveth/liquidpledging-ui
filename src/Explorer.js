@@ -5,6 +5,7 @@ import TextField from 'material-ui/TextField'
 import {List, ListItem} from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
 import Divider from 'material-ui/Divider'
+import Caller from './LiquidPledgingCaller'
 
 class Explorer extends Component {
 
@@ -91,11 +92,27 @@ class Explorer extends Component {
     createList(tree)
     {
         let list = []
-        this.state.filtredTree.map((item)=>{
+        this.state.filtredTree.map((child)=>{
+
+            let showTransferDialog=()=>
+            {
+                let transferData={
+                    giverName:child.delegation.name,
+                    emiterId:0,
+                    recieverId:child.delegation.adminId,
+                    amount:undefined
+                }
+
+                this.props.onCancel()
+                Caller.showTransferDialog(transferData)
+                
+            }
+            
             list.push(
                 <ListItem
-                    primaryText={item.delegation.name}
-                    secondaryText={item.delegation.type}
+                    primaryText={child.delegation.name}
+                    secondaryText={child.delegation.type}
+                    onClick={showTransferDialog}
                 />)
             list.push(<Divider/>)
         })
