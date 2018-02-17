@@ -20,7 +20,6 @@ class TransferDialog extends React.Component
     }
 
     componentWillReceiveProps(newProps) {
-        console.log("Ungaaa", newProps.data.emiterId)
         if(newProps.data.emiterId>0)
             this.setState({selectedEmiter:newProps.data.emiterId})
     }
