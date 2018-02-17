@@ -64,12 +64,14 @@ class MyFunds extends Component {
         Caller.showDonateDialog(donateData)
     }
 
-    getAvailableButtons=()=>
+    getAvailableButtons=(giverNode)=>
     {
         function onDelegateFunds()
         {
+            console.log(giverNode)
             let findDelegationsData={
-               title:"Unga bunga"
+               title:"",
+               emiterId:giverNode.id
             }
             Caller.showFindDelegationsDialog(findDelegationsData)
         }
@@ -153,7 +155,7 @@ class MyFunds extends Component {
 
             let header = this.getHeader(giverNode)
 
-            let availableButtons = this.getAvailableButtons()
+            let availableButtons = this.getAvailableButtons(giverNode)
 
             let card = <AdminCard
                 key={giverNode.id}

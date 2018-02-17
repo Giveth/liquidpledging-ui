@@ -49,7 +49,7 @@ class Explorer extends Component {
         {
             this.setState({
                 treeChildren:[],
-                currentAddress:'Not connected to Ethereum...  (╯°□°）╯︵ ┻━┻',
+                currentAddress:'Not connected to Ethereum...  (╯°□°)╯  ┻━┻',
             })
             return
         }
@@ -92,18 +92,21 @@ class Explorer extends Component {
     createList(tree)
     {
         let list = []
+        let that = this
         this.state.filtredTree.map((child)=>{
 
             let showTransferDialog=()=>
             {
                 let transferData={
                     giverName:child.delegation.name,
-                    emiterId:0,
+                    emiterId:this.props.emiterId,
                     recieverId:child.delegation.adminId,
                     amount:undefined
                 }
 
-                this.props.onCancel()
+                if(this.props.onCancel)
+                    this.props.onCancel()
+                    
                 Caller.showTransferDialog(transferData)
                 
             }

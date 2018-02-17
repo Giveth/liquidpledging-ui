@@ -24,7 +24,7 @@ class Dialogs extends Component {
             snackBarTime:6000,
 
             transferOpen:false,
-            transferData:{reciever:0, emiter:0, amount:0, giverName:''},
+            transferData:{reciever:0, emiterId:0, amount:0, giverName:''},
             transferMetadata:{emiters:[]},
 
             addAdminOpen:false,

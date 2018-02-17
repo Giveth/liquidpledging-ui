@@ -39,11 +39,11 @@ class FindDelegationsDialog extends React.Component
                 contentStyle={{maxWidth:'none'}}
                 autoScrollBodyContent={false}>
                
-
                 <div style = {{overflow:'auto'}}>
                     <Explorer
                         label="Explorer"
-                        onCancel = {this.props.onCancel}/>
+                        onCancel = {this.props.onCancel}
+                        emiterId = {this.props.data.emiterId}/>
                 </div>
 
             </Dialog>

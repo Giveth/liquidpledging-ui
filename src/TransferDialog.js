@@ -11,6 +11,7 @@ class TransferDialog extends React.Component
     constructor(props)
     {
         super();
+        
         this.state={
             amount:'',
             okDisabled:true,
@@ -18,11 +19,17 @@ class TransferDialog extends React.Component
         }
     }
 
+    componentWillReceiveProps(newProps) {
+        console.log("Ungaaa", newProps.data.emiterId)
+        if(newProps.data.emiterId>0)
+            this.setState({selectedEmiter:newProps.data.emiterId})
+    }
+
     onDone=()=>
     {
         let data = {}
         let delegation = this.getDelegationFromId(this.state.selectedEmiter)
-
+    
         data.emiterId = delegation.adminId
         data.pledgeId = delegation.pledgeId
         data.recieverId = this.props.data.recieverId
@@ -124,9 +131,10 @@ class TransferDialog extends React.Component
         emitersList=emitersList.concat(emiters.map((delegation, index)=>{
 
             let label = delegation.name+ " ("+Currency.symbol+" "+Currency.toEther(delegation.availableAmount)+")"
+           
             return <MenuItem
-                key= {delegation.id}
-                value={delegation.id}
+                key= {delegation.adminId}
+                value={delegation.adminId}
                 primaryText={label} />
         }))
 
