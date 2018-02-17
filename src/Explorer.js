@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
-import DelegationsList from './DelegationsList'
 import TextField from 'material-ui/TextField'
 import {List, ListItem} from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
@@ -74,7 +73,7 @@ class Explorer extends Component {
     filterByText=(tree, text)=>
     {
         return tree.filter((value,index, array)=>{
-           return ( value.delegation.name.indexOf(text)!= -1 )
+           return ( value.delegation.name.indexOf(text)!== -1 )
         })
     }
 
@@ -92,7 +91,6 @@ class Explorer extends Component {
     createList(tree)
     {
         let list = []
-        let that = this
         this.state.filtredTree.map((child)=>{
 
             let showTransferDialog=()=>
@@ -108,7 +106,6 @@ class Explorer extends Component {
                     this.props.onCancel()
                     
                 Caller.showTransferDialog(transferData)
-                
             }
             
             list.push(
@@ -119,6 +116,8 @@ class Explorer extends Component {
                     key={child.delegation.id}
                 />)
             list.push(<Divider key={"d"+child.delegation.id}/>)
+
+            return child
         })
 
         return list

@@ -5,7 +5,6 @@ import RootDelegationList from './RootDelegationList'
 import Paper from 'material-ui/Paper'
 import LPState from "./LiquidPledgingState.js"
 import SectionHeader from './SectionHeader'
-import FlatButton from 'material-ui/FlatButton'
 
 class AdminCard extends Component {
 

@@ -26,8 +26,6 @@ class FindDelegationsDialog extends React.Component
         ]
 
         let title = "Pledges for "+this.props.data.title
-       
-        let tables = []
         
         return (
             <Dialog

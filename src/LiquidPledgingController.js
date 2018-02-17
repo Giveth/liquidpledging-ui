@@ -1,6 +1,5 @@
 import ProviderHelper from './Web3ProviderHelper'
 import Formatter from './DataFormatter'
-import Bignumber from 'bignumber.js'
 
 const liquidpledging = require('./liquidpledging');
 const LiquidPledging = liquidpledging.LiquidPledging;
@@ -74,7 +73,7 @@ class LiquidPledgingController extends ProviderHelper {
 
     setState(data)
     {
-        if((data.admins.length == this.admins.length + 1) && (data.pledges.length == this.pledges.length+1))
+        if((data.admins.length === this.admins.length + 1) && (data.pledges.length === this.pledges.length+1))
             return
 
         console.log("New state")
