@@ -170,12 +170,6 @@ class Dialogs extends Component {
     }
 
     render() {
-
-        let findDelegations = <div/>
-        if(this.state.findDelegationsOpen)
-        {
-            
-        }
         
         return (
             <div>
