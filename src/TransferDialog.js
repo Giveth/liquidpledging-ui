@@ -27,7 +27,7 @@ class TransferDialog extends React.Component
     onDone=()=>
     {
         let data = {}
-        let delegation = this.getDelegationFromId(this.state.selectedEmiter)
+        let delegation = this.getDelegationFromAdminId(this.state.selectedEmiter)
     
         data.emiterId = delegation.adminId
         data.pledgeId = delegation.pledgeId
@@ -80,7 +80,7 @@ class TransferDialog extends React.Component
 
     hasEnoughAmount=(amount, selectedEmiter)=>
     {
-        let availableAmount = Currency.toEther(this.getDelegationFromId(selectedEmiter).availableAmount)
+        let availableAmount = Currency.toEther(this.getDelegationFromAdminId(selectedEmiter).availableAmount)
         let enough = (amount <= availableAmount)
         let state= {}
         state.error = ''
@@ -93,10 +93,10 @@ class TransferDialog extends React.Component
         return enough
     }
 
-    getDelegationFromId=(delegationId)=>
+    getDelegationFromAdminId=(adminId)=>
     {
         for(let delegation of this.props.meta.emiters)
-            if(delegation.id === delegationId)
+            if(delegation.adminId === adminId)
                 return delegation
         return {}
     }
