@@ -17,15 +17,22 @@ class Explorer extends Component {
             filtredTree: [],
             searchValue:""
         }
+    }
 
+    componentWillMount=()=>
+    {
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
         LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
         LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
-        //this.setDelegations()
-    }
-    componentWillMount=()=>
-    {
+        
         this.setDelegations()
+    }
+
+    componentWillUnmount=()=>
+    {
+        LPState.removeListener(LPState.STATE_CHANGED, this.onStateChanged)
+        LPState.removeListener(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
+        LPState.removeListener(LPState.NETWORK_CHANGED, this.onNetworkChanged)
     }
 
     onStateChanged=()=>{
