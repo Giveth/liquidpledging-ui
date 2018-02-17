@@ -138,22 +138,19 @@ class LiquidPledgingController extends ProviderHelper {
 
     donate(emiterId, receiverId, amount )
     {
-        let bn = new Bignumber(amount)
-        let weiAmount =this.web3.utils.toWei(bn)
+        let weiAmount =this.web3.utils.toWei(amount.toString())
         return this.liquidPledging.donate(emiterId, receiverId, { from: this.currentAccount, value:weiAmount})
     }
 
     transfer(emiterId, pledgeId, receiverId, amount )
     {
-        let bn = new Bignumber(amount)
-        let weiAmount =this.web3.utils.toWei(bn)
+        let weiAmount =this.web3.utils.toWei(amount.toString())
         return this.liquidPledging.transfer(emiterId, pledgeId, weiAmount, receiverId, {from: this.currentAccount })
     }
 
     cancel(emiterId, pledgeId, receiverId, amount)
     {
-        let bn = new Bignumber(0.3)
-        let weiAmount =this.web3.utils.toWei(bn)
+        let weiAmount =this.web3.utils.toWei(amount.toString())
         return this.liquidPledging.transfer(emiterId, pledgeId, weiAmount, receiverId, { from: this.currentAccount, gas: 2000000 })
     }
 
