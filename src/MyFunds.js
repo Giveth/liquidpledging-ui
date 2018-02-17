@@ -68,7 +68,6 @@ class MyFunds extends Component {
     {
         function onDelegateFunds()
         {
-            console.log(giverNode)
             let findDelegationsData={
                title:"",
                emiterId:giverNode.id
