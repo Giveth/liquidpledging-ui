@@ -16,20 +16,19 @@ class TransferDialog extends React.Component
         this.state={
             amount:'',
             okDisabled:true,
-            userNodes:[],
+            emiters:[],
             selectedEmiter:0
         }
     }
 
-    componentWillReceiveProps(newProps) {
+    componentWillReceiveProps(newProps)
+    {
         let selectedEmiter = this.state.selectedEmiter
         if(newProps.data.emiterId>0)
             selectedEmiter = newProps.data.emiterId
 
         let addressFilter={adminAddress:this.props.currentAddress}
         let userNodes=LPState.getNodes(addressFilter)
-
-        
 
         let sortByAmount=(a, b)=>{
             return a.availableAmount < b.availableAmount
@@ -43,7 +42,7 @@ class TransferDialog extends React.Component
             delegationsIn.forEach((delegation)=>{totalAvailableAmount+=delegation.availableAmount})
 
             let emiter = {
-                id:node.adminId,
+                adminId:node.adminId,
                 name:node.name,
                 delegationsIn:delegationsIn,
                 totalAvailableAmount:totalAvailableAmount
@@ -173,13 +172,13 @@ class TransferDialog extends React.Component
             defaultItem =  <MenuItem key= {0} value={0} primaryText={'No available accounts'} disabled={true} />
 
         let emitersList = [defaultItem]
-        emitersList=emitersList.concat(emitersDelegations.map((delegation, index)=>{
+        emitersList=emitersList.concat(this.state.emiters.map((emiter, index)=>{
 
-            let label = delegation.name+ " ("+Currency.symbol+" "+Currency.toEther(delegation.availableAmount)+")"
+            let label = emiter.name+ " ("+Currency.symbol+" "+Currency.toEther(emiter.totalAvailableAmount)+")"
            
             return <MenuItem
-                key= {delegation.adminId}
-                value={delegation.adminId}
+                key= {emiter.adminId}
+                value={emiter.adminId}
                 primaryText={label} />
         }))
 
