@@ -73,8 +73,7 @@ class LiquidPledgingController extends ProviderHelper {
 
     setState(data)
     {
-        if((data.admins.length === this.admins.length + 1) && (data.pledges.length === this.pledges.length+1))
-            return
+        //TODO: Only update if there is the state changed
 
         console.log("New state")
         
