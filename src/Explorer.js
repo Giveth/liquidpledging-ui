@@ -145,7 +145,7 @@ class Explorer extends Component {
                     value={this.state.searchValue}
                     onChange={this.onSearchChanged}/>
 
-                <List>
+                <List style={{maxHeight: 400, overflow: "auto"}}>
                     <Subheader>Choose who to delegate</Subheader>
                     {itemsList}
                 </List>
