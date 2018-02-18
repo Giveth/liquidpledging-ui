@@ -34,7 +34,7 @@ class TransferDialog extends React.Component
             return a.availableAmount < b.availableAmount
         }
 
-        let emiters = []
+        let emiters = {}
         userNodes.forEach((node)=>
         {
             let delegationsIn = LPState.getDelegations(node.delegationsIn).sort(sortByAmount)
@@ -47,7 +47,7 @@ class TransferDialog extends React.Component
                 delegationsIn:delegationsIn,
                 totalAvailableAmount:totalAvailableAmount
             }
-            emiters.push(emiter)
+            emiters[node.adminId] = emiter
         })
         
         this.setState({
@@ -126,14 +126,6 @@ class TransferDialog extends React.Component
         return enough
     }
 
-    /*getDelegationFromAdminId=(adminId)=>
-    {
-        for(let delegation of this.props.meta.emiters)
-            if(delegation.adminId === adminId)
-                return delegation
-        return {}
-    }*/
-
     render()
     {
         const actions = [
@@ -152,35 +144,26 @@ class TransferDialog extends React.Component
         ]
 
         let title = "Delegate funds to "+ this.props.data.giverName
-        let emitersDelegations = this.props.meta.emiters
-        let mergedEmiters = []
+        let defaultItem = <MenuItem key= {0} value={0} primaryText={'Delegate from...'} disabled={true} />
 
-        emitersDelegations.forEach((delegation)=>
-        {
-            mergedEmiters.forEach((emiter)=>
-            {
-                if(emiter.id === delegation.adminId)
-                {
-
-                }
-            })
-        })
-
-        let defaultItem =  <MenuItem key= {0} value={0} primaryText={'Delegate from...'} disabled={true} />
-
-        if(!emitersDelegations.length)
+        if(!this.state.emiters.length)
             defaultItem =  <MenuItem key= {0} value={0} primaryText={'No available accounts'} disabled={true} />
 
         let emitersList = [defaultItem]
-        emitersList=emitersList.concat(this.state.emiters.map((emiter, index)=>{
-
+        
+        for(let adminId in this.state.emiters )
+        {
+            let emiter = this.state.emiters[adminId]
+            
             let label = emiter.name+ " ("+Currency.symbol+" "+Currency.toEther(emiter.totalAvailableAmount)+")"
            
-            return <MenuItem
+            let item =  <MenuItem
                 key= {emiter.adminId}
                 value={emiter.adminId}
                 primaryText={label} />
-        }))
+
+            emitersList.push(item)
+        }
 
         return (
             <Dialog
