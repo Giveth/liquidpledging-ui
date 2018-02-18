@@ -80,7 +80,7 @@ class Explorer extends Component {
     filterByText=(tree, text)=>
     {
         return tree.filter((value,index, array)=>{
-           return ( value.delegation.name.indexOf(text)!== -1 )
+           return ( value.delegation.name.toLowerCase().indexOf(text.toLowerCase())!== -1 )
         })
     }
 
