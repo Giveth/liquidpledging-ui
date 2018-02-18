@@ -37,7 +37,6 @@ class Dialogs extends Component {
 
             findDelegationsOpen:false,
             findDelegationsData:{},
-            findDelegationsMetadata:{emiters:[]}
         }
 
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
