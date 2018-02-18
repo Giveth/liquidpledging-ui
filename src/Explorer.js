@@ -60,13 +60,15 @@ class Explorer extends Component {
             return
         }
 
-        let delegatesFilter = {type:'Delegate'}
-        let delegatesNodes =  LPState.getNodes(delegatesFilter)
-        let projectsFilter = {type:'Project'}
-        let projectNodes =  LPState.getNodes(projectsFilter)
+        let delegations = []
 
-        //let delegations = LPState.getFirstDelegationsForNodes(projectNodes)
-        let delegations = LPState.getFirstDelegationsForNodes(projectNodes.concat(delegatesNodes))
+        if(this.props.adminTypes)
+            this.props.adminTypes.forEach((type)=>{
+                let adminTypeFilter = {type:type}
+                let nodes =  LPState.getNodes(adminTypeFilter)
+                delegations = delegations.concat(LPState.getFirstDelegationsForNodes(nodes))
+            })
+
         let onlyDelegationsWithMoneyFilter= {assignedAmount:undefined}
         let myTrees = LPState.getDelegationsTrees(delegations, onlyDelegationsWithMoneyFilter)
 

@@ -41,7 +41,8 @@ class FindDelegationsDialog extends React.Component
                     <Explorer
                         label="Explorer"
                         onCancel = {this.props.onCancel}
-                        emiterId = {this.props.data.emiterId}/>
+                        emiterId = {this.props.data.emiterId}
+                        adminTypes={this.props.data.adminTypes}/>
                 </div>
 
             </Dialog>
