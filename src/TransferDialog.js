@@ -113,7 +113,7 @@ class TransferDialog extends React.Component
 
     hasEnoughAmount=(amount, selectedEmiter)=>
     {
-        let availableAmount = Currency.toEther(this.getDelegationFromAdminId(selectedEmiter).availableAmount)
+        let availableAmount = Currency.toEther(this.state.emiters[selectedEmiter].totalAvailableAmount)
         let enough = (amount <= availableAmount)
         let state= {}
         state.error = ''
@@ -154,7 +154,6 @@ class TransferDialog extends React.Component
         for(let adminId in this.state.emiters )
         {
             let emiter = this.state.emiters[adminId]
-            
             let label = emiter.name+ " ("+Currency.symbol+" "+Currency.toEther(emiter.totalAvailableAmount)+")"
            
             let item =  <MenuItem
