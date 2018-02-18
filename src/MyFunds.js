@@ -69,16 +69,21 @@ class MyFunds extends Component {
         function onDelegateFunds()
         {
             let findDelegationsData={
-               title:"",
-               emiterId:giverNode.id,
-               adminTypes:["Project"]
-            }
-            Caller.showFindDelegationsDialog(findDelegationsData)
+                title:"",
+                emiterId:giverNode.id,
+                adminTypes:["Delegate"]
+             }
+             Caller.showFindDelegationsDialog(findDelegationsData)
         }
 
         function onAssignToProject()
         {
-            //that.onDelegateFunds(giverNode)
+            let findDelegationsData={
+                title:"",
+                emiterId:giverNode.id,
+                adminTypes:["Project"]
+             }
+             Caller.showFindDelegationsDialog(findDelegationsData)
         }
 
         return (<div>
