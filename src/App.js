@@ -44,7 +44,7 @@ class App extends Component {
                            
                             <OthersFunds label="Other's funds" />
                             <MyProjects label="My projects" />
-                            <Explorer label="Explorer" />
+                            <Explorer label="Explorer" adminTypes={["Delegate", "Project", "Giver"]} />
                             <PledgesView label="Pledges" />
 
                         </LayoutController>
