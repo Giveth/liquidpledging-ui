@@ -49,27 +49,25 @@ async function run() {
 
 //-------------------    
 
-    await liquidPledging.donate(1, 1, { from: user1, value: utils.toWei('1') }); //#P1 --> Means: Pledge[1] is created
-    await liquidPledging.donate(2, 2, { from: user2, value: utils.toWei('2') }); //#P2
-    await liquidPledging.donate(3, 3, { from: user3, value: utils.toWei('3') }); //#P3
-    await liquidPledging.donate(4, 4, { from: user4, value: utils.toWei('4') }); //#P4
+    await liquidPledging.donate(1, 1, { from: user1, value: utils.toWei('5') }); //#P1 --> Means: Pledge[1] is created
+    await liquidPledging.donate(2, 2, { from: user2, value: utils.toWei('5') }); //#P2
+    await liquidPledging.donate(3, 3, { from: user3, value: utils.toWei('5') }); //#P3
+    await liquidPledging.donate(4, 4, { from: user4, value: utils.toWei('5') }); //#P4
     await liquidPledging.donate(5, 5, { from: user5, value: utils.toWei('5') }); //#P5
 
 //Now let's create a long chain of pledges from giver1 to project15 passing through all delegates
 
     //From GiverUser1(#1), pledge #1(first donate) to DelegateUser2(#2)
-    await liquidPledging.transfer(1, 1, utils.toWei('0.5'), 7, { from: user1 }); //#P6
+    await liquidPledging.transfer(1, 1, utils.toWei('2'), 7, { from: user1 }); //#P6
 
     //From DelegateUser2(#7, pledge #6 (previous pledge) to DelegateUser3(#8)
-    //await liquidPledging.transfer(7, 6, utils.toWei('0.5'), 8, { from: user2 }); //#P7
-    await liquidPledging.transfer(7, 6, utils.toWei('0.5'), 6, { from: user2 }); //#P7
+    await liquidPledging.transfer(7, 6, utils.toWei('1.5'), 8, { from: user2 }); //#P7
 
-    //From DelegateUser3(#8, pledge #7 (previous pledge) to DelegateUser4(#9)
-   // await liquidPledging.transfer(8, 7, utils.toWei('0.5'), 9, { from: user3 }); //#P8
-    await liquidPledging.transfer(6, 7, utils.toWei('0.5'), 9, { from: user1 }); //#P8
-
-    //From DelegateUser4(#9, pledge #8 (previous pledge) to ProjectUser5(#15)
-    await liquidPledging.transfer(9, 8, utils.toWei('0.3'), 10, { from: user4 }); //#P9
+    //A delegate (Delegate1User1) controling multiple delegations
+    await liquidPledging.transfer(1, 1, utils.toWei('0.8'), 6, { from: user1 }); //#P8
+    await liquidPledging.transfer(2, 2, utils.toWei('0.6'), 6, { from: user2 }); //#P9
+    await liquidPledging.transfer(7, 7, utils.toWei('0.4'), 6, { from: user2 }); //#P10
+    await liquidPledging.transfer(3, 3, utils.toWei('0.2'), 6, { from: user3 }); //#P11
 
     const st = await liquidPledgingState.getState();
     console.log(JSON.stringify(st, null, 2));
