@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton'
 import {Styles, Currency} from './Styles'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
+import LPState from "./LiquidPledgingState.js"
 
 class TransferDialog extends React.Component
 {
@@ -15,13 +16,46 @@ class TransferDialog extends React.Component
         this.state={
             amount:'',
             okDisabled:true,
+            userNodes:[],
             selectedEmiter:0
         }
     }
 
     componentWillReceiveProps(newProps) {
+        let selectedEmiter = this.state.selectedEmiter
         if(newProps.data.emiterId>0)
-            this.setState({selectedEmiter:newProps.data.emiterId})
+            selectedEmiter = newProps.data.emiterId
+
+        let addressFilter={adminAddress:this.props.currentAddress}
+        let userNodes=LPState.getNodes(addressFilter)
+
+        
+
+        let sortByAmount=(a, b)=>{
+            return a.availableAmount < b.availableAmount
+        }
+
+        let emiters = []
+        userNodes.forEach((node)=>
+        {
+            let delegationsIn = LPState.getDelegations(node.delegationsIn).sort(sortByAmount)
+            let totalAvailableAmount = 0
+            delegationsIn.forEach((delegation)=>{totalAvailableAmount+=delegation.availableAmount})
+
+            let emiter = {
+                id:node.adminId,
+                name:node.name,
+                delegationsIn:delegationsIn,
+                totalAvailableAmount:totalAvailableAmount
+            }
+            emiters.push(emiter)
+        })
+        
+        this.setState({
+            selectedEmiter:selectedEmiter,
+            currentAddress:newProps.currentAddress,
+            emiters:emiters
+        })
     }
 
     onDone=()=>
@@ -93,13 +127,13 @@ class TransferDialog extends React.Component
         return enough
     }
 
-    getDelegationFromAdminId=(adminId)=>
+    /*getDelegationFromAdminId=(adminId)=>
     {
         for(let delegation of this.props.meta.emiters)
             if(delegation.adminId === adminId)
                 return delegation
         return {}
-    }
+    }*/
 
     render()
     {
@@ -119,15 +153,27 @@ class TransferDialog extends React.Component
         ]
 
         let title = "Delegate funds to "+ this.props.data.giverName
-        let emiters = this.props.meta.emiters
+        let emitersDelegations = this.props.meta.emiters
+        let mergedEmiters = []
+
+        emitersDelegations.forEach((delegation)=>
+        {
+            mergedEmiters.forEach((emiter)=>
+            {
+                if(emiter.id === delegation.adminId)
+                {
+
+                }
+            })
+        })
 
         let defaultItem =  <MenuItem key= {0} value={0} primaryText={'Delegate from...'} disabled={true} />
 
-        if(!emiters.length)
+        if(!emitersDelegations.length)
             defaultItem =  <MenuItem key= {0} value={0} primaryText={'No available accounts'} disabled={true} />
 
         let emitersList = [defaultItem]
-        emitersList=emitersList.concat(emiters.map((delegation, index)=>{
+        emitersList=emitersList.concat(emitersDelegations.map((delegation, index)=>{
 
             let label = delegation.name+ " ("+Currency.symbol+" "+Currency.toEther(delegation.availableAmount)+")"
            

@@ -192,7 +192,8 @@ class Dialogs extends Component {
                     onCancel ={this.transferOnCancel}
                     onDone ={this.transferOnDone}
                     data={this.state.transferData}
-                    meta={this.state.transferMetadata}/>
+                    meta={this.state.transferMetadata}
+                    currentAddress={this.state.currentAddress}/>
 
                 <AddAdminDialog
                     open={this.state.addAdminOpen}
