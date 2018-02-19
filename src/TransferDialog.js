@@ -88,12 +88,12 @@ class TransferDialog extends React.Component
                 let missingAmount = transferAmount - addedTotal
                 if(missingAmount >= amount)
                 {
-                    pledgeAmounts.push(amount)
+                    pledgeAmounts.push({amount:amount, id:delegation.pledgeId})
                     addedTotal += amount
                 }
                 else
                 {
-                    pledgeAmounts.push(missingAmount)
+                    pledgeAmounts.push({amount:missingAmount, id:delegation.pledgeId})
                     addedTotal += missingAmount
                     break;
                 }  
