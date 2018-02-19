@@ -60,28 +60,57 @@ class TransferDialog extends React.Component
     onDone=()=>
     { 
         let data = {}
-        let delegation = {} 
-        
-        let highestAvailableAmount = Currency.toEther(this.state.emiters[this.state.selectedEmiter].delegationsIn[0].availableAmount)
+        let emiter = this.state.emiters[this.state.selectedEmiter]
+        let highestAvailableAmount = Currency.toEther(emiter.delegationsIn[0].availableAmount)
         let transferAmount = parseFloat(this.state.amount,10)
         
-        if(highestAvailableAmount>=transferAmount)
-        {
-            delegation = this.state.emiters[this.state.selectedEmiter].delegationsIn[0]
-            console.log("Do single transfer")
+        if(highestAvailableAmount >= transferAmount)
+        {          
+            let delegation = this.state.emiters[this.state.selectedEmiter].delegationsIn[0]
+
+            data.emiterId = this.state.selectedEmiter
+            data.pledgeId = delegation.pledgeId
+            data.recieverId = this.props.data.recieverId
+            data.amount = parseFloat(this.state.amount,10)
+    
+            this.setState({amount:'', selectedEmiter:0, okDisabled:true})
+            this.props.onTransferDone(data)
         }
         else
         {
-            console.log("Do multi transfer")
-        }
-    
-        data.emiterId = delegation.adminId
-        data.pledgeId = delegation.pledgeId
-        data.recieverId = this.props.data.recieverId
-        data.amount = parseFloat(this.state.amount,10)
+            let addedTotal = 0
+            let pledgeAmounts = []
+            
+            for(let delegationId in emiter.delegationsIn )
+            {
+                let delegation = emiter.delegationsIn[delegationId]
+                let amount = Currency.toEther(delegation.availableAmount)
+                let missingAmount = transferAmount - addedTotal
+                if(missingAmount >= amount)
+                {
+                    pledgeAmounts.push(amount)
+                    addedTotal += amount
+                }
+                else
+                {
+                    pledgeAmounts.push(missingAmount)
+                    addedTotal += missingAmount
+                    break;
+                }
+                    
+                console.log(addedTotal)
+            }
 
-        this.setState({amount:'', selectedEmiter:0, okDisabled:true})
-        this.props.onDone(data)
+            console.log(pledgeAmounts)
+
+            data.emiterId = this.state.selectedEmiter
+            data.pledgeAmounts =pledgeAmounts
+            data.recieverId = this.props.data.recieverId
+            data.amount = parseFloat(this.state.amount,10)
+    
+            this.setState({amount:'', selectedEmiter:0, okDisabled:true})
+            this.props.onMultiTransferDone(data)
+        }
     }   
 
     onCancel=()=>
