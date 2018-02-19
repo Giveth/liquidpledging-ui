@@ -61,8 +61,8 @@ class TransferDialog extends React.Component
     { 
         let data = {}
         let emiter = this.state.emiters[this.state.selectedEmiter]
-        let highestAvailableAmount = Currency.toEther(emiter.delegationsIn[0].availableAmount)
-        let transferAmount = parseFloat(this.state.amount,10)
+        let highestAvailableAmount = emiter.delegationsIn[0].availableAmount
+        let transferAmount = Currency.toWei(parseFloat(this.state.amount,10))
         
         if(highestAvailableAmount >= transferAmount)
         {          
@@ -71,7 +71,7 @@ class TransferDialog extends React.Component
             data.emiterId = this.state.selectedEmiter
             data.pledgeId = delegation.pledgeId
             data.recieverId = this.props.data.recieverId
-            data.amount = parseFloat(this.state.amount,10)
+            data.amount = transferAmount
     
             this.setState({amount:'', selectedEmiter:0, okDisabled:true})
             this.props.onTransferDone(data)
@@ -84,7 +84,7 @@ class TransferDialog extends React.Component
             for(let delegationId in emiter.delegationsIn )
             {
                 let delegation = emiter.delegationsIn[delegationId]
-                let amount = Currency.toEther(delegation.availableAmount)
+                let amount = delegation.availableAmount
                 let missingAmount = transferAmount - addedTotal
                 if(missingAmount >= amount)
                 {
@@ -96,11 +96,10 @@ class TransferDialog extends React.Component
                     pledgeAmounts.push(missingAmount)
                     addedTotal += missingAmount
                     break;
-                }
-                    
-                console.log(addedTotal)
+                }  
+                
             }
-
+            console.log(addedTotal)
             console.log(pledgeAmounts)
 
             data.emiterId = this.state.selectedEmiter
