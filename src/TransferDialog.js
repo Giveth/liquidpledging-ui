@@ -97,10 +97,7 @@ class TransferDialog extends React.Component
                     addedTotal += missingAmount
                     break;
                 }  
-                
             }
-            console.log(addedTotal)
-            console.log(pledgeAmounts)
 
             data.emiterId = this.state.selectedEmiter
             data.pledgeAmounts =pledgeAmounts
