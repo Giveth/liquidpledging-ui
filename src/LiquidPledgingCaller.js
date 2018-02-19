@@ -46,6 +46,15 @@ class Caller extends EventEmitter
         }).catch((error)=>console.error(error))
     }
 
+    multiTransfer(data)
+    {
+       LiquidPledging.multiTransfer(data.emiterId, data.pledgeAmounts, data.recieverId)
+       .then((data) => {
+            console.log("Multi Transfered", data)
+            LiquidPledging.retriveStateData()
+        }).catch((error)=>console.error(error))
+    }
+
     //CANCEL
     showCancelDialog(currentDelegation)
     {

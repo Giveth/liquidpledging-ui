@@ -146,6 +146,14 @@ class LiquidPledgingController extends ProviderHelper {
         return this.liquidPledging.transfer(emiterId, pledgeId, weiAmount, receiverId, {from: this.currentAccount })
     }
 
+    multiTransfer(emiterId, pledgesAmounts, receiverId )
+    {
+        console.log(pledgesAmounts)
+        let weiAmounts = pledgesAmounts.map(amount => this.web3.utils.toWei(amount.toString()))
+        console.log(weiAmounts)
+        return this.liquidPledging.mTransfer(emiterId, weiAmounts, receiverId, {from: this.currentAccount })
+    }
+
     cancel(emiterId, pledgeId, receiverId, amount)
     {
         let weiAmount =this.web3.utils.toWei(amount.toString())

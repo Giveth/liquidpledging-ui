@@ -123,10 +123,16 @@ class Dialogs extends Component {
         this.setState({ transferOpen:false })
     }
 
-    transferOnDone=(data)=>
+    onTransferDone=(data)=>
     {
         this.setState({  transferOpen:false })
         Caller.transfer(data)
+    }
+
+    onMultiTransferDone=(data)=>
+    {
+        this.setState({  transferOpen:false })
+        Caller.multiTransfer(data)
     }
 
     //AddAdmin
@@ -190,7 +196,8 @@ class Dialogs extends Component {
                 <TransferDialog
                     open={this.state.transferOpen}
                     onCancel ={this.transferOnCancel}
-                    onDone ={this.transferOnDone}
+                    onTransferDone ={this.onTransferDone}
+                    onMultiTransferDone ={this.onMultiTransferDone}
                     data={this.state.transferData}
                     meta={this.state.transferMetadata}
                     currentAddress={this.state.currentAddress}/>
