@@ -69,6 +69,9 @@ async function run() {
     await liquidPledging.transfer(7, 7, utils.toWei('0.4'), 6, { from: user2 }); //#P10
     await liquidPledging.transfer(3, 3, utils.toWei('0.2'), 6, { from: user3 }); //#P11
 
+    //Let's do a mTransfer
+    await liquidPledging.mTransfer(6, [utils.toWei('0.8'), utils.toWei('0.6')], 7, { from: user1 }); //#P
+
     const st = await liquidPledgingState.getState();
     console.log(JSON.stringify(st, null, 2));
     console.log(liquidPledging.$address);
