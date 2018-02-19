@@ -315,6 +315,11 @@ export const Currency = {
     {
         return wei/1000000000000000000
     },
+    
+    toWei(ether)
+    {
+        return ether*1000000000000000000
+    },
 
     format(amount)
     {
