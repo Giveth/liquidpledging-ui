@@ -58,9 +58,22 @@ class TransferDialog extends React.Component
     }
 
     onDone=()=>
-    {
+    { 
         let data = {}
-        let delegation = this.getDelegationFromAdminId(this.state.selectedEmiter)
+        let delegation = {} 
+        
+        let highestAvailableAmount = Currency.toEther(this.state.emiters[this.state.selectedEmiter].delegationsIn[0].availableAmount)
+        let transferAmount = parseFloat(this.state.amount,10)
+        
+        if(highestAvailableAmount>=transferAmount)
+        {
+            delegation = this.state.emiters[this.state.selectedEmiter].delegationsIn[0]
+            console.log("Do single transfer")
+        }
+        else
+        {
+            console.log("Do multi transfer")
+        }
     
         data.emiterId = delegation.adminId
         data.pledgeId = delegation.pledgeId

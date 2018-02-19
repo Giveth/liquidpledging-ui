@@ -39,7 +39,7 @@ class App extends Component {
                                  }}> Liquid Pledging </h2>
                         </div>
 
-                        <LayoutController defaultTab = {0}>
+                        <LayoutController defaultTab = {1}>
                             <MyFunds label="My funds"/>
                            
                             <OthersFunds label="Other's funds" />
