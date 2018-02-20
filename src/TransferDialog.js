@@ -5,7 +5,9 @@ import FlatButton from 'material-ui/FlatButton'
 import {Styles, Currency} from './Styles'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
+import Toggle from 'material-ui/Toggle'
 import LPState from "./LiquidPledgingState.js"
+import {List, ListItem} from 'material-ui/List'
 
 class TransferDialog extends React.Component
 {
@@ -17,7 +19,8 @@ class TransferDialog extends React.Component
             amount:'',
             okDisabled:true,
             emiters:[],
-            selectedEmiter:0
+            selectedEmiter:0,
+            isAdvance:false
         }
     }
 
@@ -163,6 +166,18 @@ class TransferDialog extends React.Component
 
         return enough
     }
+    onAdvanceToggle=(e, isToggled)=>
+    {
+        this.setState({isAdvance:isToggled})
+        this.getAdvanceComponents()
+    }
+
+    getAdvanceComponents=()=>
+    {
+        this.state.emiters[this.state.selectedEmiter].delegationsIn.forEach(element => {
+            console.log(element)
+        });
+    }
 
     render()
     {
@@ -227,6 +242,11 @@ class TransferDialog extends React.Component
                     value={this.state.amount}
                     onChange={this.onTextChange}
                     errorText = {this.state.error}/>
+                 <Toggle
+                    label="Advanced"
+                    toggled={this.state.isAdvance}
+                    onToggle={this.onAdvanceToggle}
+                    />
             </Dialog>
         )
     }
