@@ -8,6 +8,7 @@ import MenuItem from 'material-ui/MenuItem'
 import Toggle from 'material-ui/Toggle'
 import LPState from "./LiquidPledgingState.js"
 import {List, ListItem} from 'material-ui/List'
+import Subheader from 'material-ui/Subheader'
 
 class TransferDialog extends React.Component
 {
@@ -27,7 +28,7 @@ class TransferDialog extends React.Component
     componentWillReceiveProps(newProps)
     {
         let selectedEmiter = this.state.selectedEmiter
-        if(newProps.data.emiterId>0)
+        if(newProps.data.emiterId>0 && this.state.selectedEmiter===0)
             selectedEmiter = newProps.data.emiterId
 
         let addressFilter={adminAddress:this.props.currentAddress}
@@ -174,9 +175,21 @@ class TransferDialog extends React.Component
 
     getAdvanceComponents=()=>
     {
-        this.state.emiters[this.state.selectedEmiter].delegationsIn.forEach(element => {
-            console.log(element)
-        });
+        let availableDelegations = this.state.emiters[this.state.selectedEmiter].delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
+        let itemsList = availableDelegations.map(delegation => {
+            if(delegation.availableAmount > 0)
+            return ( <ListItem
+                primaryText={delegation.name}
+                secondaryText={Currency.format(Currency.toEther(delegation.availableAmount))}
+                //onClick={}
+                key={delegation.id}
+            />)
+        })
+
+        return <List style={{maxHeight: 400, overflow: "auto"}}>
+                    <Subheader>Define how much to delegate from each peldge</Subheader>
+                    {itemsList}
+                </List>
     }
 
     render()
@@ -217,6 +230,10 @@ class TransferDialog extends React.Component
             emitersList.push(item)
         }
 
+        let advanceComponents = <div/>
+        if(this.state.isAdvance)
+            advanceComponents = this.getAdvanceComponents()
+
         return (
             <Dialog
                 title={title}
@@ -235,18 +252,22 @@ class TransferDialog extends React.Component
 
                 </DropDownMenu>
 
+                <Toggle
+                    label="Advanced"
+                    toggled={this.state.isAdvance}
+                    onToggle={this.onAdvanceToggle}
+                    />
+
+                {advanceComponents}
+
                 <TextField
                     autoFocus={true}
                     id="inputText"
                     hintText={'Ether to delegate'}
                     value={this.state.amount}
                     onChange={this.onTextChange}
-                    errorText = {this.state.error}/>
-                 <Toggle
-                    label="Advanced"
-                    toggled={this.state.isAdvance}
-                    onToggle={this.onAdvanceToggle}
-                    />
+                    errorText = {this.state.error}/> 
+
             </Dialog>
         )
     }
