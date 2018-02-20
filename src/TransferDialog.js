@@ -177,12 +177,19 @@ class TransferDialog extends React.Component
     {
         let availableDelegations = this.state.emiters[this.state.selectedEmiter].delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
         let itemsList = availableDelegations.map(delegation => {
-            if(delegation.availableAmount > 0)
+            let availableAmountText = Currency.format(Currency.toEther(delegation.availableAmount))
+            let amountInput =<TextField
+                hintText={'Ether to delegate'}
+                //value={availableAmountText}
+                //onChange={this.onTextChange}
+                errorText = {this.state.error}/>
+            
             return ( <ListItem
-                primaryText={delegation.name}
-                secondaryText={Currency.format(Currency.toEther(delegation.availableAmount))}
+                primaryText={delegation.name + " ("+availableAmountText+")"}
+                secondaryText= {amountInput}
                 //onClick={}
                 key={delegation.id}
+                secondaryTextLines={3}
             />)
         })
 
