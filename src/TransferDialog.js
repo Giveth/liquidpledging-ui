@@ -179,21 +179,32 @@ class TransferDialog extends React.Component
         let itemsList = availableDelegations.map(delegation => {
             let availableAmountText = Currency.format(Currency.toEther(delegation.availableAmount))
             let amountInput =<TextField
-                hintText={'Ether to delegate'}
+                fullWidth = {true}
+                hintText={'Amount'}
                 //value={availableAmountText}
                 //onChange={this.onTextChange}
                 errorText = {this.state.error}/>
 
-            let primary =(<div>
-                    {delegation.name + " ("+availableAmountText+")"}
-                    {amountInput}
+            let primary =(<div style={Merge(Styles.row,{justifyContent:"space-between"})}>
+                    <div style = {{flex:1, lineHeight: "56px"}}>
+                        {delegation.name + " ("+availableAmountText+")"}
+                    </div>
+
+                    <div style = {{width:100}}>
+                        {amountInput}
+                    </div>
+                    
+
                 </div>)
             
             return ( <ListItem
+                style={{padding:0, paddingRight: 16, paddinLeft:16}}
+                disabled = {true}
                 primaryText={primary}
                 //secondaryText= {amountInput}
                 //onClick={}
                 key={delegation.id}
+                secondaryTextLines={2}
             />)
         })
 
