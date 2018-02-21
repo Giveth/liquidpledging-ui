@@ -126,7 +126,7 @@ class TransferDialog extends React.Component
         if(isNaN(newText))
             return
 
-        let amount = parseFloat(newText)
+        let amount = newText
         state.amount = amount
         state.okDisabled=!this.isReady(amount, this.state.selectedEmiter)
         state.delegationsAmounts = this.getDelegationsAmountsFromTotal(amount)
@@ -177,6 +177,7 @@ class TransferDialog extends React.Component
 
     getDelegationsAmountsFromTotal=(total)=>
     {
+        total = isNaN(parseFloat(total))?0:parseFloat(total)
         let delegationsAmounts = {}
         let missingAmount = (total <= 0) ? 0 : total
         let availableDelegations = this.state.emiters[this.state.selectedEmiter].delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
@@ -197,7 +198,7 @@ class TransferDialog extends React.Component
         for(let id in delegationsAmounts)
         {
             let amount = delegationsAmounts[id]
-            console.log(amount)
+            amount = isNaN(parseFloat(amount))?0:parseFloat(amount)
             amount = isNaN(amount)?0:amount
             total += amount
         }
