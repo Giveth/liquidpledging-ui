@@ -18,6 +18,7 @@ class TransferDialog extends React.Component
         
         this.state={
             amount:'',
+            delegationsAmounts:{},
             okDisabled:true,
             emiters:[],
             selectedEmiter:0,
@@ -123,9 +124,10 @@ class TransferDialog extends React.Component
         let state = {}
 
         if(!isNaN(newText))
-            state.amount=newText
+            state.amount=Currency.toWei(newText)
        
         state.okDisabled=!this.isReady(newText, this.state.selectedEmiter)
+        state.delegationsAmounts = this.getDelegationsAmountsFromTotal(Currency.toWei(newText))
 
        this.setState(state)
     }
@@ -169,23 +171,63 @@ class TransferDialog extends React.Component
     onAdvanceToggle=(e, isToggled)=>
     {
         this.setState({isAdvance:isToggled})
-        this.getAdvanceComponents()
     }
 
+    getDelegationsAmountsFromTotal=(total)=>
+    {
+        let delegationsAmounts = {}
+        let missingAmount = (total <= 0) ? 0 : total
+        let availableDelegations = this.state.emiters[this.state.selectedEmiter].delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
+        
+        availableDelegations.forEach(delegation => {
+            let amount = (missingAmount > delegation.availableAmount) ? delegation.availableAmount :  missingAmount
+            missingAmount -= amount
+            delegationsAmounts[delegation.id] = amount
+        })
+
+        return delegationsAmounts
+
+    }
+
+    getTotalFromDelegationsAmounts(delegationsAmounts)
+    {
+        let total = 0
+        for(let id in delegationsAmounts)
+        {
+            let amount = delegationsAmounts[id]
+
+            total += amount
+        }
+        return total
+    }
+    
     getAdvanceComponents=()=>
     {
         let availableDelegations = this.state.emiters[this.state.selectedEmiter].delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
-        let missingAmount = (Currency.toWei(this.state.amount) <= 0) ? 0 : Currency.toWei(this.state.amount)
+
         let itemsList = availableDelegations.map(delegation => {
             let availableAmountText = Currency.format(Currency.toEther(delegation.availableAmount))
-            let preFilledAmount = (missingAmount > delegation.availableAmount) ? delegation.availableAmount :  missingAmount
-            missingAmount -= preFilledAmount
-            let preFilledAmountText = Currency.toEther(preFilledAmount)
+
+            let onTextChange=(e, newText) => {
+                if(isNaN(newText))
+                    true
+                
+                let state = {}
+                state.delegationsAmounts = this.state.delegationsAmounts
+                state.delegationsAmounts[delegation.id] = Currency.toWei(newText)
+                state.amount = this.getTotalFromDelegationsAmounts(state.delegationsAmounts)
+                
+                this.setState(state)
+            }
+
+            let amount = this.state.delegationsAmounts[delegation.id]
+            let amountText = isNaN(amount)?"":Currency.toEther(amount)
+
             let amountInput =<TextField
                 fullWidth = {true}
                 hintText={'Amount'}
-                value={preFilledAmountText}
-                //onChange={this.onTextChange}
+                value={amountText}
+                onChange={onTextChange}
                 errorText = {this.state.error}/>
 
             let primary =(<div style={Merge(Styles.row,{justifyContent:"space-between"})}>
@@ -197,15 +239,12 @@ class TransferDialog extends React.Component
                         {amountInput}
                     </div>
                     
-
                 </div>)
             
             return ( <ListItem
                 style={{padding:0, paddingRight: 16, paddinLeft:16}}
                 disabled = {true}
                 primaryText={primary}
-                //secondaryText= {amountInput}
-                //onClick={}
                 key={delegation.id}
                 secondaryTextLines={2}
             />)
@@ -302,7 +341,7 @@ class TransferDialog extends React.Component
                     autoFocus={true}
                     id="inputText"
                     hintText={'Ether to delegate'}
-                    value={this.state.amount}
+                    value={Currency.toEther(this.state.amount)}
                     onChange={this.onTextChange}
                     errorText = {this.state.error}/> 
 
