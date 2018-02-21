@@ -19,6 +19,7 @@ class TransferDialog extends React.Component
         this.state={
             amount:'',
             delegationsAmounts:{},
+            delegationsErrors:{},
             okDisabled:true,
             emiters:[],
             selectedEmiter:0,
@@ -130,6 +131,7 @@ class TransferDialog extends React.Component
         state.amount = amount
         state.okDisabled=!this.isReady(amount, this.state.selectedEmiter)
         state.delegationsAmounts = this.getDelegationsAmountsFromTotal(amount)
+        state.delegationsErrors = this.getDelegationsErrorsFromTotal(amount)
 
        this.setState(state)
     }
@@ -144,7 +146,9 @@ class TransferDialog extends React.Component
 
     isReady=(amount, selectedEmiter)=>
     {
-        if(!this.hasEnoughAmount(amount, selectedEmiter))
+        let availableAmount = Currency.toEther(this.state.emiters[selectedEmiter].totalAvailableAmount)
+
+        if(!this.hasEnoughAmount(amount, availableAmount))
             return false
 
         if(!amount || isNaN(amount))
@@ -156,9 +160,8 @@ class TransferDialog extends React.Component
         return true
     }
 
-    hasEnoughAmount=(amount, selectedEmiter)=>
+    hasEnoughAmount=(amount, availableAmount)=>
     {
-        let availableAmount = Currency.toEther(this.state.emiters[selectedEmiter].totalAvailableAmount)
         let enough = (amount <= availableAmount)
         let state= {}
         state.error = ''
@@ -192,6 +195,17 @@ class TransferDialog extends React.Component
         return delegationsAmounts
     }
 
+    getDelegationsErrorsFromTotal=(total)=>
+    {
+        let availableDelegations = this.state.emiters[this.state.selectedEmiter].delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
+        let delegationsErrors = []
+        availableDelegations.forEach(delegation => {
+            delegationsErrors[delegation.id] = ""
+        })
+
+        return delegationsErrors
+    }
+
     getTotalFromDelegationsAmounts(delegationsAmounts)
     {
         let total = 0
@@ -218,11 +232,21 @@ class TransferDialog extends React.Component
                 if(isNaN(newText))
                     return
 
+                let error = ""
+                let amount = isNaN(parseFloat(newText))?0:parseFloat(newText)
+                
+                if(amount > Currency.toEther(delegation.availableAmount))
+                    error = 'Not enough funds'
+
                 let state = {}
                 state.delegationsAmounts = this.state.delegationsAmounts
+                state.delegationsErrors = this.state.delegationsErrors
                 state.delegationsAmounts[delegation.id] = newText
+                state.delegationsErrors[delegation.id] = error
                 state.amount = this.getTotalFromDelegationsAmounts(state.delegationsAmounts)
-                
+
+                this.isReady(state.amount, this.state.selectedEmiter)
+
                 this.setState(state)
             }
 
@@ -234,7 +258,7 @@ class TransferDialog extends React.Component
                 hintText={'Amount'}
                 value={amount}
                 onChange={onTextChange}
-                errorText = {this.state.error}/>
+                errorText = {this.state.delegationsErrors[delegation.id]}/>
 
             let primary =(<div style={Merge(Styles.row,{justifyContent:"space-between"})}>
                     <div style = {{flex:1, lineHeight: "56px"}}>
