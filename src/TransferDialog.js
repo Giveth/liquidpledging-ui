@@ -2,7 +2,7 @@ import React from 'react'
 import TextField from 'material-ui/TextField'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-import {Styles, Currency} from './Styles'
+import {Styles, Currency, Merge} from './Styles'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Toggle from 'material-ui/Toggle'
@@ -183,13 +183,17 @@ class TransferDialog extends React.Component
                 //value={availableAmountText}
                 //onChange={this.onTextChange}
                 errorText = {this.state.error}/>
+
+            let primary =(<div>
+                    {delegation.name + " ("+availableAmountText+")"}
+                    {amountInput}
+                </div>)
             
             return ( <ListItem
-                primaryText={delegation.name + " ("+availableAmountText+")"}
-                secondaryText= {amountInput}
+                primaryText={primary}
+                //secondaryText= {amountInput}
                 //onClick={}
                 key={delegation.id}
-                secondaryTextLines={3}
             />)
         })
 
@@ -216,7 +220,7 @@ class TransferDialog extends React.Component
             />
         ]
 
-        let title = "Delegate funds to "+ this.props.data.giverName
+        let title = "Delegate funds"
         let defaultItem = <MenuItem key= {0} value={0} primaryText={'Delegate from...'} disabled={true} />
 
         if(!this.state.emiters.length)
@@ -250,14 +254,27 @@ class TransferDialog extends React.Component
                 onRequestClose={this.onCancel}
                 contentStyle={Styles.dialogs.narrow}>
 
-                <DropDownMenu
-                    value={this.state.selectedEmiter}
-                    onChange={this.onEmiterChanged}
-                    autoWidth={true}>
+                <div> 
+                    {"To " + this.props.data.giverName}
+                </div>
 
-                    {emitersList}
+                <div style={Merge(Styles.row,{})}>
+                    <div style = {{lineHeight:"56px"}}>
+                        {"From"}
+                    </div>
+                    <div style = {{Flex:1}}>
+                        <DropDownMenu
+                            style={{}}
+                            value={this.state.selectedEmiter}
+                            onChange={this.onEmiterChanged}
+                            autoWidth={true}>
 
-                </DropDownMenu>
+                            {emitersList}
+
+                        </DropDownMenu>
+                    </div>
+
+                </div>
 
                 <Toggle
                     label="Advanced"
