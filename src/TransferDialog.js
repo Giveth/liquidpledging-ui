@@ -119,7 +119,6 @@ class TransferDialog extends React.Component
         this.props.onCancel()
     }  
 
-    //TODO: Check
     onTextChange = (e, newText) => {
         let state = {}
 
@@ -176,12 +175,16 @@ class TransferDialog extends React.Component
     getAdvanceComponents=()=>
     {
         let availableDelegations = this.state.emiters[this.state.selectedEmiter].delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
+        let missingAmount = (Currency.toWei(this.state.amount) <= 0) ? 0 : Currency.toWei(this.state.amount)
         let itemsList = availableDelegations.map(delegation => {
             let availableAmountText = Currency.format(Currency.toEther(delegation.availableAmount))
+            let preFilledAmount = (missingAmount > delegation.availableAmount) ? delegation.availableAmount :  missingAmount
+            missingAmount -= preFilledAmount
+            let preFilledAmountText = Currency.toEther(preFilledAmount)
             let amountInput =<TextField
                 fullWidth = {true}
                 hintText={'Amount'}
-                //value={availableAmountText}
+                value={preFilledAmountText}
                 //onChange={this.onTextChange}
                 errorText = {this.state.error}/>
 
