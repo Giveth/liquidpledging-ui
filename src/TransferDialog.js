@@ -220,7 +220,7 @@ class TransferDialog extends React.Component
 
                 let state = {}
                 state.delegationsAmounts = this.state.delegationsAmounts
-                state.delegationsAmounts[delegation.id] = parseFloat(newText)
+                state.delegationsAmounts[delegation.id] = newText
                 state.amount = this.getTotalFromDelegationsAmounts(state.delegationsAmounts)
                 
                 this.setState(state)
