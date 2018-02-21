@@ -123,13 +123,13 @@ class TransferDialog extends React.Component
     onTextChange = (e, newText) => {
         let state = {}
 
-        console.log(isNaN(newText))
         if(isNaN(newText))
             return
 
-        state.amount = newText
-        state.okDisabled=!this.isReady(newText, this.state.selectedEmiter)
-        state.delegationsAmounts = this.getDelegationsAmountsFromTotal(newText)
+        let amount = parseFloat(newText)
+        state.amount = amount
+        state.okDisabled=!this.isReady(amount, this.state.selectedEmiter)
+        state.delegationsAmounts = this.getDelegationsAmountsFromTotal(amount)
 
        this.setState(state)
     }
@@ -183,6 +183,7 @@ class TransferDialog extends React.Component
         
         availableDelegations.forEach(delegation => {
             let amount = (missingAmount > Currency.toEther(delegation.availableAmount)) ? Currency.toEther(delegation.availableAmount) :  missingAmount
+            amount = isNaN(amount)?0:amount
             missingAmount -= amount
             delegationsAmounts[delegation.id] = amount
         })
@@ -196,9 +197,11 @@ class TransferDialog extends React.Component
         for(let id in delegationsAmounts)
         {
             let amount = delegationsAmounts[id]
-
+            console.log(amount)
+            amount = isNaN(amount)?0:amount
             total += amount
         }
+        console.log(total)
         return total
     }
     
@@ -211,18 +214,19 @@ class TransferDialog extends React.Component
 
             let onTextChange=(e, newText) => {
                 
-                if(!isNaN(newText))
+                if(isNaN(newText))
                     return
 
                 let state = {}
                 state.delegationsAmounts = this.state.delegationsAmounts
-                state.delegationsAmounts[delegation.id] = newText
+                state.delegationsAmounts[delegation.id] = parseFloat(newText)
                 state.amount = this.getTotalFromDelegationsAmounts(state.delegationsAmounts)
                 
                 this.setState(state)
             }
 
-            let amount = this.state.delegationsAmounts[delegation.id]
+            
+            let amount = isNaN(this.state.delegationsAmounts[delegation.id])?"":this.state.delegationsAmounts[delegation.id]
 
             let amountInput =<TextField
                 fullWidth = {true}
