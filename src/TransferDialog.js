@@ -66,50 +66,32 @@ class TransferDialog extends React.Component
     onDone=()=>
     { 
         let data = {}
-        let emiter = this.state.emiters[this.state.selectedEmiter]
-        let highestAvailableAmount = emiter.delegationsIn[0].availableAmount
-        let transferAmount = Currency.toWei(parseFloat(this.state.amount,10))
-        
-        if(highestAvailableAmount >= transferAmount)
-        {          
-            let delegation = this.state.emiters[this.state.selectedEmiter].delegationsIn[0]
+        let pledgeAmounts = []
 
-            data.emiterId = this.state.selectedEmiter
-            data.pledgeId = delegation.pledgeId
-            data.recieverId = this.props.data.recieverId
-            data.amount = transferAmount
-    
+        for(let delegationId in this.state.delegationsAmounts )
+        {
+            //console.log(delegationId, this.state.emiters[this.state.selectedEmiter].delegationsIn )
+           // let delegation = this.state.emiters[this.state.selectedEmiter].delegationsIn[delegationId]
+            let delegation = LPState.getDelegation(delegationId)
+            let amount = Currency.toWei(this.state.delegationsAmounts[delegationId])
+            if(amount>0)
+                pledgeAmounts.push({amount:amount, id:delegation.pledgeId})
+        }
+
+        data.emiterId = this.state.selectedEmiter
+        data.recieverId = this.props.data.recieverId
+            
+        if(pledgeAmounts.length===1)
+        {
+            data.pledgeId = pledgeAmounts[0].id
+            data.amount = pledgeAmounts[0].amount
             this.setState({amount:'', selectedEmiter:0, okDisabled:true})
             this.props.onTransferDone(data)
         }
         else
         {
-            let addedTotal = 0
-            let pledgeAmounts = []
-            
-            for(let delegationId in emiter.delegationsIn )
-            {
-                let delegation = emiter.delegationsIn[delegationId]
-                let amount = delegation.availableAmount
-                let missingAmount = transferAmount - addedTotal
-                if(missingAmount >= amount)
-                {
-                    pledgeAmounts.push({amount:amount, id:delegation.pledgeId})
-                    addedTotal += amount
-                }
-                else
-                {
-                    pledgeAmounts.push({amount:missingAmount, id:delegation.pledgeId})
-                    addedTotal += missingAmount
-                    break;
-                }  
-            }
-
-            data.emiterId = this.state.selectedEmiter
             data.pledgeAmounts =pledgeAmounts
-            data.recieverId = this.props.data.recieverId
             data.amount = parseFloat(this.state.amount,10)
-    
             this.setState({amount:'', selectedEmiter:0, okDisabled:true})
             this.props.onMultiTransferDone(data)
         }
@@ -249,7 +231,6 @@ class TransferDialog extends React.Component
 
                 this.setState(state)
             }
-
             
             let amount = isNaN(this.state.delegationsAmounts[delegation.id])?"":this.state.delegationsAmounts[delegation.id]
 
