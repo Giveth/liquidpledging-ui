@@ -10,24 +10,25 @@ import LPState from "./LiquidPledgingState.js"
 import {List, ListItem} from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
 
+const resetState = {
+    amount:'',
+    delegationsAmounts:{},
+    delegationsErrors:{},
+    okDisabled:true,
+    emiters:[],
+    selectedEmiter:0,
+    //isAdvance:false
+}
+
 class TransferDialog extends React.Component
 {
     constructor(props)
     {
-        super();
-        
-        this.state={
-            amount:'',
-            delegationsAmounts:{},
-            delegationsErrors:{},
-            okDisabled:true,
-            emiters:[],
-            selectedEmiter:0,
-            isAdvance:false
-        }
+        super(); 
+        this.state=resetState
     }
 
-    componentWillReceiveProps(newProps)
+    componentWillReceiveProps=(newProps)=>
     {
         let selectedEmiter = this.state.selectedEmiter
         if(newProps.data.emiterId>0 && this.state.selectedEmiter===0)
@@ -70,8 +71,6 @@ class TransferDialog extends React.Component
 
         for(let delegationId in this.state.delegationsAmounts )
         {
-            //console.log(delegationId, this.state.emiters[this.state.selectedEmiter].delegationsIn )
-           // let delegation = this.state.emiters[this.state.selectedEmiter].delegationsIn[delegationId]
             let delegation = LPState.getDelegation(delegationId)
             let amount = Currency.toWei(this.state.delegationsAmounts[delegationId])
             if(amount>0)
@@ -85,23 +84,23 @@ class TransferDialog extends React.Component
         {
             data.pledgeId = pledgeAmounts[0].id
             data.amount = pledgeAmounts[0].amount
-            this.setState({amount:'', selectedEmiter:0, okDisabled:true})
+            this.setState(resetState)
             this.props.onTransferDone(data)
         }
         else
         {
             data.pledgeAmounts =pledgeAmounts
             data.amount = parseFloat(this.state.amount,10)
-            this.setState({amount:'', selectedEmiter:0, okDisabled:true})
+            this.setState(resetState)
             this.props.onMultiTransferDone(data)
         }
     }   
 
     onCancel=()=>
     {
-        this.setState({amount:'', selectedEmiter:0, okDisabled:true})
+        this.setState(resetState)
         this.props.onCancel()
-    }  
+    }
 
     onTextChange = (e, newText) => {
         let state = {}
@@ -113,6 +112,8 @@ class TransferDialog extends React.Component
         state.amount = amount
         state.okDisabled=!this.isReady(amount, this.state.selectedEmiter)
         state.delegationsAmounts = this.getDelegationsAmountsFromTotal(amount)
+        console.log(state.delegationsAmounts)
+
         state.delegationsErrors = this.getDelegationsErrorsFromTotal(amount)
 
        this.setState(state)
@@ -168,8 +169,10 @@ class TransferDialog extends React.Component
         let availableDelegations = this.state.emiters[this.state.selectedEmiter].delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
         
         availableDelegations.forEach(delegation => {
-            let amount = (missingAmount > Currency.toEther(delegation.availableAmount)) ? Currency.toEther(delegation.availableAmount) :  missingAmount
-            amount = isNaN(amount)?0:amount
+
+            let amount = (missingAmount >= Currency.toEther(delegation.availableAmount)) ? Currency.toEther(delegation.availableAmount) :  missingAmount
+            amount = Number(isNaN(amount)?0:amount)
+            
             missingAmount -= amount
             delegationsAmounts[delegation.id] = amount
         })
@@ -198,7 +201,6 @@ class TransferDialog extends React.Component
             amount = isNaN(amount)?0:amount
             total += amount
         }
-        console.log(total)
         return total
     }
     
@@ -294,7 +296,7 @@ class TransferDialog extends React.Component
         
         for(let adminId in this.state.emiters )
         {
-            let emiter = this.state.emiters[adminId]
+            let emiter = this.state.emiters[adminId]            
             let label = emiter.name+ " ("+Currency.symbol+" "+Currency.toEther(emiter.totalAvailableAmount)+")"
            
             let item =  <MenuItem
@@ -306,7 +308,8 @@ class TransferDialog extends React.Component
         }
 
         let advanceComponents = <div/>
-        if(this.state.isAdvance)
+
+        if(this.state.isAdvance && this.state.emiters[this.state.selectedEmiter])
             advanceComponents = this.getAdvanceComponents()
 
         return (
