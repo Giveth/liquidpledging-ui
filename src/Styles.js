@@ -7,6 +7,7 @@ import CancelIcon from 'react-icons/lib/fa/close'
 import AddAdminIcon from 'react-icons/lib/md/group-add'
 import ProjectIcon from 'react-icons/lib/fa/flask'
 import PledgesIcon from 'react-icons/lib/go/search'
+import Web3 from 'web3'
 
 
 const MAX_CONTENT_WIDTH = 800
@@ -313,16 +314,25 @@ export const Currency = {
 
     toEther(wei)
     {
-        return wei/1000000000000000000
+        if (typeof wei === "number")
+            wei = wei.toString()
+        //return wei/1000000000000000000
+        return Web3.utils.fromWei(wei)
     },
     
     toWei(ether)
     {
-        return ether*1000000000000000000
+        if (typeof ether === "number")
+            ether = ether.toString()
+        return Web3.utils.toWei(ether)
+        //return ether*1000000000000000000
     },
 
     format(amount)
     {
+        if (typeof amount === "string")
+            amount = parseFloat(amount)
+
         let number = Numeral(amount)
         return number.format('$0,0.[0000]')
     },
