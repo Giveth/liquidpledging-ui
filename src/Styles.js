@@ -312,20 +312,21 @@ export function MergeIf (style1, style2, condition){
 
 export const Currency = {
 
+    //We work with "number" types.
+    //Calculations are done in wei to avoid floting point precision errors
+
     toEther(wei)
     {
         if (typeof wei === "number")
             wei = wei.toString()
-        //return wei/1000000000000000000
-        return Web3.utils.fromWei(wei)
+        return parseFloat(Web3.utils.fromWei(wei))
     },
     
     toWei(ether)
     {
         if (typeof ether === "number")
             ether = ether.toString()
-        return Web3.utils.toWei(ether)
-        //return ether*1000000000000000000
+        return parseInt(Web3.utils.toWei(ether))    
     },
 
     format(amount)
