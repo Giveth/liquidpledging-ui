@@ -175,6 +175,55 @@ class Dialogs extends Component {
     }
 
     render() {
+
+        let donateDialog = <div/>
+        let transferDialog = <div/>
+        let addAminDialog = <div/>
+        let pledgesDialog = <div/>
+        let findDelegationsDialog = <div/>
+
+        if(this.state.donateOpen)
+            donateDialog = (
+            <DonateDialog
+                open={this.state.donateOpen}
+                onCancel ={this.donateOnCancel}
+                onDone ={this.donateOnDone}
+                data={this.state.donateData}/>)
+
+        if(this.state.transferOpen)
+            transferDialog = (
+                <TransferDialog
+                    open={this.state.transferOpen}
+                    onCancel ={this.transferOnCancel}
+                    onTransferDone ={this.onTransferDone}
+                    onMultiTransferDone ={this.onMultiTransferDone}
+                    data={this.state.transferData}
+                    meta={this.state.transferMetadata}
+                    currentAddress={this.state.currentAddress}/>)
+
+        if(this.state.addAdminOpen)
+            addAminDialog =(
+                    <AddAdminDialog
+                    open={this.state.addAdminOpen}
+                    onCancel ={this.addAdminOnCancel}
+                    onDone ={this.addAdminOnDone}
+                    data={this.state.addAdminData}/>)
+
+        if(this.state.pledgesOpen)
+            pledgesDialog = (
+                <PledgesDialog
+                    open={this.state.pledgesOpen}
+                    onCancel ={this.pledgesOnCancel}
+                    data={this.state.pledgesData}/>
+            )
+
+        if(this.state.findDelegationsOpen)
+            findDelegationsDialog = (
+                <FindDelegationsDialog
+                    open={this.state.findDelegationsOpen}
+                    onCancel ={this.findDelegationsOnCancel}
+                    data={this.state.findDelegationsData}/>
+            )
         
         return (
             <div>
@@ -187,36 +236,11 @@ class Dialogs extends Component {
                     onRequestClose={this.closeSnackbar}
                     />
 
-                <DonateDialog
-                    open={this.state.donateOpen}
-                    onCancel ={this.donateOnCancel}
-                    onDone ={this.donateOnDone}
-                    data={this.state.donateData}/>
-
-                <TransferDialog
-                    open={this.state.transferOpen}
-                    onCancel ={this.transferOnCancel}
-                    onTransferDone ={this.onTransferDone}
-                    onMultiTransferDone ={this.onMultiTransferDone}
-                    data={this.state.transferData}
-                    meta={this.state.transferMetadata}
-                    currentAddress={this.state.currentAddress}/>
-
-                <AddAdminDialog
-                    open={this.state.addAdminOpen}
-                    onCancel ={this.addAdminOnCancel}
-                    onDone ={this.addAdminOnDone}
-                    data={this.state.addAdminData}/>
-
-                 <PledgesDialog
-                    open={this.state.pledgesOpen}
-                    onCancel ={this.pledgesOnCancel}
-                    data={this.state.pledgesData}/>
-                
-                <FindDelegationsDialog
-                    open={this.state.findDelegationsOpen}
-                    onCancel ={this.findDelegationsOnCancel}
-                    data={this.state.findDelegationsData}/>
+            {donateDialog}
+            {transferDialog}
+            {addAminDialog}
+            {pledgesDialog}
+            {findDelegationsDialog}
 
             </div>
         )
