@@ -319,6 +319,7 @@ export const Currency = {
     {
         if (typeof wei === "number")
             wei = wei.toString()
+        wei = (isNaN(wei) || wei==="")  ? "0": wei
         return parseFloat(Web3.utils.fromWei(wei))
     },
     
@@ -326,6 +327,8 @@ export const Currency = {
     {
         if (typeof ether === "number")
             ether = ether.toString()
+        ether = (isNaN(ether) || ether==="")  ? "0": ether
+        console.log(ether)
         return parseInt(Web3.utils.toWei(ether))    
     },
 
