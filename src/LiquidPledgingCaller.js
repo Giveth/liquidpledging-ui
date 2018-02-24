@@ -85,6 +85,8 @@ class Caller extends EventEmitter
                     amount:d.assignedAmount
                 }
 
+                this.cancel(data)
+
                 pledgeAmounts.push(data)
 
             }
