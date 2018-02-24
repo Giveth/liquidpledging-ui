@@ -62,10 +62,8 @@ class Caller extends EventEmitter
         console.log(currentDelegation, delegation)
 
         let data = {
-            emiterId:currentDelegation.adminId,
             pledgeId:currentDelegation.pledgeId,
-            recieverId:delegation.parentAdminId,
-            amount:Currency.toEther(currentDelegation.assignedAmount)
+            amount:currentDelegation.assignedAmount
         }
 
         this.cancel(data)
@@ -73,8 +71,7 @@ class Caller extends EventEmitter
 
     cancel(data)
     {
-
-        LiquidPledging.cancel(data.emiterId, data.pledgeId, data.recieverId, data.amount)
+        LiquidPledging.cancel(data.pledgeId, data.amount)
         .then((data) => {
             console.log("Canceled", data)
             LiquidPledging.retriveStateData()
