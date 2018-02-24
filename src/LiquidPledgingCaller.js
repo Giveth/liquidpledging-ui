@@ -1,5 +1,5 @@
-import LiquidPledging from './LiquidPledgingState'
 import {Currency} from './Styles'
+import LiquidPledging from './LiquidPledgingState'
 
 const EventEmitter = require('events')
 
@@ -56,18 +56,46 @@ class Caller extends EventEmitter
     }
 
     //CANCEL
-    showCancelDialog(currentDelegation)
+    showCancelDialog(delegation)
     {
-        let delegation = LiquidPledging.getDelegation(currentDelegation.parentId)
-        console.log(currentDelegation, delegation)
+        console.log(delegation)
 
-        let data = {
-            pledgeId:currentDelegation.pledgeId,
-            amount:currentDelegation.assignedAmount
+        if(delegation.delegations.length === 0)
+        {
+            console.log("Single!")
+            let data = {
+                pledgeId:delegation.pledgeId,
+                amount:delegation.assignedAmount
+            }
+    
+            this.cancel(data)
         }
+        else
+        {
+            let pledgeAmounts = []
 
-        this.cancel(data)
+            let getCancelPledgesRecursively=(d)=>
+            {
+                d.delegations.forEach((delegationId)=>{
+                    getCancelPledgesRecursively(LiquidPledging.getDelegation(delegationId))
+                })
+
+                let data = {
+                    pledgeId:d.pledgeId,
+                    amount:d.assignedAmount
+                }
+
+                pledgeAmounts.push(data)
+
+            }
+
+            getCancelPledgesRecursively(delegation)
+
+            console.log("multi!", pledgeAmounts)
+        }
     }
+
+    
 
     cancel(data)
     {
