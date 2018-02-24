@@ -3,6 +3,8 @@ import SectionHeader from './SectionHeader'
 import { Styles, Icons, Merge } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import FlatButton from 'material-ui/FlatButton'
+import Caller from './LiquidPledgingCaller'
+
 
 class RootDelegationList extends Component {   
 
@@ -28,6 +30,11 @@ class RootDelegationList extends Component {
     
             let cancelDelegateButton = <div style = {Styles.emptyButton} />
             let delegateFundsButton = <div style = {Styles.emptyButton} />
+
+            let onCancel=()=>
+            {
+                Caller.showCancelDialog(d)
+            }
     
             if(canDelegate){
                 delegateFundsButton = (
@@ -52,7 +59,7 @@ class RootDelegationList extends Component {
                 </IconButton>)*/
                 //text button
                 <FlatButton
-                    onClick = {this.onCancel}
+                    onClick = {onCancel}
                     secondary = {false}
                     label={'Cancel'}
                     labelStyle = {{fontSize:11}}
