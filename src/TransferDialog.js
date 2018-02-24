@@ -24,17 +24,18 @@ class TransferDialog extends React.Component
 {
     constructor(props)
     {
-        super(); 
-        this.state=resetState
+        super()
+        this.state = this.getInitState(props, resetState)
     }
 
-    componentWillReceiveProps=(newProps)=>
+    getInitState = (props,state)=>
     {
-        let selectedEmiter = this.state.selectedEmiter
-        if(newProps.data.emiterId>0 && this.state.selectedEmiter===0)
-            selectedEmiter = newProps.data.emiterId
+        console.log(state)
+        let selectedEmiter = state.selectedEmiter
+        if(props.data.emiterId > 0 && state.selectedEmiter === 0)
+            selectedEmiter = props.data.emiterId
 
-        let addressFilter={adminAddress:this.props.currentAddress}
+        let addressFilter={adminAddress:props.currentAddress}
         let userNodes=LPState.getNodes(addressFilter)
 
         let sortByAmount=(a, b)=>{
@@ -57,11 +58,17 @@ class TransferDialog extends React.Component
             emiters[node.adminId] = emiter
         })
         
-        this.setState({
-            selectedEmiter:selectedEmiter,
-            currentAddress:newProps.currentAddress,
-            emiters:emiters
-        })
+        let newState =  JSON.parse(JSON.stringify(state));
+            newState.selectedEmiter = selectedEmiter,
+            newState.currentAddress = props.currentAddress,
+            newState.emiters = emiters
+
+        return newState
+    }
+
+    componentWillReceiveProps=(newProps)=>
+    {
+        this.setState(this.getInitState(newProps,this.state))
     }
     
     onTextChange = (e, newText) => {
@@ -172,10 +179,8 @@ class TransferDialog extends React.Component
         this.props.onCancel()
     }
 
-
     getDelegationsAmountsFromTotal=(totalEth)=>
     {
-
         let total = isNaN(parseFloat(totalEth))?0:Currency.toWei(parseFloat(totalEth))
         let delegationsAmounts = {}
         let missingAmount = (total <= 0) ? 0 : total
