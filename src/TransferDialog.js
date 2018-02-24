@@ -112,8 +112,6 @@ class TransferDialog extends React.Component
         state.amount = amount
         state.okDisabled=!this.isReady(amount, this.state.selectedEmiter)
         state.delegationsAmounts = this.getDelegationsAmountsFromTotal(amount)
-        console.log(state.delegationsAmounts)
-
         state.delegationsErrors = this.getDelegationsErrorsFromTotal(amount)
 
        this.setState(state)
@@ -161,20 +159,21 @@ class TransferDialog extends React.Component
         this.setState({isAdvance:isToggled})
     }
 
-    getDelegationsAmountsFromTotal=(total)=>
+    getDelegationsAmountsFromTotal=(totalEth)=>
     {
-        total = isNaN(parseFloat(total))?0:parseFloat(total)
+
+        let total = isNaN(parseFloat(totalEth))?0:Currency.toWei(parseFloat(totalEth))
         let delegationsAmounts = {}
         let missingAmount = (total <= 0) ? 0 : total
         let availableDelegations = this.state.emiters[this.state.selectedEmiter].delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
         
         availableDelegations.forEach(delegation => {
 
-            let amount = (missingAmount >= Currency.toEther(delegation.availableAmount)) ? Currency.toEther(delegation.availableAmount) :  missingAmount
+            let amount = (missingAmount >= delegation.availableAmount) ? delegation.availableAmount :  missingAmount
             amount = Number(isNaN(amount)?0:amount)
             
             missingAmount -= amount
-            delegationsAmounts[delegation.id] = amount
+            delegationsAmounts[delegation.id] = Currency.toEther(amount)
         })
 
         return delegationsAmounts
@@ -197,11 +196,11 @@ class TransferDialog extends React.Component
         for(let id in delegationsAmounts)
         {
             let amount = delegationsAmounts[id]
-            amount = isNaN(parseFloat(amount))?0:parseFloat(amount)
+            amount = isNaN(parseFloat(amount))?0:Currency.toWei(parseFloat(amount))
             amount = isNaN(amount)?0:amount
             total += amount
         }
-        return total
+        return Currency.toEther(total)
     }
     
     getAdvanceComponents=()=>
@@ -230,7 +229,6 @@ class TransferDialog extends React.Component
                 state.amount = this.getTotalFromDelegationsAmounts(state.delegationsAmounts)
 
                 this.isReady(state.amount, this.state.selectedEmiter)
-
                 this.setState(state)
             }
             
