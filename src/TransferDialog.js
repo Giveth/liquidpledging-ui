@@ -63,45 +63,7 @@ class TransferDialog extends React.Component
             emiters:emiters
         })
     }
-
-    onDone=()=>
-    { 
-        let data = {}
-        let pledgeAmounts = []
-
-        for(let delegationId in this.state.delegationsAmounts )
-        {
-            let delegation = LPState.getDelegation(delegationId)
-            let amount = Currency.toWei(this.state.delegationsAmounts[delegationId])
-            if(amount>0)
-                pledgeAmounts.push({amount:amount, id:delegation.pledgeId})
-        }
-
-        data.emiterId = this.state.selectedEmiter
-        data.recieverId = this.props.data.recieverId
-            
-        if(pledgeAmounts.length===1)
-        {
-            data.pledgeId = pledgeAmounts[0].id
-            data.amount = pledgeAmounts[0].amount
-            this.setState(resetState)
-            this.props.onTransferDone(data)
-        }
-        else
-        {
-            data.pledgeAmounts =pledgeAmounts
-            data.amount = parseFloat(this.state.amount,10)
-            this.setState(resetState)
-            this.props.onMultiTransferDone(data)
-        }
-    }   
-
-    onCancel=()=>
-    {
-        this.setState(resetState)
-        this.props.onCancel()
-    }
-
+    
     onTextChange = (e, newText) => {
         let state = {}
 
@@ -115,14 +77,6 @@ class TransferDialog extends React.Component
         state.delegationsErrors = this.getDelegationsErrorsFromTotal(amount)
 
        this.setState(state)
-    }
-
-    onEmiterChanged = (event, index, selectedEmiter) =>
-    {
-        let state = {}
-        state.selectedEmiter = selectedEmiter
-        state.okDisabled=!this.isReady(this.state.amount, selectedEmiter)
-        this.setState(state)
     }
 
     isReady=(amountEth, selectedEmiter)=>
@@ -166,10 +120,58 @@ class TransferDialog extends React.Component
 
         return enough
     }
+
+    onEmiterChanged = (event, index, selectedEmiter) =>
+    {
+        let state = {}
+        state.selectedEmiter = selectedEmiter
+        state.okDisabled=!this.isReady(this.state.amount, selectedEmiter)
+        this.setState(state)
+    }
+
     onAdvanceToggle=(e, isToggled)=>
     {
         this.setState({isAdvance:isToggled})
     }
+
+    onDone=()=>
+    { 
+        let data = {}
+        let pledgeAmounts = []
+
+        for(let delegationId in this.state.delegationsAmounts )
+        {
+            let delegation = LPState.getDelegation(delegationId)
+            let amount = Currency.toWei(this.state.delegationsAmounts[delegationId])
+            if(amount>0)
+                pledgeAmounts.push({amount:amount, id:delegation.pledgeId})
+        }
+
+        data.emiterId = this.state.selectedEmiter
+        data.recieverId = this.props.data.recieverId
+            
+        if(pledgeAmounts.length===1)
+        {
+            data.pledgeId = pledgeAmounts[0].id
+            data.amount = pledgeAmounts[0].amount
+            this.setState(resetState)
+            this.props.onTransferDone(data)
+        }
+        else
+        {
+            data.pledgeAmounts =pledgeAmounts
+            data.amount = parseFloat(this.state.amount,10)
+            this.setState(resetState)
+            this.props.onMultiTransferDone(data)
+        }
+    }   
+
+    onCancel=()=>
+    {
+        this.setState(resetState)
+        this.props.onCancel()
+    }
+
 
     getDelegationsAmountsFromTotal=(totalEth)=>
     {
