@@ -328,8 +328,7 @@ export const Currency = {
         if (typeof ether === "number")
             ether = ether.toString()
         ether = (isNaN(ether) || ether==="")  ? "0": ether
-        console.log(ether)
-        return parseInt(Web3.utils.toWei(ether))    
+        return parseInt(Web3.utils.toWei(ether),10)    
     },
 
     format(amount)
