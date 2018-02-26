@@ -58,8 +58,6 @@ class Caller extends EventEmitter
     //CANCEL
     showCancelDialog(delegation)
     {
-        console.log(delegation)
-
         if(delegation.delegations.length === 0)
         {
             console.log("Single!")
@@ -86,7 +84,6 @@ class Caller extends EventEmitter
                 d.delegations.forEach((delegationId)=>{
                     getCancelPledgesRecursively(LiquidPledging.getDelegation(delegationId))
                 })
-
             }
 
             getCancelPledgesRecursively(delegation)
@@ -95,8 +92,6 @@ class Caller extends EventEmitter
             this.multiCancel(pledgeAmounts)
         }
     }
-
-    
 
     cancel(data)
     {
