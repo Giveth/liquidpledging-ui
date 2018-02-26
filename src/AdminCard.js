@@ -45,6 +45,16 @@ class AdminCard extends Component {
         this.showPledgesDialog(pledgesGroups)
     }
 
+    onUsecuredPledges=()=>{
+        /*
+        let pledgesGroups = [
+            this.getPledgesGroup('Unsecured', this.props.delegationsIn)
+        ]
+
+        this.showPledgesDialog(pledgesGroups)
+        */
+    }
+
     onDelegatedPledges=()=>{
         let pledgesGroups = [
             this.getPledgesGroup('Delegated', this.props.delegationsOut),
@@ -104,7 +114,15 @@ class AdminCard extends Component {
     }
    
     render() {
-        
+
+        let unsecured = <div/>
+        if(this.props.giverNode.type === "Project")
+            unsecured =  <SectionHeader
+                key = 'Unsecured'
+                title='Unsecured'
+                amount= {this.props.unsecuredAmount}
+                onPledges = {this.onUsecuredPledges}/>
+
         return ( 
             
           <Paper style={{padding:20, marginTop:10, marginBottom:20}} zDepth={1}>
@@ -118,6 +136,8 @@ class AdminCard extends Component {
                     amount= {this.props.totalAmount}
                     amountStyle = {Styles.cardTitle}
                     onPledges = {this.onCardPledges}/>
+
+                {unsecured}
 
                 <SectionHeader
                     key = 'Available'
