@@ -76,24 +76,23 @@ class Caller extends EventEmitter
 
             let getCancelPledgesRecursively=(d)=>
             {
-                d.delegations.forEach((delegationId)=>{
-                    getCancelPledgesRecursively(LiquidPledging.getDelegation(delegationId))
-                })
-
                 let data = {
-                    pledgeId:d.pledgeId,
+                    id:d.pledgeId,
                     amount:d.assignedAmount
                 }
 
-                this.cancel(data)
-
                 pledgeAmounts.push(data)
+
+                d.delegations.forEach((delegationId)=>{
+                    getCancelPledgesRecursively(LiquidPledging.getDelegation(delegationId))
+                })
 
             }
 
             getCancelPledgesRecursively(delegation)
 
             console.log("multi!", pledgeAmounts)
+            this.multiCancel(pledgeAmounts)
         }
     }
 
@@ -104,6 +103,15 @@ class Caller extends EventEmitter
         LiquidPledging.cancel(data.pledgeId, data.amount)
         .then((data) => {
             console.log("Canceled", data)
+            LiquidPledging.retriveStateData()
+        }).catch((error)=>console.error(error))
+    }
+
+    multiCancel(pledgeAmounts)
+    {
+        LiquidPledging.multiCancel(pledgeAmounts)
+        .then((data) => {
+            console.log("MultiCanceled", data)
             LiquidPledging.retriveStateData()
         }).catch((error)=>console.error(error))
     }

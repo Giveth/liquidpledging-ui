@@ -159,6 +159,16 @@ class LiquidPledgingController extends ProviderHelper {
         return this.liquidPledging.cancelPledge(pledgeId, amount, {from:this.currentAccount, gas:500000})
     }
 
+    multiCancel(pledgesAmounts )
+    {
+        let encodedPledges = pledgesAmounts.map(p => {
+            return '0x' + this.web3.utils.padLeft(this.web3.utils.toHex(p.amount).substring(2), 48) + this.web3.utils.padLeft(this.web3.utils.toHex(p.id).substring(2), 16);
+        })
+
+        return this.liquidPledging.mCancelPayment( encodedPledges, {from: this.currentAccount })
+    }
+    
+
     addGiver(name, url)
     {
         //return this.liquidPledging.addGiver('UngaGiver', 'ungaurl', 600, 0, { from: this.currentAccount }); //#A1 
