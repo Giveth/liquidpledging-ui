@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import SectionHeader from './SectionHeader'
-import { Styles, Icons, Merge } from './Styles'
+import { Styles, Icons, Merge, Time } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import FlatButton from 'material-ui/FlatButton'
 import Caller from './LiquidPledgingCaller'
-import Moment from 'moment'
 
 class RootDelegationList extends Component {   
 
@@ -78,10 +77,9 @@ class RootDelegationList extends Component {
             if(d.type==="Project")
             {
                 let currentTime = new Date().getMilliseconds()
-                let left = Moment.duration(d.commitTime - currentTime)               
-                timeLeft = <p>{left.humanize()}</p>
+                let left = Time.millisToHuman(d.commitTime - currentTime)               
+                timeLeft = <p>{left}</p>
             }
-
 
             return (
             <SectionHeader

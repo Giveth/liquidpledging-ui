@@ -8,7 +8,7 @@ import AddAdminIcon from 'react-icons/lib/md/group-add'
 import ProjectIcon from 'react-icons/lib/fa/flask'
 import PledgesIcon from 'react-icons/lib/go/search'
 import Web3 from 'web3'
-
+import Moment from 'moment'
 
 const MAX_CONTENT_WIDTH = 800
 const MIN_CONTENT_WIDTH = 400
@@ -342,6 +342,13 @@ export const Currency = {
 
     //symbol : 'Ξ' 
     symbol : 'ETH ' 
+}
+
+export const Time = {
+    millisToHuman(millis)
+    {
+       return Moment.duration(millis).humanize(true) 
+    }
 }
 
 Numeral.register('locale', 'eth', {
