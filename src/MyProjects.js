@@ -61,6 +61,46 @@ class MyProjects extends Component {
         )
     }
 
+    getAvailableButtons=(giverNode)=>
+    {
+        function onDelegateFunds()
+        {
+            let findDelegationsData={
+                title:"",
+                emiterId:giverNode.id,
+                adminTypes:["Delegate"]
+             }
+             Caller.showFindDelegationsDialog(findDelegationsData)
+        }
+
+        function onAssignToProject()
+        {
+            let findDelegationsData={
+                title:"",
+                emiterId:giverNode.id,
+                adminTypes:["Project"]
+             }
+             Caller.showFindDelegationsDialog(findDelegationsData)
+        }
+
+        return (<div>
+                    <FlatButton
+                        onClick = {onDelegateFunds}
+                        secondary = {false}
+                        label={'Delegate'}
+                        labelStyle = {{fontSize:11}}
+                    />
+
+                    <FlatButton
+                        onClick = {onAssignToProject}
+                        secondary = {false}
+                        label={'Assign to project'}
+                        labelStyle = {{fontSize:11}}
+                    />
+                </div>
+            )
+    }
+
     populateCards=(projectNodes)=>
     {
         let cards = []
@@ -84,9 +124,12 @@ class MyProjects extends Component {
             let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(projectNode) 
             let delegatedAmount = LPState.getNodeDelegatedAmount(projectNode) - assignedToProjectsAmount
             let assignedAmount = LPState.getNodeAssignedAmount(projectNode)
-            let availableAmount = assignedAmount - delegatedAmount - assignedToProjectsAmount
+            let securedAmount = LPState.getProjectNodeSecuredAmount(projectNode)
+            let unsecuredAmount = assignedAmount - securedAmount
+            let availableAmount = assignedAmount - delegatedAmount - assignedToProjectsAmount - unsecuredAmount
+            let availableButtons = this.getAvailableButtons(projectNode)
     
-            let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
+            let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount + unsecuredAmount
             totalGiverAmount += assignedAmount
             let header = this.getHeader(projectNode)
 
@@ -105,6 +148,9 @@ class MyProjects extends Component {
                 delegatedAmount = {delegatedAmount}
                 assignedToProjectsAmount ={assignedToProjectsAmount}
                 totalAmount = {totalAmount}
+                unsecuredAmount = {unsecuredAmount}
+
+                availableButtons={availableButtons}
                 />
 
             cards.push(card)
