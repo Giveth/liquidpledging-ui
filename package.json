@@ -6,10 +6,10 @@
     "bignumber.js": "^5.0.0",
     "liquidpledging": "0.0.10",
     "material-ui": "^0.19.4",
+    "moment": "^2.20.1",
     "numeral": "^2.0.6",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-
     "react-icons": "^2.2.7",
     "react-scripts": "1.0.14",
     "react-table": "^6.6.0",
@@ -28,7 +28,6 @@
     "deploy": "gh-pages -d build",
     "testrpc": "./node_modules/.bin/ganache-cli --ws --deterministic --gasLimit=6000000",
     "go": "fuser -k -n tcp 3000 ; fuser -k -n tcp 8545 ; fuser -k -n tcp 8546 ; (npm run testrpc &) && sleep 1 && node scripts/basicScenario.js && npm start"
-
   },
   "homepage": "https://giveth.github.io/liquidpledging-ui"
 }
