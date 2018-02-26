@@ -7,41 +7,28 @@ import {Time} from "./Styles.js"
 
 class PledgesTable extends React.Component {
 
-    getColorByAdminType(type)
-    {
-        if(type==="Project")
-            return "red"
-        if(type==="Delegate")
-            return "green"
-        if(type==="Giver")
-            return "yellow"
-        
-    }
-
     humanizeDelegates=(delegates)=>
     {
+        let list = []
         
-        let list = delegates.map((adminId)=>{
-            let delegation = LPState.getAdmin(adminId)
-            console.log(adminId, delegation)
-            let color = this.getColorByAdminType(delegation.type)
-            console.log(color)
-            return <span 
-                style = {{color:color}}
-                key = {delegation.id}>
-                    {delegation.name}
-                </span>
+        delegates.forEach((adminId, index, array)=>{
+            list.push(this.idToAdmin(adminId))
+
+            if(index<array.length-1)
+                list.push( <span  style = {{color:"LightGrey"}} > &#9658; </span>)
         })
-        return (<div>
-                    {list}
-                </div>)
+        return <span> {list} </span>
     }
 
     idToAdmin(adminId)
     {
         if(adminId == 0)
             return ""
-        return adminId + " " + LPState.getAdmin(adminId).name
+
+        return ( <span  key = {adminId}>
+                    <span  style = {{color:"DimGrey"}} key = "id"> {" #"+ adminId} </span>
+                    <span key = "name" > {LPState.getAdmin(adminId).name} </span>
+                </span>)
     }
 
     render() {
