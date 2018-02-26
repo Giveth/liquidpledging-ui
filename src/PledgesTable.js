@@ -3,6 +3,7 @@ import ReactTable from "react-table"
 import "react-table/react-table.css"
 import {Currency} from './Styles'
 import LPState from "./LiquidPledgingState.js"
+import {Time} from "./Styles.js"
 
 class PledgesTable extends React.Component {
 
@@ -80,7 +81,7 @@ class PledgesTable extends React.Component {
                     {
                         Header: "Commit time",
                         id: "commmitTime",
-                        accessor: d => d.commmitTime,
+                        accessor: d => Time.humanizeTimeLeft(d.commmitTime),
                     },
                     {
                         Header: "Old pledge",
