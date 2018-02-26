@@ -37,6 +37,13 @@ class PledgesTable extends React.Component {
                 </div>)
     }
 
+    idToAdmin(adminId)
+    {
+        if(adminId == 0)
+            return ""
+        return adminId + " " + LPState.getAdmin(adminId).name
+    }
+
     render() {
 
         let rows = 1
@@ -71,12 +78,12 @@ class PledgesTable extends React.Component {
                     {
                         Header: "Owner",
                         id: "owner",
-                        accessor: d =>d.owner + " " + LPState.getAdmin(d.owner).name,
+                        accessor: d => this.idToAdmin(d.owner),
                     },
                     {
                         Header: "Intended project",
                         id: "intendedProject",
-                        accessor: d => d.intendedProject,
+                        accessor: d => this.idToAdmin(d.intendedProject),
                     },
                     {
                         Header: "Commit time",
@@ -86,7 +93,7 @@ class PledgesTable extends React.Component {
                     {
                         Header: "Old pledge",
                         id: "oldPledge",
-                        accessor: d => d.oldPledge,
+                        accessor: d => d.oldPledge==0?"":d.oldPledge,
                     },
                     {
                         Header: "Payment state",
