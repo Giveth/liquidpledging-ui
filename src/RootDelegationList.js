@@ -76,9 +76,7 @@ class RootDelegationList extends Component {
             let timeLeft = <div/>
             if(d.type==="Project")
             {
-                let currentTime = new Date().getMilliseconds()
-                let left = Time.millisToHuman(d.commitTime - currentTime)               
-                timeLeft = <p>{left}</p>
+                timeLeft = <p>{Time.humanizeTimeLeft(d.commitTime) }</p>
             }
 
             return (
