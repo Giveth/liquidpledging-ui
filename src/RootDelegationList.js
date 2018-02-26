@@ -4,7 +4,7 @@ import { Styles, Icons, Merge } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import FlatButton from 'material-ui/FlatButton'
 import Caller from './LiquidPledgingCaller'
-
+import Moment from 'moment'
 
 class RootDelegationList extends Component {   
 
@@ -74,6 +74,15 @@ class RootDelegationList extends Component {
 
             let amount = d.assignedAmount - d.assignedToProjectsAmount
 
+            let timeLeft = <div/>
+            if(d.type==="Project")
+            {
+                let currentTime = new Date().getMilliseconds()
+                let left = Moment.duration(d.commitTime - currentTime)               
+                timeLeft = <p>{left.humanize()}</p>
+            }
+
+
             return (
             <SectionHeader
                 key = {'Delegation'+index}
@@ -84,8 +93,9 @@ class RootDelegationList extends Component {
                 onPledges = {onPledges}
                 showOnHovering = {true}
                 >
-                
+
                 {actionButons}
+                {timeLeft}
                 
             </SectionHeader>)
                 
