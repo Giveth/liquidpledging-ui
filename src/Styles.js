@@ -347,9 +347,8 @@ export const Currency = {
 export const Time = {
     humanizeTimeLeft(endDate)
     {
-        console.log(endDate)
         if(endDate == 0)
-        return ""
+            return ""
         
         let current = new Date().getMilliseconds()
         let millisLeft = endDate - current
