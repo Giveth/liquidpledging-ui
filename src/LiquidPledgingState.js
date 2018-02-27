@@ -4,7 +4,27 @@ const Filter = require('./Filter.js');
 
 class LiquidPledgingState extends LiquidPledgingController {
 
+    constructor()
+    {
+        super()
+        this.isMergedAccounts = false
+        this.MERGED_ACCOUNTS_CHANGED = "MergedAccountsChanged"
+    }
+
     //PLEDGES
+
+    getIsMergedAccounts()
+    {
+        return this.isMergedAccounts
+    }
+
+    setIsMergedAccounts(isMerged)
+    {
+        let wasMerged = this.isMergedAccounts
+        this.isMergedAccounts = isMerged
+        if(wasMerged!==isMerged)
+            this.emit(this.MERGED_ACCOUNTS_CHANGED)
+    }
 
     getPledge(pledgeId)
     {
@@ -251,6 +271,11 @@ class LiquidPledgingState extends LiquidPledgingController {
         return amount
     }
 
+    setCurrentAccount(selectedAccount)
+    {
+        this.setIsMergedAccounts (selectedAccount==="*"?true:false)
+        this.setAccount(selectedAccount==="*"?this.getCurrentAccount():selectedAccount)
+    }
 
     /*getAvailablePledges(address)
     {
