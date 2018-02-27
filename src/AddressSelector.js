@@ -19,6 +19,10 @@ class AddressSelector extends React.Component
 
     onAccountChanged=()=>
     {
+        let accounts = LPState.getAccounts()
+        if(accounts.length>1)
+            accounts.push("*")
+
         this.setState({
             accounts:LPState.getAccounts(),
             selectedIndex:LPState.getCurrentAccountIndex()
@@ -32,13 +36,20 @@ class AddressSelector extends React.Component
    
     render()
     {
-        let list = this.state.accounts.map((account, index)=>{
+        let list = this.state.accounts.map((account, index,array)=>{
 
             let label = index +' - '+account
+            let key = index
+            if(account ==="*")
+            {
+                key = "*"
+                label = "Merge all the accounts ("+(array.length-1)+")"
+            }
+                
             return <MenuItem
 
-                key= {index}
-                value={index}
+                key= {key}
+                value={key}
                 style={{fontSize:'0.8em'}}
                 primaryText={label} />
         })
