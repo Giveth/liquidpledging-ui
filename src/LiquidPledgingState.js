@@ -22,6 +22,7 @@ class LiquidPledgingState extends LiquidPledgingController {
     {
         let wasMerged = this.isMergedAccounts
         this.isMergedAccounts = isMerged
+        console.log(wasMerged,isMerged, wasMerged!==isMerged)
         if(wasMerged!==isMerged)
             this.emit(this.MERGED_ACCOUNTS_CHANGED)
     }
@@ -273,8 +274,22 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     setCurrentAccount(selectedAccount)
     {
-        this.setIsMergedAccounts (selectedAccount==="*"?true:false)
-        this.setAccount(selectedAccount==="*"?this.getCurrentAccount():selectedAccount)
+        let isMerged = selectedAccount=="*"?true:false
+        this.setIsMergedAccounts (isMerged)
+
+        if(!isMerged)
+            this.setAccount(this.getAccountIndexFromAddress(selectedAccount))
+    }
+
+    getAccountIndexFromAddress(address)
+    {
+        let accounts = this.getAccounts()
+        for(let i in accounts)
+        {
+            if(this.accounts[i]===address)
+                return i
+        }
+        return -1
     }
 
     /*getAvailablePledges(address)

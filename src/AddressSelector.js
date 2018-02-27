@@ -11,7 +11,7 @@ class AddressSelector extends React.Component
         super()
         this.state={
             accounts:[],
-            selectedIndex:0,
+            selectedAccount:"",
         }
 
         LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
@@ -30,21 +30,20 @@ class AddressSelector extends React.Component
 
     setAccounts=()=>
     {
-        let accounts = LPState.getAccounts()
+        let accounts = JSON.parse(JSON.stringify(LPState.getAccounts()) )
         let isMergedAccounts = LPState.getIsMergedAccounts()
+        let selected = LPState.getCurrentAccount()
 
         if(accounts.length>1)
+        {
             accounts.push("*")
+            if(isMergedAccounts)
+                selected = accounts[accounts.length-1]
+        }
 
-        let index = LPState.getCurrentAccountIndex()
-
-        if(isMergedAccounts)
-            index = "*"
-
-        //console.log(index, isMergedAccounts, accounts)
         this.setState({
             accounts:accounts,
-            selectedIndex:index
+            selectedAccount:selected
         })
     }
 
@@ -55,18 +54,15 @@ class AddressSelector extends React.Component
    
     render()
     {
-        //console.log(this.state.selectedIndex, this.state.accounts)
-
         let list = this.state.accounts.map((account, index, array)=>{
 
             let label = index +' - '+account
             if(account =="*")
                 label = "Display as merged accounts ("+(array.length-1)+")"
-            
 
             return <MenuItem
                 key= {index}
-                value={index}
+                value={account}
                 style={{fontSize:'0.8em'}}
                 primaryText={label} />
         })
@@ -74,7 +70,7 @@ class AddressSelector extends React.Component
         return (
             <div style = {Styles.floatingAddressSelectorTopLeft}>
                 <DropDownMenu
-                    value={this.state.selectedIndex}
+                    value={this.state.selectedAccount}
                     onChange={this.onSelected}
                     style={{fontSize:'0.8em'}}
                     autoWidth={true}>
