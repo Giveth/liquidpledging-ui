@@ -31,6 +31,11 @@ class PledgesTable extends React.Component {
                 </span>)
     }
 
+    filterText(filter , d)
+    {
+        return String(d._original[filter.id]).indexOf(filter.value)>-1
+    }
+
     render() {
 
         let rows = 1
@@ -41,6 +46,8 @@ class PledgesTable extends React.Component {
         <div>
             <ReactTable
             data={this.props.pledges}
+            filterable = {true}
+            defaultFilterMethod={(filter, delegation) => this.filterText(filter, delegation)}
             columns={[
                 {
                 Header: this.props.title,
@@ -48,7 +55,7 @@ class PledgesTable extends React.Component {
                     {
                         Header: "Id",
                         amount: "Id",
-                        accessor: "id"
+                        accessor: "id",
                     },
                     {
                         Header: "Amount",
@@ -68,7 +75,7 @@ class PledgesTable extends React.Component {
                         accessor: d => this.idToAdmin(d.owner),
                     },
                     {
-                        Header: "Intended project",
+                        Header: "Intendedproject",
                         id: "intendedProject",
                         accessor: d => this.idToAdmin(d.intendedProject),
                     },
