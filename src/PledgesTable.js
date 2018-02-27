@@ -15,7 +15,7 @@ class PledgesTable extends React.Component {
             list.push(this.idToAdmin(adminId))
 
             if(index<array.length-1)
-                list.push( <span  style = {{color:"LightGrey"}} > &#9658; </span>)
+                list.push( <span  key={index+">"} style = {{color:"LightGrey"}} > &#9658; </span>)
         })
         return <span> {list} </span>
     }
