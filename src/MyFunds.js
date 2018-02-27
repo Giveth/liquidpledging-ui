@@ -19,6 +19,7 @@ class MyFunds extends Component {
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
         LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
         LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
+        LPState.on(LPState.MERGED_ACCOUNTS_CHANGED, this.onMergedAccountsChanged)
     }
 
     onStateChanged=()=>{
@@ -29,20 +30,42 @@ class MyFunds extends Component {
         this.setDelegations()
     }
 
+    onMergedAccountsChanged=()=>{
+        this.setDelegations()
+    }
+
     onNetworkChanged=()=>{
         this.setDelegations()
     }
 
     setDelegations=()=>{
         let currentAddress = LPState.getCurrentAccount()
+        let mergedAccounts = LPState.getIsMergedAccounts()
+
         if(!currentAddress)
             return
             
         let myGiversFilter = {adminAddress:currentAddress, type:'Giver'}
-        let giverNodes = LPState.getNodes(myGiversFilter)
+        let giverNodes =[]
+
+        if(mergedAccounts)
+        {
+            let accounts = LPState.getAccounts()
+            accounts.forEach(account => {
+                let myGiversFilter = {adminAddress:account, type:'Giver'}
+                giverNodes = giverNodes.concat(LPState.getNodes(myGiversFilter))
+                console.log(giverNodes)
+            })
+        }
+        else
+        {
+            giverNodes = LPState.getNodes(myGiversFilter)    
+        }
         this.populateCards(giverNodes)
+
         this.setState({
             currentAddress:currentAddress,
+            mergedAccounts:mergedAccounts
         })
     }
 
@@ -135,6 +158,7 @@ class MyFunds extends Component {
     {
         let cards = []
         let totalGiverAmount = 0
+
         for(let giverNode of giverNodes)
         {
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
@@ -154,7 +178,6 @@ class MyFunds extends Component {
             let assignedAmount = LPState.getNodeAssignedAmount(giverNode)
             let availableAmount = assignedAmount - delegatedAmount - assignedToProjectsAmount
             
-    
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
             totalGiverAmount += assignedAmount
 
