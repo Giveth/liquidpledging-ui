@@ -19,6 +19,7 @@ class MyProjects extends Component {
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
         LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
         LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
+        LPState.on(LPState.MERGED_ACCOUNTS_CHANGED, this.onMergedAccountsChanged)
     }
 
     onStateChanged=()=>{
@@ -33,16 +34,38 @@ class MyProjects extends Component {
         this.setDelegations()
     }
 
+    onMergedAccountsChanged=()=>{
+        this.setDelegations()
+    }
+
     setDelegations=()=>{
         let currentAddress = LPState.getCurrentAccount()
+        let mergedAccounts = LPState.getIsMergedAccounts()
+
         if(!currentAddress)
             return
+        
+        let MyProjectsFilter = {adminAddress:currentAddress, type:'Project'}
+        let nodes = []
 
-        let myDelegatesFilter = {adminAddress:currentAddress, type:'Project'}
-        let nodes = LPState.getNodes(myDelegatesFilter)
+        if(mergedAccounts)
+        {
+            let accounts = LPState.getAccounts()
+            accounts.forEach(account => {
+                let MyProjectsFilter = {adminAddress:account, type:'Project'}
+                nodes = nodes.concat(LPState.getNodes(MyProjectsFilter))
+            })
+        }
+        else
+        {
+            nodes = LPState.getNodes(MyProjectsFilter)    
+        }
+        
         this.populateCards(nodes)
+
         this.setState({
             currentAddress:currentAddress,
+            mergedAccounts:mergedAccounts
         })
     }
 
@@ -68,7 +91,8 @@ class MyProjects extends Component {
             let findDelegationsData={
                 title:"",
                 emiterId:node.id,
-                adminTypes:["Delegate"]
+                adminTypes:["Delegate"],
+                adminAddress:node.adminAddress
              }
              Caller.showFindDelegationsDialog(findDelegationsData)
         }
@@ -78,7 +102,8 @@ class MyProjects extends Component {
             let findDelegationsData={
                 title:"",
                 emiterId:node.id,
-                adminTypes:["Project"]
+                adminTypes:["Project"],
+                adminAddress: node.adminAddress
              }
              Caller.showFindDelegationsDialog(findDelegationsData)
         }
@@ -136,7 +161,7 @@ class MyProjects extends Component {
             let card = <AdminCard
                 key={node.id}
                 node = {node}
-                userAddress={this.state.currentAddress}
+                userAddress={this.adminAddress}
 
                 header = {header}
 
