@@ -54,7 +54,6 @@ class MyFunds extends Component {
             accounts.forEach(account => {
                 let myGiversFilter = {adminAddress:account, type:'Giver'}
                 giverNodes = giverNodes.concat(LPState.getNodes(myGiversFilter))
-                console.log(giverNodes)
             })
         }
         else
@@ -87,16 +86,15 @@ class MyFunds extends Component {
         Caller.showDonateDialog(donateData)
     }
 
-    getAvailableButtons=(giverNode)=>
+    getAvailableButtons=(node)=>
     {
         function onDelegateFunds()
         {
-            console.log(giverNode.adminAddress, giverNode)
             let findDelegationsData={
                 title:"",
-                emiterId:giverNode.id,
+                emiterId:node.id,
                 adminTypes:["Delegate"],
-                adminAddress:giverNode.adminAddress
+                adminAddress:node.adminAddress
              }
              Caller.showFindDelegationsDialog(findDelegationsData)
         }
@@ -105,7 +103,7 @@ class MyFunds extends Component {
         {
             let findDelegationsData={
                 title:"",
-                emiterId:giverNode.id,
+                emiterId:node.id,
                 adminTypes:["Project"]
              }
              Caller.showFindDelegationsDialog(findDelegationsData)
