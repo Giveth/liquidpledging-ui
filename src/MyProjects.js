@@ -11,7 +11,7 @@ class MyProjects extends Component {
         super()
 
         this.state={
-            projectNodes:[],
+            nodes:[],
             currentAddress:'',
             totalAmount:0,
         }
@@ -39,8 +39,8 @@ class MyProjects extends Component {
             return
 
         let myDelegatesFilter = {adminAddress:currentAddress, type:'Project'}
-        let projectNodes = LPState.getNodes(myDelegatesFilter)
-        this.populateCards(projectNodes)
+        let nodes = LPState.getNodes(myDelegatesFilter)
+        this.populateCards(nodes)
         this.setState({
             currentAddress:currentAddress,
         })
@@ -53,7 +53,7 @@ class MyProjects extends Component {
         Caller.showAddAdminDialog(data)
     }
 
-    getHeader=(projectNode)=>
+    getHeader=(node)=>
     {
         return (
             <div>
@@ -61,13 +61,13 @@ class MyProjects extends Component {
         )
     }
 
-    getAvailableButtons=(giverNode)=>
+    getAvailableButtons=(node)=>
     {
         function onDelegateFunds()
         {
             let findDelegationsData={
                 title:"",
-                emiterId:giverNode.id,
+                emiterId:node.id,
                 adminTypes:["Delegate"]
              }
              Caller.showFindDelegationsDialog(findDelegationsData)
@@ -77,7 +77,7 @@ class MyProjects extends Component {
         {
             let findDelegationsData={
                 title:"",
-                emiterId:giverNode.id,
+                emiterId:node.id,
                 adminTypes:["Project"]
              }
              Caller.showFindDelegationsDialog(findDelegationsData)
@@ -101,19 +101,19 @@ class MyProjects extends Component {
             )
     }
 
-    populateCards=(projectNodes)=>
+    populateCards=(nodes)=>
     {
         let cards = []
         let totalGiverAmount = 0
-        for(let projectNode of projectNodes)
+        for(let node of nodes)
         {
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
             let onlyProjectsFilter= {type:'Project'}
             let onlyDelegatesFilter= {type:'Delegate'}
 
-            let delegationsIn = LPState.getDelegations(projectNode.delegationsIn) 
+            let delegationsIn = LPState.getDelegations(node.delegationsIn) 
 
-            let delegationsOutWithProjects = LPState.getDelegations(projectNode.delegationsOut) //Delegation. To 
+            let delegationsOutWithProjects = LPState.getDelegations(node.delegationsOut) //Delegation. To 
             let delegationsOut = LPState.filterDelegations(delegationsOutWithProjects, onlyDelegatesFilter)
             let childrenOut = LPState.getDelegationsTrees(delegationsOutWithProjects, onlyDelegationsWithMoneyFilter)// Children. To. No money
 
@@ -121,21 +121,21 @@ class MyProjects extends Component {
 
             //let projectsChildren = LPState.getDelegationsTrees(assignedToProjectsDelegations)//Children. Any level. Projects
 
-            let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(projectNode) 
-            let delegatedAmount = LPState.getNodeDelegatedAmount(projectNode) - assignedToProjectsAmount
-            let assignedAmount = LPState.getNodeAssignedAmount(projectNode)
-            let securedAmount = LPState.getProjectNodeSecuredAmount(projectNode)
+            let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(node) 
+            let delegatedAmount = LPState.getNodeDelegatedAmount(node) - assignedToProjectsAmount
+            let assignedAmount = LPState.getNodeAssignedAmount(node)
+            let securedAmount = LPState.getProjectNodeSecuredAmount(node)
             let unsecuredAmount = assignedAmount - securedAmount
             let availableAmount = assignedAmount - delegatedAmount - assignedToProjectsAmount - unsecuredAmount
-            let availableButtons = this.getAvailableButtons(projectNode)
+            let availableButtons = this.getAvailableButtons(node)
     
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount + unsecuredAmount
             totalGiverAmount += assignedAmount
-            let header = this.getHeader(projectNode)
+            let header = this.getHeader(node)
 
             let card = <AdminCard
-                key={projectNode.id}
-                giverNode = {projectNode}
+                key={node.id}
+                node = {node}
                 userAddress={this.state.currentAddress}
 
                 header = {header}

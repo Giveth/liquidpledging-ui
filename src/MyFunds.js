@@ -11,7 +11,7 @@ class MyFunds extends Component {
         super()
 
         this.state={
-            giverNodes:[],
+            nodes:[],
             currentAddress:'',
             totalAmount:0,
         }
@@ -46,21 +46,21 @@ class MyFunds extends Component {
             return
             
         let myGiversFilter = {adminAddress:currentAddress, type:'Giver'}
-        let giverNodes =[]
+        let nodes =[]
 
         if(mergedAccounts)
         {
             let accounts = LPState.getAccounts()
             accounts.forEach(account => {
                 let myGiversFilter = {adminAddress:account, type:'Giver'}
-                giverNodes = giverNodes.concat(LPState.getNodes(myGiversFilter))
+                nodes = nodes.concat(LPState.getNodes(myGiversFilter))
             })
         }
         else
         {
-            giverNodes = LPState.getNodes(myGiversFilter)    
+            nodes = LPState.getNodes(myGiversFilter)    
         }
-        this.populateCards(giverNodes)
+        this.populateCards(nodes)
 
         this.setState({
             currentAddress:currentAddress,
@@ -75,12 +75,12 @@ class MyFunds extends Component {
         Caller.showAddAdminDialog(data)
     }
 
-    onAddFunds=(giverNode)=>
+    onAddFunds=(node)=>
     {
         let donateData={
-            giverName:giverNode.name,
-            emiterId:giverNode.adminId,
-            recieverId:giverNode.adminId,
+            giverName:node.name,
+            emiterId:node.adminId,
+            recieverId:node.adminId,
             amount:undefined
         }
         Caller.showDonateDialog(donateData)
@@ -128,13 +128,13 @@ class MyFunds extends Component {
             )
     }
 
-    getHeader=(giverNode)=>
+    getHeader=(node)=>
     {
         let that = this
 
         function onAddFunds()
         {
-            that.onAddFunds(giverNode)
+            that.onAddFunds(node)
         }
 
         return (
@@ -155,41 +155,41 @@ class MyFunds extends Component {
         )
     }
 
-    populateCards=(giverNodes)=>
+    populateCards=(nodes)=>
     {
         let cards = []
         let totalGiverAmount = 0
 
-        for(let giverNode of giverNodes)
+        for(let node of nodes)
         {
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
             let onlyProjectsFilter= {type:'Project'}
 
-            let delegationsIn = LPState.getDelegations(giverNode.delegationsIn) 
+            let delegationsIn = LPState.getDelegations(node.delegationsIn) 
 
-            let delegationsOut = LPState.getDelegations(giverNode.delegationsOut) //Delegation. To  
+            let delegationsOut = LPState.getDelegations(node.delegationsOut) //Delegation. To  
             let childrenOut = LPState.getDelegationsTrees(delegationsOut, onlyDelegationsWithMoneyFilter)// Children. To. No money
 
             let delegationsToProject = LPState.getDelegationsFromTreeChildren(childrenOut, onlyProjectsFilter) //Delegations. Any level. Projects
 
             //let projectsChildren = LPState.getDelegationsTrees(assignedToProjectsDelegations)//Children. Any level. Projects
 
-            let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(giverNode) 
-            let delegatedAmount = LPState.getNodeDelegatedAmount(giverNode) - assignedToProjectsAmount
-            let assignedAmount = LPState.getNodeAssignedAmount(giverNode)
+            let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(node) 
+            let delegatedAmount = LPState.getNodeDelegatedAmount(node) - assignedToProjectsAmount
+            let assignedAmount = LPState.getNodeAssignedAmount(node)
             let availableAmount = assignedAmount - delegatedAmount - assignedToProjectsAmount
             
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
             totalGiverAmount += assignedAmount
 
-            let header = this.getHeader(giverNode)
+            let header = this.getHeader(node)
 
-            let availableButtons = this.getAvailableButtons(giverNode)
+            let availableButtons = this.getAvailableButtons(node)
 
             let card = <AdminCard
-                key={giverNode.id}
-                giverNode = {giverNode}
-                userAddress={giverNode.adminAddress}
+                key={node.id}
+                node = {node}
+                userAddress={node.adminAddress}
 
                 header = {header}
 

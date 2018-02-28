@@ -11,7 +11,7 @@ class OthersFunds extends Component {
         super()
 
         this.state={
-            delegateNodes:[],
+            nodes:[],
             currentAddress:'',
             totalAmount:0,
         }
@@ -47,22 +47,22 @@ class OthersFunds extends Component {
             return
 
         let myDelegatesFilter = {adminAddress:currentAddress, type:'Delegate'}
-        let delegateNodes = []
+        let nodes = []
         
         if(mergedAccounts)
         {
             let accounts = LPState.getAccounts()
             accounts.forEach(account => {
                 let myDelegatesFilter = {adminAddress:account, type:'Delegate'}
-                delegateNodes = delegateNodes.concat(LPState.getNodes(myDelegatesFilter))
+                nodes = nodes.concat(LPState.getNodes(myDelegatesFilter))
             })
         }
         else
         {
-            delegateNodes = LPState.getNodes(myDelegatesFilter)
+            nodes = LPState.getNodes(myDelegatesFilter)
         }
         
-        this.populateCards(delegateNodes)
+        this.populateCards(nodes)
 
         this.setState({
             currentAddress:currentAddress,
@@ -119,7 +119,7 @@ class OthersFunds extends Component {
             )
     }
 
-    getHeader=(giverNode)=>
+    getHeader=(node)=>
     {
         return (
             <div>
@@ -132,19 +132,19 @@ class OthersFunds extends Component {
         )
     }
 
-    populateCards=(delegateNodes)=>
+    populateCards=(nodes)=>
     {
         let cards = []
         let totalDelegateAmount = 0
-        for(let delegateNode of delegateNodes)
+        for(let node of nodes)
         {
             let onlyDelegationsWithMoneyFilter = { assignedAmount:undefined}
             let onlyProjectsFilter= {type:'Project'}
             let onlyDelegatesFilter= {type:'Delegate'}
 
-            let delegationsIn = LPState.getDelegations(delegateNode.delegationsIn) 
+            let delegationsIn = LPState.getDelegations(node.delegationsIn) 
 
-            let delegationsOutWithProjects = LPState.getDelegations(delegateNode.delegationsOut) //Delegation. To 
+            let delegationsOutWithProjects = LPState.getDelegations(node.delegationsOut) //Delegation. To 
             let delegationsOut = LPState.filterDelegations(delegationsOutWithProjects, onlyDelegatesFilter)
             let childrenOut = LPState.getDelegationsTrees(delegationsOutWithProjects, onlyDelegationsWithMoneyFilter)// Children. To. No money
 
@@ -152,20 +152,20 @@ class OthersFunds extends Component {
 
             //let projectsChildren = LPState.getDelegationsTrees(assignedToProjectsDelegations)//Children. Any level. Projects
 
-            let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(delegateNode) 
-            let delegatedAmount = LPState.getNodeDelegatedAmount(delegateNode) - assignedToProjectsAmount
-            let assignedAmount = LPState.getNodeAssignedAmount(delegateNode)
+            let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(node) 
+            let delegatedAmount = LPState.getNodeDelegatedAmount(node) - assignedToProjectsAmount
+            let assignedAmount = LPState.getNodeAssignedAmount(node)
             let availableAmount = assignedAmount - delegatedAmount - assignedToProjectsAmount
     
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
             totalDelegateAmount += assignedAmount
-            let header = this.getHeader(delegateNode)
-            let availableButtons = this.getAvailableButtons(delegateNode)
+            let header = this.getHeader(node)
+            let availableButtons = this.getAvailableButtons(node)
 
             let card = <AdminCard
-                key={delegateNode.id}
-                giverNode = {delegateNode}
-                userAddress={delegateNode.adminAddress}
+                key={node.id}
+                node = {node}
+                userAddress={node.adminAddress}
 
                 header = {header}
 

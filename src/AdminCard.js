@@ -21,7 +21,7 @@ class AdminCard extends Component {
     showPledgesDialog=(pledgesGroups)=>{
         let data = {
             pledgesBlocks: pledgesGroups,
-            title: this.props.giverNode.name
+            title: this.props.node.name
         }
 
         Caller.showPledgesDialog(data)
@@ -116,7 +116,7 @@ class AdminCard extends Component {
     render() {
 
         let unsecured = <div/>
-        if(this.props.giverNode.type === "Project")
+        if(this.props.node.type === "Project")
             unsecured =  <SectionHeader
                 key = 'Unsecured'
                 title='Unsecured'
@@ -131,7 +131,7 @@ class AdminCard extends Component {
 
                 <SectionHeader
                     key = 'title'
-                    title= {this.props.giverNode.name}
+                    title= {this.props.node.name}
                     titleStyle = {Styles.cardTitle}
                     amount= {this.props.totalAmount}
                     amountStyle = {Styles.cardTitle}
