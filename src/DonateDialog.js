@@ -3,16 +3,31 @@ import TextField from 'material-ui/TextField'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import {Styles} from './Styles'
+import LPState from "./LiquidPledgingState.js"
+import DropDownMenu from 'material-ui/DropDownMenu'
+import MenuItem from 'material-ui/MenuItem'
 
 class DonateDialog extends React.Component
 {
     constructor(props)
     {
         super();
+
+        let isMergedAccounts = LPState.getIsMergedAccounts()
+        let accounts = JSON.parse(JSON.stringify(LPState.getAccounts()) )
+        let selectedAccount = LPState.getCurrentAccount()
+
+        if(isMergedAccounts)
+            selectedAccount = "*"
+
         this.state={
             amount:'',
-            okDisabled:true
+            okDisabled:true,
+            selectedAccount: selectedAccount,
+            isMergedAccounts:isMergedAccounts,
+            accounts:accounts
         }
+
     }
 
     onDone=()=>
@@ -34,16 +49,69 @@ class DonateDialog extends React.Component
     onTextChange = (e, newText) => {
         let state = {}
 
-
         if(!isNaN(newText))
             state.amount=newText
 
-        if(!newText || isNaN(newText) )
-            state.okDisabled=true
-        else
-           state.okDisabled=false
+        state.okDisabled = !this.isReady(newText, this.state.selectedAccount)
 
        this.setState(state)
+    }
+
+    isReady(amount, address)
+    {
+        console.log(amount, address)
+        if (isNaN(amount))
+            return false
+        
+        if(amount === "")
+            return false
+
+        if(address==="*")
+            return false
+
+        return true
+    }
+
+    onAddressChanged = (event, index, selectedAddress) =>
+    {
+        let state = {}
+        state.selectedAccount = selectedAddress
+        state.okDisabled=!this.isReady(this.state.amount, selectedAddress)
+        this.setState(state)
+    }
+
+    getAddressSelector=()=>
+    {
+        let select = <MenuItem
+            key= {"*"}
+            value={"*"}
+            disabled = {true}
+            primaryText={"Select an address"} />
+        
+        let list = this.state.accounts.map((account, index, array)=>{
+                return <MenuItem
+                   key= {index}
+                    value={account}
+                    primaryText={ index +' - '+account} />
+            })
+
+        list.unshift(select)
+
+        return  <DropDownMenu
+                    value={this.state.selectedAccount}
+                    onChange={this.onAddressChanged}
+                    autoWidth={true}>
+                    {list}
+
+                 </DropDownMenu>
+    }
+
+    onAddressChanged = (event, index, selectedAddress) =>
+    {
+        let state = {}
+        state.selectedAccount = selectedAddress
+        state.okDisabled=!this.isReady(this.state.selectedType,selectedAddress, this.state.name)
+        this.setState(state)
     }
 
     render()
@@ -65,6 +133,11 @@ class DonateDialog extends React.Component
 
         let title = "Add funds to "+ this.props.data.giverName
 
+        let addressSelector = <div/>
+
+        if(this.state.isMergedAccounts)
+            addressSelector = this.getAddressSelector()
+
         return (
             <Dialog
                 title={title}
@@ -73,6 +146,8 @@ class DonateDialog extends React.Component
                 open={this.props.open}
                 onRequestClose={this.onCancel}
                 contentStyle={Styles.dialogs.narrow}>
+
+                {addressSelector}
 
                 <TextField
                     
