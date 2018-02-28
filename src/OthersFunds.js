@@ -19,6 +19,8 @@ class OthersFunds extends Component {
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
         LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
         LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
+        LPState.on(LPState.MERGED_ACCOUNTS_CHANGED, this.onMergedAccountsChanged)
+
     }
 
     onStateChanged=()=>{
@@ -29,20 +31,42 @@ class OthersFunds extends Component {
         this.setDelegations()
     }
 
+    onMergedAccountsChanged=()=>{
+        this.setDelegations()
+    }
+
     onNetworkChanged=()=>{
         this.setDelegations()
     }
 
     setDelegations=()=>{
         let currentAddress = LPState.getCurrentAccount()
+        let mergedAccounts = LPState.getIsMergedAccounts()
+
         if(!currentAddress)
             return
 
         let myDelegatesFilter = {adminAddress:currentAddress, type:'Delegate'}
-        let delegateNodes = LPState.getNodes(myDelegatesFilter)
+        let delegateNodes = []
+        
+        if(mergedAccounts)
+        {
+            let accounts = LPState.getAccounts()
+            accounts.forEach(account => {
+                let myDelegatesFilter = {adminAddress:account, type:'Delegate'}
+                delegateNodes = delegateNodes.concat(LPState.getNodes(myDelegatesFilter))
+            })
+        }
+        else
+        {
+            delegateNodes = LPState.getNodes(myDelegatesFilter)
+        }
+        
         this.populateCards(delegateNodes)
+
         this.setState({
             currentAddress:currentAddress,
+            mergedAccounts, mergedAccounts
         })
     }
 
@@ -53,14 +77,15 @@ class OthersFunds extends Component {
         Caller.showAddAdminDialog(data)
     }
 
-    getAvailableButtons=(giverNode)=>
+    getAvailableButtons=(node)=>
     {
         function onDelegateFunds()
         {
             let findDelegationsData={
                 title:"",
-                emiterId:giverNode.id,
-                adminTypes:["Delegate"]
+                emiterId:node.id,
+                adminTypes:["Delegate"],
+                adminAddress:node.adminAddress
              }
              Caller.showFindDelegationsDialog(findDelegationsData)
         }
@@ -69,7 +94,7 @@ class OthersFunds extends Component {
         {
             let findDelegationsData={
                 title:"",
-                emiterId:giverNode.id,
+                emiterId:node.id,
                 adminTypes:["Project"]
              }
              Caller.showFindDelegationsDialog(findDelegationsData)
@@ -139,7 +164,7 @@ class OthersFunds extends Component {
             let card = <AdminCard
                 key={delegateNode.id}
                 giverNode = {delegateNode}
-                userAddress={this.state.currentAddress}
+                userAddress={delegateNode.adminAddress}
 
                 header = {header}
 
