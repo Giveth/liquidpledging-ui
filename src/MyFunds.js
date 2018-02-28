@@ -77,7 +77,6 @@ class MyFunds extends Component {
 
     onAddFunds=(node)=>
     {
-        console.log(node)
         let donateData={
             giverName:node.name,
             emiterId:node.adminId,
