@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton'
 import {Styles} from './Styles'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
+import LPState from "./LiquidPledgingState.js"
 
 const types = [
     {
@@ -35,11 +36,21 @@ class AddAdmin extends React.Component
     {
         super ()
 
+        let isMergedAccounts = LPState.getIsMergedAccounts()
+        let accounts = JSON.parse(JSON.stringify(LPState.getAccounts()) )
+        let currentAccount = LPState.getCurrentAccount()
+
+        if(isMergedAccounts)
+            currentAccount = "*"
+
         this.state={
             name:'',
             url:'',
             okDisabled:true,
-            selectedType:0
+            selectedType:0,
+            isMergedAccounts : isMergedAccounts,
+            accounts : accounts,
+            selectedAccount : currentAccount
         }
     }
 
@@ -112,6 +123,33 @@ class AddAdmin extends React.Component
                 this.setState({selectedType:newProps.data.defaultAdminType})
     } 
 
+    getAddressSelector=()=>
+    {
+        let select = <MenuItem
+            key= {"*"}
+            value={"*"}
+            disabled = {true}
+            primaryText={"Select an address"} />
+        
+        let list = this.state.accounts.map((account, index, array)=>{
+                return <MenuItem
+                   key= {index}
+                    value={account}
+                    primaryText={ index +' - '+account} />
+            })
+
+        list.unshift(select)
+
+        return  <DropDownMenu
+                     value={this.state.selectedAccount}
+                    onChange={this.onSelected}
+                    autoWidth={true}>
+                    {list}
+
+                 </DropDownMenu>
+
+    }
+
     render()
     {
         let createLabel = "Create"
@@ -140,6 +178,11 @@ class AddAdmin extends React.Component
                 disabled = {element.disabled}/>
         })
 
+        let addressSelector = <div/>
+
+        if(this.state.isMergedAccounts)
+            addressSelector = this.getAddressSelector()
+
         return (
             <Dialog
                 title={"New account"}
@@ -148,6 +191,8 @@ class AddAdmin extends React.Component
                 open={this.props.open}
                 onRequestClose={this.onCancel}
                 contentStyle={Styles.dialogs.narrow}>
+
+                {addressSelector}
 
                 <DropDownMenu
                     value={this.state.selectedType}
