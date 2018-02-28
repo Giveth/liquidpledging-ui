@@ -49,7 +49,7 @@ class Explorer extends Component {
 
     setDelegations=()=>
     {
-        let address = LPState.getCurrentAccount()
+        let address = this.props.adminAddress
 
         if(!address)
         {
@@ -108,7 +108,8 @@ class Explorer extends Component {
                     giverName:child.delegation.name,
                     emiterId:this.props.emiterId,
                     recieverId:child.delegation.adminId,
-                    amount:undefined
+                    amount:undefined,
+                    adminAddress:this.props.adminAddress
                 }
 
                 if(this.props.onCancel)

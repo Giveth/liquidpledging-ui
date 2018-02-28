@@ -39,7 +39,7 @@ class Caller extends EventEmitter
 
     transfer(data)
     {
-       LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount)
+       LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount, data.address)
        .then((data) => {
             console.log("Transfered", data)
             LiquidPledging.retriveStateData()
@@ -48,7 +48,7 @@ class Caller extends EventEmitter
 
     multiTransfer(data)
     {
-       LiquidPledging.multiTransfer(data.emiterId, data.pledgeAmounts, data.recieverId)
+       LiquidPledging.multiTransfer(data.emiterId, data.pledgeAmounts, data.recieverId, data.address)
        .then((data) => {
             console.log("Multi Transfered", data)
             LiquidPledging.retriveStateData()

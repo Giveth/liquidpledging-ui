@@ -26,7 +26,6 @@ class FindDelegationsDialog extends React.Component
         ]
 
         let title = "Pledges for "+this.props.data.title
-        
         return (
             <Dialog
                 title={title}
@@ -42,7 +41,8 @@ class FindDelegationsDialog extends React.Component
                         label="Explorer"
                         onCancel = {this.props.onCancel}
                         emiterId = {this.props.data.emiterId}
-                        adminTypes={this.props.data.adminTypes}/>
+                        adminTypes = {this.props.data.adminTypes}
+                        adminAddress = {this.props.data.adminAddress}/>
                 </div>
 
             </Dialog>

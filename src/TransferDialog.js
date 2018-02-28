@@ -17,6 +17,7 @@ const resetState = {
     okDisabled:true,
     emiters:[],
     selectedEmiter:0,
+    adminAddress:"",
     //isAdvance:false
 }
 
@@ -30,12 +31,11 @@ class TransferDialog extends React.Component
 
     getInitState = (props,state)=>
     {
-        console.log(state)
         let selectedEmiter = state.selectedEmiter
         if(props.data.emiterId > 0 && state.selectedEmiter === 0)
             selectedEmiter = props.data.emiterId
 
-        let addressFilter={adminAddress:props.currentAddress}
+        let addressFilter={adminAddress:props.data.adminAddress}
         let userNodes=LPState.getNodes(addressFilter)
 
         let sortByAmount=(a, b)=>{
@@ -60,7 +60,7 @@ class TransferDialog extends React.Component
         
         let newState =  JSON.parse(JSON.stringify(state));
             newState.selectedEmiter = selectedEmiter,
-            newState.currentAddress = props.currentAddress,
+            newState.adminAddress = props.data.adminAddress,
             newState.emiters = emiters
 
         return newState
@@ -156,6 +156,7 @@ class TransferDialog extends React.Component
 
         data.emiterId = this.state.selectedEmiter
         data.recieverId = this.props.data.recieverId
+        data.address = this.props.data.adminAddress
             
         if(pledgeAmounts.length===1)
         {

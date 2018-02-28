@@ -91,10 +91,12 @@ class MyFunds extends Component {
     {
         function onDelegateFunds()
         {
+            console.log(giverNode.adminAddress, giverNode)
             let findDelegationsData={
                 title:"",
                 emiterId:giverNode.id,
-                adminTypes:["Delegate"]
+                adminTypes:["Delegate"],
+                adminAddress:giverNode.adminAddress
              }
              Caller.showFindDelegationsDialog(findDelegationsData)
         }
@@ -188,7 +190,7 @@ class MyFunds extends Component {
             let card = <AdminCard
                 key={giverNode.id}
                 giverNode = {giverNode}
-                userAddress={this.state.currentAddress}
+                userAddress={giverNode.adminAddress}
 
                 header = {header}
 
@@ -215,7 +217,6 @@ class MyFunds extends Component {
     }
 
     render() {
-        
         let totalAmountText = 'My Funds total'+ Currency.symbol+Currency.format(Currency.toEther(this.state.totalAmount.toString()))
 
         return  (
