@@ -24,7 +24,7 @@ class Caller extends EventEmitter
 
     donate(data)
     {
-       LiquidPledging.donate(data.emiterId, data.recieverId, data.amount )
+       LiquidPledging.donate(data.emiterId, data.recieverId, data.amount, data.address )
        .then((data) => {
             console.log("Donated", data)
             LiquidPledging.retriveStateData()

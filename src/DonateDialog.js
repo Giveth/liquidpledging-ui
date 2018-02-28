@@ -19,6 +19,7 @@ class DonateDialog extends React.Component
     {
         let data = this.props.data
         data.amount = parseFloat(this.state.amount,10)
+        data.address = this.props.data.adminAddress
         this.props.onDone(data)
         this.state={amount:'', okDisabled:true}
     }   

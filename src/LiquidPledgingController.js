@@ -134,10 +134,11 @@ class LiquidPledgingController extends ProviderHelper {
 
     //SET
 
-    donate(emiterId, receiverId, amount )
+    donate(emiterId, receiverId, amount, address )
     {
+        console.log(address)
         let weiAmount =this.web3.utils.toWei(amount.toString())
-        return this.liquidPledging.donate(emiterId, receiverId, { from: this.currentAccount, value:weiAmount})
+        return this.liquidPledging.donate(emiterId, receiverId, { from: address, value:weiAmount})
     }
 
     transfer(emiterId, pledgeId, receiverId, amount, address )

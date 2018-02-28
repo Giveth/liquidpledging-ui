@@ -77,10 +77,12 @@ class MyFunds extends Component {
 
     onAddFunds=(node)=>
     {
+        console.log(node)
         let donateData={
             giverName:node.name,
             emiterId:node.adminId,
             recieverId:node.adminId,
+            adminAddress:node.adminAddress,
             amount:undefined
         }
         Caller.showDonateDialog(donateData)

@@ -22,7 +22,6 @@ class LiquidPledgingState extends LiquidPledgingController {
     {
         let wasMerged = this.isMergedAccounts
         this.isMergedAccounts = isMerged
-        console.log(wasMerged,isMerged, wasMerged!==isMerged)
         if(wasMerged!==isMerged)
             this.emit(this.MERGED_ACCOUNTS_CHANGED)
     }
