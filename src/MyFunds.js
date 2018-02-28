@@ -104,7 +104,8 @@ class MyFunds extends Component {
             let findDelegationsData={
                 title:"",
                 emiterId:node.id,
-                adminTypes:["Project"]
+                adminTypes:["Project"],
+                adminAddress:node.adminAddress
              }
              Caller.showFindDelegationsDialog(findDelegationsData)
         }
