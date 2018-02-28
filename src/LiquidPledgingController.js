@@ -170,20 +170,19 @@ class LiquidPledgingController extends ProviderHelper {
     }
     
 
-    addGiver(name, url)
+    addGiver(name, url, address)
     {
-        //return this.liquidPledging.addGiver('UngaGiver', 'ungaurl', 600, 0, { from: this.currentAccount }); //#A1 
-       return this.liquidPledging.addGiver(name, url, 600, 0, { from: this.currentAccount })
+       return this.liquidPledging.addGiver(name, url, 600, 0, { from: address })
     }
 
-    addDelegate(name, url)
+    addDelegate(name, url, address)
     {
-        return this.liquidPledging.addDelegate(name, url, 600, 0, { from: this.currentAccount })
+        return this.liquidPledging.addDelegate(name, url, 600, 0, { from: address })
     }
 
-    addProject(name, url)
+    addProject(name, url, address)
     {
-        return this.liquidPledging.addProject(name, url, this.currentAccount, 0, 86400, 0, { from: this.currentAccount })
+        return this.liquidPledging.addProject(name, url, address, 0, 86400, 0, { from: address })
     }
 }
 

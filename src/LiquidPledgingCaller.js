@@ -120,21 +120,21 @@ class Caller extends EventEmitter
     addAdmin(data)
     {
         if(data.type==="Giver")
-            LiquidPledging.addGiver(data.name, data.url).then((data) => {
+            LiquidPledging.addGiver(data.name, data.url, data.address).then((data) => {
                 console.log("Giver added", data, LiquidPledging.admins)
                 LiquidPledging.retriveStateData()
             }).catch((error)=>console.error(error))
 
 
         else if(data.type==="Delegate")
-            LiquidPledging.addDelegate(data.name, data.url).then((data) => {
+            LiquidPledging.addDelegate(data.name, data.url, data.address).then((data) => {
                 console.log("Delgate added", data)
                 LiquidPledging.retriveStateData()
             }).catch((error)=>console.error(error))
 
 
         else if(data.type==="Project")
-            LiquidPledging.addProject(data.name, data.url).then((data) => {
+            LiquidPledging.addProject(data.name, data.url, data.address).then((data) => {
                 console.log("Project added", data)
                 LiquidPledging.retriveStateData()
             }).catch((error)=>console.error(error))
