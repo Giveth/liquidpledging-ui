@@ -10,8 +10,8 @@ class UrlRouting {
         this.onHashChanged()
         this.data = {
             contract:"",
-            network:3,
-            page:1
+            page:1,
+            account:"*",
         }
     }
 
@@ -34,18 +34,20 @@ class UrlRouting {
     {
         if(name === 'contract')
         {
-            if(!Web3.utils.isAddress(value))
+            if(Web3.utils.isAddress(value))
             {
-                console.log("Nope")
-            }
-            else
-            {
-                console.log("Yep")
                 LPState.setContractAddress(value)
                 LPState.setupWeb3()
             }
-            
         }
+        else if(name === 'account')
+        {
+            if(Web3.utils.isAddress(value) || value === "*")
+            {
+                LPState.setCurrentAccount(value)
+            }
+        }
+
     }
 
 }
