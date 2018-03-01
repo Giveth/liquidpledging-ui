@@ -56,43 +56,51 @@ class PledgesTable extends React.Component {
                         Header: "Id",
                         amount: "Id",
                         accessor: "id",
+                        width:40
                     },
                     {
                         Header: "Amount",
                         id: "amount",
                         accessor: d => d.amount,
-                        Cell: row => Currency.format(Currency.toEther(row.row.amount))
+                        Cell: row => Currency.format(Currency.toEther(row.row.amount)),
+                        width:70
                     },
                     {
                         Header: "Delegates",
                         id: "delegates",
                         accessor: d => d.delegates,
-                        Cell: row => this.humanizeDelegates(row.row.delegates)
+                        Cell: row => this.humanizeDelegates(row.row.delegates),
+                        minWidth:200
                     },
                     {
                         Header: "Owner",
                         id: "owner",
                         accessor: d => this.idToAdmin(d.owner),
+                        minWidth:70
                     },
                     {
-                        Header: "Intendedproject",
+                        Header: "Intended project",
                         id: "intendedProject",
                         accessor: d => this.idToAdmin(d.intendedProject),
+                        minWidth:70
                     },
                     {
                         Header: "Commit time",
                         id: "commmitTime",
                         accessor: d => Time.humanizeTimeLeft(d.commmitTime),
+                        minWidth:70
                     },
                     {
                         Header: "Old pledge",
                         id: "oldPledge",
                         accessor: d => d.oldPledge==0?"":d.oldPledge,
+                        width:70
                     },
                     {
                         Header: "Payment state",
                         id: "paymentState",
                         accessor: d => d.paymentState,
+                        minWidth:70
                     },
                 ]
                 }
