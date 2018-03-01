@@ -48,6 +48,10 @@ class PledgesTable extends React.Component {
             data={this.props.pledges}
             filterable = {true}
             defaultFilterMethod={(filter, delegation) => this.filterText(filter, delegation)}
+            pageSize={rows}
+            showPaginationTop={false}
+            showPaginationBottom={false}
+            noDataText=""
             columns={[
                 {
                 Header: this.props.title,
@@ -70,7 +74,7 @@ class PledgesTable extends React.Component {
                         id: "delegates",
                         accessor: d => d.delegates,
                         Cell: row => this.humanizeDelegates(row.row.delegates),
-                        minWidth:200
+                        minWidth:170
                     },
                     {
                         Header: "Owner",
@@ -94,7 +98,7 @@ class PledgesTable extends React.Component {
                         Header: "Old pledge",
                         id: "oldPledge",
                         accessor: d => d.oldPledge==0?"":d.oldPledge,
-                        width:70
+                        minWidth:70
                     },
                     {
                         Header: "Payment state",
@@ -105,10 +109,8 @@ class PledgesTable extends React.Component {
                 ]
                 }
             ]}
-                pageSize={rows}
-                showPaginationTop={false}
-                showPaginationBottom={false}
-                noDataText=""
+                
+                
             />
 
         </div>
