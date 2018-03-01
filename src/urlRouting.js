@@ -2,17 +2,21 @@ import QueryString from 'query-string'
 import LPState from "./LiquidPledgingState.js"
 import Web3 from 'web3'
 
+const CONTRACT = "contract"
+const ACCOUNT = "account"
+const PAGE = "page"
+
 class UrlRouting {
 
     constructor()
     {
-        window.addEventListener('hashchange', this.onHashChanged, false);
+        this.data = {}
+        this.data[CONTRACT] = ""
+        this.data[ACCOUNT] = ""
+        this.data[PAGE] = ""
+
+        window.addEventListener('hashchange', this.onHashChanged, false)
         this.onHashChanged()
-        this.data = {
-            contract:"",
-            page:1,
-            account:"*",
-        }
     }
 
     onHashChanged=()=>
@@ -20,7 +24,8 @@ class UrlRouting {
         let parsedHash = QueryString.parse(window.location.hash)
 
         for(let propertyName in parsedHash)
-            this.evaluateProperty(propertyName, parsedHash[propertyName])
+            if(this.data[propertyName] !== parsedHash[propertyName])
+               this.processProperty(propertyName, parsedHash[propertyName])
     }
 
     setHashProperty=(name, value)=>
@@ -30,9 +35,9 @@ class UrlRouting {
         window.location.hash(newHash)
     }
 
-    evaluateProperty=(name,value)=>
+    processProperty=(name,value)=>
     {
-        if(name === 'contract')
+        if(name === CONTRACT)
         {
             if(Web3.utils.isAddress(value))
             {
@@ -40,7 +45,7 @@ class UrlRouting {
                 LPState.setupWeb3()
             }
         }
-        else if(name === 'account')
+        else if(name === ACCOUNT)
         {
             if(Web3.utils.isAddress(value) || value === "*")
             {
