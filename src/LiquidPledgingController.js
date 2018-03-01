@@ -25,7 +25,7 @@ class LiquidPledgingController extends ProviderHelper {
         this.delegations={}
         this.delegationsArray=[]
         this.nodes=[]
-        this.defalutProviders= [testRPCProvider, '*', testRPCProvider]
+        this.defalutProviders= [testRPCProvider, '*' ]
 
         this.setupWeb3()
     }
@@ -66,7 +66,7 @@ class LiquidPledgingController extends ProviderHelper {
         //TODO: This needs to be gone. It is just because some providers don't support the subscribe method yet
         if(this.retrieveInterval)
             clearInterval(this.retrieveInterval)
-            
+
         this.retrieveInterval = setInterval(()=>{
             this.retriveStateData()
         },10000) 
