@@ -14,6 +14,7 @@ import Explorer from './Explorer'
 import LayoutController from './LayoutController'
 import PledgesView from './PledgesView'
 import AddressSelector from './AddressSelector'
+import UrlRouting from './urlRouting'
 
 class App extends Component {
 
