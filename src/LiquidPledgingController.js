@@ -18,18 +18,30 @@ class LiquidPledgingController extends ProviderHelper {
 
         this.liquidpledging={}
         this.liquidPledgingState={}
+        this.retrieveInterval = undefined
         
         this.admins=[]
         this.pledges=[]
         this.delegations={}
         this.delegationsArray=[]
         this.nodes=[]
+        this.defalutProviders= [testRPCProvider, '*', testRPCProvider]
 
         this.setupWeb3()
     }
 
+    setContractAddress(contractAddress)
+    {
+        this.liquidPledgingContractAddress = contractAddress
+    }
+
+    setProviders(providers)
+    {
+        this.defalutProviders = providers
+    }
+
     setupWeb3(){
-        this.setup([testRPCProvider, '*', testRPCProvider]).then(()=>{
+        this.setup(this.defalutProviders).then(()=>{
 
             this.setupLiquidPledging()
 
@@ -52,7 +64,10 @@ class LiquidPledgingController extends ProviderHelper {
         })   
 
         //TODO: This needs to be gone. It is just because some providers don't support the subscribe method yet
-        setInterval(()=>{
+        if(this.retrieveInterval)
+            clearInterval(this.retrieveInterval)
+            
+        this.retrieveInterval = setInterval(()=>{
             this.retriveStateData()
         },10000) 
         
