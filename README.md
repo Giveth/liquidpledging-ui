@@ -39,10 +39,10 @@ This will compile the interface and serve it locally at  `http://localhost:3000/
 ## Fast setup
 
 Run `npm run go` to do all the above at once.
-It will start testrpc, create mock-data and to compile and start a local server for the frontend.
-In addition it will also kill any process running on ports 3000, 8545 and 8546
+It will start testrpc, create mock-data, compile, and start a local server for the frontend.
+In addition it will also kill any process running on ports 3000, 8545 and 8546.
 
-##Build
+## Build
 
 If you want to build and optimized version run
 
