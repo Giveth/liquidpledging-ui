@@ -5,37 +5,53 @@ import Web3 from 'web3'
 const CONTRACT = "contract"
 const ACCOUNT = "account"
 const PAGE = "page"
+const HASH_PROPERTY_CHANGED = "hashPropertyChanged"
 
 class UrlRouting {
 
     constructor()
     {
-        this.data = {}
-        this.data[CONTRACT] = ""
-        this.data[ACCOUNT] = ""
-        this.data[PAGE] = ""
+        this.properties = {}
+        this.callbacks = {}
 
-        window.addEventListener('hashchange', this.onHashChanged, false)
-        this.onHashChanged()
+        window.addEventListener('hashchange', this.onHashChanged.bind(this), false)
+        //this.onHashChanged()
     }
 
-    onHashChanged=()=>
+    onHashChanged()
     {
-        let parsedHash = QueryString.parse(window.location.hash)
-
-        for(let propertyName in parsedHash)
-            if(this.data[propertyName] !== parsedHash[propertyName])
-               this.processProperty(propertyName, parsedHash[propertyName])
+        let newProperties = QueryString.parse(window.location.hash)
+        let changed = false
+                
+        for(let id in newProperties)
+        {
+            if(this.properties[id])
+            {
+                if(this.properties[id] !== newProperties[id])
+                {
+                    this.properties[id] == newProperties[id]
+                    this.callbacks[id](newProperties.id)
+                }
+            }
+        }
     }
 
-    setHashProperty=(name, value)=>
+    registerProperty=(id, onChangeCallback, defaultValue = "")=>
     {
-        this.data[name] = value
-        let newHash = QueryString.stringify(this.data)
-        window.location.hash(newHash)
+        this.properties[id] = defaultValue
+        this.callbacks[id] = onChangeCallback
+        this.setProperty(id, defaultValue)
     }
 
-    processProperty=(name,value)=>
+    setProperty=(id, value)=>
+    {
+        let newProperties = JSON.parse(JSON.stringify(this.properties))
+        newProperties[id] = value
+        let newHash = QueryString.stringify(newProperties)
+        window.location.hash=newHash
+    }
+
+    processProperty(name,value)
     {
         if(name === CONTRACT)
         {
