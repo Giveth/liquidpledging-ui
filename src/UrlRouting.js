@@ -11,11 +11,10 @@ class UrlRouting {
 
     constructor()
     {
-        this.properties = {}
+        this.properties = QueryString.parse(window.location.hash)
         this.callbacks = {}
 
         window.addEventListener('hashchange', this.onHashChanged.bind(this), false)
-        //this.onHashChanged()
     }
 
     onHashChanged()
@@ -30,7 +29,7 @@ class UrlRouting {
                 if(this.properties[id] !== newProperties[id])
                 {
                     this.properties[id] == newProperties[id]
-                    this.callbacks[id](newProperties.id)
+                    this.callbacks[id](newProperties[id])
                 }
             }
         }
@@ -38,9 +37,12 @@ class UrlRouting {
 
     registerProperty=(id, onChangeCallback, defaultValue = "")=>
     {
-        this.properties[id] = defaultValue
         this.callbacks[id] = onChangeCallback
-        this.setProperty(id, defaultValue)
+
+        if(this.properties[id])
+            onChangeCallback(this.properties[id])
+        else
+            this.setProperty(id, defaultValue)
     }
 
     setProperty=(id, value)=>
