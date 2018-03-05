@@ -1,5 +1,5 @@
-var Web3 = require('web3')
-var EventEmitter = require('events')
+import Web3 from 'web3'
+import EventEmitter from 'events'
 
 const Providers={
     INJECTED:"*",
