@@ -13,12 +13,11 @@ class LiquidPledgingState extends LiquidPledgingController {
         super()
         this.isMergedAccounts = false
         this.MERGED_ACCOUNTS_CHANGED = "MergedAccountsChanged"
-        UrlRouting.registerProperty(CONTRACT, this.onContractChanged, this.contract)
+        UrlRouting.registerProperty(CONTRACT, this.onContractChanged.bind(this), this.contract)
     }
 
     onContractChanged(newContract)
     {
-
         if(Web3.utils.isAddress(newContract))
         {
             this.setContractAddress(newContract)
@@ -26,6 +25,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         }
         else
         {
+            console.warn("Invalid contract address. Ignoring:"+this.newContract)
             UrlRouting.setProperty(CONTRACT, this.contract )
         }
     }
