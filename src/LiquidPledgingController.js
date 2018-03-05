@@ -5,8 +5,8 @@ const liquidpledging = require('./liquidpledging');
 const LiquidPledging = liquidpledging.LiquidPledging;
 const LiquidPledgingState = liquidpledging.LiquidPledgingState;
 const testRPCProvider = 'ws://localhost:8546'
-const liquidPledgingContractAddress = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24' //TESTRPC DETERMINISTIC
-//const liquidPledgingContractAddress = '0x18658A1A7cB8b0Be97b155D051769b3651b2943c' //ROPSTEN
+const defaultContract = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24' //TESTRPC DETERMINISTIC
+//const defaultContract = '0x18658A1A7cB8b0Be97b155D051769b3651b2943c' //ROPSTEN
 
 class LiquidPledgingController extends ProviderHelper {
 
@@ -26,13 +26,14 @@ class LiquidPledgingController extends ProviderHelper {
         this.delegationsArray=[]
         this.nodes=[]
         this.defalutProviders= [testRPCProvider, '*' ]
+        this.contract = defaultContract
 
         this.setupWeb3()
     }
 
     setContractAddress(contractAddress)
     {
-        this.liquidPledgingContractAddress = contractAddress
+        this.contract = contractAddress
     }
 
     setProviders(providers)
@@ -50,7 +51,7 @@ class LiquidPledgingController extends ProviderHelper {
 
     setupLiquidPledging()
     {this.data = {}
-        this.liquidPledging = new LiquidPledging(this.web3, liquidPledgingContractAddress);
+        this.liquidPledging = new LiquidPledging(this.web3, this.contract);
         this.liquidPledgingState = new LiquidPledgingState(this.liquidPledging);
 
         this.web3.eth.subscribe('newBlockHeaders',(err,block)=>
