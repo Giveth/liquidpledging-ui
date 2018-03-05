@@ -1,9 +1,10 @@
 import LiquidPledgingController from "./LiquidPledgingController"
 import Formatter from './DataFormatter'
 import UrlRouting from './UrlRouting.js'
-import {Utils} from 'web3'
+import Web3 from 'web3'
 
 const Filter = require('./Filter.js');
+const CONTRACT = "contract"
 
 class LiquidPledgingState extends LiquidPledgingController {
 
@@ -12,22 +13,21 @@ class LiquidPledgingState extends LiquidPledgingController {
         super()
         this.isMergedAccounts = false
         this.MERGED_ACCOUNTS_CHANGED = "MergedAccountsChanged"
-        console.log(this.contract)
-        UrlRouting.registerProperty("contract", this.onContractChanged, this.contract)
+        UrlRouting.registerProperty(CONTRACT, this.onContractChanged, this.contract)
     }
 
     onContractChanged(newContract)
     {
-        if(!newContract)
-            return
 
-        if(Utils.isAddress(newContract))
+        if(Web3.utils.isAddress(newContract))
         {
             this.setContractAddress(newContract)
             this.setupWeb3()
-            
         }
-        console.log(newContract)
+        else
+        {
+            UrlRouting.setProperty(CONTRACT, this.contract )
+        }
     }
 
     //PLEDGES
