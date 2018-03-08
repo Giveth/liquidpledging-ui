@@ -1,7 +1,5 @@
 import QueryString from 'query-string'
 
-const HASH_PROPERTY_CHANGED = "hashPropertyChanged"
-
 class UrlRouting {
 
     constructor()
@@ -20,7 +18,7 @@ class UrlRouting {
         {
             if(this.properties[id] !== newProperties[id])
             {
-                this.properties[id] == newProperties[id]
+                this.properties[id] = newProperties[id]
                 this.callbacks[id](newProperties[id])
             }
         }

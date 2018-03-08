@@ -58,10 +58,10 @@ class TransferDialog extends React.Component
             emiters[node.adminId] = emiter
         })
         
-        let newState =  JSON.parse(JSON.stringify(state));
-            newState.selectedEmiter = selectedEmiter,
-            newState.adminAddress = props.data.adminAddress,
-            newState.emiters = emiters
+        let newState =  JSON.parse(JSON.stringify(state))
+        newState.selectedEmiter = selectedEmiter
+        newState.adminAddress = props.data.adminAddress
+        newState.emiters = emiters
 
         return newState
     }

@@ -292,13 +292,13 @@ class LiquidPledgingState extends LiquidPledgingController {
 
     setCurrentAccount(selectedAccount)
     {
-        let isMerged = selectedAccount=="*"?true:false
+        let isMerged = selectedAccount==="*"?true:false
         this.setIsMergedAccounts (isMerged)
 
         if(!isMerged)
         {
             let index = this.getAccountIndexFromAddress(selectedAccount)
-            if(index == -1)
+            if(index === -1)
             {
                 console.error("You don't own this address : "+ selectedAccount)
                 return

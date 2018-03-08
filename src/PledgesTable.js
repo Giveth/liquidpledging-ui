@@ -22,7 +22,7 @@ class PledgesTable extends React.Component {
 
     idToAdmin(adminId)
     {
-        if(adminId == 0)
+        if(adminId === 0)
             return ""
 
         return ( <span  key = {adminId}>
@@ -97,7 +97,7 @@ class PledgesTable extends React.Component {
                     {
                         Header: "Old pledge",
                         id: "oldPledge",
-                        accessor: d => d.oldPledge==0?"":d.oldPledge,
+                        accessor: d => d.oldPledge===0?"":d.oldPledge,
                         minWidth:70
                     },
                     {

@@ -58,7 +58,7 @@ class LayoutController extends Component {
             let item = this.props.children[i]
             if(item)
             {
-                if(item.props.pageId == pageId)
+                if(item.props.pageId === pageId)
                 {
                     return i
                 }  

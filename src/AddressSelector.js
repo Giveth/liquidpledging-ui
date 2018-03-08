@@ -57,7 +57,7 @@ class AddressSelector extends React.Component
         let list = this.state.accounts.map((account, index, array)=>{
 
             let label = index +' - '+account
-            if(account =="*")
+            if(account ==="*")
                 label = "Display as merged accounts ("+(array.length-1)+")"
 
             return <MenuItem

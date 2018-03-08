@@ -1,4 +1,3 @@
-import {Currency} from './Styles'
 import LiquidPledging from './LiquidPledgingState'
 
 const EventEmitter = require('events')

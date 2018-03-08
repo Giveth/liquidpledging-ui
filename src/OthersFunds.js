@@ -66,7 +66,7 @@ class OthersFunds extends Component {
 
         this.setState({
             currentAddress:currentAddress,
-            mergedAccounts, mergedAccounts
+            mergedAccounts: mergedAccounts
         })
     }
 
