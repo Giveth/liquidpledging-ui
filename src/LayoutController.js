@@ -20,33 +20,61 @@ class LayoutController extends Component {
 
     componentWillMount=()=>
     {
-        UrlRouting.registerProperty(PAGE_ID, this.onPageIdChanged.bind(this), this.state.currentTab)
+        UrlRouting.registerProperty(PAGE_ID, this.onPageIdHashChanged.bind(this), this.state.currentTab)
     }
 
-    onPageIdChanged=(pageId)=>
+    onPageIdHashChanged=(pageId)=>
     {
-        let index = this.getIndexByPageId(pageId)
+        let index = this.getIndexFromPageId(pageId)
         if(index>=0)
-            this.onTabChange(index)
+        {
+            UrlRouting.setProperty(PAGE_ID, pageId)
+            this.setTab(index)
+        }
+        else
+        {
+            UrlRouting.setProperty(PAGE_ID, this.getPageIdFromIndex(this.state.currentTab))
+        }
     }
 
-    onTabChange=(value)=>
+    onTabChange=(index)=>
+    {
+        let pageId = this.getPageIdFromIndex(index)
+        UrlRouting.setProperty(PAGE_ID, pageId)
+        this.setTab(index)
+    }
+
+    setTab(index)
     {
         this.setState({
-          currentTab: value,
-        })
+            currentTab: index,
+          })
     }
 
-    getIndexByPageId=(pageId)=>
+    getIndexFromPageId=(pageId)=>
     {
         for(let i = 0; i<=this.props.children.length; i ++)
         {
             let item = this.props.children[i]
-            if(item.props.pageId == pageId)
-               return i
+            if(item)
+            {
+                if(item.props.pageId == pageId)
+                {
+                    return i
+                }  
+            }
         }
         
         return -1
+    }
+
+    getPageIdFromIndex=(index)=>
+    {
+        if(this.props.children[index])
+            if(this.props.children[index].props.pageId)
+                return this.props.children[index].props.pageId
+
+        return ""
     }
 
     getNumberOfViews()
