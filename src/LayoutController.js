@@ -1,16 +1,33 @@
 import React, { Component } from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
+import UrlRouting from './UrlRouting.js'
+const PAGE_ID = "pageId"
 
 class LayoutController extends Component {
 
     constructor(props)
     {
         super()
-        this.state={currentTab:props.defaultTab, windowWidth:window.innerWidth}
+        this.state={
+            currentTab:props.defaultTab,
+            windowWidth:window.innerWidth,
+        }
 
         window.addEventListener('resize', ()=>{
             this.setState({windowWidth:window.innerWidth})
         })
+    }
+
+    componentWillMount=()=>
+    {
+        UrlRouting.registerProperty(PAGE_ID, this.onPageIdChanged.bind(this), this.state.currentTab)
+        //UrlRouting.registerProperty(PAGE_ID, this.onPageIdChanged, this.state.currentTab)
+    }
+
+    onPageIdChanged=(value)=>
+    {
+        console.log(value)
+        this.onTabChange(value)
     }
 
     onTabChange=(value)=>
