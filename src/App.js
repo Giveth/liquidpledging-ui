@@ -41,13 +41,11 @@ class App extends Component {
                         </div>
 
                         <LayoutController defaultTab = {0}>
-                            <MyFunds label="My funds"/>
-                           
-                            <OthersFunds label="Other's funds" />
-                            <MyProjects label="My projects" />
-                            <Explorer label="Explorer" adminTypes={["Delegate", "Project", "Giver"]} />
-                            <PledgesView label="Pledges" />
-
+                            <MyFunds pageId = "myFunds" label="My funds"/>
+                            <OthersFunds pageId = "othersFunds" label="Other's funds" />
+                            <MyProjects pageId = "myProjects" label="My projects" />
+                            <Explorer pageId = "explorer" label="Explorer" adminTypes={["Delegate", "Project", "Giver"]} />
+                            <PledgesView pageId = "pledgesView" label="Pledges" />
                         </LayoutController>
 
                     </Page>

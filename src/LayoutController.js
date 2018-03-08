@@ -21,20 +21,32 @@ class LayoutController extends Component {
     componentWillMount=()=>
     {
         UrlRouting.registerProperty(PAGE_ID, this.onPageIdChanged.bind(this), this.state.currentTab)
-        //UrlRouting.registerProperty(PAGE_ID, this.onPageIdChanged, this.state.currentTab)
     }
 
-    onPageIdChanged=(value)=>
+    onPageIdChanged=(pageId)=>
     {
-        console.log(value)
-        this.onTabChange(value)
+        let index = this.getIndexByPageId(pageId)
+        if(index>=0)
+            this.onTabChange(index)
     }
 
     onTabChange=(value)=>
     {
         this.setState({
           currentTab: value,
-        });
+        })
+    }
+
+    getIndexByPageId=(pageId)=>
+    {
+        for(let i = 0; i<=this.props.children.length; i ++)
+        {
+            let item = this.props.children[i]
+            if(item.props.pageId == pageId)
+               return i
+        }
+        
+        return -1
     }
 
     getNumberOfViews()
@@ -64,7 +76,7 @@ class LayoutController extends Component {
             {
                 let tabs = this.props.children.map((item, index)=>
                 {
-                    let label = 'A'
+                    let label = ''
                     if(item.props.label)
                         label = item.props.label
 
