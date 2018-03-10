@@ -72,8 +72,18 @@ class App extends Component {
 
             <Divider key = "d1"/>,
             <Subheader key = "c">Contract</Subheader>,
-            <MenuItem key = "e" >Explorer</MenuItem>,
-            <MenuItem key = "p" >Pledges</MenuItem>,
+
+            <MenuItem
+                key = {EXPLORER} 
+                onClick = {()=>this.changePage(EXPLORER)}>
+                Explorer
+            </MenuItem>,
+
+            <MenuItem
+                key = {PLEDGES} 
+                onClick = {()=>this.changePage(PLEDGES)}>
+                Pledges
+            </MenuItem>,
 
             <Divider key = "d2" />,
             <MenuItem key = "a">About</MenuItem>,
@@ -85,7 +95,9 @@ class App extends Component {
         return [
             <MyFunds key= {MY_FUNDS} pageId = {MY_FUNDS} label="My funds"/>,
             <OthersFunds key = {OTHERS_FUNDS} pageId = {OTHERS_FUNDS} label="Other's funds" />,
-            <MyProjects key = {MY_PROJECTS} pageId = {MY_PROJECTS} label="My projects" />
+            <MyProjects key = {MY_PROJECTS} pageId = {MY_PROJECTS} label="My projects" />,
+            <Explorer key = {EXPLORER} pageId = {EXPLORER} label="My projects" />,
+            <PledgesView key = {PLEDGES} pageId = {PLEDGES} label="My projects" />
         ]
     }
 
