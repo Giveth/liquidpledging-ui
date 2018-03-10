@@ -206,8 +206,8 @@ class MyFunds extends BaseDelegationPage
             <div style = {Styles.singlePageContainer}>
 
                 <Header title = {this.props.label}/>
-                
-                <div style = {Styles.page.singlePage}>
+
+                <div style = {Styles.page.singlePageBody}>
 
                     <div style={Styles.row}>
                         <div style = {Styles.sectionFrontCell}>
