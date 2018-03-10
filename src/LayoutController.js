@@ -3,6 +3,11 @@ import {Tabs, Tab} from 'material-ui/Tabs'
 import UrlRouting from './UrlRouting.js'
 import {Styles} from './Styles.js'
 import PageColumn from './PageColumn.js'
+import Drawer from 'material-ui/Drawer'
+import MenuItem from 'material-ui/MenuItem'
+import liquidPledgingLogo from './liquid-pledging.svg'
+
+
 
 const PAGE_ID = "pageId"
 
@@ -14,6 +19,7 @@ class LayoutController extends Component {
         this.state={
             currentTab:props.defaultTab,
             windowWidth:window.innerWidth,
+            menuWidth:300
         }
 
         window.addEventListener('resize', ()=>{
@@ -90,10 +96,22 @@ class LayoutController extends Component {
         return n
     }
 
-    getSinglePageView()
+    getIcon()
     {
-        
+       return( <div style={{textAlign: 'center'}}>
+                    <img
+                        src={liquidPledgingLogo}
+                        alt="Building the Future of Giving"
+                        style={Styles.givethLogo}
+                    />
+                    <h2 style = {{
+                            fontWeight: 200,
+                            textTransform: 'uppercase',
+                            color:'grey'
+                        }}> Liquid Pledging </h2>
+                </div>)
     }
+
 
     render() {
 
@@ -108,7 +126,7 @@ class LayoutController extends Component {
         }
         else if (viewsNumber > 1)
         {
-            if(isTabLayout)
+            if(true)
             {
                 let tabs = this.props.children.map((item, index)=>
                 {
@@ -145,7 +163,26 @@ class LayoutController extends Component {
             }
         }
 
-        return view
+        return(
+        <div style = {Styles.row}>
+            
+            <Drawer
+                open={this.state.open}
+                docket
+                width = {this.state.menuWidth}>
+                {this.getIcon()}
+                <MenuItem>Menu Item</MenuItem>
+                <MenuItem>Menu Item 2</MenuItem>
+            </Drawer>
+
+            <div style = {{paddingLeft:this.state.menuWidth}}>
+                
+                {this.props.header}
+                {view}
+            </div>
+            
+        </div>)
+        
     }
 }
 
