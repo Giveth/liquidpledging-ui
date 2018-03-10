@@ -13,9 +13,10 @@ class LayoutController extends Component {
     {
         super()
         this.state={
-            currentTab:props.defaultTab,
+            currentPageId:props.pages[0].props.pageId,
             windowWidth:window.innerWidth,
-            menuWidth:300
+            menuWidth:300,
+            currentPage:<div/>
         }
 
         window.addEventListener('resize', ()=>{
@@ -25,61 +26,22 @@ class LayoutController extends Component {
 
     componentWillMount=()=>
     {
-        UrlRouting.registerProperty(PAGE_ID, this.onPageIdHashChanged.bind(this), this.state.currentTab)
+        UrlRouting.registerProperty(PAGE_ID, this.onPageIdHashChanged.bind(this), this.state.currentPageId)
     }
 
     onPageIdHashChanged=(pageId)=>
     {
-        let index = this.getIndexFromPageId(pageId)
-        if(index>=0)
-        {
-            UrlRouting.setProperty(PAGE_ID, pageId)
-            this.setTab(index)
-        }
-        else
-        {
-            UrlRouting.setProperty(PAGE_ID, this.getPageIdFromIndex(this.state.currentTab))
-        }
-    }
+        console.log(pageId)
+        let newPage = this.getPage(pageId)
 
-    onTabChange=(index)=>
-    {
-        let pageId = this.getPageIdFromIndex(index)
+        console.log(newPage)
+        if(!newPage)
+            return
+
         UrlRouting.setProperty(PAGE_ID, pageId)
-        this.setTab(index)
-    }
-
-    setTab(index)
-    {
         this.setState({
-            currentTab: index,
+            currentPage: newPage,
           })
-    }
-
-    getIndexFromPageId=(pageId)=>
-    {
-        for(let i = 0; i<=this.props.length; i ++)
-        {
-            let item = this.props[i]
-            if(item)
-            {
-                if(item.props.pageId === pageId)
-                {
-                    return i
-                }  
-            }
-        }
-        
-        return -1
-    }
-
-    getPageIdFromIndex=(index)=>
-    {
-        if(this.props.pages[index])
-            if(this.props.pages[index].props.pageId)
-                return this.props.pages[index].props.pageId
-
-        return ""
     }
 
     getNumberOfViews()
@@ -92,43 +54,18 @@ class LayoutController extends Component {
         return n
     }
 
-    
+    getPage(pageId)
+    {
+        for(let i = 0; i<this.props.pages.length; i++)
+            if(pageId === this.props.pages[i].props.pageId)
+                return this.props.pages[i]
+    }
 
 
     render() {
 
-        let viewsNumber = this.getNumberOfViews()
-        console.log(viewsNumber, Styles.minContentWidth, this.state.windowWidth)
-        let isTabLayout = ((Styles.minContentWidth * viewsNumber) > this.state.windowWidth)
-        let view = <div/>
-
-        if(viewsNumber===1)
-        {
-            view = this.props
-        }
-        else if (viewsNumber > 1)
-        {
-            if(false)
-            {
-                let tabs = this.props.map((item, index)=>
-                {
-                    let label = ''
-                    if(item.props.label)
-                        label = item.props.label
-
-                    return (<Tab key={index} label={label} value={index}> {item} </Tab>)
-                })
-
-                view =(
-                    <div style = {Styles.page.singlePage}>
-                        <Tabs
-                            value={this.state.currentTab}
-                            onChange={this.onTabChange}>
-                            {tabs}>
-                        </Tabs>
-                    </div>)
-            }
-        }
+        //let viewsNumber = this.getNumberOfViews()
+        //let isTabLayout = ((Styles.minContentWidth * viewsNumber) > this.state.windowWidth)
 
         return(
         <div style = {Styles.row}>
@@ -141,6 +78,7 @@ class LayoutController extends Component {
             </Drawer>
 
             <div style = {{paddingLeft:this.state.menuWidth}}>
+                {this.state.currentPage}
             </div>
             
         </div>)
