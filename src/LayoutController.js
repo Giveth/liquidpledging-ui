@@ -13,7 +13,7 @@ class LayoutController extends Component {
         this.state={
             currentPageId:props.pages[0].props.pageId,
             windowWidth:window.innerWidth,
-            menuWidth:300,
+            menuWidth:250,
             currentPage:<div/>
         }
 
@@ -64,7 +64,7 @@ class LayoutController extends Component {
         //let isTabLayout = ((Styles.minContentWidth * viewsNumber) > this.state.windowWidth)
 
         return(
-        <div style = {Styles.row}>
+        <div>
             
             <Drawer
                 open={this.state.open}
@@ -73,8 +73,10 @@ class LayoutController extends Component {
                 {this.props.menuItems}
             </Drawer>
 
-            <div style = {{paddingLeft:this.state.menuWidth}}>
-                {this.state.currentPage}
+            <div style = {{paddingLeft:this.state.menuWidth, display:"flex", justifyContent:"center"}}>
+                <div style = {Styles.page.singlePage}>
+                    {this.state.currentPage}
+                </div>
             </div>
             
         </div>)

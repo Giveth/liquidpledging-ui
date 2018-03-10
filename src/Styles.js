@@ -10,8 +10,8 @@ import PledgesIcon from 'react-icons/lib/go/search'
 import Web3 from 'web3'
 import Moment from 'moment'
 
-const MAX_CONTENT_WIDTH = 800
-const MIN_CONTENT_WIDTH = 400
+const MAX_CONTENT_WIDTH = 960
+const MIN_CONTENT_WIDTH = 600
 
 export const Colors = {
     base:'#666',
@@ -67,18 +67,20 @@ export const Styles = {
     },
 
     page:{
+    
         singlePage:{
-            display:"flex",
-            justifyContent:"center",
-            alignItems:"flexStart",
+           // justifyContent:"center",
             maxWidth:MAX_CONTENT_WIDTH,
-            flex:1
-        },
+            flex:1,
+            padding:50
+        },  
+        
         singlePageContainer:{
             maxWidth:MAX_CONTENT_WIDTH,
             minWidth:MIN_CONTENT_WIDTH,
             width:MAX_CONTENT_WIDTH
-        }
+        },
+
     },
 
     subtitle:{
@@ -297,11 +299,6 @@ export const Styles = {
         //position: 'fixed',
         zIndex:100,
     },
-
-    pageColumn:
-    {
-        margin:10
-    }
 
 }
 
