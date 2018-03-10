@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
 import UrlRouting from './UrlRouting.js'
 import {Styles} from './Styles.js'
-import PageColumn from './PageColumn.js'
 import Drawer from 'material-ui/Drawer'
 
 const PAGE_ID = "pageId"
