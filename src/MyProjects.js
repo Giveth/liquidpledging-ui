@@ -4,8 +4,10 @@ import AdminCard from './AdminCard'
 import FlatButton from 'material-ui/FlatButton'
 import { Styles, Currency, Merge } from './Styles'
 import Caller from './LiquidPledgingCaller'
+import BaseDelegationPage from './BaseDelegationsPage'
 
-class MyProjects extends Component {
+
+class MyProjects extends BaseDelegationPage {
 
     constructor(){
         super()
@@ -15,27 +17,6 @@ class MyProjects extends Component {
             currentAddress:'',
             totalAmount:0,
         }
-
-        LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
-        LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
-        LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
-        LPState.on(LPState.MERGED_ACCOUNTS_CHANGED, this.onMergedAccountsChanged)
-    }
-
-    onStateChanged=()=>{
-        this.setDelegations()
-    }
-
-    onAccountChanged=()=>{
-        this.setDelegations()
-    }
-
-    onNetworkChanged=()=>{
-        this.setDelegations()
-    }
-
-    onMergedAccountsChanged=()=>{
-        this.setDelegations()
     }
 
     setDelegations=()=>{

@@ -4,8 +4,10 @@ import AdminCard from './AdminCard'
 import FlatButton from 'material-ui/FlatButton'
 import { Styles, Currency, Merge } from './Styles'
 import Caller from './LiquidPledgingCaller'
+import BaseDelegationPage from './BaseDelegationsPage'
 
-class OthersFunds extends Component {
+
+class OthersFunds extends BaseDelegationPage {
 
     constructor(){
         super()
@@ -16,36 +18,17 @@ class OthersFunds extends Component {
             totalAmount:0,
         }
 
-        LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
-        LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
-        LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
-        LPState.on(LPState.MERGED_ACCOUNTS_CHANGED, this.onMergedAccountsChanged)
-
-    }
-
-    onStateChanged=()=>{
-        this.setDelegations()
-    }
-
-    onAccountChanged=()=>{
-        this.setDelegations()
-    }
-
-    onMergedAccountsChanged=()=>{
-        this.setDelegations()
-    }
-
-    onNetworkChanged=()=>{
-        this.setDelegations()
     }
 
     setDelegations=()=>{
+        console.log("SET")
         let currentAddress = LPState.getCurrentAccount()
         let mergedAccounts = LPState.getIsMergedAccounts()
 
         if(!currentAddress)
             return
 
+        console.log("SET 2")
         let myDelegatesFilter = {adminAddress:currentAddress, type:'Delegate'}
         let nodes = []
         
@@ -62,6 +45,9 @@ class OthersFunds extends Component {
             nodes = LPState.getNodes(myDelegatesFilter)
         }
         
+        console.log("NODes")
+    
+
         this.populateCards(nodes)
 
         this.setState({
