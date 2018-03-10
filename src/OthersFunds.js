@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import LPState from "./LiquidPledgingState.js"
 import AdminCard from './AdminCard'
 import FlatButton from 'material-ui/FlatButton'
@@ -17,18 +17,15 @@ class OthersFunds extends BaseDelegationPage {
             currentAddress:'',
             totalAmount:0,
         }
-
     }
 
     setDelegations=()=>{
-        console.log("SET")
         let currentAddress = LPState.getCurrentAccount()
         let mergedAccounts = LPState.getIsMergedAccounts()
 
         if(!currentAddress)
             return
 
-        console.log("SET 2")
         let myDelegatesFilter = {adminAddress:currentAddress, type:'Delegate'}
         let nodes = []
         
@@ -45,9 +42,6 @@ class OthersFunds extends BaseDelegationPage {
             nodes = LPState.getNodes(myDelegatesFilter)
         }
         
-        console.log("NODes")
-    
-
         this.populateCards(nodes)
 
         this.setState({

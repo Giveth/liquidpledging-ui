@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import LPState from "./LiquidPledgingState.js"
-import Caller from './LiquidPledgingCaller'
 
 class BaseDelegationsPage extends Component {
-
-    constructor(){
-        super()
-    }
 
     componentWillMount()
     {

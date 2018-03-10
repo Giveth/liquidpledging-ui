@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import LPState from "./LiquidPledgingState.js"
 import AdminCard from './AdminCard'
 import FlatButton from 'material-ui/FlatButton'
@@ -17,15 +17,13 @@ class MyFunds extends BaseDelegationPage
             currentAddress:'',
             totalAmount:0,
         }
-
-       
     }
 
     setDelegations=()=>{
         
         let currentAddress = LPState.getCurrentAccount()
         let mergedAccounts = LPState.getIsMergedAccounts()
-
+        
         if(!currentAddress)
             return
             

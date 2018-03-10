@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Tabs, Tab} from 'material-ui/Tabs'
 import UrlRouting from './UrlRouting.js'
 import {Styles} from './Styles.js'
 import Drawer from 'material-ui/Drawer'
@@ -30,10 +29,8 @@ class LayoutController extends Component {
 
     onPageIdHashChanged=(pageId)=>
     {
-        console.log(pageId)
         let newPage = this.getPage(pageId)
 
-        console.log(newPage)
         if(!newPage)
             return
 
