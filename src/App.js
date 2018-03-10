@@ -27,7 +27,7 @@ class App extends Component {
 
     getIcon()
     {
-       return( <div style={{textAlign: 'center'}}>
+       return( <div key = "icon" style={{textAlign: 'center'}}>
                     <img
                         src={liquidPledgingLogo}
                         alt="Building the Future of Giving"
@@ -43,7 +43,6 @@ class App extends Component {
 
     changePage=(newPageId)=>
     {
-        console.log(LayoutController)
         UrlRouting.setProperty("pageId", newPageId)
     }
 
@@ -51,36 +50,42 @@ class App extends Component {
     {
         return [
             this.getIcon(),
-            <Divider/>,
-            <Subheader >Wallet</Subheader>,
+            <Divider key = "d0"/>,
+            <Subheader key = "a0" >Wallet</Subheader>,
             <MenuItem
+                key = {MY_FUNDS}
                 onClick = {()=>this.changePage(MY_FUNDS)}>
                 My Funds
             </MenuItem>,
 
             <MenuItem
-            onClick = {()=>this.changePage(OTHERS_FUNDS)}>
-            Other's Funds
+                key = {OTHERS_FUNDS}
+                onClick = {()=>this.changePage(OTHERS_FUNDS)}>
+                Other's Funds
             </MenuItem>,
             
             <MenuItem
+            key = {MY_PROJECTS}
                 onClick = {()=>this.changePage(MY_PROJECTS)}>
                 My Projects
             </MenuItem>,
 
-            <Divider/>,
-            <Subheader>Contract</Subheader>,
-            <MenuItem>Explorer</MenuItem>,
-            <MenuItem>Pledges</MenuItem>,
+            <Divider key = "d1"/>,
+            <Subheader key = "c">Contract</Subheader>,
+            <MenuItem key = "e" >Explorer</MenuItem>,
+            <MenuItem key = "p" >Pledges</MenuItem>,
+
+            <Divider key = "d2" />,
+            <MenuItem key = "a">About</MenuItem>,
         ]
     }
 
     getPages()
     {
         return [
-            <MyFunds pageId = {MY_FUNDS} label="My funds"/>,
-            <OthersFunds pageId = {OTHERS_FUNDS} label="Other's funds" />,
-            <MyProjects pageId = {MY_PROJECTS} label="My projects" />
+            <MyFunds key= {MY_FUNDS} pageId = {MY_FUNDS} label="My funds"/>,
+            <OthersFunds key = {OTHERS_FUNDS} pageId = {OTHERS_FUNDS} label="Other's funds" />,
+            <MyProjects key = {MY_PROJECTS} pageId = {MY_PROJECTS} label="My projects" />
         ]
     }
 
