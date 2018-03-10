@@ -263,8 +263,9 @@ export const Styles = {
     givethLogo:{
        // WebkitFilter: 'grayscale(100%)', 
        justifyContent:"center",
-       width:100,
-       height:100,
+       width:50,
+       height:50,
+       paddingTop:30
     },
 
     dialogs:{

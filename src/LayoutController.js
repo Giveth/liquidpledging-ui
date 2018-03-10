@@ -104,11 +104,11 @@ class LayoutController extends Component {
                         alt="Building the Future of Giving"
                         style={Styles.givethLogo}
                     />
-                    <h2 style = {{
+                    <h4 style = {{
                             fontWeight: 200,
                             textTransform: 'uppercase',
                             color:'grey'
-                        }}> Liquid Pledging </h2>
+                        }}> Liquid Pledging </h4>
                 </div>)
     }
 
@@ -126,7 +126,7 @@ class LayoutController extends Component {
         }
         else if (viewsNumber > 1)
         {
-            if(true)
+            if(false)
             {
                 let tabs = this.props.children.map((item, index)=>
                 {
