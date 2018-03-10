@@ -13,7 +13,15 @@ import AddressSelector from './AddressSelector.js'
 import MenuItem from 'material-ui/MenuItem'
 import liquidPledgingLogo from './liquid-pledging.svg'
 import {Styles} from './Styles.js'
+import Subheader from 'material-ui/Subheader'
+import Divider from 'material-ui/Divider'
+import UrlRouting from './UrlRouting.js'
 
+const MY_FUNDS = "myFunds"
+const OTHERS_FUNDS= "othersFunds"
+const MY_PROJECTS = "myProjects"
+const EXPLORER = "explorer"
+const PLEDGES = "pledges"
 
 class App extends Component {
 
@@ -33,21 +41,46 @@ class App extends Component {
                 </div>)
     }
 
-    getMenuItems()
+    changePage=(newPageId)=>
+    {
+        console.log(LayoutController)
+        UrlRouting.setProperty("pageId", newPageId)
+    }
+
+    getMenuItems=()=>
     {
         return [
             this.getIcon(),
-            <MenuItem>Menu Item</MenuItem>,
-            <MenuItem>Menu Item 2</MenuItem>
+            <Divider/>,
+            <Subheader >Wallet</Subheader>,
+            <MenuItem
+                onClick = {()=>this.changePage(MY_FUNDS)}>
+                My Funds
+            </MenuItem>,
+
+            <MenuItem
+            onClick = {()=>this.changePage(OTHERS_FUNDS)}>
+            Other's Funds
+            </MenuItem>,
+            
+            <MenuItem
+                onClick = {()=>this.changePage(MY_PROJECTS)}>
+                My Projects
+            </MenuItem>,
+
+            <Divider/>,
+            <Subheader>Contract</Subheader>,
+            <MenuItem>Explorer</MenuItem>,
+            <MenuItem>Pledges</MenuItem>,
         ]
     }
 
     getPages()
     {
         return [
-            <MyFunds pageId = "myFunds" label="My funds"/>,
-            <OthersFunds pageId = "othersFunds" label="Other's funds" />,
-            <MyProjects pageId = "myProjects" label="My projects" />
+            <MyFunds pageId = {MY_FUNDS} label="My funds"/>,
+            <OthersFunds pageId = {OTHERS_FUNDS} label="Other's funds" />,
+            <MyProjects pageId = {MY_PROJECTS} label="My projects" />
         ]
     }
 
@@ -67,8 +100,10 @@ class App extends Component {
         return (
                         
             <MuiThemeProvider muiTheme={GreyTheme}>
-                {this.getContent()}
-                <Dialogs/>
+                <div>
+                    {this.getContent()}
+                    <Dialogs/>
+                </div>
             </MuiThemeProvider>
             
         )

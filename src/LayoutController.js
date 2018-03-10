@@ -58,9 +58,9 @@ class LayoutController extends Component {
 
     getIndexFromPageId=(pageId)=>
     {
-        for(let i = 0; i<=this.props.pages.length; i ++)
+        for(let i = 0; i<=this.props.length; i ++)
         {
-            let item = this.props.pages[i]
+            let item = this.props[i]
             if(item)
             {
                 if(item.props.pageId === pageId)
@@ -85,10 +85,10 @@ class LayoutController extends Component {
     getNumberOfViews()
     {
         let n = 0
-        if(this.props.pages)
+        if(this.props)
             n = 1
-        if(this.props.pages.length)
-            n = this.props.pages.length
+        if(this.props.length)
+            n = this.props.length
         return n
     }
 
@@ -104,13 +104,13 @@ class LayoutController extends Component {
 
         if(viewsNumber===1)
         {
-            view = this.props.pages
+            view = this.props
         }
         else if (viewsNumber > 1)
         {
             if(false)
             {
-                let tabs = this.props.pages.map((item, index)=>
+                let tabs = this.props.map((item, index)=>
                 {
                     let label = ''
                     if(item.props.label)
@@ -128,21 +128,6 @@ class LayoutController extends Component {
                         </Tabs>
                     </div>)
             }
-            else
-            {
-                let tabs = this.props.pages.map((item, index)=>
-                {
-                    let label = ''
-                    if(item.props.label)
-                        label = item.props.label
-
-                        return (<PageColumn key={index} label={label} value={index}> {item} </PageColumn>)
-                    })
-
-                view = <div style = {Styles.row}>
-                    {tabs}
-                    </div>
-            }
         }
 
         return(
@@ -156,9 +141,6 @@ class LayoutController extends Component {
             </Drawer>
 
             <div style = {{paddingLeft:this.state.menuWidth}}>
-                
-                {this.props.header}
-                {view}
             </div>
             
         </div>)
