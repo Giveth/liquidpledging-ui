@@ -5,6 +5,7 @@ class UrlRouting {
     constructor()
     {
         this.properties = QueryString.parse(window.location.hash)
+        this.oldProperties = this.properties
         this.callbacks = {}
 
         window.addEventListener('hashchange', this.onHashChanged.bind(this), false)
@@ -16,12 +17,14 @@ class UrlRouting {
                 
         for(let id in newProperties)
         {
-            if(this.properties[id] !== newProperties[id])
+            if(this.oldProperties[id] !== newProperties[id])
             {
                 this.properties[id] = newProperties[id]
                 this.callbacks[id](newProperties[id])
             }
         }
+
+        this.oldProperties = JSON.parse(JSON.stringify(this.properties))
     }
 
     registerProperty=(id, onChangeCallback, defaultValue = "")=>
@@ -35,15 +38,17 @@ class UrlRouting {
         }
         else
         {
-            this.properties[id] = defaultValue
+            
             this.setProperty(id, defaultValue)
         }
     }
 
     setProperty=(id, value)=>
     {
-        this.properties[id]=value
-        let newHash = QueryString.stringify(this.properties)
+        //this.oldProperties = JSON.parse(JSON.stringify(this.properties))
+        let nextProperties  = JSON.parse(JSON.stringify(this.properties))
+        nextProperties[id]=value
+        let newHash = QueryString.stringify(nextProperties)
         window.location.hash=newHash
     }
 }
