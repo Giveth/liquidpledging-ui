@@ -4,10 +4,6 @@ import UrlRouting from './UrlRouting.js'
 import {Styles} from './Styles.js'
 import PageColumn from './PageColumn.js'
 import Drawer from 'material-ui/Drawer'
-import MenuItem from 'material-ui/MenuItem'
-import liquidPledgingLogo from './liquid-pledging.svg'
-
-
 
 const PAGE_ID = "pageId"
 
@@ -62,9 +58,9 @@ class LayoutController extends Component {
 
     getIndexFromPageId=(pageId)=>
     {
-        for(let i = 0; i<=this.props.children.length; i ++)
+        for(let i = 0; i<=this.props.pages.length; i ++)
         {
-            let item = this.props.children[i]
+            let item = this.props.pages[i]
             if(item)
             {
                 if(item.props.pageId === pageId)
@@ -79,9 +75,9 @@ class LayoutController extends Component {
 
     getPageIdFromIndex=(index)=>
     {
-        if(this.props.children[index])
-            if(this.props.children[index].props.pageId)
-                return this.props.children[index].props.pageId
+        if(this.props.pages[index])
+            if(this.props.pages[index].props.pageId)
+                return this.props.pages[index].props.pageId
 
         return ""
     }
@@ -89,28 +85,14 @@ class LayoutController extends Component {
     getNumberOfViews()
     {
         let n = 0
-        if(this.props.children)
+        if(this.props.pages)
             n = 1
-        if(this.props.children.length)
-            n = this.props.children.length
+        if(this.props.pages.length)
+            n = this.props.pages.length
         return n
     }
 
-    getIcon()
-    {
-       return( <div style={{textAlign: 'center'}}>
-                    <img
-                        src={liquidPledgingLogo}
-                        alt="Building the Future of Giving"
-                        style={Styles.givethLogo}
-                    />
-                    <h4 style = {{
-                            fontWeight: 200,
-                            textTransform: 'uppercase',
-                            color:'grey'
-                        }}> Liquid Pledging </h4>
-                </div>)
-    }
+    
 
 
     render() {
@@ -122,13 +104,13 @@ class LayoutController extends Component {
 
         if(viewsNumber===1)
         {
-            view = this.props.children
+            view = this.props.pages
         }
         else if (viewsNumber > 1)
         {
             if(false)
             {
-                let tabs = this.props.children.map((item, index)=>
+                let tabs = this.props.pages.map((item, index)=>
                 {
                     let label = ''
                     if(item.props.label)
@@ -148,7 +130,7 @@ class LayoutController extends Component {
             }
             else
             {
-                let tabs = this.props.children.map((item, index)=>
+                let tabs = this.props.pages.map((item, index)=>
                 {
                     let label = ''
                     if(item.props.label)
@@ -170,9 +152,7 @@ class LayoutController extends Component {
                 open={this.state.open}
                 docket
                 width = {this.state.menuWidth}>
-                {this.getIcon()}
-                <MenuItem>Menu Item</MenuItem>
-                <MenuItem>Menu Item 2</MenuItem>
+                {this.props.menuItems}
             </Drawer>
 
             <div style = {{paddingLeft:this.state.menuWidth}}>
