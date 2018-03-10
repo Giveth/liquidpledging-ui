@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
 import UrlRouting from './UrlRouting.js'
+import {Styles} from './Styles.js'
+import PageColumn from './PageColumn.js'
+
 const PAGE_ID = "pageId"
 
 class LayoutController extends Component {
@@ -87,11 +90,16 @@ class LayoutController extends Component {
         return n
     }
 
+    getSinglePageView()
+    {
+        
+    }
+
     render() {
 
         let viewsNumber = this.getNumberOfViews()
-        //let isTabLayout = ((Styles.minContentWidth * viewsNumber) > this.state.windowWidth)
-
+        console.log(viewsNumber, Styles.minContentWidth, this.state.windowWidth)
+        let isTabLayout = ((Styles.minContentWidth * viewsNumber) > this.state.windowWidth)
         let view = <div/>
 
         if(viewsNumber===1)
@@ -100,7 +108,7 @@ class LayoutController extends Component {
         }
         else if (viewsNumber > 1)
         {
-            if(true)//isTabLayout
+            if(isTabLayout)
             {
                 let tabs = this.props.children.map((item, index)=>
                 {
@@ -111,19 +119,33 @@ class LayoutController extends Component {
                     return (<Tab key={index} label={label} value={index}> {item} </Tab>)
                 })
 
-                view = <Tabs value={this.state.currentTab} onChange={this.onTabChange}> {tabs} </Tabs>
+                view =(
+                    <div style = {Styles.page.singlePage}>
+                        <Tabs
+                            value={this.state.currentTab}
+                            onChange={this.onTabChange}>
+                            {tabs}>
+                        </Tabs>
+                    </div>)
             }
             else
             {
-                //Make alternative layout here
+                let tabs = this.props.children.map((item, index)=>
+                {
+                    let label = ''
+                    if(item.props.label)
+                        label = item.props.label
+
+                        return (<PageColumn key={index} label={label} value={index}> {item} </PageColumn>)
+                    })
+
+                view = <div style = {Styles.row}>
+                    {tabs}
+                    </div>
             }
         }
 
-        return (
-           <div> 
-                {view}
-           </div>
-        )
+        return view
     }
 }
 

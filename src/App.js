@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import liquidPledgingLogo from './liquid-pledging.svg'
 import './App.css'
-import Page from './Page'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Styles } from './Styles'
 import GreyTheme from './GreyTheme'
@@ -24,9 +23,7 @@ class App extends Component {
             <MuiThemeProvider muiTheme={GreyTheme}>
                 <div> 
                     <AddressSelector />
-                    
-                    <Page>
-
+                
                         <div style={{textAlign: 'center'}}>
                             <img
                                 src={liquidPledgingLogo}
@@ -44,11 +41,9 @@ class App extends Component {
                             <MyFunds pageId = "myFunds" label="My funds"/>
                             <OthersFunds pageId = "othersFunds" label="Other's funds" />
                             <MyProjects pageId = "myProjects" label="My projects" />
-                            <Explorer pageId = "explorer" label="Explorer" adminTypes={["Delegate", "Project", "Giver"]} />
-                            <PledgesView pageId = "pledgesView" label="Pledges" />
                         </LayoutController>
 
-                    </Page>
+                   
                     
                     <AddAdmin/>
                     <Dialogs/>

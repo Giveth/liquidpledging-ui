@@ -67,14 +67,14 @@ export const Styles = {
     },
 
     page:{
-        center:{
+        singlePage:{
             display:"flex",
             justifyContent:"center",
-            alignItems:"flexStart"
+            alignItems:"flexStart",
+            maxWidth:MAX_CONTENT_WIDTH,
+            flex:1
         },
-
-        container:{
-            margin:20,
+        singlePageContainer:{
             maxWidth:MAX_CONTENT_WIDTH,
             minWidth:MIN_CONTENT_WIDTH,
             width:MAX_CONTENT_WIDTH
@@ -295,6 +295,11 @@ export const Styles = {
         left: 'auto',
         //position: 'fixed',
         zIndex:100,
+    },
+
+    pageColumn:
+    {
+        margin:10
     }
 
 }
