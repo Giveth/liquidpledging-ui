@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import LPState from './LiquidPledgingState'
 import PledgesTable from './PledgesTable'
+import BaseDelegationPage from './BaseDelegationsPage'
 
-class PledgesView extends Component {
+class PledgesView extends BaseDelegationPage {
 
     constructor(){
         super()
@@ -11,22 +12,6 @@ class PledgesView extends Component {
             network:'',
             pledges:[]
         }
-
-        LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
-        LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
-        LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
-    }
-
-    onStateChanged=()=>{
-        this.setDelegations()
-    }
-
-    onAccountChanged=()=>{
-        this.setDelegations()
-    }
-
-    onNetworkChanged=()=>{
-        this.setDelegations()
     }
 
     setDelegations=()=>

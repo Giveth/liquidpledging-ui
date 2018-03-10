@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 import LPState from "./LiquidPledgingState.js"
 import TextField from 'material-ui/TextField'
 import {List, ListItem} from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
 import Divider from 'material-ui/Divider'
 import Caller from './LiquidPledgingCaller'
+import BaseDelegationPage from './BaseDelegationsPage'
 
-class Explorer extends Component {
+class Explorer extends BaseDelegationPage {
 
     constructor(){
         super()
@@ -17,34 +18,6 @@ class Explorer extends Component {
             filtredTree: [],
             searchValue:""
         }
-    }
-
-    componentWillMount=()=>
-    {
-        LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
-        LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
-        LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
-        
-        this.setDelegations()
-    }
-
-    componentWillUnmount=()=>
-    {
-        LPState.removeListener(LPState.STATE_CHANGED, this.onStateChanged)
-        LPState.removeListener(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
-        LPState.removeListener(LPState.NETWORK_CHANGED, this.onNetworkChanged)
-    }
-
-    onStateChanged=()=>{
-        this.setDelegations()
-    }
-
-    onAccountChanged=()=>{
-        this.setDelegations()
-    }
-
-    onNetworkChanged=()=>{
-        this.setDelegations()
     }
 
     setDelegations=()=>
