@@ -68,18 +68,15 @@ export const Styles = {
 
     page:{
     
-        singlePage:{
-           // justifyContent:"center",
+        singlePageBody:{
             maxWidth:MAX_CONTENT_WIDTH,
             flex:1,
             padding:50
         },  
         
         singlePageContainer:{
-            maxWidth:MAX_CONTENT_WIDTH,
-            minWidth:MIN_CONTENT_WIDTH,
-            width:MAX_CONTENT_WIDTH
-        },
+            display:"flex",
+            justifyContent:"center"}
 
     },
 

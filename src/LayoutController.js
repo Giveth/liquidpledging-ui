@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import UrlRouting from './UrlRouting.js'
 import {Styles} from './Styles.js'
 import Drawer from 'material-ui/Drawer'
+import Header from './Header'
+import liquidPledgingLogo from './liquid-pledging.svg'
+import AppBar from 'material-ui/AppBar'
+import SvgIcon from 'material-ui/SvgIcon'
+
 
 const PAGE_ID = "pageId"
 
@@ -70,13 +75,15 @@ class LayoutController extends Component {
                 open={this.state.open}
                 docket
                 width = {this.state.menuWidth}>
+                <AppBar
+                    showMenuIconButton = {false}
+                />
+
                 {this.props.menuItems}
             </Drawer>
 
-            <div style = {{paddingLeft:this.state.menuWidth, display:"flex", justifyContent:"center"}}>
-                <div style = {Styles.page.singlePage}>
-                    {this.state.currentPage}
-                </div>
+            <div style = {{paddingLeft:this.state.menuWidth}}>
+                {this.state.currentPage}           
             </div>
             
         </div>)

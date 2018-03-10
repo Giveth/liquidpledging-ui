@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton'
 import { Styles, Currency, Merge } from './Styles'
 import Caller from './LiquidPledgingCaller'
 import BaseDelegationPage from './BaseDelegationsPage'
+import Header from './Header'
 
 class MyFunds extends BaseDelegationPage
 {
@@ -202,24 +203,29 @@ class MyFunds extends BaseDelegationPage
         let totalAmountText = 'My Funds total'+ Currency.symbol+Currency.format(Currency.toEther(this.state.totalAmount.toString()))
 
         return  (
-            <div >
+            <div style = {Styles.singlePageContainer}>
 
-                <div style={Styles.row}>
-                    <div style = {Styles.sectionFrontCell}>
+                <Header title = {this.props.label}/>
+                
+                <div style = {Styles.page.singlePage}>
 
+                    <div style={Styles.row}>
+                        <div style = {Styles.sectionFrontCell}>
+
+                        </div>
+
+                        <div style = {Merge(Styles.sectionMiddleCell, Styles.sectionTitle)}>
+                            {totalAmountText}
+                        </div>
+
+                        <div style = {Styles.sectionBackCell}>
+                            <FlatButton onClick = {this.onNewGiver} primary = {true} label="New Giver"  />
+                        </div>
                     </div>
 
-                    <div style = {Merge(Styles.sectionMiddleCell, Styles.sectionTitle)}>
-                        {totalAmountText}
-                    </div>
+                    {this.state.cards}
 
-                    <div style = {Styles.sectionBackCell}>
-                        <FlatButton onClick = {this.onNewGiver} primary = {true} label="New Giver"  />
-                    </div>
                 </div>
-
-                {this.state.cards}
-
             </div>
         )
     }
