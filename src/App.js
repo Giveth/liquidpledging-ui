@@ -5,33 +5,34 @@ import GreyTheme from './GreyTheme'
 import Dialogs from './Dialogs'
 import MyFunds from './MyFunds'
 import MyProjects from './MyProjects'
-import AddAdmin from './AddAdmin'
 import OthersFunds from './OthersFunds'
 import Explorer from './Explorer'
 import LayoutController from './LayoutController'
 import PledgesView from './PledgesView'
-import AddressSelector from './AddressSelector'
-//import UrlRouting from './UrlRouting'
+import AddressSelector from './AddressSelector.js'
 
 class App extends Component {
+
+    getContent()
+    {
+        return (
+            <LayoutController
+                defaultTab = {0}
+                header =  {<AddressSelector />}>
+                    
+                <MyFunds pageId = "myFunds" label="My funds"/>
+                <OthersFunds pageId = "othersFunds" label="Other's funds" />
+                <MyProjects pageId = "myProjects" label="My projects" />
+             </LayoutController>
+        )
+    }
 
     render() {
         return (
                         
             <MuiThemeProvider muiTheme={GreyTheme}>
-                <div> 
-                   
-                        <LayoutController defaultTab = {0} header =  {<AddressSelector />}>
-                                 
-                            <MyFunds pageId = "myFunds" label="My funds"/>
-                            <OthersFunds pageId = "othersFunds" label="Other's funds" />
-                            <MyProjects pageId = "myProjects" label="My projects" />
-                        </LayoutController>
-
-                    <AddAdmin/>
-                    <Dialogs/>
-
-                </div>
+                {this.getContent()}
+                <Dialogs/>
             </MuiThemeProvider>
             
         )
