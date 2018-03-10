@@ -24,30 +24,39 @@ class BaseDelegationsPage extends Component {
         LPState.removeListener(LPState.MERGED_ACCOUNTS_CHANGED, this.onMergedAccountsChanged)
     }
 
-    onStateChanged=()=>{
+    componentDidMount()
+    {
         this.setDelegations()
     }
 
-    onAccountChanged=()=>{
+    onStateChanged=()=>
+    {
         this.setDelegations()
     }
 
-    onMergedAccountsChanged=()=>{
+    onAccountChanged=()=>
+    {
         this.setDelegations()
     }
 
-    onNetworkChanged=()=>{
+    onMergedAccountsChanged=()=>
+    {
         this.setDelegations()
     }
 
-    setDelegations=()=>{
+    onNetworkChanged=()=>
+    {
+        this.setDelegations()
+    }
+
+    setDelegations=()=>
+    {
        console.warn("Override me!")
     }
 
-    render() {
-
-        return  <div/>
-        
+    render()
+    {
+        return  <div/>  
     }
 }
 export default BaseDelegationsPage
