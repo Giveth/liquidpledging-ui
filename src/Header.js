@@ -9,15 +9,17 @@ class Header extends Component
         return  (
             <div   style = {{
                 backgroundColor:"grey",
-                height:70,
+                height:25,
                 margin:0,
                 padding:20}}>
-                <h3 style= {{
-                    fontSize: "1 em",
+                <p style= {{
+                    margin:0,
+                    fontSize: "1.2 em",
                     fontWeight:200,
+                    textTransform:"uppercase",
                     color:"white"}}>
                     {this.props.title}
-                </h3>
+                </p>
             </div>
         )
     }
