@@ -440,7 +440,7 @@ export const Currency = {
             amount = parseFloat(amount)
 
         let number = Numeral(amount)
-        return number.format('$0,0.[0000]')
+        return number.format('$0,0.00[000]')//optional decimals inside brackets
     },
 
     //symbol : 'Ξ ' 
