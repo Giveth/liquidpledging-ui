@@ -12,6 +12,7 @@ import Moment from 'moment'
 
 const MAX_CONTENT_WIDTH = 960
 const MIN_CONTENT_WIDTH = 600
+const PAGE_SIDE_PADDING = 60
 
 export const Colors = {
     base:'#666',
@@ -47,6 +48,7 @@ export const Styles = {
     minContentWidth:MIN_CONTENT_WIDTH,
     maxContentWidth:MAX_CONTENT_WIDTH,
 
+
     emptyButton:{
         display:"flex",
         flexDirection: 'row',
@@ -64,20 +66,6 @@ export const Styles = {
         display:"flex",
         flexDirection: 'row',
         //justifyContent:'space-between',
-    },
-
-    page:{
-    
-        singlePageBody:{
-            maxWidth:MAX_CONTENT_WIDTH,
-            flex:1,
-            padding:50
-        },  
-        
-        singlePageContainer:{
-            display:"flex",
-            justifyContent:"center"}
-
     },
 
     subtitle:{
@@ -293,11 +281,67 @@ export const Styles = {
         right: 20,
         bottom: 'auto',
         left: 'auto',
-        //position: 'fixed',
         zIndex:100,
     },
 
+    title:{
+        fontSize: "x-large",
+        fontWeight:200,
+        color:"white"
+    },
+
+    appBar:{
+        body:{
+            backgroundColor: "#6CCDDC",
+            height: 30,
+            margin: 0,
+            paddingTop: 30,
+            paddingBottom:30,
+            paddingLeft:PAGE_SIDE_PADDING,
+            paddingRight:PAGE_SIDE_PADDING,
+            display: "flex",
+            flexDirection: 'row',
+            justifyContent:'center',
+            alignItems:"center",
+        },
+        content:{
+            display: "flex",
+            flexDirection: 'row',
+            justifyContent:'space-between',
+            alignItems:"baseline",
+            flex:1,
+            maxWidth:MAX_CONTENT_WIDTH
+        }
+    },
+
+    page:{
+        display: "flex",
+        justifyContent:'center',
+        flexDirection: 'column',
+    }, 
+    
+    singlePage:{
+    
+        body:{
+            display: "flex",
+            flexDirection: 'row',
+            justifyContent:'center',
+            alignItems:"center",
+        },  
+        
+        content:{
+            flex:1,
+            margin: 0,
+            paddingTop: 30,
+            paddingBottom:30,
+            paddingLeft:PAGE_SIDE_PADDING,
+            paddingRight:PAGE_SIDE_PADDING,
+            maxWidth:MAX_CONTENT_WIDTH
+        }
+    },
+    
 }
+
 
 export function Merge (style1, style2, style3={}) {
     return Object.assign({},style1, style2, style3)
