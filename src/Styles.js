@@ -412,7 +412,8 @@ export const Styles = {
     funds:{
         amount:{},
         currency:{
-            fontSize:"50%"
+            fontSize:"80%",
+            opacity:0.5
         },
     }
     
@@ -460,7 +461,7 @@ export const Currency = {
         return number.format('$0,0.[0000]')
     },
 
-    //symbol : 'Ξ' 
+    //symbol : 'Ξ ' 
     symbol : 'ETH ' 
 }
 

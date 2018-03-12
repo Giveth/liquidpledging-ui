@@ -6,8 +6,8 @@ class Funds extends Component
 
         return  (
             <div>
-                <span style = {Styles.Funds.currency}>   {Currency.symbol}  </span>
-                <span style = {Styles.Funds.amount}>   {Currency.toEther(this.props.amount)}  </span>
+                <span style = {Styles.funds.amount}>   {Currency.toEther(this.props.amount)}  </span>
+                <span style = {Styles.funds.currency}>   {Currency.symbol}  </span>
             </div>
         )
     }
