@@ -13,6 +13,8 @@ import Moment from 'moment'
 const MAX_CONTENT_WIDTH = 960
 const MIN_CONTENT_WIDTH = 600
 const PAGE_SIDE_PADDING = 60
+const CARD_RADIUS = 6
+const CARD_SIDE_PADDING = 25
 
 export const Colors = {
     base:'#666',
@@ -284,13 +286,21 @@ export const Styles = {
         zIndex:100,
     },
 
-    title:{
-        fontSize: "x-large",
-        fontWeight:200,
-        color:"white"
-    },
+    
 
     appBar:{
+        title:{
+            fontSize: "x-large",
+            fontWeight:200,
+            color:"white"
+        },
+
+        titleAmount:{
+            fontSize: "x-large",
+            fontWeight:200,
+            color:"white"
+        },
+
         body:{
             backgroundColor: "#6CCDDC",
             height: 30,
@@ -339,6 +349,72 @@ export const Styles = {
             maxWidth:MAX_CONTENT_WIDTH
         }
     },
+
+    card:{
+        title:{
+            fontSize:'1em',
+            color:"white",
+            fontWeight: 200,
+            textTransform: 'uppercase',
+            marginBottom:10,
+            marginTop:10,
+        },
+
+        title:{
+            fontSize:'1em',
+            color:"white",
+            fontWeight: 200,
+            textTransform: 'uppercase',
+            marginBottom:10,
+            marginTop:10,
+        },
+
+        body:{
+            display: "flex",
+            justifyContent:'center',
+            flexDirection: 'column',
+            padding:0,
+            backgroundColor:"white",
+            borderRadius:CARD_RADIUS,
+            margin:10
+        },
+
+        header:{
+            backgroundColor:"#6CCDDC",
+            paddingTop:10,
+            paddingBottom:10,
+            paddingLeft: CARD_SIDE_PADDING,
+            paddingRight: CARD_SIDE_PADDING,
+            borderTopLeftRadius: CARD_RADIUS,
+            borderTopRightRadius: CARD_RADIUS,
+            display: "flex",
+            justifyContent:'center',
+            flexDirection: 'column',
+        },
+
+        content:{
+            padding:20,
+            paddingLeft: CARD_SIDE_PADDING,
+            paddingRight: CARD_SIDE_PADDING,
+            display: "flex",
+            justifyContent:'center',
+            flexDirection: 'column',
+        },
+
+        row:{
+            display: "flex",
+            flexDirection: 'row',
+            justifyContent:'space-between',
+            alignItems:"baseline"
+        }
+    },
+
+    funds:{
+        amount:{},
+        currency:{
+            fontSize:"50%"
+        },
+    }
     
 }
 

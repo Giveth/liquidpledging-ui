@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Styles } from './Styles'
+import { Styles, Currency } from './Styles'
 import Caller from './LiquidPledgingCaller'
 import RootDelegationList from './RootDelegationList'
-import Paper from 'material-ui/Paper'
 import LPState from "./LiquidPledgingState.js"
-import SectionHeader from './SectionHeader'
+import SectionHeader from './SectionHeader.js'
+
 
 class AdminCard extends Component {
 
@@ -125,58 +125,72 @@ class AdminCard extends Component {
 
         return ( 
             
-          <Paper style={{padding:20, marginTop:10, marginBottom:20}} zDepth={1}>
+          <div style = {Styles.card.body}>
+
+                <div style = {Styles.card.header}>
+                    <div style = {Styles.card.row}>
+                        <div style = {Styles.card.title}> {this.props.node.name} </div>
+                        <div style = {Styles.card.titleAmount}> {Currency.toEther(this.props.totalAmount)} </div>
+                    </div>
+                </div>
 
                 {this.props.header}
 
-                <SectionHeader
-                    key = 'title'
-                    title= {this.props.node.name}
-                    titleStyle = {Styles.cardTitle}
-                    amount= {this.props.totalAmount}
-                    amountStyle = {Styles.cardTitle}
-                    onPledges = {this.onCardPledges}/>
+                <div style = {Styles.card.content}>
 
-                {unsecured}
 
-                <SectionHeader
-                    key = 'Available'
-                    title='Available'
-                    amount= {this.props.availableAmount}
-                    onPledges = {this.onAvailablePledges}
-                    children = {this.props.availableButtons}/>
+                    <SectionHeader
+                        key = 'title'
+                        title= {this.props.node.name}
+                        titleStyle = {Styles.cardTitle}
+                        amount= {this.props.totalAmount}
+                        amountStyle = {Styles.cardTitle}
+                        onPledges = {this.onCardPledges}/>
 
-                <SectionHeader
-                    key = 'Delegated'
-                    title='Delegated'
-                    amount= {this.props.delegatedAmount}
-                    onPledges = {this.onDelegatedPledges}/>
+                    {unsecured}
 
-                <RootDelegationList
-                    key='Delegations'
-                    delegations={this.props.delegationsOut}
-                    indentLevel={-1}
-                    userAddress={this.props.currentAddress}
-                    defaultColapsed = {false}
-                    defaultColapsedRoot={true}
-                    onPledges={this.onDelegationPledge}/>
+                    <SectionHeader
+                        key = 'Available'
+                        title='Available'
+                        amount= {this.props.availableAmount}
+                        onPledges = {this.onAvailablePledges}
+                        children = {this.props.availableButtons}/>
 
-                <SectionHeader
-                    key = 'Intended Projects'
-                    title='Intended Projects'
-                    amount= {this.props.assignedToProjectsAmount}
-                    onPledges = {this.onProjectsPledges}/>
+                    <SectionHeader
+                        key = 'Delegated'
+                        title='Delegated'
+                        amount= {this.props.delegatedAmount}
+                        onPledges = {this.onDelegatedPledges}/>
 
-                <RootDelegationList
-                    key='Projects'
-                    delegations={this.props.delegationsToProject}
-                    indentLevel={-1}
-                    userAddress={this.props.currentAddress}
-                    defaultColapsed = {false}
-                    defaultColapsedRoot={true}
-                    onPledges={this.onDelegationPledge}/>
+                    <RootDelegationList
+                        key='Delegations'
+                        delegations={this.props.delegationsOut}
+                        indentLevel={-1}
+                        userAddress={this.props.currentAddress}
+                        defaultColapsed = {false}
+                        defaultColapsedRoot={true}
+                        onPledges={this.onDelegationPledge}/>
 
-            </Paper>
+                    <SectionHeader
+                        key = 'Intended Projects'
+                        title='Intended Projects'
+                        amount= {this.props.assignedToProjectsAmount}
+                        onPledges = {this.onProjectsPledges}/>
+
+                    <RootDelegationList
+                        key='Projects'
+                        delegations={this.props.delegationsToProject}
+                        indentLevel={-1}
+                        userAddress={this.props.currentAddress}
+                        defaultColapsed = {false}
+                        defaultColapsedRoot={true}
+                        onPledges={this.onDelegationPledge}/>
+
+                
+                </div>
+
+            </div>
+
         )
     }
 }
