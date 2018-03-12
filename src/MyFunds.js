@@ -5,11 +5,10 @@ import FlatButton from 'material-ui/FlatButton'
 import { Styles, Currency, Merge } from './Styles'
 import Caller from './LiquidPledgingCaller'
 import BaseDelegationPage from './BaseDelegationsPage'
-import Header from './Header'
+import AppBar from './AppBar'
 
 class MyFunds extends BaseDelegationPage
 {
-
     constructor(){
         super()
 
@@ -205,7 +204,7 @@ class MyFunds extends BaseDelegationPage
         return  (
             <div style = {Styles.singlePageContainer}>
 
-                <Header title = {this.props.label}/>
+                <AppBar title = {this.props.label}/>
 
                 <div style = {Styles.page.singlePageBody}>
 

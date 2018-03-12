@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import FlatButton from 'material-ui/FlatButton'
-import AppBar from 'material-ui/AppBar'
 
-class Header extends Component
+class AppBar extends Component
 {
     render() {
 
@@ -24,4 +23,4 @@ class Header extends Component
         )
     }
 }
-export default Header
+export default AppBar

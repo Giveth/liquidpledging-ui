@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import UrlRouting from './UrlRouting.js'
 import {Styles} from './Styles.js'
 import Drawer from 'material-ui/Drawer'
-import Header from './Header'
+import AppBar from './AppBar'
 import liquidPledgingLogo from './liquid-pledging.svg'
-import AppBar from 'material-ui/AppBar'
 import SvgIcon from 'material-ui/SvgIcon'
 
 
