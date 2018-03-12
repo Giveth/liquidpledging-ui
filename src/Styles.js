@@ -14,7 +14,7 @@ const MAX_CONTENT_WIDTH = 960
 const MIN_CONTENT_WIDTH = 600
 const PAGE_SIDE_PADDING = 60
 const CARD_RADIUS = 6
-const CARD_SIDE_PADDING = 25
+const CARD_SIDE_PADDING = 35
 
 export const Colors = {
     base:'#666',
@@ -389,7 +389,17 @@ export const Styles = {
             flexDirection: 'row',
             justifyContent:'space-between',
             alignItems:"baseline"
-        }
+        },
+
+        subHeader:
+        {
+            fontSize:'1em',
+            color:Colors.subtle,
+            fontWeight: 200,
+            textTransform: 'uppercase',
+            marginBottom:10,
+            marginTop:10,
+        }, 
     },
 
     funds:{

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import SectionHeader from './SectionHeader'
 import { Styles, Icons, Merge, Time } from './Styles'
 import IconButton from 'material-ui/IconButton'
 import FlatButton from 'material-ui/FlatButton'
 import Caller from './LiquidPledgingCaller'
+import Funds from './Funds'
 
 class RootDelegationList extends Component {   
 
@@ -80,6 +80,17 @@ class RootDelegationList extends Component {
             }
 
             return (
+
+                <div key= {"Delegation" + index} style = {Merge(Styles.card.row, {})} onClick = {onPledges}>
+                    {d.name}
+                    <div style = {Styles.row}>
+                        {actionButons}
+                        <div style={Styles.space}/>
+                        <Funds amount = {amount}/>
+                    </div>
+                </div>
+            )})
+                /*
             <SectionHeader
                 key = {'Delegation'+index}
                 title={d.name}
@@ -94,8 +105,10 @@ class RootDelegationList extends Component {
                 {timeLeft}
                 
             </SectionHeader>)
+            
+            */
                 
-        })
+        
         
         return (
             <div>
