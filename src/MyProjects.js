@@ -177,15 +177,15 @@ class MyProjects extends BaseDelegationPage {
             <div style = {Styles.page}>
 
                 <AppBar>
-                    <div style = {Styles.title}>
+                    <div style = {Styles.appBar.title}>
                         {this.props.label}
                     </div>
 
-                    <div style = {Styles.title}>
+                    <div style = {Styles.appBar.titleAmount}>
                         {totalAmountText}
                     </div>
 
-                    <div style = {Styles.title}>
+                    <div>
                         <FlatButton onClick = {this.onNewProject} primary = {true} label="New Project"  />
                     </div>
 
