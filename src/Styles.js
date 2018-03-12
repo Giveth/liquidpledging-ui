@@ -289,17 +289,6 @@ export const Styles = {
     
 
     appBar:{
-        title:{
-            fontSize: "x-large",
-            fontWeight:200,
-            color:"white"
-        },
-
-        titleAmount:{
-            fontSize: "x-large",
-            fontWeight:200,
-            color:"white"
-        },
 
         body:{
             backgroundColor: "#6CCDDC",
@@ -313,6 +302,7 @@ export const Styles = {
             flexDirection: 'row',
             justifyContent:'center',
             alignItems:"center",
+
         },
         content:{
             display: "flex",
@@ -320,7 +310,10 @@ export const Styles = {
             justifyContent:'space-between',
             alignItems:"baseline",
             flex:1,
-            maxWidth:MAX_CONTENT_WIDTH
+            maxWidth:MAX_CONTENT_WIDTH,
+            fontSize: "x-large",
+            fontWeight:200,
+            color:"white"
         }
     },
 
