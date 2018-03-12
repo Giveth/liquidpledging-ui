@@ -351,23 +351,6 @@ export const Styles = {
     },
 
     card:{
-        title:{
-            fontSize:'1em',
-            color:"white",
-            fontWeight: 200,
-            textTransform: 'uppercase',
-            marginBottom:10,
-            marginTop:10,
-        },
-
-        title:{
-            fontSize:'1em',
-            color:"white",
-            fontWeight: 200,
-            textTransform: 'uppercase',
-            marginBottom:10,
-            marginTop:10,
-        },
 
         body:{
             display: "flex",
@@ -381,8 +364,8 @@ export const Styles = {
 
         header:{
             backgroundColor:"#6CCDDC",
-            paddingTop:10,
-            paddingBottom:10,
+            paddingTop:20,
+            paddingBottom:20,
             paddingLeft: CARD_SIDE_PADDING,
             paddingRight: CARD_SIDE_PADDING,
             borderTopLeftRadius: CARD_RADIUS,
@@ -390,6 +373,12 @@ export const Styles = {
             display: "flex",
             justifyContent:'center',
             flexDirection: 'column',
+
+            fontSize:'1em',
+            color:"white",
+            fontWeight: 200,
+            textTransform: 'uppercase',
+
         },
 
         content:{
@@ -413,7 +402,7 @@ export const Styles = {
         amount:{},
         currency:{
             fontSize:"80%",
-            opacity:0.5
+            opacity:0.7
         },
     }
     

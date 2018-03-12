@@ -4,7 +4,7 @@ import Caller from './LiquidPledgingCaller'
 import RootDelegationList from './RootDelegationList'
 import LPState from "./LiquidPledgingState.js"
 import SectionHeader from './SectionHeader.js'
-
+import Funds from './Funds.js'
 
 class AdminCard extends Component {
 
@@ -129,8 +129,8 @@ class AdminCard extends Component {
 
                 <div style = {Styles.card.header}>
                     <div style = {Styles.card.row}>
-                        <div style = {Styles.card.title}> {this.props.node.name} </div>
-                        <div style = {Styles.card.titleAmount}> {Currency.toEther(this.props.totalAmount)} </div>
+                        {this.props.node.name}
+                        <Funds amount = {this.props.totalAmount}/>
                     </div>
                 </div>
 
