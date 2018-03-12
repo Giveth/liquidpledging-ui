@@ -128,24 +128,17 @@ class AdminCard extends Component {
           <div style = {Styles.card.body}>
 
                 <div style = {Styles.card.header}>
-                    <div style = {Styles.card.row}>
+                    <div style = {Styles.card.row} onClick = {this.onCardPledges}>
                         {this.props.node.name}
-                        <Funds amount = {this.props.totalAmount}/>
+                        <div style = {Styles.row}>
+                            {this.props.header}
+                            <div style={Styles.space}/>
+                            <Funds amount = {this.props.totalAmount}/>
+                        </div>
                     </div>
                 </div>
 
-                {this.props.header}
-
                 <div style = {Styles.card.content}>
-
-
-                    <SectionHeader
-                        key = 'title'
-                        title= {this.props.node.name}
-                        titleStyle = {Styles.cardTitle}
-                        amount= {this.props.totalAmount}
-                        amountStyle = {Styles.cardTitle}
-                        onPledges = {this.onCardPledges}/>
 
                     {unsecured}
 

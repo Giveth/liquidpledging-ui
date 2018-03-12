@@ -67,6 +67,7 @@ export const Styles = {
     row:{
         display:"flex",
         flexDirection: 'row',
+        alignItems:"baseline"
         //justifyContent:'space-between',
     },
 
