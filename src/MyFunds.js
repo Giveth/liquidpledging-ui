@@ -199,30 +199,32 @@ class MyFunds extends BaseDelegationPage
     }
 
     render() {
-        let totalAmountText = 'My Funds total'+ Currency.symbol+Currency.format(Currency.toEther(this.state.totalAmount.toString()))
+        let totalAmountText =  Currency.symbol+Currency.format(Currency.toEther(this.state.totalAmount.toString()))
 
         return  (
-            <div style = {Styles.singlePageContainer}>
+            <div style = {Styles.page}>
 
-                <AppBar title = {this.props.label}/>
-
-                <div style = {Styles.page.singlePageBody}>
-
-                    <div style={Styles.row}>
-                        <div style = {Styles.sectionFrontCell}>
-
-                        </div>
-
-                        <div style = {Merge(Styles.sectionMiddleCell, Styles.sectionTitle)}>
-                            {totalAmountText}
-                        </div>
-
-                        <div style = {Styles.sectionBackCell}>
-                            <FlatButton onClick = {this.onNewGiver} primary = {true} label="New Giver"  />
-                        </div>
+                <AppBar>
+                    <div style = {Styles.title}>
+                        {this.props.label}
                     </div>
 
-                    {this.state.cards}
+                    <div style = {Styles.title}>
+                        {totalAmountText}
+                    </div>
+
+                    <div style = {Styles.title}>
+                        <FlatButton onClick = {this.onNewGiver} primary = {true} label="New Giver" />
+                    </div>
+
+                </AppBar>
+                
+
+                <div style = {Styles.singlePage.body}>
+
+                     <div style = {Styles.singlePage.content}>
+                        {this.state.cards}
+                    </div>
 
                 </div>
             </div>
