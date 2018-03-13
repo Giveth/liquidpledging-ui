@@ -99,19 +99,6 @@ class OthersFunds extends BaseDelegationPage {
             )
     }
 
-    getHeader=(node)=>
-    {
-        return (
-            <div>
-                <div style={Styles.row}>
-                <div style = {Styles.sectionFrontCell}/>
-                <div style = {Styles.sectionMiddleCell}/>
-                <div style = {Styles.sectionBackCell}/>
-            </div>
-         </div>
-        )
-    }
-
     populateCards=(nodes)=>
     {
         let cards = []
@@ -139,16 +126,13 @@ class OthersFunds extends BaseDelegationPage {
     
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
             totalDelegateAmount += assignedAmount
-            let header = this.getHeader(node)
             let availableButtons = this.getAvailableButtons(node)
 
             let card = <AdminCard
                 key={node.id}
                 node = {node}
                 userAddress={node.adminAddress}
-
-                header = {header}
-
+                
                 delegationsIn={delegationsIn}
                 delegationsOut={delegationsOut}
                 delegationsToProject={delegationsToProject}

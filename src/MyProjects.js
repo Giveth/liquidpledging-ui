@@ -58,14 +58,6 @@ class MyProjects extends BaseDelegationPage {
         Caller.showAddAdminDialog(data)
     }
 
-    getHeader=(node)=>
-    {
-        return (
-            <div>
-            </div>
-        )
-    }
-
     getAvailableButtons=(node)=>
     {
         function onDelegateFunds()
@@ -138,14 +130,11 @@ class MyProjects extends BaseDelegationPage {
     
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount + unsecuredAmount
             totalGiverAmount += assignedAmount
-            let header = this.getHeader(node)
 
             let card = <AdminCard
                 key={node.id}
                 node = {node}
                 userAddress={this.adminAddress}
-
-                header = {header}
 
                 delegationsIn={delegationsIn}
                 delegationsOut={delegationsOut}

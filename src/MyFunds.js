@@ -113,7 +113,7 @@ class MyFunds extends BaseDelegationPage
             )
     }
 
-    getHeader=(node)=>
+    getAddFundsButton=(node)=>
     {
         let that = this
 
@@ -123,20 +123,12 @@ class MyFunds extends BaseDelegationPage
         }
 
         return (
-            <div>
-                <div style={Styles.row}>
-                <div style = {Styles.sectionFrontCell}/>
-                <div style = {Styles.sectionMiddleCell}/>   
-                <div style = {Styles.sectionBackCell}>
-                    <FlatButton
-                        onClick = {onAddFunds}
-                        secondary = {false}
-                        label={'Add Funds'}
-                        labelStyle = {{fontSize:11}}
-                    />     
-                </div>
-            </div>
-         </div>
+            <FlatButton
+                onClick = {onAddFunds}
+                secondary = {false}
+                label={'Add Funds'}
+                labelStyle = {{fontSize:11}}
+            />       
         )
     }
 
@@ -167,7 +159,7 @@ class MyFunds extends BaseDelegationPage
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount
             totalGiverAmount += assignedAmount
 
-            let header = this.getHeader(node)
+            let addFundsButton = this.getAddFundsButton(node)
 
             let availableButtons = this.getAvailableButtons(node)
 
@@ -176,10 +168,10 @@ class MyFunds extends BaseDelegationPage
                 node = {node}
                 userAddress={node.adminAddress}
 
-                header = {header}
+                addFundsButton = {addFundsButton}
 
                 delegationsIn={delegationsIn}
-                delegationsOut={delegationsOut}
+                delegationsOut={delegationsOut}s
                 delegationsToProject={delegationsToProject}
                 
                 availableAmount= {availableAmount}

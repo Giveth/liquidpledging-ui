@@ -11,8 +11,8 @@ import Web3 from 'web3'
 import Moment from 'moment'
 
 const MAX_CONTENT_WIDTH = 960
-const MIN_CONTENT_WIDTH = 100
-const PAGE_SIDE_PADDING = 60
+const MIN_CONTENT_WIDTH = 550
+const PAGE_SIDE_PADDING = 20
 const CARD_RADIUS = 6
 const CARD_SIDE_PADDING = 35
 
@@ -311,6 +311,7 @@ export const Styles = {
             alignItems:"baseline",
             flex:1,
             maxWidth:MAX_CONTENT_WIDTH,
+            minWidth:MIN_CONTENT_WIDTH,
             fontSize: "x-large",
             fontWeight:200,
             color:"white"
@@ -339,7 +340,8 @@ export const Styles = {
             paddingBottom:30,
             paddingLeft:PAGE_SIDE_PADDING,
             paddingRight:PAGE_SIDE_PADDING,
-            maxWidth:MAX_CONTENT_WIDTH
+            maxWidth:MAX_CONTENT_WIDTH,
+            minWidth:MIN_CONTENT_WIDTH
         }
     },
 

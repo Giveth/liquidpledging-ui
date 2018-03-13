@@ -129,9 +129,6 @@ class AdminCard extends Component {
         }
 
 
-
-
-
         return ( 
             
           <div style = {Styles.card.body}>
@@ -140,7 +137,7 @@ class AdminCard extends Component {
                     <div style = {Styles.card.row} onClick = {this.onCardPledges}>
                         {this.props.node.name}
                         <div style = {Styles.row}>
-                            {this.props.header}
+                            {this.props.addFundsButton}
                             <div style={Styles.space}/>
                             <Funds amount = {this.props.totalAmount}/>
                         </div>
