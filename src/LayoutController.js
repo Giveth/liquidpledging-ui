@@ -3,6 +3,7 @@ import UrlRouting from './UrlRouting.js'
 import {Styles,Merge} from './Styles.js'
 import Drawer from 'material-ui/Drawer'
 import liquidPledgingLogo from './liquid-pledging.svg'
+import AddressSelector from './AddressSelector.js'
 
 const PAGE_ID = "pageId"
 
@@ -90,21 +91,27 @@ class LayoutController extends Component {
 
         return(
         <div>
-            
-            <Drawer
-                open={this.state.open}
-                docket
-                width = {this.state.menuWidth}>
-                {this.props.menuItems}
-            </Drawer>
-
-            <div style = {Merge(Styles.canvas, {marginLeft:this.state.menuWidth})}>
-                {view}           
-            </div>
-            
-        </div>)
         
-    }
+            <div style = {Styles.appBar.header}>  
+            a 
+                <AddressSelector/>
+
+            </div>         
+            
+            <div style ={Styles.row}>
+                
+                <div style = {Merge(Styles.drawer, {width:this.state.menuWidth})}>
+                    {this.props.menuItems}
+                </div>
+
+                <div style = {Styles.canvas}>
+                    {view}           
+                </div>
+                
+            </div>
+        </div>
+        
+    ) }
 }
 
 export default LayoutController

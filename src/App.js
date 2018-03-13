@@ -52,7 +52,7 @@ class App extends Component {
     {
         return [
 
-            <AppBar/> ,
+            <div style = {Styles.appBar.menu}/> ,
             this.getIcon(),
             <Divider key = "d0"/>,
             <Subheader key = "a0" >Wallet</Subheader>,

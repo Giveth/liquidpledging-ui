@@ -11,7 +11,7 @@ import Web3 from 'web3'
 import Moment from 'moment'
 
 const MAX_CONTENT_WIDTH = 960
-const MIN_CONTENT_WIDTH = 250
+const MIN_CONTENT_WIDTH = 300
 const PAGE_SIDE_PADDING = 30
 const CARD_RADIUS = 5
 const CARD_SIDE_PADDING = 35
@@ -70,7 +70,7 @@ export const Styles = {
     row:{
         display:"flex",
         flexDirection: 'row',
-        alignItems:"baseline"
+        //alignItems:"baseline"
         //justifyContent:'space-between',
     },
 
@@ -290,6 +290,8 @@ export const Styles = {
         zIndex:100,
     },
 
+    
+
     appBar:{
 
         body:{
@@ -304,14 +306,28 @@ export const Styles = {
             flexDirection: 'row',
             justifyContent:'center',
             alignItems:"center",
+        },
 
+        menu:{
+            backgroundColor: Colors.contrast,
+            height: 30,
+            margin: 0,
+            paddingTop: 30,
+            paddingBottom:30,
+            width:"100%"
+        },
 
-            //position:'fixed',
-            //top:0,
-            //zIndex:1,
-
-            //boxShadow:"0px 0px 20px -2px #000000"
-
+        header:{
+            backgroundColor: Colors.contrast,
+            height: 30,
+            margin: 0,
+            paddingTop: 10,
+            paddingBottom:10,
+            paddingLeft:PAGE_SIDE_PADDING,
+            paddingRight:PAGE_SIDE_PADDING,
+            display: "flex",
+            flexDirection: 'row',
+            justifyContent:'space-between',
         },
 
         getHeight(){
@@ -332,11 +348,18 @@ export const Styles = {
              }
     },
 
+    drawer:{
+        width:300,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent:'flex-start',
+        alignItems: 'left',
+    },
 
     canvas:{
+        flex:1,
         display: "flex",
         flexDirection: 'row',
-        //justifyContent:'center',
         alignItems:"flex-start",
     },
 
@@ -344,7 +367,7 @@ export const Styles = {
         flex:1,
         display: "flex",
         justifyContent:'center',
-        flexDirection: 'column',
+        flexDirection: 'column',       
     }, 
     
     singlePage:{
@@ -354,7 +377,6 @@ export const Styles = {
             flexDirection: 'row',
             justifyContent:'center',
             alignItems:"center",
-            //marginTop:APPBAR_HEIGHT,//AppBar total hight
         },  
         
         content:{
@@ -366,7 +388,6 @@ export const Styles = {
             paddingRight:PAGE_SIDE_PADDING,
             maxWidth:MAX_CONTENT_WIDTH,
             minWidth:MIN_CONTENT_WIDTH,
-            //maxHeight:700,
             overflow:"auto"
         }
     },
@@ -381,7 +402,8 @@ export const Styles = {
             backgroundColor:"white",
             borderRadius:CARD_RADIUS,
             marginTop:15,
-            marginBottom:15
+            marginBottom:15,
+            transition: "transform 300ms ease-in-out"
         },
 
         header:{
