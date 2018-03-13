@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import UrlRouting from './UrlRouting.js'
-import {Styles} from './Styles.js'
+import {Styles,Merge} from './Styles.js'
 import Drawer from 'material-ui/Drawer'
 import liquidPledgingLogo from './liquid-pledging.svg'
 
@@ -58,11 +58,32 @@ class LayoutController extends Component {
                 return this.props.pages[i]
     }
 
+    getGroupViews(group)
+    {
+        let views = []
+        for(let pageId of group)
+            views.push(this.getPage(pageId))
+        return views
+    }
+
+    getGroupFromPageId(pageId, groups)
+    {
+        for(let group of groups)
+            for(let id of group)
+                if(id === pageId)
+                    return group
+        return []
+    }
 
     render() {
 
-        //let viewsNumber = this.getNumberOfViews()
-        //let isTabLayout = ((Styles.minContentWidth * viewsNumber) > this.state.windowWidth)
+        let viewsNumber = this.getNumberOfViews()
+        let isTabLayout = ((Styles.minContentWidth * viewsNumber) > this.state.windowWidth)
+
+        let view = this.state.currentPage
+
+        if(true)
+            view = this.getGroupViews(this.getGroupFromPageId(this.state.currentPageId, this.props.groups))
 
         return(
         <div>
@@ -71,12 +92,11 @@ class LayoutController extends Component {
                 open={this.state.open}
                 docket
                 width = {this.state.menuWidth}>
-
                 {this.props.menuItems}
             </Drawer>
 
-            <div style = {{paddingLeft:this.state.menuWidth}}>
-                {this.state.currentPage}           
+            <div style = {Merge(Styles.canvas, {paddingLeft:this.state.menuWidth})}>
+                {view}           
             </div>
             
         </div>)
