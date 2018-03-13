@@ -17,6 +17,14 @@ class Funds extends Component
     
     componentWillReceiveProps=(props)=>
     {
+        if(!this.props.animate)
+        {
+            this.setState({
+                currentAmount:Currency.toEther(props.amount),
+                futureAmount:Currency.toEther(props.amount)})
+            return
+        }
+    
         if(Currency.toEther(props.amount)==this.state.futureAmount)
             return
 
@@ -28,7 +36,6 @@ class Funds extends Component
     {
         clearInterval(this.timer)
         this.timer = setInterval(this.tick, 50);
-        console.log("interval started")
     }
 
     tick=()=>
@@ -42,7 +49,6 @@ class Funds extends Component
         {
             newAmount = this.state.futureAmount
             clearInterval(this.timer)
-            console.log("interval stopped")
         }
 
         newAmount = Math.round(newAmount*100)/100
@@ -51,10 +57,14 @@ class Funds extends Component
         
     render() {
 
+        let currency = <span style = {Styles.funds.currency}>   {Currency.symbol}  </span>
+        if(!this.props.showCurrency)
+            currency =  <span/>
+
         return  (
             <div>
                 <span style = {Styles.funds.amount}>   {Currency.format(this.state.currentAmount)}  </span>
-                <span style = {Styles.funds.currency}>   {Currency.symbol}  </span>
+                {currency}
             </div>
         )
     }
