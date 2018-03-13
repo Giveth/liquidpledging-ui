@@ -16,6 +16,8 @@ import {Styles} from './Styles.js'
 import Subheader from 'material-ui/Subheader'
 import Divider from 'material-ui/Divider'
 import UrlRouting from './UrlRouting.js'
+import AppBar from './AppBar.js'
+
 
 const MY_FUNDS = "myFunds"
 const OTHERS_FUNDS= "othersFunds"
@@ -49,6 +51,8 @@ class App extends Component {
     getMenuItems=()=>
     {
         return [
+
+            <AppBar/> ,
             this.getIcon(),
             <Divider key = "d0"/>,
             <Subheader key = "a0" >Wallet</Subheader>,

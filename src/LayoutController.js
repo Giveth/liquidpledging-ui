@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import UrlRouting from './UrlRouting.js'
 import {Styles} from './Styles.js'
 import Drawer from 'material-ui/Drawer'
-import AppBar from './AppBar'
 import liquidPledgingLogo from './liquid-pledging.svg'
-import SvgIcon from 'material-ui/SvgIcon'
-
 
 const PAGE_ID = "pageId"
 
@@ -17,7 +14,7 @@ class LayoutController extends Component {
         this.state={
             currentPageId:props.pages[0].props.pageId,
             windowWidth:window.innerWidth,
-            menuWidth:250,
+            menuWidth:200,
             currentPage:<div/>
         }
 
@@ -74,9 +71,6 @@ class LayoutController extends Component {
                 open={this.state.open}
                 docket
                 width = {this.state.menuWidth}>
-                <AppBar
-                    showMenuIconButton = {false}
-                />
 
                 {this.props.menuItems}
             </Drawer>
