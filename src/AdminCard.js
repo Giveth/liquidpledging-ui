@@ -139,7 +139,7 @@ class AdminCard extends Component {
                         <div style = {Styles.row}>
                             {this.props.addFundsButton}
                             <div style={Styles.space}/>
-                            <Funds amount = {this.props.totalAmount}/>
+                            <Funds showCurrency amount = {this.props.totalAmount}/>
                         </div>
                     </div>
                 </div>
@@ -164,7 +164,7 @@ class AdminCard extends Component {
 
                     <div key= "Delegated" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onDelegatedPledges}>
                         {"Delegated"}
-                        <Funds amount = {this.props.availableAmount}/>
+                        <Funds amount = {this.props.delegatedAmount}/>
                     </div>
 
                     <RootDelegationList

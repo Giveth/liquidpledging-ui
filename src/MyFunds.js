@@ -201,7 +201,7 @@ class MyFunds extends BaseDelegationPage
                         {this.props.label}
                     </div>
 
-                     <Funds amount = {this.state.totalAmount}/>
+                     <Funds amount = {this.state.totalAmount} showCurrency/>
 
                     <div style = {Styles.title}>
                         <FlatButton onClick = {this.onNewGiver} primary = {true} label="New Giver" />

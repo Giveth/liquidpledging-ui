@@ -17,7 +17,7 @@ class Funds extends Component
     
     componentWillReceiveProps=(props)=>
     {
-        if(!this.props.animate)
+        if(this.props.noAnimation)
         {
             this.setState({
                 currentAmount:Currency.toEther(props.amount),
@@ -63,8 +63,8 @@ class Funds extends Component
 
         return  (
             <div>
-                <span style = {Styles.funds.amount}>   {Currency.format(this.state.currentAmount)}  </span>
                 {currency}
+                <span style = {Styles.funds.amount}>   {Currency.format(this.state.currentAmount)}  </span>
             </div>
         )
     }

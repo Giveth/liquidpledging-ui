@@ -6,6 +6,7 @@ import { Styles, Currency, Merge } from './Styles'
 import Caller from './LiquidPledgingCaller'
 import BaseDelegationPage from './BaseDelegationsPage'
 import AppBar from './AppBar'
+import Funds from './Funds'
 
 
 class MyProjects extends BaseDelegationPage {
@@ -160,8 +161,6 @@ class MyProjects extends BaseDelegationPage {
 
     render() {
         
-        let totalAmountText = Currency.symbol+Currency.format(Currency.toEther(this.state.totalAmount))
-
         return  (
             <div style = {Styles.page}>
 
@@ -170,9 +169,7 @@ class MyProjects extends BaseDelegationPage {
                         {this.props.label}
                     </div>
 
-                    <div style = {Styles.appBar.titleAmount}>
-                        {totalAmountText}
-                    </div>
+                    <Funds amount = {this.state.totalAmount} showCurrency/>
 
                     <div>
                         <FlatButton onClick = {this.onNewProject} primary = {true} label="New Project"  />
