@@ -13,7 +13,7 @@ import Moment from 'moment'
 const MAX_CONTENT_WIDTH = 960
 const MIN_CONTENT_WIDTH = 550
 const PAGE_SIDE_PADDING = 20
-const CARD_RADIUS = 6
+const CARD_RADIUS = 5
 const CARD_SIDE_PADDING = 35
 
 export const Colors = {
