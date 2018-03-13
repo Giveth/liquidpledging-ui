@@ -176,7 +176,7 @@ class OthersFunds extends BaseDelegationPage {
                 
                 <div style = {Styles.singlePage.body}>
 
-                     <div style = {Styles.singlePage.content}>
+                     <div style = {Merge(Styles.singlePage.content, {height:window.innerHeight - Styles.appBar.getHeight() - 50})}>
                         {this.state.cards}
                     </div>
 
