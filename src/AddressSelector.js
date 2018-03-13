@@ -73,7 +73,10 @@ class AddressSelector extends React.Component
                     value={this.state.selectedAccount}
                     onChange={this.onSelected}
                     style={{fontSize:'0.8em'}}
-                    autoWidth={true}>
+                    autoWidth={true}
+                    labelStyle = {{color:"white"}}
+                    underlineStyle={{display: 'none'}}>
+                    
 
                     {list}
 
