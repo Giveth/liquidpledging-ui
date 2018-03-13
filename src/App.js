@@ -113,7 +113,7 @@ class App extends Component {
                 header =  {<AddressSelector />}
                 menuItems = {this.getMenuItems()}
                 pages = {this.getPages()}
-                groups = {[[MY_FUNDS, OTHERS_FUNDS, MY_PROJECTS],[EXPLORER, PLEDGES]]}/>
+                groups = {[[MY_FUNDS, OTHERS_FUNDS, MY_PROJECTS],[EXPLORER], [PLEDGES]]}/>
 
         )
     }
