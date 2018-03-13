@@ -112,7 +112,8 @@ class App extends Component {
                 defaultTab = {0}
                 header =  {<AddressSelector />}
                 menuItems = {this.getMenuItems()}
-                pages = {this.getPages()}/>
+                pages = {this.getPages()}
+                groups = {[[MY_FUNDS, OTHERS_FUNDS, MY_PROJECTS],[EXPLORER, PLEDGES]]}/>
 
         )
     }

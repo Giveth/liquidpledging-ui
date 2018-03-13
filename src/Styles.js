@@ -318,6 +318,13 @@ export const Styles = {
         }
     },
 
+    canvas:{
+        display: "flex",
+        flexDirection: 'row',
+        justifyContent:'center',
+        alignItems:"flex-start",
+    },
+
     page:{
         display: "flex",
         justifyContent:'center',
@@ -354,7 +361,8 @@ export const Styles = {
             padding:0,
             backgroundColor:"white",
             borderRadius:CARD_RADIUS,
-            margin:15
+            marginTop:15,
+            marginBottom:15
         },
 
         header:{
