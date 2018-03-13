@@ -11,10 +11,12 @@ import Web3 from 'web3'
 import Moment from 'moment'
 
 const MAX_CONTENT_WIDTH = 960
-const MIN_CONTENT_WIDTH = 550
-const PAGE_SIDE_PADDING = 20
+const MIN_CONTENT_WIDTH = 250
+const PAGE_SIDE_PADDING = 30
 const CARD_RADIUS = 5
 const CARD_SIDE_PADDING = 35
+
+const APPBAR_HEIGHT = 90
 
 export const Colors = {
     contrast:'#6CCDDC',
@@ -303,7 +305,19 @@ export const Styles = {
             justifyContent:'center',
             alignItems:"center",
 
+
+            //position:'fixed',
+            //top:0,
+            //zIndex:1,
+
+            //boxShadow:"0px 0px 20px -2px #000000"
+
         },
+
+        getHeight(){
+            return this.body.height + this.body.paddingTop + this.body.paddingBottom
+        },
+
         content:{
             display: "flex",
             flexDirection: 'row',
@@ -314,18 +328,20 @@ export const Styles = {
             minWidth:MIN_CONTENT_WIDTH,
             fontSize: "x-large",
             fontWeight:200,
-            color:"white"
-        }
+            color:"white",
+             }
     },
+
 
     canvas:{
         display: "flex",
         flexDirection: 'row',
-        justifyContent:'center',
+        //justifyContent:'center',
         alignItems:"flex-start",
     },
 
     page:{
+        flex:1,
         display: "flex",
         justifyContent:'center',
         flexDirection: 'column',
@@ -338,6 +354,7 @@ export const Styles = {
             flexDirection: 'row',
             justifyContent:'center',
             alignItems:"center",
+            //marginTop:APPBAR_HEIGHT,//AppBar total hight
         },  
         
         content:{
@@ -348,7 +365,9 @@ export const Styles = {
             paddingLeft:PAGE_SIDE_PADDING,
             paddingRight:PAGE_SIDE_PADDING,
             maxWidth:MAX_CONTENT_WIDTH,
-            minWidth:MIN_CONTENT_WIDTH
+            minWidth:MIN_CONTENT_WIDTH,
+            //maxHeight:700,
+            overflow:"auto"
         }
     },
 

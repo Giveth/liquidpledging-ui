@@ -78,12 +78,15 @@ class LayoutController extends Component {
     render() {
 
         let viewsNumber = this.getNumberOfViews()
-        let isTabLayout = ((Styles.minContentWidth * viewsNumber) > this.state.windowWidth)
-
+        
         let view = this.state.currentPage
-
-        if(true)
-            view = this.getGroupViews(this.getGroupFromPageId(this.state.currentPageId, this.props.groups))
+        let currentGroup = this.getGroupFromPageId(this.state.currentPageId, this.props.groups)
+        let multiViewWidth = ((Styles.minContentWidth + 40) * currentGroup.length)
+        let availableWidth = this.state.windowWidth - this.state.menuWidth
+        let isTabLayout = availableWidth > multiViewWidth
+        
+        if(isTabLayout)
+            view = this.getGroupViews(currentGroup)
 
         return(
         <div>
@@ -95,7 +98,7 @@ class LayoutController extends Component {
                 {this.props.menuItems}
             </Drawer>
 
-            <div style = {Merge(Styles.canvas, {paddingLeft:this.state.menuWidth})}>
+            <div style = {Merge(Styles.canvas, {marginLeft:this.state.menuWidth})}>
                 {view}           
             </div>
             
