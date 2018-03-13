@@ -36,7 +36,9 @@ class LayoutController extends Component {
             return
 
         UrlRouting.setProperty(PAGE_ID, pageId)
+
         this.setState({
+            currentPageId: pageId,
             currentPage: newPage,
           })
     }
@@ -63,6 +65,7 @@ class LayoutController extends Component {
         let views = []
         for(let pageId of group)
             views.push(this.getPage(pageId))
+        
         return views
     }
 
@@ -76,9 +79,6 @@ class LayoutController extends Component {
     }
 
     render() {
-
-        let viewsNumber = this.getNumberOfViews()
-        
         let view = this.state.currentPage
         let currentGroup = this.getGroupFromPageId(this.state.currentPageId, this.props.groups)
         let multiViewWidth = ((Styles.minContentWidth + 40) * currentGroup.length)
