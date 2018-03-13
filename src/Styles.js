@@ -359,8 +359,8 @@ export const Styles = {
 
         header:{
             backgroundColor:Colors.contrast,
-            paddingTop:15,
-            paddingBottom:15,
+            paddingTop:10,
+            paddingBottom:10,
             borderTopLeftRadius: CARD_RADIUS,
             borderTopRightRadius: CARD_RADIUS,
             display: "flex",
@@ -375,6 +375,7 @@ export const Styles = {
         },
 
         content:{
+            paddingTop:10,
             paddingBottom:10,
             display: "flex",
             justifyContent:'center',
@@ -388,6 +389,8 @@ export const Styles = {
             alignItems:"baseline",
             paddingLeft: CARD_SIDE_PADDING,
             paddingRight: CARD_SIDE_PADDING,
+            lineHeight:"36px",
+
         },
 
         subHeader:
@@ -396,16 +399,15 @@ export const Styles = {
             color:Colors.contrast,
             fontWeight: 200,
             textTransform: 'uppercase',
-            //backgroundColor: 'rgba(0, 0, 0, 0.01)',
-            paddingTop:10,
-            paddingBottom:10,
+
         }, 
 
         delegation:
         {
             color:"grey",
             paddingLeft:CARD_SIDE_PADDING,
-            fontSize:"95%"
+            fontSize:"95%",
+
         },
 
         divider:
@@ -413,6 +415,8 @@ export const Styles = {
             height:1,
             flex:1,
             backgroundColor:'rgba(0, 0, 0, 0.05)',
+            marginTop:5,
+            marginBottom:5
         }
     },
 
