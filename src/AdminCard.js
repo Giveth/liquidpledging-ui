@@ -115,20 +115,22 @@ class AdminCard extends Component {
     render() {
 
         let unsecured = <div/>
+        let unsecuredDivider = <div/>
+
         if(this.props.node.type === "Project")
+        {
 
             unsecured = <div key= "Unsecured" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onUsecuredPledges}>
                 {"Unsecured"}
                 <Funds amount = {this.props.unsecuredAmount}/>
             </div>
 
+            unsecuredDivider = <div style={Styles.card.divider}/>
+        }
 
-            /*unsecured =  <SectionHeader
-                key = 'Unsecured'
-                title='Unsecured'
-                amount= {this.props.unsecuredAmount}
-                onPledges = {this.onUsecuredPledges}/>
-                */
+
+
+
 
         return ( 
             
@@ -145,46 +147,54 @@ class AdminCard extends Component {
                     </div>
                 </div>
 
+
                 <div style = {Styles.card.content}>
 
-                {unsecured}
+                    {unsecured}
+                    {unsecuredDivider}
 
-                <div key= "Available" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onAvailablePledges}>
-                    {"Available"}
-                    <div style = {Styles.row}>
-                        {this.props.availableButtons}
-                        <div style={Styles.space}/>
+
+                    <div key= "Available" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onAvailablePledges}>
+                        {"Available"}
+                        <div style = {Styles.row}>
+                            {this.props.availableButtons}
+                            <div style={Styles.space}/>
+                            <Funds amount = {this.props.availableAmount}/>
+                        </div>
+                    </div>
+                    
+                    <div style={Styles.card.divider}/>
+
+                    <div key= "Delegated" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onDelegatedPledges}>
+                        {"Delegated"}
                         <Funds amount = {this.props.availableAmount}/>
                     </div>
-                </div>
 
-                <div key= "Delegated" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onDelegatedPledges}>
-                    {"Delegated"}
-                    <Funds amount = {this.props.availableAmount}/>
-                </div>
-                
-                <RootDelegationList
-                    key='Delegations'
-                    delegations={this.props.delegationsOut}
-                    indentLevel={-1}
-                    userAddress={this.props.currentAddress}
-                    defaultColapsed = {false}
-                    defaultColapsedRoot={true}
-                    onPledges={this.onDelegationPledge}/>
+                    <RootDelegationList
+                        key='Delegations'
+                        delegations={this.props.delegationsOut}
+                        indentLevel={-1}
+                        userAddress={this.props.currentAddress}
+                        defaultColapsed = {false}
+                        defaultColapsedRoot={true}
+                        onPledges={this.onDelegationPledge}/>
 
-                <div key= "Intended Projects" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onProjectsPledges}>
-                    {'Intended Projects'}
-                    <Funds amount = {this.props.assignedToProjectsAmount}/>
-                </div>
-                
-                <RootDelegationList
-                    key='Projects'
-                    delegations={this.props.delegationsToProject}
-                    indentLevel={-1}
-                    userAddress={this.props.currentAddress}
-                    defaultColapsed = {false}
-                    defaultColapsedRoot={true}
-                    onPledges={this.onDelegationPledge}/>
+                    <div style={Styles.card.divider}/>
+
+
+                    <div key= "Intended Projects" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onProjectsPledges}>
+                        {'Intended Projects'}
+                        <Funds amount = {this.props.assignedToProjectsAmount}/>
+                    </div>
+                    
+                    <RootDelegationList
+                        key='Projects'
+                        delegations={this.props.delegationsToProject}
+                        indentLevel={-1}
+                        userAddress={this.props.currentAddress}
+                        defaultColapsed = {false}
+                        defaultColapsedRoot={true}
+                        onPledges={this.onDelegationPledge}/>
 
                 </div>
 

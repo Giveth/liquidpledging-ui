@@ -81,7 +81,7 @@ class RootDelegationList extends Component {
 
             return (
 
-                <div key= {"Delegation" + index} style = {Merge(Styles.card.row, {})} onClick = {onPledges}>
+                <div key= {"Delegation" + index} style = {Merge(Styles.card.row, Styles.card.delegation)} onClick = {onPledges}>
                     {d.name}
                     <div style = {Styles.row}>
                         {actionButons}

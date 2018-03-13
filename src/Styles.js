@@ -11,12 +11,13 @@ import Web3 from 'web3'
 import Moment from 'moment'
 
 const MAX_CONTENT_WIDTH = 960
-const MIN_CONTENT_WIDTH = 600
+const MIN_CONTENT_WIDTH = 100
 const PAGE_SIDE_PADDING = 60
 const CARD_RADIUS = 6
 const CARD_SIDE_PADDING = 35
 
 export const Colors = {
+    contrast:'#6CCDDC',
     base:'#666',
     highlight:'#333',
     backgroundHighlight:'rgba(0, 0, 0, 0.05)',
@@ -287,12 +288,10 @@ export const Styles = {
         zIndex:100,
     },
 
-    
-
     appBar:{
 
         body:{
-            backgroundColor: "#6CCDDC",
+            backgroundColor: Colors.contrast,
             height: 30,
             margin: 0,
             paddingTop: 30,
@@ -336,7 +335,7 @@ export const Styles = {
         content:{
             flex:1,
             margin: 0,
-            paddingTop: 30,
+            paddingTop: 10,
             paddingBottom:30,
             paddingLeft:PAGE_SIDE_PADDING,
             paddingRight:PAGE_SIDE_PADDING,
@@ -353,15 +352,13 @@ export const Styles = {
             padding:0,
             backgroundColor:"white",
             borderRadius:CARD_RADIUS,
-            margin:10
+            margin:15
         },
 
         header:{
-            backgroundColor:"#6CCDDC",
-            paddingTop:20,
-            paddingBottom:20,
-            paddingLeft: CARD_SIDE_PADDING,
-            paddingRight: CARD_SIDE_PADDING,
+            backgroundColor:Colors.contrast,
+            paddingTop:15,
+            paddingBottom:15,
             borderTopLeftRadius: CARD_RADIUS,
             borderTopRightRadius: CARD_RADIUS,
             display: "flex",
@@ -376,9 +373,7 @@ export const Styles = {
         },
 
         content:{
-            padding:20,
-            paddingLeft: CARD_SIDE_PADDING,
-            paddingRight: CARD_SIDE_PADDING,
+            paddingBottom:10,
             display: "flex",
             justifyContent:'center',
             flexDirection: 'column',
@@ -388,18 +383,35 @@ export const Styles = {
             display: "flex",
             flexDirection: 'row',
             justifyContent:'space-between',
-            alignItems:"baseline"
+            alignItems:"baseline",
+            paddingLeft: CARD_SIDE_PADDING,
+            paddingRight: CARD_SIDE_PADDING,
         },
 
         subHeader:
         {
             fontSize:'1em',
-            color:Colors.subtle,
+            color:Colors.contrast,
             fontWeight: 200,
             textTransform: 'uppercase',
-            marginBottom:10,
-            marginTop:10,
+            //backgroundColor: 'rgba(0, 0, 0, 0.01)',
+            paddingTop:10,
+            paddingBottom:10,
         }, 
+
+        delegation:
+        {
+            color:"grey",
+            paddingLeft:CARD_SIDE_PADDING,
+            fontSize:"95%"
+        },
+
+        divider:
+        {
+            height:1,
+            flex:1,
+            backgroundColor:'rgba(0, 0, 0, 0.05)',
+        }
     },
 
     funds:{
