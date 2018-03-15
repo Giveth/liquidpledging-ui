@@ -162,16 +162,9 @@ class OthersFunds extends BaseDelegationPage {
             <div style = {Styles.page}>
 
                 <AppBar>
-                    <div style = {Styles.appBar.title}>
-                        {this.props.label}
-                    </div>
-
+                    <div style = {Styles.appBar.title}> {this.props.label} </div>
                     <Funds amount = {this.state.totalAmount} showCurrency/>
-
-                    <div style = {Styles.title}>
-                        <FlatButton onClick = {this.onNewDelegate} primary = {true} label="New Delegate"  />
-                    </div>
-
+                    <FlatButton onClick = {this.onNewDelegate} primary = {true} label="New Delegate"  />
                 </AppBar>
                 
                 <div style = {Styles.singlePage.body}>
