@@ -243,19 +243,28 @@ class Web3ProviderHelper extends EventEmitter
     getNetworkDetails=(networkId)=>
     {
         var network = {}
+        network.id = networkId
+        
         switch (networkId) {
-            case "1":
-                network.name= "Main-net"
+            case '1':
+                network.name= 'Main-net'
                 break
-            case "2":
-                network.name= "Morden"
+            case '2':
+                network.name= 'Morden'
                 break
-            case "3":
-                network.name= "Ropsten"
+            case '3':
+                network.name= 'Ropsten'
+                break
+            case '4':
+                network.name=  'Rinkeby'
+                break
+            case '42':
+                network.name='Kovan'
                 break
             default:
-                network.name= "Unknown"
+                network.name= 'Unknown'
         }
+        
         return network
     }
 
