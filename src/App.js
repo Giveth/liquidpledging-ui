@@ -29,10 +29,24 @@ const ABOUT = "about"
 
 class App extends Component {
 
+    constructor()
+    {
+        super()
+        this.currentAddress = LPState.getCurrentAccount()
+    }
+
     componentWillMount()
     {
         LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
         LPState.on(LPState.NO_CONTRACT, this.onNoContractFound)
+        LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
+    }
+
+    componentDidMount()
+    {
+        this.currentAddress = LPState.getCurrentAccount()
+        if(!this.currentAddress)
+            Caller.showNotification({message:"No account available. Try to unlock it..."})
     }
 
     onNetworkChanged=()=>
@@ -43,6 +57,13 @@ class App extends Component {
     onNoContractFound=()=>
     {
         Caller.showNotification({message:'Invalid contract address'})
+    }
+
+    onAccountChanged=(account)=>
+    {
+        if(!this.currentAddress)
+            if(account)
+                Caller.showNotification({message:"Account unlocked!"})
     }
 
     getIcon()
