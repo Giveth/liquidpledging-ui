@@ -13,21 +13,30 @@ class Caller extends EventEmitter
         this.ADD_ADMIN_DIALOG = 'addAdmin'
         this.PLEDGES = 'pledges'
         this.FIND_DELEGATIONS = 'findDelegations'
+        this.SHOW_NOTIFICATION = 'show_notification'
+        this.CLOSE_NOTIFICATION ='close_notification'
     }
 
     //DONATE
     showDonateDialog(data)
     {
+        
         this.emit(this.DONATE_DIALOG, data)
     }
 
     donate(data)
     {
+        
        LiquidPledging.donate(data.emiterId, data.recieverId, data.amount, data.address )
        .then((data) => {
             console.log("Donated", data)
+            this.emit(this.SHOW_NOTIFICATION, {message: 'Donation confirmed!'})
+            
+            
             LiquidPledging.retriveStateData()
         }).catch((error)=>console.error(error))
+
+        this.emit(this.SHOW_NOTIFICATION, {title: 'Donated!', message:  'Waiting for transaction to confirm'})
     }
 
     //TRANSFER
@@ -148,6 +157,15 @@ class Caller extends EventEmitter
     showFindDelegationsDialog(data)
     {
         this.emit(this.FIND_DELEGATIONS,data)
+    }
+
+    showNotification(data)
+    {
+        this.emit(this.SHOW_NOTIFICATION, data)
+    }
+    closeNotification(data)
+    {
+        this.emit(this.CLOSE_NOTIFICATION, data)
     }
 }
 
