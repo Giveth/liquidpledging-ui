@@ -446,7 +446,7 @@ export const Styles = {
 
         subHeader:
         {
-            fontSize:'1em',
+            fontSize:"95%",
             color:Colors.contrast,
             fontWeight: 200,
             textTransform: 'uppercase',
@@ -457,7 +457,7 @@ export const Styles = {
         {
             color:"grey",
             paddingLeft:CARD_SIDE_PADDING,
-            fontSize:"95%",
+            fontSize:"90%",
 
         },
 
