@@ -30,11 +30,19 @@ class App extends Component {
     getIcon()
     {
         return( 
-            <img
-                src={liquidPledgingLogo}
-                alt="Building the Future of Giving"
-                style={Styles.givethLogo}
-            />)
+            <div style = {{
+                width:"100%",
+                flexDirection: 'row',
+                display:'flex',
+                justifyContent:'center',
+                alignItems:'center'}}>
+                
+                <img
+                    src={liquidPledgingLogo}
+                    alt="Building the Future of Giving"
+                    style={Styles.givethLogo}
+                />
+            </div>)
     }
 
     changePage=(newPageId)=>
