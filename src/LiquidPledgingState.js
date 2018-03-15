@@ -26,6 +26,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         else
         {
             console.warn("Invalid contract address. Ignoring:"+this.newContract)
+            this.emit(this.NO_CONTRACT)
             UrlRouting.setProperty(CONTRACT, this.contract )
         }
     }
