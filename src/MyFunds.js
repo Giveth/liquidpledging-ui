@@ -171,7 +171,7 @@ class MyFunds extends BaseDelegationPage
                 addFundsButton = {addFundsButton}
 
                 delegationsIn={delegationsIn}
-                delegationsOut={delegationsOut}s
+                delegationsOut={delegationsOut}
                 delegationsToProject={delegationsToProject}
                 
                 availableAmount= {availableAmount}
@@ -198,22 +198,15 @@ class MyFunds extends BaseDelegationPage
             <div style = {Styles.page}>
 
                 <AppBar>
-                    <div style = {Styles.appBar.title}>
-                        {this.props.label}
-                    </div>
-
-                     <Funds amount = {this.state.totalAmount} showCurrency/>
-
-                    <div style = {Styles.title}>
-                        <FlatButton onClick = {this.onNewGiver} primary = {true} label="New Giver" />
-                    </div>
-
+                    <div style = {Styles.appBar.title}> {this.props.label} </div>
+                    <Funds amount = {this.state.totalAmount} showCurrency/>
+                    <FlatButton onClick = {this.onNewGiver} primary = {true} label="New Giver" />
                 </AppBar>
                 
 
                 <div style = {Styles.singlePage.body}>
 
-                     <div style = {Merge(Styles.singlePage.content, {height:window.innerHeight - Styles.appBar.getHeight() - 50})}>
+                     <div style = {Merge(Styles.singlePage.content, {height:window.innerHeight - Styles.appBar.getHeight() - 100})}>
                         {this.state.cards}
                     </div>
 

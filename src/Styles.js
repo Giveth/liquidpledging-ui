@@ -200,7 +200,7 @@ export const Styles = {
             display:'none'
         },
 
-        title:{
+       /* title:{
             color:Colors.highlight,
             paddingRight: 10,
             paddingTop: 0,
@@ -211,7 +211,7 @@ export const Styles = {
             fontWeight: 300,
             fontSize: '0.95em',
         
-        },
+        },*/
 
         shrink:{
             flex:1,
@@ -256,9 +256,9 @@ export const Styles = {
     givethLogo:{
        // WebkitFilter: 'grayscale(100%)', 
        justifyContent:"center",
-       width:50,
-       height:50,
-       paddingTop:30
+       width:70,
+       height:70,
+       padding:10
     },
 
     dialogs:{
@@ -281,48 +281,50 @@ export const Styles = {
         backgroundColor:'grey'
     },
 
-    floatingAddressSelectorTopLeft:{
-        margin: 0,
-        top: 10,
-        right: 20,
-        bottom: 'auto',
-        left: 'auto',
-        zIndex:100,
+    addressSelector:{
+        width:300
     },
 
-    
+    title:{
+        paddingTop: 15,
+        fontWeight: 200,
+        textTransform: "uppercase",
+        color: "white",
+        margin: 0,
+        fontSize: "1.3em",
+    },
 
     appBar:{
 
         body:{
             backgroundColor: Colors.contrast,
-            height: 30,
+            height: 40,
             margin: 0,
-            paddingTop: 30,
-            paddingBottom:30,
+            paddingTop: 0,
+            paddingBottom:15,
             paddingLeft:PAGE_SIDE_PADDING,
             paddingRight:PAGE_SIDE_PADDING,
             display: "flex",
             flexDirection: 'row',
             justifyContent:'center',
             alignItems:"center",
+            color:"white"
         },
 
         menu:{
             backgroundColor: Colors.contrast,
-            height: 30,
+            height: 40,
             margin: 0,
-            paddingTop: 30,
-            paddingBottom:30,
+            paddingTop: 0,
+            paddingBottom:15,
             width:"100%"
         },
 
         header:{
             backgroundColor: Colors.contrast,
-            height: 30,
-            margin: 0,
-            paddingTop: 10,
-            paddingBottom:10,
+            //paddingTop: 10,
+            //paddingBottom:10,
+            height:60,
             paddingLeft:PAGE_SIDE_PADDING,
             paddingRight:PAGE_SIDE_PADDING,
             display: "flex",
@@ -342,7 +344,7 @@ export const Styles = {
             flex:1,
             maxWidth:MAX_CONTENT_WIDTH,
             minWidth:MIN_CONTENT_WIDTH,
-            fontSize: "x-large",
+            fontSize: "1.4em",
             fontWeight:200,
             color:"white",
              }
@@ -550,12 +552,12 @@ Numeral.register('locale', 'eth', {
         trillion: 't'
     },
     /*ordinal : function (number) {
-        return number === 1 ? 'er' : 'ème';
+        return number === 1 ? 'er' : 'ème'
     },*/
     currency: {
         symbol: ''
     }
-});
+})
 
 Numeral.locale('eth')
 

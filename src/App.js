@@ -29,18 +29,12 @@ class App extends Component {
 
     getIcon()
     {
-       return( <div key = "icon" style={{textAlign: 'center'}}>
-                    <img
-                        src={liquidPledgingLogo}
-                        alt="Building the Future of Giving"
-                        style={Styles.givethLogo}
-                    />
-                    <h4 style = {{
-                            fontWeight: 200,
-                            textTransform: 'uppercase',
-                            color:'grey'
-                        }}> Liquid Pledging </h4>
-                </div>)
+        return( 
+            <img
+                src={liquidPledgingLogo}
+                alt="Building the Future of Giving"
+                style={Styles.givethLogo}
+            />)
     }
 
     changePage=(newPageId)=>
@@ -52,7 +46,7 @@ class App extends Component {
     {
         return [
 
-            <div style = {Styles.appBar.menu}/> ,
+            <div style = {Styles.appBar.menu}> {} </div> ,
             this.getIcon(),
             <Divider key = "d0"/>,
             <Subheader key = "a0" >Wallet</Subheader>,
@@ -105,12 +99,19 @@ class App extends Component {
         ]
     }
 
+    getHeader(){
+        return [
+            <div style = {Styles.title}>  Liquid Pledging </div>,
+            <AddressSelector />
+        ]
+    }
+
     getContent()
     {
         return (
             <LayoutController
                 defaultTab = {0}
-                header =  {<AddressSelector />}
+                header =  {this.getHeader()}
                 menuItems = {this.getMenuItems()}
                 pages = {this.getPages()}
                 groups = {[[MY_FUNDS, OTHERS_FUNDS, MY_PROJECTS],[EXPLORER], [PLEDGES]]}/>

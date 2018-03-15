@@ -51,6 +51,7 @@ class AddressSelector extends React.Component
     {
         LPState.setCurrentAccount(newSelection)
     }   
+
    
     render()
     {
@@ -68,11 +69,11 @@ class AddressSelector extends React.Component
         })
 
         return (
-            <div style = {Styles.floatingAddressSelectorTopLeft}>
+            <div>
                 <DropDownMenu
                     value={this.state.selectedAccount}
                     onChange={this.onSelected}
-                    style={{fontSize:'0.8em'}}
+                    style = {Styles.addressSelector}
                     autoWidth={true}
                     labelStyle = {{color:"white"}}
                     underlineStyle={{display: 'none'}}>

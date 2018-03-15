@@ -93,8 +93,8 @@ class LayoutController extends Component {
         <div>
         
             <div style = {Styles.appBar.header}>  
-            a 
-                <AddressSelector/>
+
+                {this.props.header}
 
             </div>         
             
