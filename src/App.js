@@ -26,6 +26,7 @@ const OTHERS_FUNDS= "othersFunds"
 const MY_PROJECTS = "myProjects"
 const EXPLORER = "explorer"
 const PLEDGES = "pledges"
+const ABOUT = "about"
 
 class App extends Component {
 
@@ -48,7 +49,7 @@ class App extends Component {
     getIcon()
     {
         return( 
-            <div style = {{
+            <div key= 'icon' style = {{
                 width:"100%",
                 flexDirection: 'row',
                 display:'flex',
@@ -72,7 +73,7 @@ class App extends Component {
     {
         return [
 
-            <div style = {Styles.appBar.menu}> {} </div> ,
+            <div key = "AppBar" style = {Styles.appBar.menu}> {} </div> ,
             this.getIcon(),
             <Divider key = "d0"/>,
             <Subheader key = "a0" >Wallet</Subheader>,
@@ -110,7 +111,11 @@ class App extends Component {
             </MenuItem>,
 
             <Divider key = "d2" />,
-            <MenuItem key = "a">About</MenuItem>,
+
+            <MenuItem
+                key = {ABOUT}>
+                About
+            </MenuItem>,
         ]
     }
 
@@ -127,8 +132,8 @@ class App extends Component {
 
     getHeader(){
         return [
-            <div style = {Styles.title}>  Liquid Pledging </div>,
-            <AddressSelector />
+            <div key = 'Title' style = {Styles.title}>  Liquid Pledging </div>,
+            <AddressSelector key = "AddressSelector" />
         ]
     }
 
@@ -136,6 +141,7 @@ class App extends Component {
     {
         return (
             <LayoutController
+                key = "LayoutController"
                 defaultTab = {0}
                 header =  {this.getHeader()}
                 menuItems = {this.getMenuItems()}

@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import UrlRouting from './UrlRouting.js'
 import {Styles,Merge} from './Styles.js'
-import Drawer from 'material-ui/Drawer'
-import liquidPledgingLogo from './liquid-pledging.svg'
-import AddressSelector from './AddressSelector.js'
 
 const PAGE_ID = "pageId"
 
@@ -90,21 +87,21 @@ class LayoutController extends Component {
             view = this.getGroupViews(currentGroup)
 
         return(
-        <div>
+        <div key = 'Main'>
         
-            <div style = {Styles.appBar.header}>  
+            <div key = 'AppBarHeader' style = {Styles.appBar.header}>  
 
                 {this.props.header}
 
             </div>         
             
-            <div style ={Styles.row}>
+            <div key = 'Content' style ={Styles.row}>
                 
-                <div style = {Merge(Styles.drawer, {width:this.state.menuWidth})}>
+                <div key = 'Menu'  style = {Merge(Styles.drawer, {width:this.state.menuWidth})}>
                     {this.props.menuItems}
                 </div>
 
-                <div style = {Styles.canvas}>
+                <div key = 'Canvas' style = {Styles.canvas}>
                     {view}           
                 </div>
                 

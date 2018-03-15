@@ -64,7 +64,7 @@ class AddressSelector extends React.Component
             return <MenuItem
                 key= {index}
                 value={account}
-                style={{fontSize:'0.8em'}}
+               // style={{fontSize:'0.8em'}}
                 primaryText={label} />
         })
 
@@ -78,7 +78,6 @@ class AddressSelector extends React.Component
                     labelStyle = {{color:"white"}}
                     underlineStyle={{display: 'none'}}>
                     
-
                     {list}
 
                 </DropDownMenu>
