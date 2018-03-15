@@ -1,12 +1,12 @@
 import Numeral from 'numeral'
 import SubDelegateIcon from 'react-icons/lib/md/subdirectory-arrow-right'
-import ColapsedIcon from 'react-icons/lib/md/keyboard-arrow-up'
+/*import ColapsedIcon from 'react-icons/lib/md/keyboard-arrow-up'
 import ShownIcon from 'react-icons/lib/md/keyboard-arrow-down'
 import AddIcon from 'react-icons/lib/fa/plus'
 import CancelIcon from 'react-icons/lib/fa/close'
 import AddAdminIcon from 'react-icons/lib/md/group-add'
 import ProjectIcon from 'react-icons/lib/fa/flask'
-import PledgesIcon from 'react-icons/lib/go/search'
+import PledgesIcon from 'react-icons/lib/go/search'*/
 import Web3 from 'web3'
 import Moment from 'moment'
 
@@ -37,14 +37,14 @@ export const Colors = {
 
 export const Icons = {
 
-    subDelegate: SubDelegateIcon,
+    /*subDelegate: SubDelegateIcon,
     colapsed: ColapsedIcon,
     shown:ShownIcon,
     add:AddIcon,
     cancel:CancelIcon,
     addAdmin:AddAdminIcon,
     project:ProjectIcon,
-    pledges:PledgesIcon,
+    pledges:PledgesIcon,*/
 }
 
 export const Styles = {
