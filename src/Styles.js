@@ -422,7 +422,6 @@ export const Styles = {
             color:"white",
             fontWeight: 200,
             textTransform: 'uppercase',
-
         },
 
         content:{
@@ -441,7 +440,6 @@ export const Styles = {
             paddingLeft: CARD_SIDE_PADDING,
             paddingRight: CARD_SIDE_PADDING,
             lineHeight:"36px",
-
         },
 
         subHeader:
@@ -478,7 +476,6 @@ export const Styles = {
             opacity:0.7
         },
     }
-    
 }
 
 

@@ -20,13 +20,11 @@ class Caller extends EventEmitter
     //DONATE
     showDonateDialog(data)
     {
-        
         this.emit(this.DONATE_DIALOG, data)
     }
 
     donate(data)
     {
-        
        LiquidPledging.donate(data.emiterId, data.recieverId, data.amount, data.address )
        .then((data) => {
             console.log("Donated", data)
@@ -163,6 +161,7 @@ class Caller extends EventEmitter
     {
         this.emit(this.SHOW_NOTIFICATION, data)
     }
+    
     closeNotification(data)
     {
         this.emit(this.CLOSE_NOTIFICATION, data)
