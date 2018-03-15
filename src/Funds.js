@@ -25,7 +25,7 @@ class Funds extends Component
             return
         }
     
-        if(Currency.toEther(props.amount)==this.state.futureAmount)
+        if(Currency.toEther(props.amount)===this.state.futureAmount)
             return
 
         this.setState({futureAmount:Currency.toEther(props.amount)})

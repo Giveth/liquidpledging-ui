@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Caller from './LiquidPledgingCaller'
 import Snackbar from 'material-ui/Snackbar'
-import {Styles, Icons} from './Styles.js'
 
 class Notifications extends Component {
 
@@ -31,11 +30,10 @@ class Notifications extends Component {
             onAction = data.onAction
         }
 
-        console.log(data)
         this.setState({
             message:data.message,
             open:true,
-            action:data.action,
+            action: action,
             onAction: onAction
         })
     }
@@ -50,9 +48,6 @@ class Notifications extends Component {
     }
   
     render() {
-        let content = <div>  
-                {this.state.message}
-             </div>
 
       return (
         <div>

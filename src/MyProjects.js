@@ -2,7 +2,7 @@ import React from 'react'
 import LPState from "./LiquidPledgingState.js"
 import AdminCard from './AdminCard'
 import FlatButton from 'material-ui/FlatButton'
-import { Styles, Currency, Merge } from './Styles'
+import { Styles, Merge } from './Styles'
 import Caller from './LiquidPledgingCaller'
 import BaseDelegationPage from './BaseDelegationsPage'
 import AppBar from './AppBar'

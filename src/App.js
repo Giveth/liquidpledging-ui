@@ -16,7 +16,6 @@ import {Styles} from './Styles.js'
 import Subheader from 'material-ui/Subheader'
 import Divider from 'material-ui/Divider'
 import UrlRouting from './UrlRouting.js'
-import AppBar from './AppBar.js'
 import Notifications from './Notifications.js'
 import LPState from "./LiquidPledgingState.js"
 import Caller from "./LiquidPledgingCaller.js"

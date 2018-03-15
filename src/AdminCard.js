@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Styles, Currency, Merge } from './Styles'
+import { Styles, Merge } from './Styles'
 import Caller from './LiquidPledgingCaller'
 import RootDelegationList from './RootDelegationList'
 import LPState from "./LiquidPledgingState.js"
@@ -91,26 +91,6 @@ class AdminCard extends Component {
         }
         return group
     }
-
-    onMouseEnter=()=>
-    {
-        this.setState({isHovering:true})
-    }
-
-    onMouseLeave=()=>
-    {
-        this.setState({isHovering:false})
-    }
-
-    onBackgroundClick=()=>
-    {
-        //this.props.onToggle(!this.props.colapsed)
-    }
-
-    onDelegateFunds=()=>
-    {
-
-    }
    
     render() {
 
@@ -128,7 +108,6 @@ class AdminCard extends Component {
             unsecuredDivider = <div style={Styles.card.divider}/>
         }
 
-
         return ( 
             
           <div style = {Styles.card.body}>
@@ -144,12 +123,10 @@ class AdminCard extends Component {
                     </div>
                 </div>
 
-
                 <div style = {Styles.card.content}>
 
                     {unsecured}
                     {unsecuredDivider}
-
 
                     <div key= "Available" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onAvailablePledges}>
                         {"Available"}

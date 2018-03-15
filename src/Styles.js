@@ -1,12 +1,4 @@
 import Numeral from 'numeral'
-import SubDelegateIcon from 'react-icons/lib/md/subdirectory-arrow-right'
-/*import ColapsedIcon from 'react-icons/lib/md/keyboard-arrow-up'
-import ShownIcon from 'react-icons/lib/md/keyboard-arrow-down'
-import AddIcon from 'react-icons/lib/fa/plus'
-import CancelIcon from 'react-icons/lib/fa/close'
-import AddAdminIcon from 'react-icons/lib/md/group-add'
-import ProjectIcon from 'react-icons/lib/fa/flask'
-import PledgesIcon from 'react-icons/lib/go/search'*/
 import Web3 from 'web3'
 import Moment from 'moment'
 
@@ -15,8 +7,6 @@ const MIN_CONTENT_WIDTH = 300
 const PAGE_SIDE_PADDING = 30
 const CARD_RADIUS = 5
 const CARD_SIDE_PADDING = 35
-
-const APPBAR_HEIGHT = 90
 
 export const Colors = {
     contrast:'#6CCDDC',
