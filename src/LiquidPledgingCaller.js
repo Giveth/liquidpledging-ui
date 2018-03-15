@@ -27,14 +27,17 @@ class Caller extends EventEmitter
     {
        LiquidPledging.donate(data.emiterId, data.recieverId, data.amount, data.address )
        .then((data) => {
-            console.log("Donated", data)
-            this.emit(this.SHOW_NOTIFICATION, {message: 'Donation confirmed!'})
-            
-            
-            LiquidPledging.retriveStateData()
-        }).catch((error)=>console.error(error))
 
-        this.emit(this.SHOW_NOTIFICATION, {title: 'Donated!', message:  'Waiting for transaction to confirm'})
+            console.log("Donated", data)
+            LiquidPledging.retriveStateData()
+            this.emit(this.SHOW_NOTIFICATION, {message: 'Funds added!'}) 
+
+        }).catch((error)=>{
+            this.showTransactionError()
+            console.error(error)
+        })
+
+        this.emit(this.SHOW_NOTIFICATION, {message:'Adding funds. Waiting confirmation...'})
     }
 
     //TRANSFER
@@ -49,7 +52,15 @@ class Caller extends EventEmitter
        .then((data) => {
             console.log("Transfered", data)
             LiquidPledging.retriveStateData()
-        }).catch((error)=>console.error(error))
+            this.emit(this.SHOW_NOTIFICATION, {message: 'Funds delegated!'})
+
+        }).catch((error)=>{
+            this.showTransactionError()
+            console.error(error)
+        })
+
+        this.emit(this.SHOW_NOTIFICATION, {message: 'Delegating funds. Waiting confirmation...'})
+
     }
 
     multiTransfer(data)
@@ -58,7 +69,14 @@ class Caller extends EventEmitter
        .then((data) => {
             console.log("Multi Transfered", data)
             LiquidPledging.retriveStateData()
-        }).catch((error)=>console.error(error))
+            this.emit(this.SHOW_NOTIFICATION, {message: 'Funds delegated'})
+
+        }).catch((error)=>{
+            this.showTransactionError()
+            console.error(error)
+        })
+        this.emit(this.SHOW_NOTIFICATION, {message: 'Delegating funds. Waiting confirmation...'})
+
     }
 
     //CANCEL
@@ -105,7 +123,15 @@ class Caller extends EventEmitter
         .then((data) => {
             console.log("Canceled", data)
             LiquidPledging.retriveStateData()
-        }).catch((error)=>console.error(error))
+            this.emit(this.SHOW_NOTIFICATION, {message: 'Delegation canceled'})
+
+        }).catch((error)=>{
+            this.showTransactionError()
+            console.error(error)
+        })
+
+        this.emit(this.SHOW_NOTIFICATION, {message: 'Canceling delegation. Waiting confirmation...'})
+
     }
 
     multiCancel(pledgeAmounts)
@@ -114,7 +140,14 @@ class Caller extends EventEmitter
         .then((data) => {
             console.log("MultiCanceled", data)
             LiquidPledging.retriveStateData()
-        }).catch((error)=>console.error(error))
+            this.emit(this.SHOW_NOTIFICATION, {message: 'Delegation canceled'})
+
+        }).catch((error)=>{
+            this.showTransactionError()
+            console.error(error)
+        })
+        this.emit(this.SHOW_NOTIFICATION, {message: 'Canceling delegation. Waiting confirmation...'})
+
     }
 
      //AddAdmin
@@ -129,21 +162,44 @@ class Caller extends EventEmitter
             LiquidPledging.addGiver(data.name, data.url, data.address).then((data) => {
                 console.log("Giver added", data, LiquidPledging.admins)
                 LiquidPledging.retriveStateData()
-            }).catch((error)=>console.error(error))
+                this.emit(this.SHOW_NOTIFICATION, {message: 'New Giver   created'})
+
+            }).catch((error)=>{
+                this.showTransactionError()
+                console.error(error)
+            })
 
 
         else if(data.type==="Delegate")
             LiquidPledging.addDelegate(data.name, data.url, data.address).then((data) => {
                 console.log("Delgate added", data)
                 LiquidPledging.retriveStateData()
-            }).catch((error)=>console.error(error))
+                this.emit(this.SHOW_NOTIFICATION, {message: 'New Delegate created'})
+
+            }).catch((error)=>{
+                this.showTransactionError()
+                console.error(error)
+            })
 
 
         else if(data.type==="Project")
             LiquidPledging.addProject(data.name, data.url, data.address).then((data) => {
                 console.log("Project added", data)
                 LiquidPledging.retriveStateData()
-            }).catch((error)=>console.error(error))
+                this.emit(this.SHOW_NOTIFICATION, {message: 'New Project created'})
+
+            }).catch((error)=>{
+                this.showTransactionError()
+                console.error(error)
+            })
+            
+
+            this.emit(this.SHOW_NOTIFICATION, {message: 'Creating new '+data.type})
+    }
+
+    showTransactionError()
+    {
+        this.emit(this.SHOW_NOTIFICATION, {message: 'Ops! Something when wrong...'})
     }
     //Pledges
     showPledgesDialog(data)
