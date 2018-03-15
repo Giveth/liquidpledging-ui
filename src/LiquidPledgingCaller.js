@@ -25,20 +25,25 @@ class Caller extends EventEmitter
 
     donate(data)
     {
-       LiquidPledging.donate(data.emiterId, data.recieverId, data.amount, data.address )
+       let donate = LiquidPledging.donate(data.emiterId, data.recieverId, data.amount, data.address )
        .then((data) => {
 
             console.log("Donated", data)
             LiquidPledging.retriveStateData()
-            this.emit(this.SHOW_NOTIFICATION, {message: 'Funds added!'}) 
+            this.emit(this.SHOW_NOTIFICATION,{
+                message: 'Funds added!',
+                action:'View TX',
+                onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
+            }) 
 
         }).catch((error)=>{
             this.showTransactionError()
             console.error(error)
         })
 
-        this.generateTransactionUrl()
-        this.emit(this.SHOW_NOTIFICATION, {message:'Adding funds. Waiting confirmation...'})
+        console.log(donate)
+
+        this.emit(this.SHOW_NOTIFICATION, {message:'Adding funds. Waiting confirmation...', action:'View', })
     }
 
     //TRANSFER
@@ -53,7 +58,11 @@ class Caller extends EventEmitter
        .then((data) => {
             console.log("Transfered", data)
             LiquidPledging.retriveStateData()
-            this.emit(this.SHOW_NOTIFICATION, {message: 'Funds delegated!'})
+            this.emit(this.SHOW_NOTIFICATION,{
+                message: 'Funds delegated!',
+                action:'View TX',
+                onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
+            }) 
 
         }).catch((error)=>{
             this.showTransactionError()
@@ -61,7 +70,6 @@ class Caller extends EventEmitter
         })
 
         this.emit(this.SHOW_NOTIFICATION, {message: 'Delegating funds. Waiting confirmation...'})
-
     }
 
     multiTransfer(data)
@@ -70,7 +78,11 @@ class Caller extends EventEmitter
        .then((data) => {
             console.log("Multi Transfered", data)
             LiquidPledging.retriveStateData()
-            this.emit(this.SHOW_NOTIFICATION, {message: 'Funds delegated'})
+            this.emit(this.SHOW_NOTIFICATION,{
+                message: 'Funds delegated!',
+                action:'View TX',
+                onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
+            }) 
 
         }).catch((error)=>{
             this.showTransactionError()
@@ -124,8 +136,11 @@ class Caller extends EventEmitter
         .then((data) => {
             console.log("Canceled", data)
             LiquidPledging.retriveStateData()
-            this.emit(this.SHOW_NOTIFICATION, {message: 'Delegation canceled'})
-
+            this.emit(this.SHOW_NOTIFICATION,{
+                message: 'Delegation canceled!',
+                action:'View TX',
+                onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
+            }) 
         }).catch((error)=>{
             this.showTransactionError()
             console.error(error)
@@ -141,8 +156,11 @@ class Caller extends EventEmitter
         .then((data) => {
             console.log("MultiCanceled", data)
             LiquidPledging.retriveStateData()
-            this.emit(this.SHOW_NOTIFICATION, {message: 'Delegation canceled'})
-
+            this.emit(this.SHOW_NOTIFICATION,{
+                message: 'Delegation canceled',
+                action:'View TX',
+                onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
+            }) 
         }).catch((error)=>{
             this.showTransactionError()
             console.error(error)
@@ -163,7 +181,11 @@ class Caller extends EventEmitter
             LiquidPledging.addGiver(data.name, data.url, data.address).then((data) => {
                 console.log("Giver added", data, LiquidPledging.admins)
                 LiquidPledging.retriveStateData()
-                this.emit(this.SHOW_NOTIFICATION, {message: 'New Giver   created'})
+               this.emit(this.SHOW_NOTIFICATION,{
+                message: 'New Giver created',
+                action:'View TX',
+                onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
+            }) 
 
             }).catch((error)=>{
                 this.showTransactionError()
@@ -175,26 +197,32 @@ class Caller extends EventEmitter
             LiquidPledging.addDelegate(data.name, data.url, data.address).then((data) => {
                 console.log("Delgate added", data)
                 LiquidPledging.retriveStateData()
-                this.emit(this.SHOW_NOTIFICATION, {message: 'New Delegate created'})
+                this.emit(this.SHOW_NOTIFICATION,{
+                    message: 'New Delegate created',
+                    action:'View TX',
+                    onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
+                }) 
 
             }).catch((error)=>{
                 this.showTransactionError()
                 console.error(error)
             })
 
-
         else if(data.type==="Project")
             LiquidPledging.addProject(data.name, data.url, data.address).then((data) => {
                 console.log("Project added", data)
                 LiquidPledging.retriveStateData()
-                this.emit(this.SHOW_NOTIFICATION, {message: 'New Project created'})
+                this.emit(this.SHOW_NOTIFICATION,{
+                    message: 'New Project created',
+                    action:'View TX',
+                    onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
+                }) 
 
             }).catch((error)=>{
                 this.showTransactionError()
                 console.error(error)
             })
             
-
             this.emit(this.SHOW_NOTIFICATION, {message: 'Creating new '+data.type})
     }
 
@@ -228,6 +256,7 @@ class Caller extends EventEmitter
     {
         let network = LiquidPledging.getNetworkDetails(LiquidPledging.getCurrentNetwork())
 
+        network.id = 1
         if(!network.id)
             return
             
@@ -237,6 +266,15 @@ class Caller extends EventEmitter
         else
             return 'https://'+network.name+'.etherscan.io/tx/'+transactionId
 
+    }
+
+    goToUrl(url)
+    {
+        if(!url)
+            return
+            
+        let win = window.open(url, '_blank');
+        win.focus();
     }
 }
 
