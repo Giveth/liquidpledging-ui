@@ -15,16 +15,28 @@ class Notifications extends Component {
         this.state={
             open:false,
             message:'',
-            time:60000,
+            time:6000,
+            onAction:null,
+            action:''
         }
     }
 
     showNotification=(data)=> {
-        console.error(data)
+        let action = ''
+        let onAction = null
 
+        if(data.action)
+        {
+            action = data.action
+            onAction = data.onAction
+        }
+
+        console.log(data)
         this.setState({
             message:data.message,
-            open:true
+            open:true,
+            action:data.action,
+            onAction: onAction
         })
     }
 
@@ -46,11 +58,13 @@ class Notifications extends Component {
         <div>
             <Snackbar
                 open={this.state.open}
-                message={content}
-                //action="Ok"
+                message={this.state.message}
+                action= {this.state.action}
                 autoHideDuration={this.state.time}
-                onActionTouchTap={this.close} 
+                onActionTouchTap={this.state.onAction} 
                 onRequestClose={this.close}
+                style={{ pointerEvents: 'none', whiteSpace: 'nowrap' }}
+                bodyStyle={{ pointerEvents: 'initial', maxWidth: 'none' }}
                 />
         </div>
         )
