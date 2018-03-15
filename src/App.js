@@ -17,6 +17,7 @@ import Subheader from 'material-ui/Subheader'
 import Divider from 'material-ui/Divider'
 import UrlRouting from './UrlRouting.js'
 import AppBar from './AppBar.js'
+import Notifications from './Notifications.js'
 
 
 const MY_FUNDS = "myFunds"
@@ -134,6 +135,7 @@ class App extends Component {
                 <div>
                     {this.getContent()}
                     <Dialogs/>
+                    <Notifications/>
                 </div>
             </MuiThemeProvider>
             
