@@ -18,7 +18,8 @@ import Divider from 'material-ui/Divider'
 import UrlRouting from './UrlRouting.js'
 import AppBar from './AppBar.js'
 import Notifications from './Notifications.js'
-
+import LPState from "./LiquidPledgingState.js"
+import Caller from "./LiquidPledgingCaller.js"
 
 const MY_FUNDS = "myFunds"
 const OTHERS_FUNDS= "othersFunds"
@@ -27,6 +28,22 @@ const EXPLORER = "explorer"
 const PLEDGES = "pledges"
 
 class App extends Component {
+
+    componentWillMount()
+    {
+        LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
+        LPState.on(LPState.NO_CONTRACT, this.onNoContractFound)
+    }
+
+    onNetworkChanged=()=>
+    {
+        Caller.showNotification({message:"Connected to " + LPState.getCurrentNetwork().name})
+    }
+
+    onNoContractFound=()=>
+    {
+        Caller.showNotification({message:'Invalid contract'})
+    }
 
     getIcon()
     {
@@ -124,7 +141,6 @@ class App extends Component {
                 menuItems = {this.getMenuItems()}
                 pages = {this.getPages()}
                 groups = {[[MY_FUNDS, OTHERS_FUNDS, MY_PROJECTS],[EXPLORER], [PLEDGES]]}/>
-
         )
     }
 
