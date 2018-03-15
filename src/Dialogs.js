@@ -35,8 +35,7 @@ class Dialogs extends Component {
         }
 
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
-
-
+        LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
         Caller.on(Caller.DONATE_DIALOG, this.donateOnShow)
         Caller.on(Caller.TRANSFER_DIALOG, this.transferOnShow)
         Caller.on(Caller.ADD_ADMIN_DIALOG, this.addAdminOnShow)
@@ -50,6 +49,10 @@ class Dialogs extends Component {
         let transferMetadata={}
         transferMetadata.emiters=emiters
         this.setState({ transferMetadata:transferMetadata})
+    }
+
+    onAccountChanged=()=>{
+        this.setState({ currentAddress:LPState.getCurrentAccount()})
     }
 
     //Donate
