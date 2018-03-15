@@ -42,7 +42,7 @@ class App extends Component {
 
     onNoContractFound=()=>
     {
-        Caller.showNotification({message:'Invalid contract'})
+        Caller.showNotification({message:'Invalid contract address'})
     }
 
     getIcon()
