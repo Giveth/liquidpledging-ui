@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import NotificationSystem from 'react-notification-system'
 import Caller from './LiquidPledgingCaller'
 import Snackbar from 'material-ui/Snackbar'
 
@@ -9,7 +8,6 @@ class Notifications extends Component {
     constructor()
     {
         super()
-        this.notifications = null
         Caller.on(Caller.SHOW_NOTIFICATION, this.showNotification)
         Caller.on(Caller.CLOSE_NOTIFICATION, this.closeNotifcation)
 
@@ -21,13 +19,6 @@ class Notifications extends Component {
     }
 
     showNotification=(data)=> {
-     
-      this.notifications.addNotification({
-            title:data.title,
-            message: data.message,
-            level: 'success',
-            position:'bl',
-        })
 
         this.setState({
             snackbarMessage:data.message,
@@ -37,11 +28,6 @@ class Notifications extends Component {
     }
 
     closeNotifcation=(data)=> {
-     
-        this.notifications.removeNotification({
-          message: data.message,
-          level: 'success'
-        })
 
         this.setState({
             snackbarOpen:false,
@@ -51,14 +37,9 @@ class Notifications extends Component {
 
       }
   
-    componentDidMount=()=>{
-      this.notifications = this.refs.notificationSystem;
-    }
-  
     render() {
       return (
         <div>
-            <NotificationSystem ref="notificationSystem" />
             <Snackbar
                     open={this.state.snackbarOpen}
                     message={this.state.snackbarMessage}
