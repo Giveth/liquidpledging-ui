@@ -26,7 +26,14 @@ class MyProjects extends BaseDelegationPage {
         let mergedAccounts = LPState.getIsMergedAccounts()
 
         if(!currentAddress)
+        {
+            this.setState({
+                currentAddress:currentAddress,
+                mergedAccounts:mergedAccounts
+            })
+            this.populateCards([])
             return
+        }
         
         let MyProjectsFilter = {adminAddress:currentAddress, type:'Project'}
         let nodes = []

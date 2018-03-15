@@ -25,7 +25,14 @@ class OthersFunds extends BaseDelegationPage {
         let mergedAccounts = LPState.getIsMergedAccounts()
 
         if(!currentAddress)
+        {
+            this.setState({
+                currentAddress:currentAddress,
+                mergedAccounts:mergedAccounts
+            })
+            this.populateCards([])
             return
+        }
 
         let myDelegatesFilter = {adminAddress:currentAddress, type:'Delegate'}
         let nodes = []
