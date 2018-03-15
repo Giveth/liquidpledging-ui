@@ -37,6 +37,7 @@ class Caller extends EventEmitter
             console.error(error)
         })
 
+        this.generateTransactionUrl()
         this.emit(this.SHOW_NOTIFICATION, {message:'Adding funds. Waiting confirmation...'})
     }
 
@@ -221,6 +222,21 @@ class Caller extends EventEmitter
     closeNotification(data)
     {
         this.emit(this.CLOSE_NOTIFICATION, data)
+    }
+
+    generateTransactionUrl(transactionId)
+    {
+        let network = LiquidPledging.getNetworkDetails(LiquidPledging.getCurrentNetwork())
+
+        if(!network.id)
+            return
+            
+        if(network.id === 1)
+            return 'https://etherscan.io/tx/'+transactionId
+
+        else
+            return 'https://'+network.name+'.etherscan.io/tx/'+transactionId
+
     }
 }
 
