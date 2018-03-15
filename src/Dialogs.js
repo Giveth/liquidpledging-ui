@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Caller from './LiquidPledgingCaller'
 import LPState from "./LiquidPledgingState.js"
-import Snackbar from 'material-ui/Snackbar'
 
 import DonateDialog from './DonateDialog'
 import TransferDialog from './TransferDialog'
@@ -18,10 +17,6 @@ class Dialogs extends Component {
             currentAddress:'',
             donateOpen:false,
             donateData:{reciever:0, emiter:0, amount:0, giverName:''},
-
-            snackbarOpen:false,
-            snackbarMessage:'',
-            snackBarTime:6000,
 
             transferOpen:false,
             transferData:{reciever:0, emiterId:0, amount:0, giverName:''},
@@ -40,9 +35,7 @@ class Dialogs extends Component {
         }
 
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
-        LPState.on(LPState.ACCOUNT_CHANGED, this.onAccountChanged)
-        LPState.on(LPState.NETWORK_CHANGED, this.onNetworkChanged)
-        LPState.on(LPState.NO_CONTRACT, this.onNoContractFound)
+
 
         Caller.on(Caller.DONATE_DIALOG, this.donateOnShow)
         Caller.on(Caller.TRANSFER_DIALOG, this.transferOnShow)
@@ -57,42 +50,6 @@ class Dialogs extends Component {
         let transferMetadata={}
         transferMetadata.emiters=emiters
         this.setState({ transferMetadata:transferMetadata})
-    }
-
-    onAccountChanged=()=>{
-        this.setState({ currentAddress:LPState.getCurrentAccount()})
-    }
-
-    onNetworkChanged=()=>{
-        this.showSnackbar("Connected to " + LPState.getCurrentNetwork().name)
-    }
-
-    onNoContractFound=()=>{
-        this.showSnackbar("⚠️ Can't find the contract")
-    }
-
-    //snackBar
-    showSnackbar=(message, time=5000)=>
-    {
-        this.setState({
-            snackbarMessage:message,
-            snackbarTime:time,
-            snackbarOpen:true
-        })
-    }
-
-    closeSnackbar=()=>
-    {
-        this.setState({
-            snackbarOpen:false,
-            snackbarMessage:"",
-            snackBarTime:0,
-        } )
-    }
-
-    snackBarOnDone=(transfer)=>
-    {
-        this.setState({ snackBarOpen:false })
     }
 
     //Donate
@@ -227,21 +184,11 @@ class Dialogs extends Component {
         
         return (
             <div>
-                <Snackbar
-                    open={this.state.snackbarOpen}
-                    message={this.state.snackbarMessage}
-                    action="Ok"
-                    autoHideDuration={this.state.snackBarTime}
-                    onActionTouchTap={this.closeSnackbar}
-                    onRequestClose={this.closeSnackbar}
-                    />
-
-            {donateDialog}
-            {transferDialog}
-            {addAminDialog}
-            {pledgesDialog}
-            {findDelegationsDialog}
-
+                {donateDialog}
+                {transferDialog}
+                {addAminDialog}
+                {pledgesDialog}
+                {findDelegationsDialog}
             </div>
         )
     }
