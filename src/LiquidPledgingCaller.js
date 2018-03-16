@@ -1,4 +1,5 @@
 import LiquidPledging from './LiquidPledgingState'
+import { Currency } from './Styles';
 
 const EventEmitter = require('events')
 
@@ -93,14 +94,22 @@ class Caller extends EventEmitter
     }
 
     //CANCEL
-    showCancelDialog(delegation)
+    showCancelDialog(data)
     {
+        console.log(data)
+        let delegation = data.delegation
+        let node = data.node
+
         if(delegation.delegations.length === 0)
         {
             console.log("Single!")
             let data = {
+                emiterId:node.id,
                 pledgeId:delegation.pledgeId,
-                amount:delegation.assignedAmount
+                recieverId: node.id,
+                //amount: delegation.assignedAmount - 1000, 
+                amount: delegation.assignedAmount,
+                address: node.adminAddress
             }
     
             this.cancel(data)
@@ -132,7 +141,8 @@ class Caller extends EventEmitter
 
     cancel(data)
     {
-        LiquidPledging.cancel(data.pledgeId, data.amount)
+        console.log(data)
+        LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount, data.address)
         .then((data) => {
             console.log("Canceled", data)
             LiquidPledging.retriveStateData()
@@ -147,7 +157,6 @@ class Caller extends EventEmitter
         })
 
         this.emit(this.SHOW_NOTIFICATION, {message: 'Canceling delegation. Waiting confirmation...'})
-
     }
 
     multiCancel(pledgeAmounts)
