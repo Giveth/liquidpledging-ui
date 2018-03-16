@@ -63,7 +63,7 @@ class App extends Component {
     {
         if(!this.currentAddress)
             if(account)
-                Caller.showNotification({message:"Account unlocked!"})
+                Caller.showNotification({message:"Using "+account})
     }
 
     getIcon()
