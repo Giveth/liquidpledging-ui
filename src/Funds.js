@@ -42,8 +42,8 @@ class Funds extends Component
     {
         let delta = (this.state.futureAmount - this.state.currentAmount) * this.speed
         let newAmount = this.state.currentAmount + delta
-        let proximityHigh = this.state.futureAmount + this.state.futureAmount * this.tolerance
-        let proximityLow = this.state.futureAmount - this.state.futureAmount * this.tolerance 
+        let proximityHigh = this.state.futureAmount + 0.1
+        let proximityLow = this.state.futureAmount - 0.1
 
         if(newAmount < proximityHigh  && newAmount > proximityLow )
         {
