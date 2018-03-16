@@ -38,6 +38,7 @@ class PledgesTable extends React.Component {
 
     isSelectedId(id)
     {
+        console.log(this.props.selectedIds)
         if(!this.props.selectedIds)
             return false
 

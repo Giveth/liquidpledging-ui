@@ -34,6 +34,10 @@ class AdminCard extends Component {
         Caller.showPledgesDialog(data)
     }
 
+    onCardPledges=()=>{
+        this.showPledgesDialogPlus([])
+    }
+
     onAvailablePledges=()=>{
 
         let selectedIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsIn)
