@@ -29,33 +29,19 @@ class TransferDialog extends React.Component
         let title = "Pledges for "+this.props.data.title
        
         let tables = []
-        let singleTable = true
-
         
         if(this.props.data && this.props.data.pledgesBlocks)
         {
-            if(singleTable)
-            {
-                let all = []
-                for(let block of this.props.data.pledgesBlocks)
-                {
-                    all = all.concat(block.pledges)
-                }
 
-                tables = [<PledgesTable
-                    key= {"Main"}
-                    pledges={all}
-                    title={""}/>]
-            }
-            else
-            {
-                tables = this.props.data.pledgesBlocks.map((block, index)=>{     
-                    return <PledgesTable
-                        key= {index}
-                        pledges={block.pledges}
-                        title={block.title}/>
-                    })
-            }    
+            let all = []
+            for(let block of this.props.data.pledgesBlocks)
+                all = all.concat(block.pledges)
+        
+            tables = [<PledgesTable
+                key= {"Main"}
+                pledges={all}
+                title={""}
+                selectedIds = {this.props.data.selectedIds}/>]
         }
         
         return (

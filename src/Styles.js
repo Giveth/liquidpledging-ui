@@ -9,7 +9,8 @@ const CARD_RADIUS = 5
 const CARD_SIDE_PADDING = 35
 
 export const Colors = {
-    contrast:'#6CCDDC',
+    contrast:'rgba(108, 205, 220, 1)',
+    suttleContrast:'rgba(108, 205, 220, 0.3)',
     base:'#666',
     highlight:'#333',
     backgroundHighlight:'rgba(0, 0, 0, 0.05)',
@@ -465,6 +466,12 @@ export const Styles = {
             fontSize:"80%",
             opacity:0.7
         },
+    },
+
+    PledgesTable:{
+        selectedRow:{
+            backgroundColor:Colors.suttleContrast
+        }
     }
 }
 

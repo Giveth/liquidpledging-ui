@@ -1,7 +1,7 @@
 import React from "react"
 import ReactTable from "react-table"
 import "react-table/react-table.css"
-import {Currency} from './Styles'
+import {Currency, Styles} from './Styles'
 import LPState from "./LiquidPledgingState.js"
 import {Time} from "./Styles.js"
 
@@ -36,6 +36,20 @@ class PledgesTable extends React.Component {
         return String(d._original[filter.id]).indexOf(filter.value)>-1
     }
 
+    isSelectedId(id)
+    {
+        if(!this.props.selectedIds)
+            return false
+
+        for(let i of this.props.selectedIds)
+        {
+            if(i == id)
+                return true
+        }
+
+        return false
+    }
+
     render() {
 
         let rows = 1
@@ -52,6 +66,13 @@ class PledgesTable extends React.Component {
             showPaginationTop={false}
             showPaginationBottom={false}
             noDataText=""
+            getTrProps={(state, rowInfo, column) => {
+                let isSelectedId = this.isSelectedId(rowInfo.row.id)
+                let rowStyle = isSelectedId ?Styles.PledgesTable.selectedRow:{}
+                return {
+                  style:rowStyle
+                }
+              }}
             columns={[
                 {
                 Header: this.props.title,
