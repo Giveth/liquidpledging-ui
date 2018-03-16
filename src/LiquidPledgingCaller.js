@@ -78,7 +78,7 @@ class Caller extends EventEmitter
             console.log("Multi Transfered", data)
             LiquidPledging.retriveStateData()
             this.emit(this.SHOW_NOTIFICATION,{
-                message: 'Funds delegated!',
+                message: 'Funds delegated',
                 action:'View TX',
                 onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
             }) 
@@ -161,7 +161,7 @@ class Caller extends EventEmitter
             else
             {
                 this.emit(this.SHOW_NOTIFICATION,{
-                    message: 'Delegation canceled!',
+                    message: 'Delegation canceled',
                     action:'View TX',
                     onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
                 })
