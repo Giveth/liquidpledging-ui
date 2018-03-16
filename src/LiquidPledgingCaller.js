@@ -42,8 +42,6 @@ class Caller extends EventEmitter
             console.error(error)
         })
 
-        console.log(donate)
-
         this.emit(this.SHOW_NOTIFICATION, {message:'Adding funds. Waiting confirmation...', action:'View', })
     }
 
@@ -114,54 +112,71 @@ class Caller extends EventEmitter
         }
         else
         {
-            let pledgeAmounts = []
-
-            let getCancelPledgesRecursively=(d)=>
+            let cancelCue = []
+            let index = 0
+            
+            let cancelRecursively=(d)=>
             {
                 let data = {
-                    amount: d.assignedAmount - 1000, 
-                    id: d.pledgeId
+                    emiterId:node.id,
+                    pledgeId:d.pledgeId,
+                    recieverId: node.id,
+                    amount: d.assignedAmount,
+                    address: node.adminAddress
                 }
-                
-                pledgeAmounts.push(data)
+               
                 d.delegations.forEach((delegationId)=>{
-                    getCancelPledgesRecursively(LiquidPledging.getDelegation(delegationId))
+                    cancelRecursively(LiquidPledging.getDelegation(delegationId))
                 })
 
+                cancelCue.push(()=>{
+                    console.log("canceling "+ index)
+                    if(index>= cancelCue.length)
+                        return
+                    index ++
+                    this.cancel(data, cancelCue[index], cancelCue.length - index, cancelCue.length)
+                })
             }
-
-            getCancelPledgesRecursively(delegation)
-
-            let data = {
-                emiterId:node.id,
-                pledgeAmounts:pledgeAmounts,
-                recieverId: node.id,
-                address: node.adminAddress
-            }
-            this.multiCancel(data)
-
-            console.log("multi!", data)
+            cancelRecursively(delegation)
+            cancelCue[index]()
         }
     }
     
-    cancel(data)
+    cancel(data, onSuccess, index, total)
     {
         let extraGas = 200000
         LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount, data.address, extraGas)
         .then((data) => {
             console.log("Canceled", data)
             LiquidPledging.retriveStateData()
-            this.emit(this.SHOW_NOTIFICATION,{
-                message: 'Delegation canceled!',
-                action:'View TX',
-                onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
-            }) 
+            if(onSuccess)
+            {
+                onSuccess()
+                this.emit(this.SHOW_NOTIFICATION,{
+                    message: 'Delegation '+ index +'/'+total+' canceled!',
+                    action:'View TX',
+                    onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
+                })
+            }
+            else
+            {
+                this.emit(this.SHOW_NOTIFICATION,{
+                    message: 'Delegation canceled!',
+                    action:'View TX',
+                    onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
+                })
+            }
+            
         }).catch((error)=>{
             this.showTransactionError()
             console.error(error)
         })
 
-        this.emit(this.SHOW_NOTIFICATION, {message: 'Canceling delegation. Waiting confirmation...'})
+        if(onSuccess)
+            this.emit(this.SHOW_NOTIFICATION, {message: 'Canceling delegation '+index+'/'+total+'. Waiting confirmation...'})
+        else
+            this.emit(this.SHOW_NOTIFICATION, {message: 'Canceling delegation. Waiting confirmation...'})
+
     }
 
     multiCancel(data)
