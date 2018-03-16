@@ -32,7 +32,8 @@ class RootDelegationList extends Component {
 
             let onCancel=()=>
             {
-                Caller.showCancelDialog(d)
+                let data = {delegation:d, node:this.props.node}
+                Caller.showCancelDialog(data)
             }
     
             if(canDelegate){
