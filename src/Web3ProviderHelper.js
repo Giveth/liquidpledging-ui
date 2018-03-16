@@ -98,6 +98,12 @@ class Web3ProviderHelper extends EventEmitter
         {
             if(error)
                 console.error(error)
+
+            if (!accounts)
+            {
+                console.error("No accounts available")
+                return
+            }
         
             this.checkAccountChange(accounts)
         })
