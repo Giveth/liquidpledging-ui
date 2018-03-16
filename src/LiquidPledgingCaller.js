@@ -106,8 +106,7 @@ class Caller extends EventEmitter
                 emiterId:node.id,
                 pledgeId:delegation.pledgeId,
                 recieverId: node.id,
-                //amount: delegation.assignedAmount,
-                amount: delegation.assignedAmount - 1000, 
+                amount: delegation.assignedAmount,
                 address: node.adminAddress
             }
     
@@ -123,13 +122,12 @@ class Caller extends EventEmitter
                     amount: d.assignedAmount - 1000, 
                     id: d.pledgeId
                 }
-
                 
+                pledgeAmounts.push(data)
                 d.delegations.forEach((delegationId)=>{
                     getCancelPledgesRecursively(LiquidPledging.getDelegation(delegationId))
                 })
-                
-                pledgeAmounts.push(data)
+
             }
 
             getCancelPledgesRecursively(delegation)
@@ -140,16 +138,16 @@ class Caller extends EventEmitter
                 recieverId: node.id,
                 address: node.adminAddress
             }
+            this.multiCancel(data)
 
             console.log("multi!", data)
-            this.multiCancel(data)
         }
     }
     
     cancel(data)
     {
-        console.log(data)
-        LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount, data.address)
+        let extraGas = 200000
+        LiquidPledging.transfer(data.emiterId, data.pledgeId, data.recieverId, data.amount, data.address, extraGas)
         .then((data) => {
             console.log("Canceled", data)
             LiquidPledging.retriveStateData()
@@ -168,7 +166,8 @@ class Caller extends EventEmitter
 
     multiCancel(data)
     {
-        LiquidPledging.multiTransfer(data.emiterId, data.pledgeAmounts, data.recieverId, data.address)
+        let extraGas = 200000
+        LiquidPledging.multiTransfer(data.emiterId, data.pledgeAmounts, data.recieverId, data.address, extraGas)
         .then((data) => {
             console.log("MultiCanceled", data)
             LiquidPledging.retriveStateData()
@@ -182,7 +181,6 @@ class Caller extends EventEmitter
             console.error(error)
         })
         this.emit(this.SHOW_NOTIFICATION, {message: 'Canceling delegation. Waiting confirmation...'})
-
     }
 
      //AddAdmin
