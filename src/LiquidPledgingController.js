@@ -156,7 +156,7 @@ class LiquidPledgingController extends ProviderHelper {
         return this.liquidPledging.donate(emiterId, receiverId, { from: address, value:weiAmount})
     }
 
-    transfer(emiterId, pledgeId, receiverId, amount, address , extraGas = 0)
+    transfer(emiterId, pledgeId, receiverId, amount, address , extraGas = 100000)
     {
         return this.liquidPledging.transfer(emiterId, pledgeId, amount.toString(), receiverId, {from: address, $extraGas: extraGas})
     }
