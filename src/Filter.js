@@ -1,7 +1,7 @@
 
 module.exports = {
 
-    byProperty(array, property, value)
+    byProperty(array, property, value, reverse = false)
     {
         return array.filter((element)=>{
 
@@ -13,10 +13,10 @@ module.exports = {
 
             if(element[property] instanceof Array)
                 if(element[property].toString() === value.toString())
-                    return true
+                    return !reverse
 
             if(element[property] === value)
-                return true
+                return !reverse
                 
             return false
         })
