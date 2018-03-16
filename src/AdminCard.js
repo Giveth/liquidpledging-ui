@@ -100,8 +100,8 @@ class AdminCard extends Component {
           <div style = {Styles.card.body}>
 
                 <div style = {Styles.card.header}>
-                    <div style = {Styles.card.row} onClick = {this.onCardPledges}>
-                        {this.props.node.name}
+                    <div style = {Styles.card.row}>
+                    <div onClick = {this.onCardPledges} >{this.props.node.name}</div>
                         <div style = {Styles.row}>
                             {this.props.addFundsButton}
                             <div style={Styles.space}/>
@@ -115,8 +115,9 @@ class AdminCard extends Component {
                     {unsecured}
                     {unsecuredDivider}
 
-                    <div key= "Available" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onAvailablePledges}>
-                        {"Available"}
+                    <div key= "Available" style = {Merge(Styles.card.row, Styles.card.subHeader)}>
+                        <div onClick = {this.onAvailablePledges} >{"Available"}</div>
+                        
                         <div style = {Styles.row}>
                             {this.props.availableButtons}
                             <div style={Styles.space}/>
@@ -126,8 +127,8 @@ class AdminCard extends Component {
                     
                     <div style={Styles.card.divider}/>
 
-                    <div key= "Delegated" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onDelegatedPledges}>
-                        {"Delegated"}
+                    <div key= "Delegated" style = {Merge(Styles.card.row, Styles.card.subHeader)}>
+                        <div onClick = {this.onDelegatedPledges} >{"Delegated"}</div>
                         <Funds amount = {this.props.delegatedAmount}/>
                     </div>
 
