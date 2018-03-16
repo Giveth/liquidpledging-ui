@@ -159,31 +159,32 @@ class LiquidPledgingController extends ProviderHelper {
 
     transfer(emiterId, pledgeId, receiverId, amount, address )
     {
-        return this.liquidPledging.transfer(emiterId, pledgeId, amount.toString(), receiverId, {from: address })
+        return this.liquidPledging.transfer(emiterId, pledgeId, amount.toString(), receiverId, {from: address})
     }
 
-    multiTransfer(emiterId, pledgesAmounts, receiverId, address )
+    multiTransfer(emiterId, pledgesAmounts, receiverId, address)
     {
+        console.log(emiterId, pledgesAmounts, receiverId, address)
         let encodedPledges = pledgesAmounts.map(p => {
             return '0x' + this.web3.utils.padLeft(this.web3.utils.toHex(p.amount).substring(2), 48) + this.web3.utils.padLeft(this.web3.utils.toHex(p.id).substring(2), 16);
         })
 
-        return this.liquidPledging.mTransfer(emiterId, encodedPledges, receiverId, {from: address })
+        return this.liquidPledging.mTransfer(emiterId, encodedPledges, receiverId, {from: address})
     }
 
-    cancel(pledgeId, amount)
+   /*cancel(pledgeId, amount)
     {
         return this.liquidPledging.cancelPledge(pledgeId, amount, {from:this.currentAccount, gas:500000})
-    }
+    }*/
 
-    multiCancel(pledgesAmounts )
+    /*multiCancel(pledgesAmounts )
     {
         let encodedPledges = pledgesAmounts.map(p => {
             return '0x' + this.web3.utils.padLeft(this.web3.utils.toHex(p.amount).substring(2), 48) + this.web3.utils.padLeft(this.web3.utils.toHex(p.id).substring(2), 16);
         })
 
         return this.liquidPledging.mCancelPayment( encodedPledges, {from: this.currentAccount })
-    }
+    }*/
     
 
     addGiver(name, url, address)

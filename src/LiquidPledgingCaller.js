@@ -102,13 +102,12 @@ class Caller extends EventEmitter
 
         if(delegation.delegations.length === 0)
         {
-            console.log("Single!")
             let data = {
                 emiterId:node.id,
                 pledgeId:delegation.pledgeId,
                 recieverId: node.id,
-                //amount: delegation.assignedAmount - 1000, 
-                amount: delegation.assignedAmount,
+                //amount: delegation.assignedAmount,
+                amount: delegation.assignedAmount - 1000, 
                 address: node.adminAddress
             }
     
@@ -121,24 +120,32 @@ class Caller extends EventEmitter
             let getCancelPledgesRecursively=(d)=>
             {
                 let data = {
-                    id:d.pledgeId,
-                    amount:d.assignedAmount
+                    amount: d.assignedAmount - 1000, 
+                    id: d.pledgeId
                 }
 
-                pledgeAmounts.push(data)
-
+                
                 d.delegations.forEach((delegationId)=>{
                     getCancelPledgesRecursively(LiquidPledging.getDelegation(delegationId))
                 })
+                
+                pledgeAmounts.push(data)
             }
 
             getCancelPledgesRecursively(delegation)
 
-            console.log("multi!", pledgeAmounts)
-            this.multiCancel(pledgeAmounts)
+            let data = {
+                emiterId:node.id,
+                pledgeAmounts:pledgeAmounts,
+                recieverId: node.id,
+                address: node.adminAddress
+            }
+
+            console.log("multi!", data)
+            this.multiCancel(data)
         }
     }
-
+    
     cancel(data)
     {
         console.log(data)
@@ -159,9 +166,9 @@ class Caller extends EventEmitter
         this.emit(this.SHOW_NOTIFICATION, {message: 'Canceling delegation. Waiting confirmation...'})
     }
 
-    multiCancel(pledgeAmounts)
+    multiCancel(data)
     {
-        LiquidPledging.multiCancel(pledgeAmounts)
+        LiquidPledging.multiTransfer(data.emiterId, data.pledgeAmounts, data.recieverId, data.address)
         .then((data) => {
             console.log("MultiCanceled", data)
             LiquidPledging.retriveStateData()
