@@ -71,7 +71,6 @@ class AdminCard extends Component {
     }
 
     onDelegationPledge=(delegation)=>{
-        console.log(delegation,"eureka")
 
         let pledgesGroups = [
             this.getPledgesGroup('', [delegation])
@@ -147,6 +146,7 @@ class AdminCard extends Component {
                     <RootDelegationList
                         key='Delegations'
                         delegations={this.props.delegationsOut}
+                        node={this.props.node}
                         indentLevel={-1}
                         userAddress={this.props.currentAddress}
                         defaultColapsed = {false}
@@ -164,6 +164,7 @@ class AdminCard extends Component {
                     <RootDelegationList
                         key='Projects'
                         delegations={this.props.delegationsToProject}
+                        node={this.props.node}
                         indentLevel={-1}
                         userAddress={this.props.currentAddress}
                         defaultColapsed = {false}
