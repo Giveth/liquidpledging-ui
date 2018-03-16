@@ -27,8 +27,8 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "testrpc": "./node_modules/.bin/ganache-cli --ws --deterministic --gasLimit=6000000",
-    "go": "fuser -k -n tcp 3000 ; fuser -k -n tcp 8545 ; fuser -k -n tcp 8546 ; (npm run testrpc &) && sleep 1 && node scripts/basicScenario.js && npm start"
+    "testrpc": "ganache-cli --port 8545 --ws --deterministic --gasLimit=6000000",
+    "go": "fuser -k -n tcp 3000 ; fuser -k -n tcp 8545 ; fuser -k -n tcp 8546 ; (npm run testrpc &) && sleep 5s && node scripts/basicScenario.js && npm start"
   },
   "homepage": "https://giveth.github.io/liquidpledging-ui"
 }

@@ -3,7 +3,7 @@ import Formatter from './DataFormatter'
 import liquidpledging from 'liquidpledging'
 const LiquidPledging = liquidpledging.LiquidPledging;
 const LiquidPledgingState = liquidpledging.LiquidPledgingState;
-const testRPCProvider = 'ws://localhost:8546'
+const testRPCProvider = 'ws://localhost:8545'
 const defaultContract = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24' //TESTRPC DETERMINISTIC
 //const defaultContract = '0x18658A1A7cB8b0Be97b155D051769b3651b2943c' //ROPSTEN
 
