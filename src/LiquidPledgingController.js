@@ -152,19 +152,17 @@ class LiquidPledgingController extends ProviderHelper {
 
     donate(emiterId, receiverId, amount, address )
     {
-        console.log(address)
         let weiAmount =this.web3.utils.toWei(amount.toString())
         return this.liquidPledging.donate(emiterId, receiverId, { from: address, value:weiAmount})
     }
 
-    transfer(emiterId, pledgeId, receiverId, amount, address )
+    transfer(emiterId, pledgeId, receiverId, amount, address , extraGas = 0)
     {
-        return this.liquidPledging.transfer(emiterId, pledgeId, amount.toString(), receiverId, {from: address})
+        return this.liquidPledging.transfer(emiterId, pledgeId, amount.toString(), receiverId, {from: address, $extraGas: extraGas})
     }
 
     multiTransfer(emiterId, pledgesAmounts, receiverId, address)
     {
-        console.log(emiterId, pledgesAmounts, receiverId, address)
         let encodedPledges = pledgesAmounts.map(p => {
             return '0x' + this.web3.utils.padLeft(this.web3.utils.toHex(p.amount).substring(2), 48) + this.web3.utils.padLeft(this.web3.utils.toHex(p.id).substring(2), 16);
         })
