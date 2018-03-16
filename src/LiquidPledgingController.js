@@ -1,7 +1,6 @@
 import ProviderHelper from './Web3ProviderHelper'
 import Formatter from './DataFormatter'
-
-const liquidpledging = require('./liquidpledging');
+import liquidpledging from 'liquidpledging'
 const LiquidPledging = liquidpledging.LiquidPledging;
 const LiquidPledgingState = liquidpledging.LiquidPledgingState;
 const testRPCProvider = 'ws://localhost:8546'
@@ -25,7 +24,8 @@ class LiquidPledgingController extends ProviderHelper {
         this.delegations={}
         this.delegationsArray=[]
         this.nodes=[]
-        this.defalutProviders= [testRPCProvider, '*' ]
+        //this.defalutProviders= [testRPCProvider, '*' ]
+        this.defalutProviders= [ '*', testRPCProvider ]
         this.contract = defaultContract
 
         this.setupWeb3()
