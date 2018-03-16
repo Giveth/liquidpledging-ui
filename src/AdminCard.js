@@ -17,31 +17,27 @@ class AdminCard extends Component {
         this.props.onToggle(!this.props.colapsed)
     }
 
-    showPledgesDialog=(pledgesGroups)=>{
-        let data = {
-            pledgesBlocks: pledgesGroups,
-            title: this.props.node.name
-        }
+    showPledgesDialogPlus=(selectedIds)=>{
 
-        Caller.showPledgesDialog(data)
-    }
-
-    onCardPledges=()=>{
         let pledgesGroups = [
             this.getPledgesGroup('Available', this.props.delegationsIn),
             this.getPledgesGroup('Delegated', this.props.delegationsOut),
             this.getPledgesGroup('Assigned to Projects', this.props.delegationsToProject)
         ]
 
-        this.showPledgesDialog(pledgesGroups)
+        let data = {
+            pledgesBlocks: pledgesGroups,
+            title: this.props.node.name,
+            selectedIds:selectedIds
+        }
+
+        Caller.showPledgesDialog(data)
     }
 
     onAvailablePledges=()=>{
-        let pledgesGroups = [
-            this.getPledgesGroup('Available', this.props.delegationsIn)
-        ]
 
-        this.showPledgesDialog(pledgesGroups)
+        let selectedIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsIn)
+        this.showPledgesDialogPlus(selectedIds)
     }
 
     onUsecuredPledges=()=>{
@@ -52,31 +48,23 @@ class AdminCard extends Component {
 
         this.showPledgesDialog(pledgesGroups)
         */
+       
     }
 
     onDelegatedPledges=()=>{
-        let pledgesGroups = [
-            this.getPledgesGroup('Delegated', this.props.delegationsOut),
-        ]
-
-        this.showPledgesDialog(pledgesGroups)
+        let selectedIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsOut)
+        this.showPledgesDialogPlus(selectedIds)
     }
 
     onProjectsPledges=()=>{
-        let pledgesGroups = [
-            this.getPledgesGroup('Assigned to Projects', this.props.delegationsToProject)
-        ]
-
-        this.showPledgesDialog(pledgesGroups)
+        let selectedIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsToProject)
+        this.showPledgesDialogPlus(selectedIds)
     }
 
     onDelegationPledge=(delegation)=>{
+        let selectedIds = LPState.getPledgesIdsFromDelegations([delegation])
 
-        let pledgesGroups = [
-            this.getPledgesGroup('', [delegation])
-        ]
-
-        this.showPledgesDialog(pledgesGroups)
+        this.showPledgesDialogPlus(selectedIds)
     }
 
     getPledgesGroup(title, delegations)
