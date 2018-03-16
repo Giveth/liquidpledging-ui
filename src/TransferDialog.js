@@ -336,7 +336,7 @@ class TransferDialog extends React.Component
                 modal={false}
                 open={this.props.open}
                 onRequestClose={this.onCancel}
-                contentStyle={Styles.dialogs.narrow}>
+                contentStyle={Styles.dialogs.fit}>
 
                 <div> 
                     {"To " + this.props.data.giverName}

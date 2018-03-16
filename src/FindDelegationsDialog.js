@@ -2,6 +2,7 @@ import React from 'react'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import Explorer from './Explorer.js'
+import {Styles} from './Styles.js'
 
 class FindDelegationsDialog extends React.Component
 {
@@ -33,7 +34,7 @@ class FindDelegationsDialog extends React.Component
                 modal={false}
                 open={this.props.open}
                 onRequestClose={this.onCancel}
-                contentStyle={{maxWidth:'none'}}
+                contentStyle={Styles.dialogs.fit}
                 autoScrollBodyContent={false}>
                
                 <div style = {{overflow:'auto'}}>
@@ -42,7 +43,8 @@ class FindDelegationsDialog extends React.Component
                         onCancel = {this.props.onCancel}
                         emiterId = {this.props.data.emiterId}
                         adminTypes = {this.props.data.adminTypes}
-                        adminAddress = {this.props.data.adminAddress}/>
+                        adminAddress = {this.props.data.adminAddress}
+                        height = {500}/>
                 </div>
 
             </Dialog>

@@ -111,7 +111,7 @@ class Explorer extends BaseDelegationPage {
         let itemsList = this.createList(this.state.filtredTree)
 
         return (
-            <div >
+            <div style ={{height:this.props.height}}>
                 <TextField
                     autoFocus={true}
                     id="inputText"
@@ -119,7 +119,7 @@ class Explorer extends BaseDelegationPage {
                     value={this.state.searchValue}
                     onChange={this.onSearchChanged}/>
 
-                <List style={{maxHeight: 400, overflow: "auto"}}>
+                <List style={{ overflow: "auto"}}>
                     <Subheader>Choose who to delegate</Subheader>
                     {itemsList}
                 </List>
