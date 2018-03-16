@@ -4,6 +4,7 @@ import IconButton from 'material-ui/IconButton'
 import FlatButton from 'material-ui/FlatButton'
 import Caller from './LiquidPledgingCaller'
 import Funds from './Funds'
+import Filter from './Filter'
 
 class RootDelegationList extends Component {   
 
@@ -11,8 +12,10 @@ class RootDelegationList extends Component {
 
         if(!this.props.delegations)
             return <div/>
+
+        let delegationsWithAmount = Filter.byProperty(this.props.delegations, 'availableAmount',0, true)
             
-        let list = this.props.delegations.map((d,index) => {
+        let list = delegationsWithAmount.map((d,index) => {
         
             let that = this
 
