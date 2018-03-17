@@ -31,14 +31,6 @@ export const Colors = {
 export const Icons = {
 
     cancel:CancelIcon
-    /*subDelegate: SubDelegateIcon,
-    colapsed: ColapsedIcon,
-    shown:ShownIcon,
-    add:AddIcon,
-    ,
-    addAdmin:AddAdminIcon,
-    project:ProjectIcon,
-    pledges:PledgesIcon,*/
 }
 
 export const Styles = {
@@ -47,123 +39,9 @@ export const Styles = {
     minContentWidth:MIN_CONTENT_WIDTH,
     maxContentWidth:MAX_CONTENT_WIDTH,
 
-
-    emptyButton:{
-        display:"flex",
-        flexDirection: 'row',
-        justifyContent:'center',
-        alignItems:'center',
-        width:48,
-    },
-
-    space:{
-        width:24,
-        height:24,
-    },
-
     row:{
         display:"flex",
         flexDirection: 'row',
-        //alignItems:"baseline"
-        //justifyContent:'space-between',
-    },
-
-    subtitle:{
-        color:Colors.secondary,
-        textTransform: 'uppercase',
-        paddingTop:40,
-        margin:0,
-    },
-
-    addressSubtle:{
-        color:Colors.subtle,
-        display: 'inline',
-        whiteSpace: "nowrap",
-        textOverflow: "ellipsis",
-        overflow: "hidden",
-        fontSize:'0.8em',
-    },
-
-    adminColor:{
-        color:Colors.admin
-    },
-
-    cardTitle:
-    {
-        fontSize:'1.2em',
-        color: Colors.base,
-        display: 'inline',
-        whiteSpace: "nowrap",
-        textOverflow: "ellipsis",
-        overflow: "hidden",
-    },
-
-    sectionTitle:
-    {
-        fontSize:'1em',
-        color:Colors.subtle,
-        fontWeight: 200,
-        textTransform: 'uppercase',
-        marginBottom:10,
-        marginTop:10,
-    },
-
-    sectionFrontCell:
-    {
-        minWidth:200,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent:'flex-start',
-        alignItems: 'center',
-        flex:1,
-    },
-
-    sectionMiddleCell:
-    {
-        minWidth:200,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent:'flex-start',
-        alignItems: 'center',
-        flex:1,
-    },
-
-    sectionBackCell:
-    {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent:'flex-end',
-        alignItems: 'center',
-    },
-   
-    rootDelegation:{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent:'space-between',
-        paddingBottom:10,
-        paddingTop:10,
-       // paddingLeft:15,
-        height:16,
-        marginBottom:5,
-        backgroundColor:Colors.rootDelegationBackround,
-    },
-
-    giverCardHeader:{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        paddingTop: 5,
-        paddingBottom: 5,
-        marginTop: 5,
-    },
-
-    givethLogo:{
-       // WebkitFilter: 'grayscale(100%)', 
-       justifyContent:"center",
-       width:70,
-       height:70,
-       padding:10
     },
 
     dialogs:{
@@ -173,17 +51,6 @@ export const Styles = {
         fit:{
             width: 'fit-content'
         }
-    },
-
-    floatingBottomRight:{
-        margin: 0,
-        top: 'auto',
-        right: 20,
-        bottom: 20,
-        left: 'auto',
-        position: 'fixed',
-        zIndex:100,
-        backgroundColor:'grey'
     },
 
     addressSelector:{
