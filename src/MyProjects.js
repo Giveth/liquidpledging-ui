@@ -66,7 +66,7 @@ class MyProjects extends BaseDelegationPage {
         Caller.showAddAdminDialog(data)
     }
 
-    getAvailableButtons=(node)=>
+    getAvailableButtons=(node, availableAmount)=>
     {
         function onDelegateFunds()
         {
@@ -90,19 +90,19 @@ class MyProjects extends BaseDelegationPage {
              Caller.showFindDelegationsDialog(findDelegationsData)
         }
 
+        let isDisabled = availableAmount<=0
+
         return (<div>
                     <Button
                         onClick = {onDelegateFunds}
-                        secondary = {false}
+                        disabled = {isDisabled}
                         label={'Delegate'}
-                        labelStyle = {{fontSize:11}}
                     />
 
                     <Button
                         onClick = {onAssignToProject}
-                        secondary = {false}
+                        disabled = {isDisabled}
                         label={'Assign to project'}
-                        labelStyle = {{fontSize:11}}
                     />
                 </div>
             )
@@ -134,7 +134,7 @@ class MyProjects extends BaseDelegationPage {
             let securedAmount = LPState.getProjectNodeSecuredAmount(node)
             let unsecuredAmount = assignedAmount - securedAmount
             let availableAmount = assignedAmount - delegatedAmount - assignedToProjectsAmount - unsecuredAmount
-            let availableButtons = this.getAvailableButtons(node)
+            let availableButtons = this.getAvailableButtons(node, availableAmount)
     
             let totalAmount = availableAmount + delegatedAmount + assignedToProjectsAmount + unsecuredAmount
             totalGiverAmount += assignedAmount

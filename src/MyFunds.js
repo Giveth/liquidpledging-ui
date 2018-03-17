@@ -77,7 +77,7 @@ class MyFunds extends BaseDelegationPage
         Caller.showDonateDialog(donateData)
     }
 
-    getAvailableButtons=(node)=>
+    getAvailableButtons=(node, availableAmount)=>
     {
         function onDelegateFunds()
         {
@@ -100,18 +100,21 @@ class MyFunds extends BaseDelegationPage
              }
              Caller.showFindDelegationsDialog(findDelegationsData)
         }
+        
+        let isDisabled = availableAmount<=0
 
         return (<div>
                     <Button
                         onClick = {onDelegateFunds}
-    
+                        disabled = {isDisabled}
                         label={'Delegate'}
                         labelStyle = {{fontSize:11}}
                     />
 
                     <Button
                         onClick = {onAssignToProject}
-    
+                        isDisabled = {isDisabled}
+                        disabled = {isDisabled}
                         label={'Assign to project'}
                         labelStyle = {{fontSize:11}}
                     />
@@ -166,7 +169,7 @@ class MyFunds extends BaseDelegationPage
 
             let addFundsButton = this.getAddFundsButton(node)
 
-            let availableButtons = this.getAvailableButtons(node)
+            let availableButtons = this.getAvailableButtons(node, availableAmount, )
 
             let card = <AdminCard
                 key={node.id}
