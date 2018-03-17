@@ -2,6 +2,8 @@ import Numeral from 'numeral'
 import Web3 from 'web3'
 import Moment from 'moment'
 
+import CancelIcon from 'react-icons/lib/fa/close' 
+
 const MAX_CONTENT_WIDTH = 960
 const MIN_CONTENT_WIDTH = 300
 const PAGE_SIDE_PADDING = 30
@@ -28,11 +30,12 @@ export const Colors = {
 
 export const Icons = {
 
+    cancel:CancelIcon
     /*subDelegate: SubDelegateIcon,
     colapsed: ColapsedIcon,
     shown:ShownIcon,
     add:AddIcon,
-    cancel:CancelIcon,
+    ,
     addAdmin:AddAdminIcon,
     project:ProjectIcon,
     pledges:PledgesIcon,*/
@@ -133,95 +136,6 @@ export const Styles = {
         alignItems: 'center',
     },
    
-    delegation:
-    {
-        container:{
-            display: 'flex',
-            flexDirection: 'column'
-        },
-
-        header:{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent:'space-between',
-            paddingLeft: 15,
-            paddingRight: 15,
-            paddingTop: 5,
-            paddingBottom: 5,
-            marginTop: 5,
-        },
-
-        rootHeader:{
-            backgroundColor: Colors.rootHeaderBackground
-        },
-
-        giverHeader:{
-            backgroundColor: Colors.giverBackground,            
-        },
-
-        delegateHeader:{
-            backgroundColor: Colors.delegateBackground,
-            
-        },
-
-        headerCell:{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent:'flex-start',
-            alignItems: 'center',
-        },
-
-        giverBackgroundHover:{
-            backgroundColor : Colors.giverBackgroundHover
-        },
-        
-        delegateBackgroundHover:{
-            backgroundColor : Colors.delegateBackgroundHover
-        },
-
-        colapseButton:{
-            //width:32
-        },
-
-        body:{
-
-        },
-
-        bodyColapsed:{
-            display:'none'
-        },
-
-       /* title:{
-            color:Colors.highlight,
-            paddingRight: 10,
-            paddingTop: 0,
-            paddingBottom: 0,
-            whiteSpace:'nowrap',
-            textOverflow: 'ellipsis',
-            overflow: 'hidden',
-            fontWeight: 300,
-            fontSize: '0.95em',
-        
-        },*/
-
-        shrink:{
-            flex:1,
-            minWidth: 0,
-            flexBasis:'auto'
-        },
-
-        actionButons:
-        {
-            flexShrink:0,
-            display: 'inlineBlock',
-        },
-
-        amount:{
-            color:Colors.secondary,
-           // minWidth:120,
-        }
-    },
-
     rootDelegation:{
         display: 'flex',
         flexDirection: 'row',
