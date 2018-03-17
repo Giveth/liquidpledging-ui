@@ -69,11 +69,6 @@ class RootDelegationList extends Component {
                 />)
             }
             
-            let actionButons =(
-                <div style = {Styles.delegation.actionButons}>
-                    {cancelDelegateButton}
-                    {delegateFundsButton}
-                </div>)
 
             let amount = d.assignedAmount - d.assignedToProjectsAmount
 
@@ -82,6 +77,14 @@ class RootDelegationList extends Component {
             {
                 timeLeft = <p>{Time.humanizeTimeLeft(d.commitTime) }</p>
             }
+
+            let actionButons =(
+                <div style = {Styles.delegation.actionButons}>
+                    {timeLeft}
+                    {cancelDelegateButton}
+                    {delegateFundsButton}
+                    
+                </div>)
 
             return (
 
