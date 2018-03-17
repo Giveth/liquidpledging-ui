@@ -12,7 +12,7 @@ class LayoutController extends Component {
         this.state={
             currentPageId:props.pages[0].props.pageId,
             windowWidth:window.innerWidth,
-            menuWidth:200,
+            menuWidth:150,
             currentPage:<div/>
         }
 
