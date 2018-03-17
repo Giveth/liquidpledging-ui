@@ -106,27 +106,25 @@ class AdminCard extends Component {
                 <div style = {Styles.card.header}>
                     <div style = {Styles.card.row}>
                     <div onClick = {this.onCardPledges} >{this.props.node.name}</div>
-                        <div style = {Styles.row}>
-                            {this.props.addFundsButton}
-                            <div style={Styles.space}/>
-                            <Funds showCurrency amount = {this.props.totalAmount}/>
-                        </div>
+                       
+                        <Funds showCurrency amount = {this.props.totalAmount}/>
+                        
                     </div>
-                </div>
+                </div>  
 
                 <div style = {Styles.card.content}>
 
+                    <div style = {Styles.card.buttonsRow}>
+                        {this.props.addFundsButton}
+                        {this.props.availableButtons}
+                    </div>
+                    <div style={Styles.card.divider}/>
                     {unsecured}
                     {unsecuredDivider}
 
                     <div key= "Available" style = {Merge(Styles.card.row, Styles.card.subHeader)}>
                         <div onClick = {this.onAvailablePledges} >{"Available"}</div>
-                        
-                        <div style = {Styles.row}>
-                            {this.props.availableButtons}
-                            <div style={Styles.space}/>
-                            <Funds amount = {this.props.availableAmount}/>
-                        </div>
+                         <Funds amount = {this.props.availableAmount}/>
                     </div>
                     
                     <div style={Styles.card.divider}/>

@@ -5,7 +5,7 @@ import Moment from 'moment'
 import CancelIcon from 'react-icons/lib/fa/close' 
 
 const MAX_CONTENT_WIDTH = 960
-const MIN_CONTENT_WIDTH = 300
+const MIN_CONTENT_WIDTH = 350//500
 const PAGE_SIDE_PADDING = 30
 const CARD_RADIUS = 5
 const CARD_SIDE_PADDING = 35
@@ -197,7 +197,7 @@ export const Styles = {
         },
 
         content:{
-            paddingTop:10,
+            //paddingTop:10,
             paddingBottom:10,
             display: "flex",
             justifyContent:'center',
@@ -208,10 +208,20 @@ export const Styles = {
             display: "flex",
             flexDirection: 'row',
             justifyContent:'space-between',
-            //alignItems:"baseline",
             paddingLeft: CARD_SIDE_PADDING,
             paddingRight: CARD_SIDE_PADDING,
             lineHeight:"36px",
+        },
+
+        buttonsRow:
+        {
+            display: "flex",
+            flexDirection: 'row',
+            justifyContent:'space-between',
+            paddingLeft: CARD_SIDE_PADDING,
+            paddingRight: CARD_SIDE_PADDING,
+            lineHeight:"36px",
+            justifyContent: 'flex-end'
         },
 
         subHeader:
@@ -220,7 +230,6 @@ export const Styles = {
             color:Colors.contrast,
             fontWeight: 200,
             textTransform: 'uppercase',
-
         }, 
 
         delegation:
@@ -228,7 +237,6 @@ export const Styles = {
             color:"grey",
             paddingLeft:CARD_SIDE_PADDING,
             fontSize:"90%",
-
         },
 
         divider:
@@ -236,8 +244,8 @@ export const Styles = {
             height:1,
             flex:1,
             backgroundColor:'rgba(0, 0, 0, 0.05)',
-            marginTop:5,
-            marginBottom:5
+            //marginTop:5,
+            //marginBottom:5
         }
     },
 
