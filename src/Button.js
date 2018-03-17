@@ -16,7 +16,7 @@ class Button extends Component {
                 onClick = {this.props.onClick}
                 secondary = {false}
                 label={this.props.label}
-                labelStyle = {{color:'grey'}}
+                labelStyle = {{color:'grey', fontSize:'0.7em'}}
                 disabled = {this.props.disabled}
                 icon = {<div style = {{color:'grey', margin:0}} >{this.props.icon}</div>}/>
         )
