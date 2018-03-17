@@ -34,7 +34,7 @@ class RootDelegationList extends Component {
     
             if(d.type==="Project")
             {
-                let timeLeft = <div style = {{paddingLeft:10, paddingRight:10}}>{Time.humanizeTimeLeft(d.commitTime)}</div>
+                let timeLeft = <div key = 'time' style = {{paddingLeft:10, paddingRight:10}}>{Time.humanizeTimeLeft(d.commitTime)}</div>
                 actionButons.push(timeLeft)
             }
             
@@ -52,15 +52,15 @@ class RootDelegationList extends Component {
             return (
 
                 <div key= {"Delegation" + index} style = {Merge(Styles.card.row, Styles.card.delegation)} >
-                    <div onClick = {onPledges} >{d.name}</div>
-                    <div style = {Styles.row}>
+                    <div key = 'label' onClick = {onPledges} >{d.name}</div>
+                    <div  key = 'content' style = {Styles.row}>
 
-                    <div style = {Styles.row}>
-                        {actionButons}      
-                    </div>
-                        <div style={Styles.space}/>
+                        <div key = 'actionButtons' style = {Styles.row}>
+                            {actionButons}      
+                        </div>
                         <Funds amount = {amount}/>
-                    </div>
+                        
+                     </div>
                 </div>
             )})     
         
