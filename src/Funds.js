@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Styles, Currency} from './Styles.js'
+import {Styles, Currency, MergeIf} from './Styles.js'
 class Funds extends Component
 {
     constructor(props)
@@ -64,7 +64,7 @@ class Funds extends Component
         return  (
             <div style = {{paddingLeft:10, paddingRight:10}}>
                 {currency}
-                <span style = {Styles.funds.amount}>   {Currency.format(this.state.currentAmount)}  </span>
+                <span style = {MergeIf(Styles.funds.amount, {opacity:0.5}, this.state.currentAmount.toString() ==='0')}>   {Currency.format(this.state.currentAmount)}  </span>
             </div>
         )
     }
