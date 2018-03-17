@@ -14,8 +14,9 @@ class Caller extends EventEmitter
         this.ADD_ADMIN_DIALOG = 'addAdmin'
         this.PLEDGES = 'pledges'
         this.FIND_DELEGATIONS = 'findDelegations'
-        this.SHOW_NOTIFICATION = 'show_notification'
-        this.CLOSE_NOTIFICATION ='close_notification'
+        this.SHOW_NOTIFICATION = 'showNotification'
+        this.CLOSE_NOTIFICATION ='closeNotification'
+        this.WITHDRAW_DIALOG = 'withrawDialog'
     }
 
     //DONATE
@@ -271,6 +272,15 @@ class Caller extends EventEmitter
         this.emit(this.FIND_DELEGATIONS,data)
     }
 
+    //WITHDRAW
+    showWithdrawDialog(data)
+    {
+        console.log('draw')
+        this.emit(this.WITHDRAW_DIALOG,data)
+    }
+
+    //NOTIFICATIONS
+
     showNotification(data)
     {
         this.emit(this.SHOW_NOTIFICATION, data)
@@ -281,6 +291,7 @@ class Caller extends EventEmitter
         this.emit(this.CLOSE_NOTIFICATION, data)
     }
 
+    //UTILS
     generateTransactionUrl(transactionId)
     {
         let network = LiquidPledging.getNetworkDetails(LiquidPledging.getCurrentNetwork())

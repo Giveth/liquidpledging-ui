@@ -100,25 +100,47 @@ class MyFunds extends BaseDelegationPage
              }
              Caller.showFindDelegationsDialog(findDelegationsData)
         }
+
+        function onWithdraw()
+        {
+            
+            let withdrawData={
+                node:node
+                /*giverName:child.delegation.name,
+                emiterId:this.props.emiterId,
+                recieverId:child.delegation.adminId,
+                amount:undefined,
+                adminAddress:this.props.adminAddress
+                */
+            }
+            if(this.props.onCancel)
+                this.props.onCancel()
+                
+            Caller.showWithdrawDialog(withdrawData)
+            
+        }
         
         let isDisabled = availableAmount<=0
 
-        return (<div>
-                    <Button
-                        onClick = {onDelegateFunds}
-                        disabled = {isDisabled}
-                        label={'Delegate'}
-                        labelStyle = {{fontSize:11}}
-                    />
-
-                    <Button
-                        onClick = {onAssignToProject}
-                        isDisabled = {isDisabled}
-                        disabled = {isDisabled}
-                        label={'Assign to project'}
-                        labelStyle = {{fontSize:11}}
-                    />
-                </div>
+        return (
+            <div>
+                <Button
+                    onClick = {onWithdraw}
+                    disabled = {isDisabled}
+                    label={'Withdraw'}
+                />
+                
+                <Button
+                    onClick = {onDelegateFunds}
+                    disabled = {isDisabled}
+                    label={'Delegate'}
+                />
+                <Button
+                    onClick = {onAssignToProject}
+                    disabled = {isDisabled}
+                    label={'Assign to project'}
+                />
+            </div>
             )
     }
 
@@ -135,7 +157,6 @@ class MyFunds extends BaseDelegationPage
             <Button
                 onClick = {onAddFunds}
                 label={'Add Funds'}
-                labelStyle = {{fontSize:11}}
             />       
         )
     }

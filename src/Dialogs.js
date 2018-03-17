@@ -7,6 +7,7 @@ import TransferDialog from './TransferDialog'
 import AddAdminDialog from './AddAdminDialog'
 import PledgesDialog from './PledgesDialog'
 import FindDelegationsDialog from './FindDelegationsDialog'
+import WithdrawDialog from './WithdrawDialog'
 
 class Dialogs extends Component {
 
@@ -32,6 +33,10 @@ class Dialogs extends Component {
 
             findDelegationsOpen:false,
             findDelegationsData:{},
+
+            withdrawOpen:false,
+            withdrawData:{node:{}},
+            
         }
 
         LPState.on(LPState.STATE_CHANGED, this.onStateChanged)
@@ -41,6 +46,7 @@ class Dialogs extends Component {
         Caller.on(Caller.ADD_ADMIN_DIALOG, this.addAdminOnShow)
         Caller.on(Caller.PLEDGES, this.pledgesOnShow)
         Caller.on(Caller.FIND_DELEGATIONS, this.findDelegationsOnShow)
+        Caller.on(Caller.WITHDRAW_DIALOG, this.widthdrawOnShow)
     }
 
     onStateChanged=()=>{
@@ -134,6 +140,29 @@ class Dialogs extends Component {
         this.setState({ findDelegationsOpen:false })
     }
 
+     //Withdraw
+     widthdrawOnShow=(data)=>
+     {
+         this.setState({ widthdrawData:data, widthdrawOpen:true})
+     }
+ 
+     widthdrawOnCancel=()=>
+     {
+         this.setState({ widthdrawOpen:false })
+     }
+ 
+     onWidthdrawDone=(data)=>
+     {
+         this.setState({  widthdrawOpen:false })
+         Caller.widthdraw(data)
+     }
+ 
+     onMultiWidthdrawDone=(data)=>
+     {
+         this.setState({  widthdrawOpen:false })
+         Caller.multiwidthdraw(data)
+     }
+
     render() {
 
         let donateDialog = <div/>
@@ -141,6 +170,7 @@ class Dialogs extends Component {
         let addAminDialog = <div/>
         let pledgesDialog = <div/>
         let findDelegationsDialog = <div/>
+        let withdrawDialog = <div/>
 
         if(this.state.donateOpen)
             donateDialog = (
@@ -184,6 +214,17 @@ class Dialogs extends Component {
                     onCancel ={this.findDelegationsOnCancel}
                     data={this.state.findDelegationsData}/>
             )
+
+        if(this.state.withdrawOpen)
+            withdrawDialog = (
+                <WithdrawDialog
+                    open={this.state.withdrawOpen}
+                    onCancel ={this.withdrawOnCancel}
+                    onwithdrawDone ={this.onWithdrawDone}
+                    onMultiwithdrawDone ={this.onMultiWithdrawDone}
+                    data={this.state.withdrawData}
+                    meta={this.state.withdrawMetadata}
+                    currentAddress={this.state.currentAddress}/>)
         
         return (
             <div>
