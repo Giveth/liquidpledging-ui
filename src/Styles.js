@@ -6,9 +6,9 @@ import CancelIcon from 'react-icons/lib/fa/close'
 
 const MAX_CONTENT_WIDTH = 960
 const MIN_CONTENT_WIDTH = 350//500
-const PAGE_SIDE_PADDING = 30
+const PAGE_SIDE_PADDING = 20
 const CARD_RADIUS = 5
-const CARD_SIDE_PADDING = 35
+const CARD_SIDE_PADDING = 25
 
 export const Colors = {
     contrast:'rgba(108, 205, 220, 1)',
@@ -38,6 +38,11 @@ export const Styles = {
     indentPadding:16,
     minContentWidth:MIN_CONTENT_WIDTH,
     maxContentWidth:MAX_CONTENT_WIDTH,
+
+    givethLogo:{
+        padding:PAGE_SIDE_PADDING,
+        width:70
+    },
 
     row:{
         display:"flex",
@@ -182,8 +187,8 @@ export const Styles = {
 
         header:{
             backgroundColor:Colors.contrast,
-            paddingTop:10,
-            paddingBottom:10,
+            paddingTop:5,
+            paddingBottom:5,
             borderTopLeftRadius: CARD_RADIUS,
             borderTopRightRadius: CARD_RADIUS,
             display: "flex",
@@ -244,8 +249,8 @@ export const Styles = {
             height:1,
             flex:1,
             backgroundColor:'rgba(0, 0, 0, 0.05)',
-            //marginTop:5,
-            //marginBottom:5
+            marginTop:3,
+            marginBottom:3
         }
     },
 
