@@ -1,13 +1,12 @@
 import React from 'react'
 import LPState from "./LiquidPledgingState.js"
 import AdminCard from './AdminCard'
-import FlatButton from 'material-ui/FlatButton'
+import Button from './Button'
 import { Styles, Merge } from './Styles'
 import Caller from './LiquidPledgingCaller'
 import BaseDelegationPage from './BaseDelegationsPage'
 import AppBar from './AppBar'
 import Funds from './Funds.js'
-
 
 class MyFunds extends BaseDelegationPage
 {
@@ -103,16 +102,16 @@ class MyFunds extends BaseDelegationPage
         }
 
         return (<div>
-                    <FlatButton
+                    <Button
                         onClick = {onDelegateFunds}
-                        secondary = {false}
+    
                         label={'Delegate'}
                         labelStyle = {{fontSize:11}}
                     />
 
-                    <FlatButton
+                    <Button
                         onClick = {onAssignToProject}
-                        secondary = {false}
+    
                         label={'Assign to project'}
                         labelStyle = {{fontSize:11}}
                     />
@@ -130,9 +129,8 @@ class MyFunds extends BaseDelegationPage
         }
 
         return (
-            <FlatButton
+            <Button
                 onClick = {onAddFunds}
-                secondary = {false}
                 label={'Add Funds'}
                 labelStyle = {{fontSize:11}}
             />       
@@ -207,7 +205,7 @@ class MyFunds extends BaseDelegationPage
                 <AppBar>
                     <div style = {Styles.appBar.title}> {this.props.label} </div>
                     <Funds amount = {this.state.totalAmount} showCurrency/>
-                    <FlatButton onClick = {this.onNewGiver} primary = {true} label="New Giver" />
+                    <Button onClick = {this.onNewGiver} primary = {true} label="New Giver" />
                 </AppBar>
                 
 
