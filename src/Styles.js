@@ -208,7 +208,7 @@ export const Styles = {
             display: "flex",
             flexDirection: 'row',
             justifyContent:'space-between',
-            alignItems:"baseline",
+            //alignItems:"baseline",
             paddingLeft: CARD_SIDE_PADDING,
             paddingRight: CARD_SIDE_PADDING,
             lineHeight:"36px",

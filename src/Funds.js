@@ -62,7 +62,7 @@ class Funds extends Component
             currency =  <span/>
 
         return  (
-            <div>
+            <div style = {{paddingLeft:10, paddingRight:10}}>
                 {currency}
                 <span style = {Styles.funds.amount}>   {Currency.format(this.state.currentAmount)}  </span>
             </div>
