@@ -34,7 +34,7 @@ class RootDelegationList extends Component {
     
             if(d.type==="Project")
             {
-                let timeLeft = <div key = 'time' style = {{paddingLeft:10, paddingRight:10}}>{Time.humanizeTimeLeft(d.commitTime)}</div>
+                let timeLeft = <div key = 'time' style = {{paddingLeft:10, paddingRight:10}}>{'Secured '+Time.humanizeTimeLeft(d.commitTime)}</div>
                 actionButons.push(timeLeft)
             }
             
@@ -58,6 +58,7 @@ class RootDelegationList extends Component {
                         <div key = 'actionButtons' style = {Styles.row}>
                             {actionButons}      
                         </div>
+                        
                         <Funds amount = {amount}/>
                         
                      </div>
