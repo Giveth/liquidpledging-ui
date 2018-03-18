@@ -106,12 +106,6 @@ class MyFunds extends BaseDelegationPage
             
             let withdrawData={
                 node:node
-                /*giverName:child.delegation.name,
-                emiterId:this.props.emiterId,
-                recieverId:child.delegation.adminId,
-                amount:undefined,
-                adminAddress:this.props.adminAddress
-                */
             }
                 
             Caller.showWithdrawDialog(withdrawData)

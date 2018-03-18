@@ -15,8 +15,6 @@ const resetState = {
     delegationsAmounts:{},
     delegationsErrors:{},
     okDisabled:true,
-    emiters:[],
-    selectedEmiter:0,
     adminAddress:"",
     //isAdvance:false
 }
@@ -26,49 +24,19 @@ class WithdrawDialog extends React.Component
     constructor(props)
     {
         super()
-        this.state = this.getInitState(props, resetState)
+        this.state = resetState
+        this.state.node = props.data.node
+        this.state.hasAdvance = props.data.node.delegationsIn<=1
+        this.state.availableDelegations = this.getAvailableDelegations()
+        this.state.totalAvailableAmount = this.state.availableDelegations.reduce((total,delegation)=>total+delegation.availableAmount,0)
     }
 
-    getInitState = (props,state)=>
+    getAvailableDelegations = ()=>
     {
-        let selectedEmiter = state.selectedEmiter
-        if(props.data.emiterId > 0 && state.selectedEmiter === 0)
-            selectedEmiter = props.data.emiterId
-
-        let addressFilter={adminAddress:props.data.adminAddress}
-        let userNodes=LPState.getNodes(addressFilter)
-
-        let sortByAmount=(a, b)=>{
-            return a.availableAmount < b.availableAmount
-        }
-
-        let emiters = {}
-        userNodes.forEach((node)=>
-        {
-            let delegationsIn = LPState.getDelegations(node.delegationsIn).sort(sortByAmount)
-            let totalAvailableAmount = 0
-            delegationsIn.forEach((delegation)=>{totalAvailableAmount+=delegation.availableAmount})
-
-            let emiter = {
-                adminId:node.adminId,
-                name:node.name,
-                delegationsIn:delegationsIn,
-                totalAvailableAmount:totalAvailableAmount
-            }
-            emiters[node.adminId] = emiter
-        })
-        
-        let newState =  JSON.parse(JSON.stringify(state))
-        newState.selectedEmiter = selectedEmiter
-        newState.adminAddress = props.data.adminAddress
-        newState.emiters = emiters
-
-        return newState
-    }
-
-    componentWillReceiveProps=(newProps)=>
-    {
-        this.setState(this.getInitState(newProps,this.state))
+        let delegationsInIds = this.state.node.delegationsIn
+        let delegationsIn = LPState.getDelegations(delegationsInIds)
+        let availableDelegations = delegationsIn.filter(d=>{return d.availableAmount>0})
+        return availableDelegations
     }
     
     onTextChange = (e, newText) => {
@@ -79,36 +47,31 @@ class WithdrawDialog extends React.Component
 
         let amount = newText
         state.amount = amount
-        state.okDisabled=!this.isReady(amount, this.state.selectedEmiter)
-        state.delegationsAmounts = this.getDelegationsAmountsFromTotal(amount)
-        state.delegationsErrors = this.getDelegationsErrorsFromTotal(amount)
+        state.okDisabled=!this.isReady(amount)
+       // state.delegationsAmounts = this./*(amount)
+        //state.delegationsErrors = this./*(amount)
 
        this.setState(state)
     }
 
-    isReady=(amountEth, selectedEmiter)=>
+    isReady=(amountEth)=>
     {
         let amount =  isNaN(parseFloat(amountEth))?0:Currency.toWei(parseFloat(amountEth))
-        let availableAmount = this.state.emiters[selectedEmiter].totalAvailableAmount
-
-        if(!this.hasEnoughAmount(amount, availableAmount))
+        if(!this.hasEnoughAmount(amount, this.state.totalAvailableAmount))
             return false
 
         let delegationHasEnough = true
-        let availableDelegations = this.state.emiters[this.state.selectedEmiter].delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
 
-        availableDelegations.forEach(delegation => {
+        /*
+        this.state.availableDelegations.forEach(delegation => {
             if(delegation.availableAmount<Currency.toWei(this.state.delegationsAmounts[delegation.id]))
                 delegationHasEnough =  false
         })
-
+*/
         if(!delegationHasEnough)
             return false
 
         if(!amount || isNaN(amount))
-            return false
-
-        if(!selectedEmiter)
             return false
 
         return true
@@ -128,14 +91,6 @@ class WithdrawDialog extends React.Component
         return enough
     }
 
-    onEmiterChanged = (event, index, selectedEmiter) =>
-    {
-        let state = {}
-        state.selectedEmiter = selectedEmiter
-        state.okDisabled=!this.isReady(this.state.amount, selectedEmiter)
-        this.setState(state)
-    }
-
     onAdvanceToggle=(e, isToggled)=>
     {
         this.setState({isAdvance:isToggled})
@@ -143,7 +98,13 @@ class WithdrawDialog extends React.Component
 
     onDone=()=>
     { 
-        let data = {}
+        let data={}
+        data.pledgeId = this.state.availableDelegations[0].pledgeId
+        data.amount = this.state.totalAvailableAmount// Currency.toWei(parseFloat(this.state.amount))
+        console.log(data.amount)
+        this.setState(resetState)
+        this.props.onWithdrawDone(data)
+       /* let data = {}
         let pledgeAmounts = []
 
         for(let delegationId in this.state.delegationsAmounts )
@@ -154,9 +115,6 @@ class WithdrawDialog extends React.Component
                 pledgeAmounts.push({amount:amount, id:delegation.pledgeId})
         }
 
-        data.emiterId = this.state.selectedEmiter
-        data.recieverId = this.props.data.recieverId
-        data.address = this.props.data.adminAddress
             
         if(pledgeAmounts.length===1)
         {
@@ -171,7 +129,7 @@ class WithdrawDialog extends React.Component
             data.amount = parseFloat(this.state.amount,10)
             this.setState(resetState)
             this.props.onMultiTransferDone(data)
-        }
+        }*/
     }   
 
     onCancel=()=>
@@ -180,7 +138,7 @@ class WithdrawDialog extends React.Component
         this.props.onCancel()
     }
 
-    getDelegationsAmountsFromTotal=(totalEth)=>
+    /*getDelegationsAmountsFromTotal=(totalEth)=>
     {
         let total = isNaN(parseFloat(totalEth))?0:Currency.toWei(parseFloat(totalEth))
         let delegationsAmounts = {}
@@ -197,9 +155,9 @@ class WithdrawDialog extends React.Component
         })
 
         return delegationsAmounts
-    }
+    }*/
 
-    getDelegationsErrorsFromTotal=(total)=>
+    /*getDelegationsErrorsFromTotal=(total)=>
     {
         let availableDelegations = this.state.emiters[this.state.selectedEmiter].delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
         let delegationsErrors = []
@@ -208,9 +166,9 @@ class WithdrawDialog extends React.Component
         })
 
         return delegationsErrors
-    }
+    }*/
 
-    getTotalFromDelegationsAmounts(delegationsAmounts)
+   /* getTotalFromDelegationsAmounts(delegationsAmounts)
     {
         let total = 0
         for(let id in delegationsAmounts)
@@ -221,11 +179,14 @@ class WithdrawDialog extends React.Component
             total += amount
         }
         return Currency.toEther(total)
-    }
+    }*/
     
-    getAdvanceComponents=()=>
+    /*getAdvanceComponents=()=>
     {
-        let availableDelegations = this.state.emiters[this.state.selectedEmiter].delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
+        //let availableDelegations =this.state.node.delegationsIn.filter(delegation=>{return delegation.availableAmount>0})
+        let delegationsInIds = this.state.node.delegationsIn
+        let delegationsIn = LPState.getDelegations(delegationsInIds)
+        let availableDelegations = delegationsIn.filter(d=>{return d.availableAmount>0})
 
         let itemsList = availableDelegations.map(delegation => {
             let availableAmountText = Currency.format(Currency.toEther(delegation.availableAmount))
@@ -247,7 +208,7 @@ class WithdrawDialog extends React.Component
                 state.delegationsAmounts[delegation.id] = newText
                 state.delegationsErrors[delegation.id] = error
                 state.amount = this.getTotalFromDelegationsAmounts(state.delegationsAmounts)
-                state.okDisabled=!this.isReady(state.amount, this.state.selectedEmiter)
+                state.okDisabled=!this.isReady(state.amount)
                 this.setState(state)
             }
             
@@ -284,7 +245,7 @@ class WithdrawDialog extends React.Component
                     <Subheader>Define how much to delegate from each peldge</Subheader>
                     {itemsList}
                 </List>
-    }
+    }*/
 
     render()
     {
@@ -295,7 +256,7 @@ class WithdrawDialog extends React.Component
               onClick={this.onCancel}
             />,
             <FlatButton
-              label="Delegate funds"
+              label="Withdraw funds"
               primary={true}
               keyboardFocused={true}
               onClick={this.onDone}
@@ -303,31 +264,19 @@ class WithdrawDialog extends React.Component
             />
         ]
 
-        let title = "Delegate funds"
-        let defaultItem = <MenuItem key= {0} value={0} primaryText={'Delegate from...'} disabled={true} />
-
-        if(!this.state.emiters.length)
-            defaultItem =  <MenuItem key= {0} value={0} primaryText={'No available accounts'} disabled={true} />
-
-        let emitersList = [defaultItem]
-        
-        for(let adminId in this.state.emiters )
-        {
-            let emiter = this.state.emiters[adminId]            
-            let label = emiter.name+ " ("+Currency.symbol+" "+Currency.toEther(emiter.totalAvailableAmount)+")"
-           
-            let item =  <MenuItem
-                key= {emiter.adminId}
-                value={emiter.adminId}
-                primaryText={label} />
-
-            emitersList.push(item)
-        }
-
+        let title = "Withdraw funds from "+this.state.node.name
+       
+        let advanceToggle = <div/>
         let advanceComponents = <div/>
 
-        if(this.state.isAdvance && this.state.emiters[this.state.selectedEmiter])
-            advanceComponents = this.getAdvanceComponents()
+        if(this.state.hasAdvance)
+            advanceToggle = (<Toggle
+                    label="Advanced"
+                    toggled={this.state.isAdvance}
+                    onToggle={this.onAdvanceToggle}/>)
+
+        //if(this.state.isAdvance)
+           // advanceComponents = this.getAdvanceComponents()
 
         return (
             <Dialog
@@ -338,40 +287,12 @@ class WithdrawDialog extends React.Component
                 onRequestClose={this.onCancel}
                 contentStyle={Styles.dialogs.fit}>
 
-                <div> 
-                    {"To " + this.props.data.giverName}
-                </div>
-
-                <div style={Merge(Styles.row,{})}>
-                    <div style = {{lineHeight:"56px"}}>
-                        {"From"}
-                    </div>
-                    <div style = {{Flex:1}}>
-                        <DropDownMenu
-                            style={{}}
-                            value={this.state.selectedEmiter}
-                            onChange={this.onEmiterChanged}
-                            autoWidth={true}>
-
-                            {emitersList}
-
-                        </DropDownMenu>
-                    </div>
-
-                </div>
-
-                <Toggle
-                    label="Advanced"
-                    toggled={this.state.isAdvance}
-                    onToggle={this.onAdvanceToggle}
-                    />
-
                 {advanceComponents}
 
                 <TextField
                     autoFocus={true}
                     id="inputText"
-                    hintText={'Ether to delegate'}
+                    hintText={'Ether to withdraw'}
                     value={this.state.amount}
                     onChange={this.onTextChange}
                     errorText = {this.state.error}/> 

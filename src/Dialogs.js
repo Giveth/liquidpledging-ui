@@ -148,13 +148,13 @@ class Dialogs extends Component {
  
      withdrawOnCancel=()=>
      {
-         this.setState({ withdrawOpen:false })
+        this.setState({ withdrawOpen:false })
      }
  
      onWithdrawDone=(data)=>
      {
-         this.setState({  withdrawOpen:false })
-         Caller.withdraw(data)
+        this.setState({  withdrawOpen:false })
+        Caller.withdraw(data)
      }
  
      onMultiWithdrawDone=(data)=>
