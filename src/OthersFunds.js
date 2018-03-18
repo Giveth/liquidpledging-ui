@@ -173,12 +173,16 @@ class OthersFunds extends BaseDelegationPage {
                 <AppBar>
                     <div style = {Styles.appBar.title}> {this.props.label} </div>
                     <Funds amount = {this.state.totalAmount} showCurrency/>
-                    <Button onClick = {this.onNewDelegate} primary = {true} label="New Delegate"  />
                 </AppBar>
                 
                 <div style = {Styles.singlePage.body}>
 
                      <div style = {Merge(Styles.singlePage.content, {height:window.innerHeight - Styles.appBar.getHeight() - 50})}>
+                        
+                        <div style = {Styles.card.buttonsRow}>
+                            <Button onClick = {this.onNewDelegate} primary = {true} label="New Delegate"  />
+                        </div>
+                        
                         {this.state.cards}
                     </div>
 
