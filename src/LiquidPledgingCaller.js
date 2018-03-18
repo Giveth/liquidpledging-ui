@@ -269,14 +269,13 @@ class Caller extends EventEmitter
     //Find Delegations
     showFindDelegationsDialog(data)
     {
-        this.emit(this.FIND_DELEGATIONS,data)
+        this.emit(this.FIND_DELEGATIONS, data)
     }
 
     //WITHDRAW
     showWithdrawDialog(data)
     {
-        console.log('draw')
-        this.emit(this.WITHDRAW_DIALOG,data)
+        this.emit(this.WITHDRAW_DIALOG, data)
     }
 
     //NOTIFICATIONS

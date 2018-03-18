@@ -46,7 +46,7 @@ class Dialogs extends Component {
         Caller.on(Caller.ADD_ADMIN_DIALOG, this.addAdminOnShow)
         Caller.on(Caller.PLEDGES, this.pledgesOnShow)
         Caller.on(Caller.FIND_DELEGATIONS, this.findDelegationsOnShow)
-        Caller.on(Caller.WITHDRAW_DIALOG, this.widthdrawOnShow)
+        Caller.on(Caller.WITHDRAW_DIALOG, this.withdrawOnShow)
     }
 
     onStateChanged=()=>{
@@ -141,26 +141,26 @@ class Dialogs extends Component {
     }
 
      //Withdraw
-     widthdrawOnShow=(data)=>
+     withdrawOnShow=(data)=>
      {
-         this.setState({ widthdrawData:data, widthdrawOpen:true})
+        this.setState({ withdrawData:data, withdrawOpen:true})
      }
  
-     widthdrawOnCancel=()=>
+     withdrawOnCancel=()=>
      {
-         this.setState({ widthdrawOpen:false })
+         this.setState({ withdrawOpen:false })
      }
  
-     onWidthdrawDone=(data)=>
+     onWithdrawDone=(data)=>
      {
-         this.setState({  widthdrawOpen:false })
-         Caller.widthdraw(data)
+         this.setState({  withdrawOpen:false })
+         Caller.withdraw(data)
      }
  
-     onMultiWidthdrawDone=(data)=>
+     onMultiWithdrawDone=(data)=>
      {
-         this.setState({  widthdrawOpen:false })
-         Caller.multiwidthdraw(data)
+         this.setState({  withdrawOpen:false })
+         Caller.multiwithdraw(data)
      }
 
     render() {
@@ -220,8 +220,8 @@ class Dialogs extends Component {
                 <WithdrawDialog
                     open={this.state.withdrawOpen}
                     onCancel ={this.withdrawOnCancel}
-                    onwithdrawDone ={this.onWithdrawDone}
-                    onMultiwithdrawDone ={this.onMultiWithdrawDone}
+                    onWithdrawDone ={this.onWithdrawDone}
+                    onMultiWithdrawDone ={this.onMultiWithdrawDone}
                     data={this.state.withdrawData}
                     meta={this.state.withdrawMetadata}
                     currentAddress={this.state.currentAddress}/>)
@@ -233,6 +233,7 @@ class Dialogs extends Component {
                 {addAminDialog}
                 {pledgesDialog}
                 {findDelegationsDialog}
+                {withdrawDialog}
             </div>
         )
     }

@@ -113,8 +113,6 @@ class MyFunds extends BaseDelegationPage
                 adminAddress:this.props.adminAddress
                 */
             }
-            if(this.props.onCancel)
-                this.props.onCancel()
                 
             Caller.showWithdrawDialog(withdrawData)
             
