@@ -142,11 +142,7 @@ class PledgesTable extends React.Component {
         if(this.props.pledges.length)
             table = this.getTable()
 
-        return(
-            <div style = {Styles.pledgesTable.body}>
-                {table}
-            </div>
-        )
+        return table
         
   }
 }

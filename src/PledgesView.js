@@ -20,8 +20,6 @@ class PledgesView extends BaseDelegationPage {
     {
         let address = LPState.getCurrentAccount()
 
-        console.log(LPState.pledges)
-
         this.setState({
             pledges:LPState.pledges,
             currentAddress:address,
@@ -41,9 +39,11 @@ class PledgesView extends BaseDelegationPage {
                 <div style = {Styles.singlePage.body}>
 
                     <div style = {Merge(Styles.singlePage.content, {maxWidth:'auto',height:window.innerHeight - Styles.appBar.getHeight() - 100})}>
-                        <PledgesTable
-                            pledges = {this.state.pledges}
-                            /> 
+                        <div style = {Styles.pledgesTable.body}>
+                            <PledgesTable
+                                pledges = {this.state.pledges}
+                                /> 
+                        </div>
                     </div>
 
                 </div>

@@ -145,9 +145,7 @@ class MyProjects extends BaseDelegationPage {
             let childrenOut = LPState.getDelegationsTrees(delegationsOutWithProjects, onlyDelegationsWithMoneyFilter)// Children. To. No money
 
             let delegationsToProject = LPState.getDelegationsFromTreeChildren(childrenOut, onlyProjectsFilter) //Delegations. Any level. Projects
-
-            //let projectsChildren = LPState.getDelegationsTrees(assignedToProjectsDelegations)//Children. Any level. Projects
-
+            
             let assignedToProjectsAmount = LPState.getNodeAssignedToProjectsAmount(node) 
             let delegatedAmount = LPState.getNodeDelegatedAmount(node) - assignedToProjectsAmount
             let assignedAmount = LPState.getNodeAssignedAmount(node)
