@@ -119,23 +119,24 @@ class App extends Component {
             <Subheader key = "c">Contract</Subheader>,
 
             <MenuItem
-                key = {EXPLORER} 
-                onClick = {()=>this.changePage(EXPLORER)}>
-                Explorer
-            </MenuItem>,
-
-            <MenuItem
                 key = {PLEDGES} 
                 onClick = {()=>this.changePage(PLEDGES)}>
                 Pledges
             </MenuItem>,
 
+            /*
+            <MenuItem
+                key = {EXPLORER} 
+                onClick = {()=>this.changePage(EXPLORER)}>
+                Explorer
+            </MenuItem>,
+            
             <Divider key = "d2" />,
 
             <MenuItem
                 key = {ABOUT}>
                 About
-            </MenuItem>,
+            </MenuItem>,*/
         ]
     }
 
