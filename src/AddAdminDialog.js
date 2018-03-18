@@ -39,6 +39,7 @@ class AddAdmin extends React.Component
         let accounts = JSON.parse(JSON.stringify(LPState.getAccounts()) )
         let currentAccount = LPState.getCurrentAccount()
         let selectedType = 0
+        
 
         if(isMergedAccounts)
             currentAccount = "*"
@@ -51,6 +52,7 @@ class AddAdmin extends React.Component
             url:'',
             okDisabled:true,
             selectedType:selectedType,
+            defaultType : selectedType,
             isMergedAccounts : isMergedAccounts,
             accounts : accounts,
             selectedAccount : currentAccount
@@ -181,6 +183,20 @@ class AddAdmin extends React.Component
             />
         ]
 
+        let title = 'Create new '+types[this.state.defaultType].label
+        let typeSelector = <div/>
+        if(this.state.defaultType === 0)
+        {
+            let title = 'Create new account'
+             typeSelector =  
+                <DropDownMenu
+                    value={this.state.selectedType}
+                    onChange={this.onTypeChanged}
+                    autoWidth={true}>
+                    {typesOptions}
+                </DropDownMenu>
+        }
+
         let typesOptions = types.map((element, index)=>{
             return <MenuItem
                 key= {element.id}
@@ -194,23 +210,18 @@ class AddAdmin extends React.Component
         if(this.state.isMergedAccounts)
             addressSelector = this.getAddressSelector()
 
+        
         return (
             <Dialog
-                title={"New account"}
+                title={title}
                 actions={actions}
                 modal={false}
                 open={this.props.open}
                 onRequestClose={this.onCancel}
                 contentStyle={Styles.dialogs.narrow}>
 
+                {typeSelector}
                 {addressSelector}
-
-                <DropDownMenu
-                    value={this.state.selectedType}
-                    onChange={this.onTypeChanged}
-                    autoWidth={true}>
-                    {typesOptions}
-                </DropDownMenu>
 
                 <TextField
                     autoFocus={true}
