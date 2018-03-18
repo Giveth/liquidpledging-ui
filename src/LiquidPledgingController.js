@@ -170,6 +170,17 @@ class LiquidPledgingController extends ProviderHelper {
         return this.liquidPledging.mTransfer(emiterId, encodedPledges, receiverId, {from: address})
     }
 
+    withdraw( pledgeId,  amount, address , extraGas = 100000)
+    {
+        return this.liquidPledging.withdraw( pledgeId, amount.toString(), {from: address, $extraGas: extraGas})
+    }
+
+    confirmPayment( pledgeId,  amount, address , extraGas = 100000)
+    {
+        return this.liquidPledging.confirmPayment( pledgeId, amount.toString(), {from: address, $extraGas: extraGas})
+    }
+
+
    /*cancel(pledgeId, amount)
     {
         return this.liquidPledging.cancelPledge(pledgeId, amount, {from:this.currentAccount, gas:500000})

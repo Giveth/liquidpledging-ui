@@ -278,6 +278,40 @@ class Caller extends EventEmitter
         this.emit(this.WITHDRAW_DIALOG, data)
     }
 
+    withdraw(data)
+    {
+       LiquidPledging.withdraw( data.pledgeId, data.amount, data.address)
+       .then(() => {
+            console.log("Withdraw authorized", data)
+            LiquidPledging.retriveStateData()
+
+            this.emit(this.SHOW_NOTIFICATION,{
+                message: 'Funds withdrawn',
+                action:'View TX',
+                onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
+            })
+
+            //TODO
+           /* LiquidPledging.confirmPayment( data.pledgeId, data.amount, data.address)
+            .then((data) => {
+                this.emit(this.SHOW_NOTIFICATION,{
+                    message: 'Funds withdrawn',
+                    action:'View TX',
+                    onAction:()=>{this.goToUrl(this.generateTransactionUrl(data.transactionHash))}
+                })
+            }).catch((error)=>{
+                this.showTransactionError()
+                console.error(error)
+            })*/
+
+        }).catch((error)=>{
+            this.showTransactionError()
+            console.error(error)
+        })
+
+        this.emit(this.SHOW_NOTIFICATION, {message: 'Authorizing withdraw...'})
+    }
+
     //NOTIFICATIONS
 
     showNotification(data)
