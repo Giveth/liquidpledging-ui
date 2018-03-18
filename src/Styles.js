@@ -249,8 +249,8 @@ export const Styles = {
             height:1,
             flex:1,
             backgroundColor:'rgba(0, 0, 0, 0.05)',
-            marginTop:3,
-            marginBottom:3
+            //marginTop:3,
+            //marginBottom:3
         }
     },
 
@@ -262,7 +262,13 @@ export const Styles = {
         },
     },
 
-    PledgesTable:{
+    pledgesTable:{
+        body:{
+            borderRadius:CARD_RADIUS,
+            background:'white',
+            padding:CARD_SIDE_PADDING,
+            marginTop:30
+        },
         selectedRow:{
             backgroundColor:Colors.suttleContrast
         }

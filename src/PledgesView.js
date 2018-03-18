@@ -2,7 +2,7 @@ import React from 'react'
 import LPState from './LiquidPledgingState'
 import PledgesTable from './PledgesTable'
 import BaseDelegationPage from './BaseDelegationsPage'
-import { Styles } from './Styles'
+import { Styles, Merge } from './Styles'
 import AppBar from './AppBar'
 
 class PledgesView extends BaseDelegationPage {
@@ -40,7 +40,11 @@ class PledgesView extends BaseDelegationPage {
 
                 <div style = {Styles.singlePage.body}>
 
-                    <PledgesTable pledges = {this.state.pledges}/>
+                    <div style = {Merge(Styles.singlePage.content, {maxWidth:'auto',height:window.innerHeight - Styles.appBar.getHeight() - 100})}>
+                        <PledgesTable
+                            pledges = {this.state.pledges}
+                            /> 
+                    </div>
 
                 </div>
             </div>

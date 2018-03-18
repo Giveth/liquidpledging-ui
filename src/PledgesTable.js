@@ -67,7 +67,7 @@ class PledgesTable extends React.Component {
                     if(!rowInfo)
                         return
                     let isSelectedId = this.isSelectedId(rowInfo.row.id)
-                    let rowStyle = isSelectedId ?Styles.PledgesTable.selectedRow:{}
+                    let rowStyle = isSelectedId ?Styles.pledgesTable.selectedRow:{}
                     return {
                       style:rowStyle
                     }
@@ -143,7 +143,7 @@ class PledgesTable extends React.Component {
             table = this.getTable()
 
         return(
-            <div>
+            <div style = {Styles.pledgesTable.body}>
                 {table}
             </div>
         )
