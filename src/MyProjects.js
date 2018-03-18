@@ -90,9 +90,27 @@ class MyProjects extends BaseDelegationPage {
              Caller.showFindDelegationsDialog(findDelegationsData)
         }
 
+        function onWithdraw()
+        {
+            
+            let withdrawData={
+                node:node
+            }
+                
+            Caller.showWithdrawDialog(withdrawData)
+        }
+        
+
         let isDisabled = availableAmount<=0
 
         return (<div>
+
+                     <Button
+                        onClick = {onWithdraw}
+                        disabled = {isDisabled}
+                        label={'Withdraw'}
+                    />
+                    
                     <Button
                         onClick = {onDelegateFunds}
                         disabled = {isDisabled}
@@ -104,6 +122,8 @@ class MyProjects extends BaseDelegationPage {
                         disabled = {isDisabled}
                         label={'Assign to project'}
                     />
+
+                   
                 </div>
             )
     }
