@@ -40,19 +40,19 @@ class AdminCard extends Component {
 
     onAvailablePledges=()=>{
 
-        let selectedIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsIn)
+        let selectedIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsIn.filter((delegation)=>{
+            let pledge  = LPState.getPledge(delegation.pledgeId)
+            return pledge.owner === this.props.node.id
+        }))
         this.showPledgesDialogPlus(selectedIds)
     }
 
-    onUsecuredPledges=()=>{
-        /*
-        let pledgesGroups = [
-            this.getPledgesGroup('Unsecured', this.props.delegationsIn)
-        ]
-
-        this.showPledgesDialog(pledgesGroups)
-        */
-       
+    onUnsecuredPledges=()=>{
+        let selectedIds = LPState.getPledgesIdsFromDelegations(this.props.delegationsIn.filter((delegation)=>{
+            let pledge  = LPState.getPledge(delegation.pledgeId)
+            return pledge.owner !== this.props.node.id
+        }))
+        this.showPledgesDialogPlus(selectedIds)
     }
 
     onDelegatedPledges=()=>{
@@ -90,8 +90,7 @@ class AdminCard extends Component {
 
         if(this.props.node.type === "Project")
         {
-
-            unsecured = <div key= "Unsecured" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onUsecuredPledges}>
+            unsecured = <div key= "Unsecured" style = {Merge(Styles.card.row, Styles.card.subHeader)} onClick = {this.onUnsecuredPledges}>
                 {"Unsecured"}
                 <Funds amount = {this.props.unsecuredAmount}/>
             </div>
