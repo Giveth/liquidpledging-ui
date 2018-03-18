@@ -146,7 +146,7 @@ class App extends Component {
             <OthersFunds key = {OTHERS_FUNDS} pageId = {OTHERS_FUNDS} label="Other's funds" />,
             <MyProjects key = {MY_PROJECTS} pageId = {MY_PROJECTS} label="My projects" />,
             <Explorer key = {EXPLORER} pageId = {EXPLORER} label="My projects" />,
-            <PledgesView key = {PLEDGES} pageId = {PLEDGES} label="My projects" />
+            <PledgesView key = {PLEDGES} pageId = {PLEDGES} label="Contact Pledges" />
         ]
     }
 

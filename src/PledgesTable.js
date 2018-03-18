@@ -38,7 +38,6 @@ class PledgesTable extends React.Component {
 
     isSelectedId(id)
     {
-        console.log(this.props.selectedIds)
         if(!this.props.selectedIds)
             return false
 
@@ -51,107 +50,105 @@ class PledgesTable extends React.Component {
         return false
     }
 
+    getTable( )
+    {
+        let rows = this.props.pledges.length
+        return (        
+            <div>
+                <ReactTable
+                data={this.props.pledges}
+                filterable = {true}
+                defaultFilterMethod={(filter, delegation) => this.filterText(filter, delegation)}
+                pageSize={rows}
+                showPaginationTop={false}
+                showPaginationBottom={false}
+                noDataText=""
+                getTrProps={(state, rowInfo, column) => {
+                    if(!rowInfo)
+                        return
+                    let isSelectedId = this.isSelectedId(rowInfo.row.id)
+                    let rowStyle = isSelectedId ?Styles.PledgesTable.selectedRow:{}
+                    return {
+                      style:rowStyle
+                    }
+                  }}
+                columns={[
+                    {
+                    Header: this.props.title,
+                    columns: [
+                        {
+                            Header: "Id",
+                            amount: "Id",
+                            accessor: "id",
+                            width:40
+                        },
+                        {
+                            Header: "Amount",
+                            id: "amount",
+                            accessor: d => d.amount,
+                            Cell: row => Currency.format(Currency.toEther(row.row.amount)),
+                            width:70
+                        },
+                        {
+                            Header: "Delegates",
+                            id: "delegates",
+                            accessor: d => d.delegates,
+                            Cell: row => this.humanizeDelegates(row.row.delegates),
+                            minWidth:170
+                        },
+                        {
+                            Header: "Owner",
+                            id: "owner",
+                            accessor: d => this.idToAdmin(d.owner),
+                            minWidth:70
+                        },
+                        {
+                            Header: "Intended project",
+                            id: "intendedProject",
+                            accessor: d => this.idToAdmin(d.intendedProject),
+                            minWidth:70
+                        },
+                        {
+                            Header: "Commit time",
+                            id: "commmitTime",
+                            accessor: d => Time.humanizeTimeLeft(d.commmitTime),
+                            minWidth:70
+                        },
+                        {
+                            Header: "Old pledge",
+                            id: "oldPledge",
+                            accessor: d => d.oldPledge===0?"":d.oldPledge,
+                            minWidth:70
+                        },
+                        {
+                            Header: "Payment state",
+                            id: "paymentState",
+                            accessor: d => d.paymentState,
+                            minWidth:70
+                        },
+                    ]
+                    }
+                ]}        
+                    
+                />
+    
+            </div>
+        )
+    }
+
     render() {
 
-        let rows = 1
+        let table = <div/>
         if(this.props.pledges.length)
-            rows = this.props.pledges.length
+            table = this.getTable()
 
-        return (        
-        <div>
-            <ReactTable
-            data={this.props.pledges}
-            filterable = {true}
-            defaultFilterMethod={(filter, delegation) => this.filterText(filter, delegation)}
-            pageSize={rows}
-            showPaginationTop={false}
-            showPaginationBottom={false}
-            noDataText=""
-            getTrProps={(state, rowInfo, column) => {
-                let isSelectedId = this.isSelectedId(rowInfo.row.id)
-                let rowStyle = isSelectedId ?Styles.PledgesTable.selectedRow:{}
-                return {
-                  style:rowStyle
-                }
-              }}
-            columns={[
-                {
-                Header: this.props.title,
-                columns: [
-                    {
-                        Header: "Id",
-                        amount: "Id",
-                        accessor: "id",
-                        width:40
-                    },
-                    {
-                        Header: "Amount",
-                        id: "amount",
-                        accessor: d => d.amount,
-                        Cell: row => Currency.format(Currency.toEther(row.row.amount)),
-                        width:70
-                    },
-                    {
-                        Header: "Delegates",
-                        id: "delegates",
-                        accessor: d => d.delegates,
-                        Cell: row => this.humanizeDelegates(row.row.delegates),
-                        minWidth:170
-                    },
-                    {
-                        Header: "Owner",
-                        id: "owner",
-                        accessor: d => this.idToAdmin(d.owner),
-                        minWidth:70
-                    },
-                    {
-                        Header: "Intended project",
-                        id: "intendedProject",
-                        accessor: d => this.idToAdmin(d.intendedProject),
-                        minWidth:70
-                    },
-                    {
-                        Header: "Commit time",
-                        id: "commmitTime",
-                        accessor: d => Time.humanizeTimeLeft(d.commmitTime),
-                        minWidth:70
-                    },
-                    {
-                        Header: "Old pledge",
-                        id: "oldPledge",
-                        accessor: d => d.oldPledge===0?"":d.oldPledge,
-                        minWidth:70
-                    },
-                    {
-                        Header: "Payment state",
-                        id: "paymentState",
-                        accessor: d => d.paymentState,
-                        minWidth:70
-                    },
-                ]
-                }
-            ]}
-                
-                
-            />
-
-        </div>
-    )
+        return(
+            <div>
+                {table}
+            </div>
+        )
+        
   }
 }
 
 export default PledgesTable
-
-
-/*
-(
-                      <div
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          backgroundColor: '#dadada',
-                          borderRadius: '2px'
-                        }}>
-                    </div>)
-
-                    */
