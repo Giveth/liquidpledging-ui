@@ -7,11 +7,19 @@ You an try a live version [here](https://giveth.github.io/liquidpledging-ui/).
 ## URL config
 
 You can define some parameters on the url like so
-http://localhost:3000/#contract=0x5b1869D9A4C187F2EAa108f3062412ecf0526b24&pageId=pledges&provider=ws://localhost:
+https://giveth.github.io/liquidpledging-ui/#contract=0x18658A1A7cB8b0Be97b155D051769b3651b2943c&pageId=pledges&provider=*
 
-`contract`: Liquid pledging contract address you want to explore. Default is the one used for local tests.  
 `pageId` : Page you want to see. It can be `myFunds`, `othersFunds`, `myProjects` or `pledges`.  
 `provider`: Provider you want to connect. Default is `ws://localhost:8546`, you can also use `*` to use the injected provider such as MetaMask.  
+`contract`: Liquid pledging contract address you want to explore. Default is the one used for local tests.  See below for contract addresses.
+
+LP contracts you can try:
+`0x18658A1A7cB8b0Be97b155D051769b3651b2943c`: Some old LP contract on Ropsten network.  
+`0x5b1869D9A4C187F2EAa108f3062412ecf0526b24`: Deterministicaly created by running `npm run go`.  
+`0x5625220088cA4Df67F15f96595546D10e9970B3A`: On Rikeby network. Not working. LP module is not returning data.
+
+
+
 # Install
 ## Basic
 
