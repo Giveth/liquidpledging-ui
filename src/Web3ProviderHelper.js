@@ -4,10 +4,10 @@ import EventEmitter from 'events'
 const Providers={
     INJECTED:"*",
     UNKNOWN:"unknown",
-    METAMASK:"MetaMask",
-    PARITY:"Parity",
-    MIST:"Mist",
-    INFURA:"Infura",
+    METAMASK:"metamask",
+    PARITY:"parity",
+    MIST:"mist",
+    INFURA:"infura",
     LOCALHOST:"localhost"
 }
 
@@ -47,16 +47,16 @@ class Web3ProviderHelper extends EventEmitter
         this.networkListeners = []
         this.checkInterval = undefined
         this.web3 = {}
+
+        // Let's store the injected provider if exist, we may use it or not
+        if (typeof web3 !== 'undefined') 
+            this.injectedProvider = window.web3.currentProvider
     }
 
     //Should be called after window load event
     setup=(providersList=[], updateInterval=1000)=>
     {
         return new Promise((resolve, reject)=>{
-
-            // Let's store the injected provider if exist, we may use it or not
-            if (typeof web3 !== 'undefined') 
-                this.injectedProvider = window.web3.currentProvider
 
             if(providersList.length===0)
                 providersList.push(Providers.INJECTED)
