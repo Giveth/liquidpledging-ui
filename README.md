@@ -4,7 +4,16 @@ This is a generig user interface implementation for the [liquid pledging](https:
 
 You an try a live version [here](https://giveth.github.io/liquidpledging-ui/).
 
-## Basic Install
+## URL config
+
+You can define some parameters on the url like so
+http://localhost:3000/#contract=0x5b1869D9A4C187F2EAa108f3062412ecf0526b24&pageId=pledges&provider=ws://localhost:
+
+`contract`: Liquid pledging contract address you want to explore. Default is the one used for local tests.  
+`pageId` : Page you want to see. It can be `myFunds`, `othersFunds`, `myProjects` or `pledges`.  
+`provider`: Provider you want to connect. Default is `ws://localhost:8546`, you can also use `*` to use the injected provider such as MetaMask.  
+# Install
+## Basic
 
 Clone this repository into your computer
 
