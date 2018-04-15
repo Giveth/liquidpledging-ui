@@ -5,6 +5,7 @@ import Web3 from 'web3'
 
 const Filter = require('./Filter.js');
 const CONTRACT = "contract"
+const PROVIDER = "provider"
 
 class LiquidPledgingState extends LiquidPledgingController {
 
@@ -14,6 +15,7 @@ class LiquidPledgingState extends LiquidPledgingController {
         this.isMergedAccounts = false
         this.MERGED_ACCOUNTS_CHANGED = "MergedAccountsChanged"
         UrlRouting.registerProperty(CONTRACT, this.onContractChanged.bind(this), this.contract)
+        UrlRouting.registerProperty(PROVIDER, this.onProviderChanged.bind(this), this.defaultProvider)
     }
 
     onContractChanged(newContract)
@@ -29,6 +31,12 @@ class LiquidPledgingState extends LiquidPledgingController {
             this.emit(this.NO_CONTRACT)
             UrlRouting.setProperty(CONTRACT, this.contract )
         }
+    }
+
+    onProviderChanged(newProvider)
+    {
+        this.setProviders(String(newProvider))
+        this.setupWeb3()
     }
 
     //PLEDGES

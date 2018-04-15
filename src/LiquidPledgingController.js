@@ -1,5 +1,5 @@
-//import ProviderHelper from './Web3ProviderHelper'
-import Wrapper from 'web3providerwrapper'
+import Wrapper from './Web3ProviderHelper'
+//import Wrapper from 'web3providerwrapper'
 import Formatter from './DataFormatter'
 import liquidpledging from 'liquidpledging'
 
@@ -7,7 +7,7 @@ import liquidpledging from 'liquidpledging'
 //const Wrapper = web3providerwrapper.Wrapper
 const LiquidPledging = liquidpledging.LiquidPledging;
 const LiquidPledgingState = liquidpledging.LiquidPledgingState;
-const testRPCProvider = 'ws://localhost:8545'
+const testRPCProvider = 'ws://localhost:8546'
 const defaultContract = '0x5b1869D9A4C187F2EAa108f3062412ecf0526b24' //TESTRPC DETERMINISTIC
 //const defaultContract = '0x18658A1A7cB8b0Be97b155D051769b3651b2943c' //ROPSTENs
 
@@ -28,8 +28,7 @@ class LiquidPledgingController extends Wrapper {
         this.delegations={}
         this.delegationsArray=[]
         this.nodes=[]
-        //this.defalutProviders= [testRPCProvider, '*' ]
-        this.defalutProviders= [ '*', testRPCProvider ]
+        this.defaultProvider=testRPCProvider
         this.contract = defaultContract
 
         this.setupWeb3()
@@ -40,13 +39,13 @@ class LiquidPledgingController extends Wrapper {
         this.contract = contractAddress
     }
 
-    setProviders(providers)
+    setProviders(provider)
     {
-        this.defalutProviders = providers
+        this.defaultProvider = provider
     }
 
     setupWeb3(){
-        this.setup(this.defalutProviders).then(()=>{
+        this.setup([this.defaultProvider]).then(()=>{
 
             this.setupLiquidPledging()
 

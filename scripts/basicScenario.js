@@ -7,7 +7,7 @@ const LiquidPledging = liquidpledging.LiquidPledging;
 const Vault = liquidpledging.Vault;
 const LiquidPledgingState = liquidpledging.LiquidPledgingState;
 
-web3 = new Web3("ws://localhost:8545");
+web3 = new Web3("ws://localhost:8546");
 
 let user0;
 let user1;

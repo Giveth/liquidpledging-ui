@@ -155,15 +155,15 @@ class Web3ProviderHelper extends EventEmitter
     //checks if we still on the same Ethereum network: Mainnet/Ropsten...
     checkNetwork=()=>
     {
-        //TODO: reimplmement with the new web3
-        /*this.web3.version.getNetwork((error, networkId) =>
+        this.web3.eth.net.getId()
+        .then=(networkId,error) =>
         {
+            console.log(networkId)
             if(error)
                 console.error(error)
 
             this.checkNetworkChange(networkId)
-        })*/
-
+        }
     }
 
     checkNetworkChange=(newNetworkId)=>
