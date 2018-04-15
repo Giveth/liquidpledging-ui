@@ -5,7 +5,7 @@ import Moment from 'moment'
 import CancelIcon from 'react-icons/lib/fa/close' 
 
 const MAX_CONTENT_WIDTH = 960
-const MIN_CONTENT_WIDTH = 350//500
+const MIN_CONTENT_WIDTH = 500
 const PAGE_SIDE_PADDING = 20
 const CARD_RADIUS = 5
 const CARD_SIDE_PADDING = 25
