@@ -2,9 +2,8 @@ import Wrapper from './Web3ProviderHelper'
 //import Wrapper from 'web3providerwrapper'
 import Formatter from './DataFormatter'
 import liquidpledging from 'liquidpledging'
+//import liquidpledging from './liquidpledging' //using version on /src for deploying
 
-//console.log(web3providerwrapper)
-//const Wrapper = web3providerwrapper.Wrapper
 const LiquidPledging = liquidpledging.LiquidPledging;
 const LiquidPledgingState = liquidpledging.LiquidPledgingState;
 const testRPCProvider = 'ws://localhost:8546'
@@ -78,6 +77,7 @@ class LiquidPledgingController extends Wrapper {
         this.retriveStateData()
     }
 
+
     retriveStateData()
     {
         this.liquidPledgingState.getState()
@@ -94,7 +94,7 @@ class LiquidPledgingController extends Wrapper {
     {
         //TODO: Only update if there is the state changed
 
-        console.log("New state")
+        console.log("New state", data)
         
         this.admins = data.admins
         this.pledges = data.pledges
