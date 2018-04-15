@@ -14,7 +14,7 @@
     "react-icons": "^2.2.7",
     "react-scripts": "1.0.14",
     "react-table": "^6.6.0",
-    "web3": "^1.0.0-beta.23",
+    "web3": "^1.0.0-beta.33",
     "web3providerwrapper": "^1.0.13"
   },
   "devDependencies": {
