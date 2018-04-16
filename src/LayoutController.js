@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import UrlRouting from './UrlRouting.js'
-import {Styles,Merge} from './Styles.js'
+import {Styles,Merge, Global} from './Styles.js'
 
 const PAGE_ID = "pageId"
 
@@ -82,24 +82,37 @@ class LayoutController extends Component {
         let multiViewWidth = ((Styles.minContentWidth + 40) * currentGroup.length)
         let availableWidth = this.state.windowWidth - this.state.menuWidth
         let isTabLayout = availableWidth > multiViewWidth
+        let isMobile = this.state.windowWidth < Global.smallTrigger
+
+        let menu = (
+            <div key = 'Menu'  style = {Merge(Styles.drawer, {width:this.state.menuWidth})}>
+                {this.props.menuItems}
+            </div>)
+
+        let header =(
+            <div key = 'AppBarHeader' style = {Styles.appBar.header}>  
+                {this.props.header}
+            </div>
+        )
         
         if(isTabLayout)
             view = this.getGroupViews(currentGroup)
 
+        if(isMobile)
+        {
+            menu = <div/>
+            header = <div/>
+        }
+            
+
         return(
         <div key = 'Main'>
         
-            <div key = 'AppBarHeader' style = {Styles.appBar.header}>  
-
-                {this.props.header}
-
-            </div>         
+            {header}         
             
             <div key = 'Content' style ={Styles.row}>
                 
-                <div key = 'Menu'  style = {Merge(Styles.drawer, {width:this.state.menuWidth})}>
-                    {this.props.menuItems}
-                </div>
+                {menu}
 
                 <div key = 'Canvas' style = {Styles.canvas}>
                     {view}           

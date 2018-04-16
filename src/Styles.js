@@ -4,11 +4,15 @@ import Moment from 'moment'
 
 import CancelIcon from 'react-icons/lib/fa/close' 
 
-const MAX_CONTENT_WIDTH = 960
-const MIN_CONTENT_WIDTH = 500
-const PAGE_SIDE_PADDING = 20
-const CARD_RADIUS = 5
-const CARD_SIDE_PADDING = 25
+export const Global = {
+    smallTrigger:450,
+    MAX_CONTENT_WIDTH : 960,
+    MIN_CONTENT_WIDTH : 300,
+    PAGE_SIDE_PADDING : 20,
+    CARD_RADIUS : 5,
+    CARD_SIDE_PADDING : 25,
+}
+
 
 export const Colors = {
     contrast:'rgba(108, 205, 220, 1)',
@@ -36,11 +40,11 @@ export const Icons = {
 export const Styles = {
 
     indentPadding:16,
-    minContentWidth:MIN_CONTENT_WIDTH,
-    maxContentWidth:MAX_CONTENT_WIDTH,
+    minContentWidth:Global.MIN_CONTENT_WIDTH,
+    maxContentWidth:Global.MAX_CONTENT_WIDTH,
 
     givethLogo:{
-        padding:PAGE_SIDE_PADDING,
+        padding:Global.PAGE_SIDE_PADDING,
         width:70
     },
 
@@ -51,7 +55,7 @@ export const Styles = {
 
     dialogs:{
         narrow: {
-            width: MIN_CONTENT_WIDTH
+            width: Global.MIN_CONTENT_WIDTH
         },
         fit:{
             width: 'fit-content'
@@ -59,7 +63,7 @@ export const Styles = {
     },
 
     addressSelector:{
-        width:300
+        width:250
     },
 
     title:{
@@ -68,7 +72,7 @@ export const Styles = {
         textTransform: "uppercase",
         color: "white",
         margin: 0,
-        fontSize: "1.3em",
+        fontSize: "1em",
     },
 
     appBar:{
@@ -79,8 +83,8 @@ export const Styles = {
             margin: 0,
             paddingTop: 0,
             paddingBottom:15,
-            paddingLeft:PAGE_SIDE_PADDING,
-            paddingRight:PAGE_SIDE_PADDING,
+            paddingLeft:Global.PAGE_SIDE_PADDING,
+            paddingRight:Global.PAGE_SIDE_PADDING,
             display: "flex",
             flexDirection: 'row',
             justifyContent:'center',
@@ -100,17 +104,15 @@ export const Styles = {
         menuItem:{
             paddingTop:0,
             paddingBottom:0,
-            paddingLeft : PAGE_SIDE_PADDING,
-            paddingRight : PAGE_SIDE_PADDING
+            paddingLeft : Global.PAGE_SIDE_PADDING,
+            paddingRight : Global.PAGE_SIDE_PADDING
         },
 
         header:{
             backgroundColor: Colors.contrast,
-            //paddingTop: 10,
-            //paddingBottom:10,
             height:60,
-            paddingLeft:PAGE_SIDE_PADDING,
-            paddingRight:PAGE_SIDE_PADDING,
+            paddingLeft:Global.PAGE_SIDE_PADDING,
+            paddingRight:Global.PAGE_SIDE_PADDING,
             display: "flex",
             flexDirection: 'row',
             justifyContent:'space-between',
@@ -126,8 +128,8 @@ export const Styles = {
             justifyContent:'space-between',
             alignItems:"baseline",
             flex:1,
-            maxWidth:MAX_CONTENT_WIDTH,
-            minWidth:MIN_CONTENT_WIDTH,
+            maxWidth:Global.MAX_CONTENT_WIDTH,
+            minWidth:Global.MIN_CONTENT_WIDTH,
             fontSize: "1.4em",
             fontWeight:200,
             color:"white",
@@ -170,10 +172,10 @@ export const Styles = {
             margin: 0,
             paddingTop: 10,
             paddingBottom:30,
-            paddingLeft:PAGE_SIDE_PADDING,
-            paddingRight:PAGE_SIDE_PADDING,
-            maxWidth:MAX_CONTENT_WIDTH,
-            minWidth:MIN_CONTENT_WIDTH,
+            paddingLeft:Global.PAGE_SIDE_PADDING,
+            paddingRight:Global.PAGE_SIDE_PADDING,
+            maxWidth:Global.MAX_CONTENT_WIDTH,
+            minWidth:Global.MIN_CONTENT_WIDTH,
             overflow:"auto"
         }
     },
@@ -186,7 +188,7 @@ export const Styles = {
             flexDirection: 'column',
             padding:0,
             backgroundColor:"white",
-            borderRadius:CARD_RADIUS,
+            borderRadius:Global.CARD_RADIUS,
             marginTop:15,
             marginBottom:15,
             transition: "transform 300ms ease-in-out"
@@ -196,8 +198,8 @@ export const Styles = {
             backgroundColor:Colors.contrast,
             paddingTop:5,
             paddingBottom:5,
-            borderTopLeftRadius: CARD_RADIUS,
-            borderTopRightRadius: CARD_RADIUS,
+            borderTopLeftRadius: Global.CARD_RADIUS,
+            borderTopRightRadius: Global.CARD_RADIUS,
             display: "flex",
             justifyContent:'center',
             flexDirection: 'column',
@@ -220,8 +222,8 @@ export const Styles = {
             display: "flex",
             flexDirection: 'row',
             justifyContent:'space-between',
-            paddingLeft: CARD_SIDE_PADDING,
-            paddingRight: CARD_SIDE_PADDING,
+            paddingLeft: Global.CARD_SIDE_PADDING,
+            paddingRight: Global.CARD_SIDE_PADDING,
             lineHeight:"36px",
         },
 
@@ -230,8 +232,8 @@ export const Styles = {
             display: "flex",
             flexDirection: 'row',
             justifyContent:'space-between',
-            paddingLeft: CARD_SIDE_PADDING,
-            paddingRight: CARD_SIDE_PADDING,
+            paddingLeft: Global.CARD_SIDE_PADDING,
+            paddingRight: Global.CARD_SIDE_PADDING,
             lineHeight:"36px",
             justifyContent: 'flex-end'
         },
@@ -247,7 +249,7 @@ export const Styles = {
         delegation:
         {
             color:"grey",
-            paddingLeft:CARD_SIDE_PADDING,
+            paddingLeft:Global.CARD_SIDE_PADDING,
             fontSize:"90%",
         },
 
@@ -271,9 +273,9 @@ export const Styles = {
 
     pledgesTable:{
         body:{
-            borderRadius:CARD_RADIUS,
+            borderRadius:Global.CARD_RADIUS,
             background:'white',
-            padding:CARD_SIDE_PADDING,
+            padding:Global.CARD_SIDE_PADDING,
             marginTop:30
         },
         selectedRow:{
