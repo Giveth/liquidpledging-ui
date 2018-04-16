@@ -32,6 +32,7 @@ class App extends Component {
     constructor()
     {
         super()
+        this.state={mobileMenuIsOn:true}
         this.currentAddress = LPState.getCurrentAccount()
     }
 
@@ -87,6 +88,12 @@ class App extends Component {
     changePage=(newPageId)=>
     {
         UrlRouting.setProperty("pageId", newPageId)
+        this.setState({mobileMenuIsOn:false})
+    }
+
+    showMenu=()=>
+    {
+        this.setState({mobileMenuIsOn:true})
     }
 
     getMenuItems=()=>
@@ -162,6 +169,13 @@ class App extends Component {
         ]
     }
 
+    getMobileHeader(){
+        return [
+            <div key = 'Title' style = {Styles.title} onClick = {this.showMenu}>  Menu </div>,
+            <AddressSelector key = "AddressSelector" />
+        ]
+    }
+
     getContent()
     {
         return (
@@ -169,7 +183,9 @@ class App extends Component {
                 key = "LayoutController"
                 defaultTab = {0}
                 header =  {this.getHeader()}
+                mobileHeader =  {this.getMobileHeader()}
                 menuItems = {this.getMenuItems()}
+                mobileMenuIsOn ={this.state.mobileMenuIsOn}
                 pages = {this.getPages()}
                 groups = {[[MY_FUNDS, OTHERS_FUNDS, MY_PROJECTS],[EXPLORER], [PLEDGES]]}/>
         )

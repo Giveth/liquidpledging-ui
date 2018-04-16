@@ -82,10 +82,16 @@ class LayoutController extends Component {
         let multiViewWidth = ((Styles.minContentWidth + 40) * currentGroup.length)
         let availableWidth = this.state.windowWidth - this.state.menuWidth
         let isTabLayout = availableWidth > multiViewWidth
+        
         let isMobile = this.state.windowWidth < Global.smallTrigger
 
+        let menuWidth = this.state.menuWidth
+        if(isMobile)
+            menuWidth='100%'
+        
+
         let menu = (
-            <div key = 'Menu'  style = {Merge(Styles.drawer, {width:this.state.menuWidth})}>
+            <div key = 'Menu'  style = {Merge(Styles.drawer, {width:menuWidth})}>
                 {this.props.menuItems}
             </div>)
 
@@ -94,34 +100,50 @@ class LayoutController extends Component {
                 {this.props.header}
             </div>
         )
+
+        let mobileHeader =(
+            <div key = 'AppBarHeader' style = {Styles.appBar.header}>  
+                {this.props.mobileHeader}
+            </div>
+        )
         
         if(isTabLayout)
             view = this.getGroupViews(currentGroup)
 
         if(isMobile)
         {
-            menu = <div/>
-            header = <div/>
+            let content = view
+            if(this.props.mobileMenuIsOn)
+               content = menu
+
+            return(
+                <div key = 'Main'>                   
+                    <div key = 'Content' style ={Styles.page}>
+                        {mobileHeader} 
+                        {content}
+                    </div>
+                </div>
+            )
         }
-            
-
-        return(
-        <div key = 'Main'>
-        
-            {header}         
-            
-            <div key = 'Content' style ={Styles.row}>
+        else
+        {
+            return(
+                <div key = 'Main'>
                 
-                {menu}
-
-                <div key = 'Canvas' style = {Styles.canvas}>
-                    {view}           
+                    {header}         
+                    
+                    <div key = 'Content' style ={Styles.row}>
+                        {menu}
+                        <div key = 'Canvas' style = {Styles.canvas}>
+                            {view}           
+                        </div>
+                        
+                    </div>
                 </div>
                 
-            </div>
-        </div>
-        
-    ) }
+            )
+        }
+         }
 }
 
 export default LayoutController
