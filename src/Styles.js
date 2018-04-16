@@ -97,6 +97,13 @@ export const Styles = {
             width:"100%"
         },
 
+        menuItem:{
+            paddingTop:0,
+            paddingBottom:0,
+            paddingLeft : PAGE_SIDE_PADDING,
+            paddingRight : PAGE_SIDE_PADDING
+        },
+
         header:{
             backgroundColor: Colors.contrast,
             //paddingTop: 10,

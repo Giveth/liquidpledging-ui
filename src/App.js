@@ -96,29 +96,33 @@ class App extends Component {
             <div key = "AppBar" style = {Styles.appBar.menu}> {} </div> ,
             this.getIcon(),
             <Divider key = "d0"/>,
-            <Subheader key = "a0" >Wallet</Subheader>,
+            <Subheader style = {Styles.appBar.menuItem} key = "a0" >Wallet</Subheader>,
             <MenuItem
+                style = {Styles.appBar.menuItem}
                 key = {MY_FUNDS}
                 onClick = {()=>this.changePage(MY_FUNDS)}>
                 My Funds
             </MenuItem>,
 
             <MenuItem
+                style = {Styles.appBar.menuItem}
                 key = {OTHERS_FUNDS}
                 onClick = {()=>this.changePage(OTHERS_FUNDS)}>
                 Other's Funds
             </MenuItem>,
             
             <MenuItem
-            key = {MY_PROJECTS}
+                style = {Styles.appBar.menuItem}
+                key = {MY_PROJECTS}
                 onClick = {()=>this.changePage(MY_PROJECTS)}>
                 My Projects
             </MenuItem>,
 
             <Divider key = "d1"/>,
-            <Subheader key = "c">Contract</Subheader>,
+            <Subheader key = "c" style = {Styles.appBar.menuItem}>Contract</Subheader>,
 
             <MenuItem
+                style = {Styles.appBar.menuItem}
                 key = {PLEDGES} 
                 onClick = {()=>this.changePage(PLEDGES)}>
                 Pledges
