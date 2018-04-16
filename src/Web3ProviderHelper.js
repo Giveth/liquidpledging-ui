@@ -2,7 +2,7 @@ import Web3 from 'web3'
 import EventEmitter from 'events'
 
 const Providers={
-    INJECTED:"*",
+    INJECTED:"injected",
     UNKNOWN:"unknown",
     METAMASK:"metamask",
     PARITY:"parity",
