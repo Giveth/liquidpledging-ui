@@ -6,7 +6,7 @@ You an try a live version [here](https://giveth.github.io/liquidpledging-ui/).
 
 ## URL config
 
-You can define some parameters on the url like so
+You can define some parameters on the url like so if you have Metamask logged in and on the Ropston Network this link will show you a version ready to play with:
 https://giveth.github.io/liquidpledging-ui/#contract=0x18658A1A7cB8b0Be97b155D051769b3651b2943c&pageId=pledges&provider=*
 
 `pageId` : Page you want to see. It can be `myFunds`, `othersFunds`, `myProjects` or `pledges`.  
